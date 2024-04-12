@@ -44,281 +44,120 @@ None that are currently known by the data consumers about the environment in whi
 
 ### Vocabulary and Encoding <a name="vocabandencoding"></a>
 
-<table>
-  <tr>
-   <td><b>Field nameE</b>
-   </td>
-   <td><b>Description</b>
-   </td>
-   <td><b>Field Type </b>
-   </td>
-   <td><b>Encoding<b/>
-   </td>
-  </tr>
-  <tr>
-   <td>specnum_formatted
-   </td>
-   <td>Identifies a surgical procedure
-   </td>
-   <td>ID
-   </td>
-   <td>string
-   </td>
-  </tr>
-  <tr>
-   <td>specclass_id
-   </td>
-   <td>Description is not known.
-   </td>
-   <td>ID
-   </td>
-   <td>string
-   </td>
-  </tr>
-  <tr>
-   <td>subspecialty
-   </td>
-   <td>Best guess at description.
-<p>
-Disease management team from which the (solid or liquid) tissue was sourced. 
-   </td>
-   <td>Categorical Variable
-   </td>
-   <td>string
-   </td>
-  </tr>
-  <tr>
-   <td>priority
-   </td>
-   <td>Type of patient visit - a detailed list
-   </td>
-   <td>Categorical Variable
-   </td>
-   <td>string
-   </td>
-  </tr>
-  <tr>
-   <td>reduced_priority
-   </td>
-   <td>Type of patient visit - a summary list
-   </td>
-   <td>Categorical Variable
-   </td>
-   <td>string
-   </td>
-  </tr>
-  <tr>
-   <td>datetime_accession
-   </td>
-   <td>Date of procedure
-   </td>
-   <td>Date
-   </td>
-   <td>date
-   </td>
-  </tr>
-  <tr>
-   <td>signout_datetime
-   </td>
-   <td>Description is not known.
-   </td>
-   <td>Date
-   </td>
-   <td>date
-   </td>
-  </tr>
-  <tr>
-   <td>part_inst
-   </td>
-   <td>Part identifier
-   </td>
-   <td>ID
-   </td>
-   <td>integer
-   </td>
-  </tr>
-  <tr>
-   <td>part_designator
-   </td>
-   <td>Description is not known.
-   </td>
-   <td>ID
-   </td>
-   <td>string
-   </td>
-  </tr>
-  <tr>
-   <td>part_type
-   </td>
-   <td>Anatomical site; Tissue extraction method \
- \
-Example:  \
-TRACHEA; RESECTION
-   </td>
-   <td>Mixed Field
-   </td>
-   <td>string
-   </td>
-  </tr>
-  <tr>
-   <td>part_description
-   </td>
-   <td>Description of the anatomical site from which the part was obtained
-   </td>
-   <td>Natural Language Description
-   </td>
-   <td>string
-   </td>
-  </tr>
-  <tr>
-   <td>block_inst
-   </td>
-   <td>Block identifier
-   </td>
-   <td>ID
-   </td>
-   <td>integer
-   </td>
-  </tr>
-  <tr>
-   <td>blkdesig_label
-   </td>
-   <td>Description is not known.
-   </td>
-   <td>Mixed Field
-   </td>
-   <td>string
-   </td>
-  </tr>
-  <tr>
-   <td>barcode
-   </td>
-   <td>Description is not known.
-   </td>
-   <td>Mixed Field
-   </td>
-   <td>string
-   </td>
-  </tr>
-  <tr>
-   <td>stain_inst
-   </td>
-   <td>Description is not known.
-   </td>
-   <td>ID
-   </td>
-   <td>integer
-   </td>
-  </tr>
-  <tr>
-   <td>stain_name
-   </td>
-   <td>Specific name of the stain used on the slide
-   </td>
-   <td>Categorical Variable
-   </td>
-   <td>string
-   </td>
-  </tr>
-  <tr>
-   <td>stain_group
-   </td>
-   <td>Broad category of stain name used to stain the slide
-   </td>
-   <td>Categorical Variable
-   </td>
-   <td>string
-   </td>
-  </tr>
-  <tr>
-   <td>scanner_id
-   </td>
-   <td>Identifier for the scanner used to scan the slide
-   </td>
-   <td>ID
-   </td>
-   <td>string
-   </td>
-  </tr>
-  <tr>
-   <td>brand
-   </td>
-   <td>Brand name of the scanner
-   </td>
-   <td>Categorical Variable
-   </td>
-   <td>string
-   </td>
-  </tr>
-  <tr>
-   <td>model
-   </td>
-   <td>Model name of the scanner
-   </td>
-   <td>Categorical Variable
-   </td>
-   <td>string
-   </td>
-  </tr>
-  <tr>
-   <td>image_id
-   </td>
-   <td>Identifier for the image that was scanned from the slide
-   </td>
-   <td>ID_Primary_Key
-   </td>
-   <td>string
-   </td>
-  </tr>
-  <tr>
-   <td>magnification
-   </td>
-   <td>Magnification at which the slide was scanned
-   </td>
-   <td>Categorical Variable
-   </td>
-   <td>string
-   </td>
-  </tr>
-  <tr>
-   <td>status_id
-   </td>
-   <td>Description is not known.
-   </td>
-   <td>ID
-   </td>
-   <td>string
-   </td>
-  </tr>
-  <tr>
-   <td>file_size_bytes
-   </td>
-   <td>Size of the scanned image in bytes
-   </td>
-   <td>Continuous Variable
-   </td>
-   <td>integer
-   </td>
-  </tr>
-  <tr>
-   <td>captured_datatime
-   </td>
-   <td>Description is not known.
-   </td>
-   <td>Date
-   </td>
-   <td>date
-   </td>
-  </tr>
-</table>
+| FIELD NAME | Description | TYPE Type | Encoding |
+|---|---|---|---|
+| specnum_formatted | Identifies a surgical procedure | ID | string |
+| specclass_id | Description is not known. | ID | string |
+| subspecialty | Best guess at description.
+Disease management team from which the (solid or liquid) tissue was sourced.  | Categorical Variable | string |
+| reduced_priority | Type of patient visit - a summary list | Categorical Variable | string |
+| datetime_accession | Date of procedure | Date | date |
+| signout_datetime | Description is not known. | Date | date |
+| part_inst | Part identifier | ID | integer |
+| part_designator | Description is not known. | ID | string |
+| part_type | Anatomical site; Tissue extraction method <br> Example: TRACHEA; RESECTION | Mixed Field | string |
+| part_description | Description of the anatomical site from which the part was obtained | Natural Language Description | string |
+| block_inst | Block identifier | ID | integer |
+| blkdesig_label | Description is not known. | Mixed Field | string |
+| barcode | Description is not known. | Mixed Field | string |
+| stain_inst | Description is not known. | ID | integer |
+| stain_group | Broad category of stain name used to stain the slide | Categorical Variable | string |
+| scanner_id | Identifier for the scanner used to scan the slide | ID | string |
+| brand | Brand name of the scanner | Categorical Variable | string |
+| model | Model name of the scanner | Categorical Variable | string |
+| image_id | Identifier for the image that was scanned from the slide | ID_Primary_Key | string |
+| magnification | Magnification at which the slide was scanned | Categorical Variable | string |
+| status_id | Description is not known. | ID | string |
+| file_size_bytes | Size of the scanned image in bytes | Continuous Variable | integer |
+| captured_datatime | Description is not known. | Date | date |
 
 ## Categorical Variables:
 
 **Subspecialty**
 
 Ordered in descending order of volume of images. 
+| subspecialty | Image count | Description |
+|:---|---:|:---|
+| .Breast|897062 | Best guess at description. Disease management team from which the (solid or liquid) tissue was sourced. UNKNOWN for unknown team.|
+.GU |850267||
+.GI |735506||
+.Heme |514898||
+.Derm |504429||
+.Thoracic |388824||
+.GYN  |355755||
+.Head & Neck |266641||
+.Bone/Soft tissue |230557||
+.Breast 66th |95754||
+.Neuro |63237||
+Regional Operations |46198||
+.Heme-74 |29699||
+CG_MSK 53rd Street |5875||
+CG_Main Campus 68th Street |1265||
+CG_MSK 64th Street |533||
+CG_Commack |273||
+.Peds |267||
+.Breast 64th |71||
+UNKNOWN |19||
+CG_Hauppauge |16||
+NS-6 |1||
+NS15 |1||
+NS-5 |1||
+NS-8 |1||
+NS16 |1||
+Kimmel| 1|| 
+
+Reduced_priority
+
+| Variable Name | count | Description |
+|:---|---:|:---|
+| inhouse-surgical| 2864370| Best guess at description. Type of patient visit |
+inhouse-biopsy| 1792196||
+consult| 1122563||
+other| 478545||
+
+Stain_group
+
+| Variable Name | Count | Description |
+|:---|---:|:---|
+| H&E (Initial) | 3831963| Description is not known.  |
+Surgical Submitted| 1087552||
+IHC| 583204||
+H&E (Other)| 322215||
+Other| 193223||
+Frozen| 116799 ||
+SS|60737 ||
+
+Brand
+
+| Variable Name | Count | Description |
+|:---|---:|:---|
+| aperio| 6228095| Brand name of scanner. It is assumed that “aperio” and “Aperio” are the same brand.  |
+Aperio|14605||
+Hamamatsu|12871||
+Huron |2103 ||
+
+Model
+
+| Variable Name | Count | Description |
+|:---|---:|:---|
+| GT450| 3180458| Model of scanner.  |
+AT2|3032283||
+gt450|17110||
+S360|12871||
+CS2|12663||
+HURON Digital TissueScope IQ|2103||
+XT |186||
 
 
+Magnification
+
+| Variable Name | Count | Description |
+|:---|---:|:---|
+| 40x| 3235000| Slide magnification |
+20x|3020559||
+25x|2006||
+50x|97||
+5x|3||
 
 
 ## Rules <a name="rules"></a>
