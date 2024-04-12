@@ -15,10 +15,12 @@ The CaseBreakdown table is a table in MSK’s [HoBBIT](https://pubmed.ncbi.nlm.n
 The CaseBreakdown table in Dremio is a live table that is constantly being updated as new slides are scanned daily. This table may be used by researchers who are interested in using pathology images in their research. Researchers may use this table to search for slides of interest or slides that have been scanned while they build their patient cohorts.
 
 ![Lineage graph for case breakdown table](./images/hobbit_lineage.png)
+*Figure 1. Lineage graph for case breakdown table*
 
 Tissue that is resected from a patient during surgery is sent to DP where it is processed. Tissue may be resected from multiple anatomical sites from a single surgical procedure. Processing involves breaking up the tissue from each anatomical site into parts and blocks. A part can contain many blocks. Both parts and blocks are given designator labels called part number and block number. Certain blocks of interest are then selected to create slides. Tissue from these blocks is also sent for IMPACT sequencing. Typically 10 to 20 slides are created from the blocks and 1 or 2 samples of tissue from the same set of blocks as those that were selected for creating slides is sent for IMPACT sequencing. It is important to try to match the part number and block number from which the IMPACT tissue sample was taken, to the part and block number of the slides in order to find the slides closest to the IMPACT tissue sample. 
 
 ![Hierarchy of the identifiers in the data](./images/hobbit_image_id_hierarchy.png)
+*Figure 2: Hierarchy of the identifiers in the data*
 
 ### Matching slide data to IMPACT data
 
@@ -44,7 +46,7 @@ None that are currently known by the data consumers about the environment in whi
 
 ### Vocabulary and Encoding <a name="vocabandencoding"></a>
 
-| FIELD NAME | Description | TYPE Type | Encoding |
+| **Field name** | **Description** | **Field Type** | **Encoding** |
 |---|---|---|---|
 | specnum_formatted | Identifies a surgical procedure | ID | string |
 | specclass_id | Description is not known. | ID | string |
@@ -73,10 +75,10 @@ Disease management team from which the (solid or liquid) tissue was sourced.  | 
 
 ## Categorical Variables:
 
-**Subspecialty**
+**Subspecialty:**
 
 Ordered in descending order of volume of images. 
-| subspecialty | Image count | Description |
+| **subspecialty** | **Image count** | **Description** |
 |:---|---:|:---|
 | .Breast|897062 | Best guess at description. Disease management team from which the (solid or liquid) tissue was sourced. UNKNOWN for unknown team.|
 .GU |850267||
@@ -106,18 +108,18 @@ NS-8 |1||
 NS16 |1||
 Kimmel| 1|| 
 
-Reduced_priority
+**Reduced_priority:**
 
-| Variable Name | count | Description |
+| **Variable Name** | **Count** | **Description** |
 |:---|---:|:---|
 | inhouse-surgical| 2864370| Best guess at description. Type of patient visit |
 inhouse-biopsy| 1792196||
 consult| 1122563||
 other| 478545||
 
-Stain_group
+**Stain_group:**
 
-| Variable Name | Count | Description |
+| **Variable Name** | **Count** | **Description** |
 |:---|---:|:---|
 | H&E (Initial) | 3831963| Description is not known.  |
 Surgical Submitted| 1087552||
@@ -127,18 +129,18 @@ Other| 193223||
 Frozen| 116799 ||
 SS|60737 ||
 
-Brand
+**Brand:**
 
-| Variable Name | Count | Description |
+| **Variable Name** | **Count** | **Description** |
 |:---|---:|:---|
 | aperio| 6228095| Brand name of scanner. It is assumed that “aperio” and “Aperio” are the same brand.  |
 Aperio|14605||
 Hamamatsu|12871||
 Huron |2103 ||
 
-Model
+**Model:**
 
-| Variable Name | Count | Description |
+| **Variable Name** | **Count** | **Description** |
 |:---|---:|:---|
 | GT450| 3180458| Model of scanner.  |
 AT2|3032283||
@@ -149,9 +151,9 @@ HURON Digital TissueScope IQ|2103||
 XT |186||
 
 
-Magnification
+**Magnification:**
 
-| Variable Name | Count | Description |
+| **Variable Name** | **Count** | **Description** |
 |:---|---:|:---|
 | 40x| 3235000| Slide magnification |
 20x|3020559||
@@ -161,4 +163,4 @@ Magnification
 
 
 ## Rules <a name="rules"></a>
-The second paragraph text
+No known verifiable rules are known for this dataset.
