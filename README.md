@@ -7,6 +7,9 @@ We think a datasheet should be owned and maintained by the data product owner an
 ## Datasheets Template
 The template is made in Markdown. If users are not familiar with Markdown or find it cumbersome to edit, they may use the [Docs to Markdown converter](https://www.docstomarkdown.pro/) Google Docs Extension to convert the template to Google Docs format, then create the data sheet on Google Docs, and finally convert the datahseet back to Markdown format before committing to Github for version control. 
 
-If datasets are maintained in a tool like Dremio, the Wiki portion of the dataset may be used to link out to the datasheet on github in order to keep the dataset and datasheet adjacent to one another and make it easy for the data consumers to find the datasheet. 
+## Existing Datasheets implementations
 
+The Cbioportal formatted file is the only known implementation of the concept of a datasheet and is a great effort to meet this need. It contains field descriptions and field encodings, but it is missing important contextual information that could go into the description and rules sections as shown in the template and example above. The cbioportal formatted file also seems to be designed more for machines to read the format than a human. Furthermore, categorical variables are not defined in the cbioportal format.
+
+The example above decouples the datasheet from the dataset in order to make it more human readable (with images etc.) and at the same time, it is possible to keep the datasheet adjacent to a dataset through a tool like Dremio whose Wiki feature may be used to link out to the version controlled Markdown datasheet on github.
 
