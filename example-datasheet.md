@@ -10,6 +10,11 @@
 
 ## Description <a name="description"></a>
 
+**Owner:** <br>
+Darin Moore <br>
+Armaan Kohli <br>
+(CDSI-PDM - Pathology Date Mining)
+
 The CaseBreakdown table is a table in MSK’s [HoBBIT](https://pubmed.ncbi.nlm.nih.gov/34260720/) (Honest Broker for BioInformatics Technology) database that contains information about anonymized images. HoBBIT is a database in the Department of Pathology (DP) that is designed to compile and share large-scale DP research datasets including anonymized images, redacted pathology reports, and clinical data of patients with consent. 
 
 The CaseBreakdown table in Dremio is a live table that is constantly being updated as new slides are scanned daily. This table may be used by researchers who are interested in using pathology images in their research. Researchers may use this table to search for slides of interest or slides that have been scanned while they build their patient cohorts.
