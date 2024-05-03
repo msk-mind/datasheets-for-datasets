@@ -79,3 +79,4 @@ Snakey/merges of various source tables
 
 - Why do some samples have multiple entries linked back to different MRNs?
 - Why are there duplicate entries in the hobbit data?
+- Is the same specimen scanned at 20x and 40x?
