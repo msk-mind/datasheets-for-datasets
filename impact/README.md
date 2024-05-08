@@ -21,6 +21,10 @@ In this table each row represents a slide, along with the metadata associated wi
 
 The table in Dremio is a live table that is constantly being updated as new slides are scanned. This table may be used by researchers who are interested in using pathology images in their research. Researchers may use this table to search for slides of interest or slides that have been scanned while they build their patient cohorts.
 
+#### Operations / Changes from Source / Data Cleaning
+1. Removes duplicate MRNs 
+2. Removes incorrect MRNs
+
 #### Statistics
 
 - Number of rows: 6100645
@@ -33,7 +37,7 @@ The table in Dremio is a live table that is constantly being updated as new slid
 
 #### Description
 
-Combination of ONCOKB annotated data with solid heme patient data. Also removed CFDNA samples (i.e. only analyzed samples with SAMPLE_CLASS of 'Tumor')
+Combination of ONCOKB annotated data with solid heme patient data.
 
 #### Statistics
 
@@ -51,6 +55,9 @@ Combination of ONCOKB annotated data with solid heme patient data. Also removed 
 
 Sample-level clinical attributes alongside their OncoKB annotations. This table is updated daily by cbioportal and pulled into dremio via a cron script. Each row represents a sample and contains information such as date added, sample type, and metastatic site.
 
+##### Operations / Changes from Source / Data Cleaning
+1. Removes CFDNA samples (only analyze SAMPLE_CLASS of 'Tumor')
+
 #### SOLID-HEME patient level
 
 - Source: [Git repo](https://github.mskcc.org/cdsi/msk-impact/tree/master/msk_solid_heme)
@@ -60,6 +67,9 @@ Sample-level clinical attributes alongside their OncoKB annotations. This table 
 ##### Description
 
 Patient-level clinical attributes. This table is updated daily by cbioportal and pulled into dremio via a cron script. Each row in this table represents a patient and contains information such as their gender, age, and ethnicity.
+
+#### Operations / Changes from Source / Data Cleaning
+1. Removes invalid SAMPLE_IDs (flagged by Chris - correspond to multiple MRNs)
 
 ### CDM Accession Table
 
