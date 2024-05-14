@@ -72,7 +72,7 @@ Disease management team from which the (solid or liquid) tissue was sourced.  | 
 | scanner_id | Identifier for the scanner used to scan the slide | ID | string |
 | brand | Brand name of the scanner | Categorical Variable | string |
 | model | Model name of the scanner | Categorical Variable | string |
-| image_id | Identifier for the image that was scanned from the slide | ID_Primary_Key | string |
+| image_id | Identifier for the image that was scanned from the slide. If the image_id exists, then the image exists | ID_Primary_Key | string |
 | magnification | Magnification at which the slide was scanned | Categorical Variable | string |
 | status_id | Description is not known. | ID | string |
 | file_size_bytes | Size of the scanned image in bytes | Continuous Variable | integer |
