@@ -13,7 +13,7 @@ A description of the value behind the dataset (motivation, composition, collecti
 
 ## Assumptions <a name="assumptions"></a>
 
-Any assumptions made about the collection evironment while collecting the data. 
+Any assumptions made about the collection evironment or collection process that is not verifiable. 
 
 ### Vocabulary and Encoding <a name="vocabandencoding"></a>
 
@@ -38,4 +38,4 @@ Description of field 1
 | variable3| 1 | description |
 
 ## Rules <a name="rules"></a>
-Verifiable rules guarding the consistency of the data (or lack of if data is noisy)
+Verifiable rules guarding the consistency of the data (or lack of such rules if data is noisy)
