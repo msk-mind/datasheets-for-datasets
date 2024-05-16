@@ -38,4 +38,4 @@ Description of field 1
 | variable3| 1 | description |
 
 ## Rules <a name="rules"></a>
-Verifiable rules guarding the consistency of the data (or lack of such rules if data is noisy)
+Verifiable rules (or invariants) guarding the consistency of the data (or lack of such rules if data is noisy)
