@@ -8,7 +8,7 @@
 
 ## Description <a name="description"></a>
 
-A description of the value behind the dataset (motivation, composition, collection process, recommended uses, and so on).
+A description of the value behind the dataset (motivation, composition (description of relationships within the dataset, description of lineage if dataset was composed from other datasets), collection process, recommended uses, and so on).
 
 
 ## Assumptions <a name="assumptions"></a>
