@@ -22,7 +22,7 @@ HoBBIT is the institutional database that keeps records of all pathology slides 
 HoBBIT [(Honest Broker for BioInformatics Technology)](https://academic.oup.com/jamia/article/28/9/1874/6321440) is a database maintained by the
 Department of Pathology containing metadata for all digitized slides processed as part of their clinical workflow [^1]. 
 
-<img src="figures/hobbit.png" width=70%/> 
+<img src="figures/HoBBIT.png" width=70%/> 
 
 
 
