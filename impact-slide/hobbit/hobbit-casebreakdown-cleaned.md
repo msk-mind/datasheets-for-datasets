@@ -31,11 +31,9 @@ After performing the data cleaning operations, we are left with 6,191,382 rows, 
 
 The most immediate use of this data is to find pathology slides associated with a set of patients. More specifically, this data has been matched with IMPACT data to associate pathology slides with the closest corresponding IMPACT sample. In generally, researchers may use this table to search for slides of interested or slides that have been scanned while they build their patient cohorts.  
 
-See also HERE
-
 
 ### Access
-The table can be accessed via dremio here: `"pathology-data-mining".HoBBIT."casebreakdown-cleaned"`
+The table can be accessed via dremio here: `"pathology-data-mining"."impact_slide"."case_breakdown_cleaned"`
 
 If you do not have permissions on this table, please contact the engineering team. 
 
@@ -56,28 +54,26 @@ This process assumes the following:
 ## Vocabulary & Encoding <a name="vocabulary"></a>
 
 
-The vocabulary and encoding is the same in the parent table, see See hobbit-casebreakdown.md for more details. 
-
+The vocabulary and encoding is the same in the parent table, see See hobbit-casebreakdown.md for more details.
 
 
 ## Rules
 
 #### How many rows are there in total?
 There are 6,191,382 rows, corresponding to data from 369,072 unique patients. There are 6,191,382 unique `image_id`s in total.
- 
+
 ```
 -- Row count
-select count(*)  FROM "pathology-data-mining".HoBBIT."casebreakdown-cleaned"
+select count(*)  FROM "pathology-data-mining"."impact_slide"."case_breakdown_cleaned"
 
 -- image_id Count
-select count(DISTINCT(image_id))  FROM "pathology-data-mining".HoBBIT."casebreakdown-cleaned"
+select count(DISTINCT(image_id))  FROM "pathology-data-mining"."impact_slide"."case_breakdown_cleaned"
 
 -- patient Count
-select count(DISTINCT(mrn))  FROM "pathology-data-mining".HoBBIT."casebreakdown-cleaned"
+select count(DISTINCT(mrn))  FROM "pathology-data-mining"."impact_slide"."case_breakdown_cleaned"
 
 
 
 ```
-The removal of these patients does not drastically change the distribution of any of the fields. 
 
-
+The removal of these patients does not drastically change the distribution of any of the fields.
