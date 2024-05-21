@@ -66,7 +66,7 @@ This data is updated daily as the source tables are updated.
 See CDSI/IMPACT documentation and HoBBIT datasheet.
 
 - [CDM Codebook](https://docs.google.com/spreadsheets/d/1po0GdSwqmmXibz4e-7YvTPUbXpi0WYv3c2ImdHXxyuc/edit#gid=187767892)
-- HoBBIT casebreakdown datasheet
+- [HoBBIT casebreakdown datasheet](https://github.com/msk-mind/datasheets-for-datasets/blob/impact-exploration/impact-slide/hobbit/hobbit-casebreakdown.md)
 
 
 ## Rules <a name="rules"></a>

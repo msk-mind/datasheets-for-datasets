@@ -56,6 +56,7 @@ This process assumes the following:
 
 The vocabulary and encoding is the same in the parent table, see See hobbit-casebreakdown.md for more details.
 
+- [hobbit-casebreakdown.md](https://github.com/msk-mind/datasheets-for-datasets/blob/impact-exploration/impact-slide/hobbit/hobbit-casebreakdown.md)
 
 ## Rules
 
