@@ -13,7 +13,7 @@ A description of the value behind the dataset (motivation, composition, collecti
 
 ## Assumptions <a name="assumptions"></a>
 
-Any assumptions made about the collection evironment while collecting the data. 
+Any assumptions made about the environment in which the data was collected or the process used to collect the data. 
 
 ### Vocabulary and Encoding <a name="vocabandencoding"></a>
 
