@@ -56,7 +56,7 @@ None that are currently known by the data consumers about the environment in whi
 | specnum_formatted | Identifies a surgical procedure | ID | string |
 | specclass_id | Description is not known. | ID | string |
 | subspecialty | Best guess at description.
-Disease management team from which the (solid or liquid) tissue was sourced.  | Categorical Variable | string |
+Disease management team from which the (solid or liquid) tissue was sourced.  | |Categorical Variable | string |
 | reduced_priority | Type of patient visit - a summary list | Categorical Variable | string |
 | datetime_accession | Date of procedure | Date | date |
 | signout_datetime | Description is not known. | Date | date |
