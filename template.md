@@ -39,3 +39,5 @@ Description of field 1
 
 ## Rules <a name="rules"></a>
 Verifiable rules (or invariants) guarding the consistency of the data (or lack of such rules if data is noisy)
+
+Mention fields with empty or null values
