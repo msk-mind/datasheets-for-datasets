@@ -13,7 +13,7 @@ A description of the value behind the dataset (motivation, composition (descript
 
 ## Assumptions <a name="assumptions"></a>
 
-Any assumptions made about the collection evironment or collection process that is not verifiable. 
+Any assumptions made about the collection evironment or collection process that is not verifiable. This section is extremely important because assumptions are made quite often especially when a dataset is being cleaned. A cleaning step may be based on an assumption about what should be correct about the dataset but it may be possible that the assumption itself is incorrect from the perspective of the collection environment and process. So stating this upfront can help shape the context in which results from an analysis where obtained. 
 
 ### Vocabulary and Encoding <a name="vocabandencoding"></a>
 
