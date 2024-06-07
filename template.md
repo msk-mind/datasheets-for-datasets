@@ -17,7 +17,7 @@ Any assumptions made about the collection evironment or collection process that 
 
 ### Vocabulary and Encoding <a name="vocabandencoding"></a>
 
-Vocabulary of the dataset.
+Vocabulary of the dataset. Clearly an unambiguous field description goes a long way. Equally important are the field type and encoding. The field type helps give a good high level overview of the type of variables contained in the dataset, which can be a very informative view of the dataset. The encoding is very important because often times the data is presented as a CSV where there is no information about whether a field should be considered as an integer or string when it is formatted into a Pandas dataframe for example. Encoding the field into the wrong format can lead to terrible errors like the infamous MRN zero-padding error. 
 
 | **Field name** | **Description** | **Field Type** | **Encoding** |
 |---|---|---|---|
