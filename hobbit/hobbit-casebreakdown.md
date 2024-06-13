@@ -32,6 +32,8 @@ The case_breakdown table, contains information for a slide in each row, indexed 
 
 Tissue that is resected from a patient (identified by `mrn`) during surgery (`specnum_formatted`) is sent to the Dept. of Pathology where it is processed. Tissue may be resected from multiple anatomical sites from a single surgical procedure. Processing involves breaking up the tissue from each anatomical site (`part_type`, `part_description`) into parts (`part_inst`) and blocks (`block_inst`, `blkdesig_label`). A part can contain many blocks. Both parts and blocks are given designator labels called part number and block number. Certain blocks of interest are then selected to create slides.
 
+The figure below illustrates the identifier hierarchy and also provides commonly used names/aliases for each of the identifiers.
+
 <img src="figures/hobbit_image_id_hierarchy.png" width=70% /> 
 
 ##### What are the types of slides that are available? 
