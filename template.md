@@ -1,4 +1,19 @@
-# Datasheet Template 
+# Table Name 
+
+<b>Path:</b> <DREMIO_PATH_TO_TABLE> <br/>
+<b>Table Type:</b> Live OR Static <br/>
+<b>Late updated:</b> <DATE> <br/>
+
+<b>Lineage:</b>
+
+Base Table <br/>
+|_ Derived_Table <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;|_ Derived Table etc. <br/>
+
+<b>Summary Statistics:</b>
+
+Typically, shape and size of table, counts of key data elements and other useful distributions. 
+
 
 # Table of contents
 1. [Description](#description)
