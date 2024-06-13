@@ -1,8 +1,20 @@
 # IMPACT - MSK IMPACT Table
 
-Late updated 2024-05-20
+<b>Path:</b> `"phi_data_lake"."pdm-data".impact."data_clinical_sample.oncokb.txt"` <br/>
+<b>Table Type:</b> `Live` <br/>
+<b>Late updated:</b> `2024-05-17` <br/>
 
-Source code: 
+<b>Lineage:</b> 
+
+[cBioportal - data_clinical_sample.oncokb](https://github.mskcc.org/cdsi/oncokb-annotated-msk-impact/blob/main/data_clinical_sample.oncokb.txt.gz) <br/>
+[cBioportal - msk_solid_heme](https://github.mskcc.org/cdsi/msk-impact/tree/master/msk_solid_heme`) <br/>
+|_ `"phi_data_lake"."pdm-data".impact."data_clinical_sample.oncokb.txt"` <br/>
+
+<b>Summary Statistics:</b>
+
+Total number of rows: 125,071 <br/>
+Total number of unique patients: 88,072 <br/>
+Total number of unique IMPACT samples: 125,071 <br/>
 
 
 1. [Description](#description)
@@ -13,57 +25,74 @@ Source code:
 
 ## Description <a name="description"></a>
 
-This is a table that combines data sources from cBioPortal. It combines patient level information and sample level information for patients w/ tumors sequenced for MSK IMPACT.
-
-### Motivation
-This table serves as an intermediate table used to match IMPACT samples with pathology slides.  
-
-### Access
-This table can be accessed here: `"pathology-data-mining"."impact_slide".impact"`
-
-### How should this data be used?
-
-This data should be used if you need access to patient and sample level information. 
-
-### How often is this data updated
-
-This data is updated nightly via cron, pulled from two github sources that
-
-- https://github.mskcc.org/cdsi/msk-impact/tree/master/msk_solid_heme`
-- https://github.mskcc.org/cdsi/oncokb-annotated-msk-impact/blob/main/data_clinical_sample.oncokb.txt.gz
-
-
-### What does each row represent 
-
-Each row represents a single MSK-IMPACT sample w/ OncoKB annotated variants and the corresponding patient level clinical data. 
+Contains patient level information and sample level information for patients w/ tumors sequenced for MSK IMPACT.
 
 ## Assumptions <a name="assumptions"></a>
 
-#### Basic Filtering
-This data was subject to basic filtering for the purposes of merging with pathology report data. Because the purposes of this dataset is to merge with pathology slides, we exclude cf-DNA samples from the main IMPACT cohort.
+None. 
 
 ## Vocabulary & Encoding <a name="vocabulary"></a>
 
-See cBioPortal/CDSI Documentation
-
-- [CDM Codebook](https://docs.google.com/spreadsheets/d/1po0GdSwqmmXibz4e-7YvTPUbXpi0WYv3c2ImdHXxyuc/edit#gid=187767892)
+| **Field name** | **Description** | **Field Type** | **Encoding** |
+|---|---|---|---|
+| SAMPLE_ID| | | |
+| PATIENT_ID| | | |
+| GLEASON_SAMPLE_LEVEL| | | |
+| PDL1_POSITIVE| | | |
+| MONTH_ADDED| | | |
+| WEEK_ADDED| | | |
+| CANCER_TYPE| | | |
+| SAMPLE_TYPE| | | |
+| SAMPLE_CLASS| | | |
+| METASTATIC_SITE| | | |
+| PRIMARY_SITE| | | |
+| CANCER_TYPE_DETAILED| | | |
+| GENE_PANEL| | | |
+| SO_COMMENTS| | | |
+| SAMPLE_COVERAGE| | | |
+| TUMOR_PURITY| | | |
+| ONCOTREE_CODE| | | |
+| MSI_COMMENT| | | |
+| MSI_SCORE| | | |
+| MSI_TYPE| | | |
+| INSTITUTE| | | |
+| SOMATIC_STATUS| | | |
+| ARCHER| | | |
+| CVR_TMB_COHORT_PERCENTILE| | | |
+| CVR_TMB_SCORE| | | |
+| CVR_TMB_TT_COHORT_PERCENTILE| | | |
+| PATH_SLIDE_EXISTS| | | |
+| MSK_SLIDE_ID| | | |
+| LEVEL_1| | | |
+| LEVEL_2| | | |
+| LEVEL_3A| | | |
+| LEVEL_3B| | | |
+| LEVEL_4| | | |
+| LEVEL_R1| | | |
+| LEVEL_R2| | | |
+| HIGHEST_LEVEL| | | |
+| HIGHEST_SENSITIVE_LEVEL| | | |
+| HIGHEST_RESISTANCE_LEVEL| | | |
+| LEVEL_Dx1| | | |
+| LEVEL_Dx2| | | |
+| LEVEL_Dx3| | | |
+| HIGHEST_DX_LEVEL| | | |
+| LEVEL_Px1| | | |
+| LEVEL_Px2| | | |
+| LEVEL_Px3| | | |
+| HIGHEST_PX_LEVEL| | | |
+| ONCOGENIC_MUTATIONS| | | |
+| #ONCOGENIC_MUTATIONS| | | |
+| RESISTANCE_MUTATIONS| | | |
+| #RESISTANCE_MUTATIONS| | | |
+| #MUTATIONS_WITH_SENSITIVE_THERAPEUTIC_IMPLICATIONS| | | |
+| #MUTATIONS_WITH_RESISTANCE_THERAPEUTIC_IMPLICATIONS| | | |
+| #MUTATIONS_WITH_DIAGNOSTIC_IMPLICATIONS| | | |
+| #MUTATIONS_WITH_PROGNOSTIC_IMPLICATIONS| | | |
+| #MUTATIONS| | | |
 
 ## Rules <a name="rules"></a>
 
-#### How many rows are there in total? 
+1. Each row represents a single MSK-IMPACT sample w/ OncoKB annotated variants and the corresponding patient level clinical data.
+2. This dataset excludes cf-DNA samples from the main IMPACT cohort dataset from cBioportal.
 
-There are 112676 rows, corresponding to data from 112,676 unique samples from  85,160 patients. 
-
-```
--- Row count
-select count(*)  FROM "pathology-data-mining"."impact_slide"."impact"
-
--- image_id Count
-select count(DISTINCT(image_id))  FROM "pathology-data-mining"."impact_slide"."impact"
-
--- patient Count
-select count(DISTINCT(mrn))  FROM "pathology-data-mining"."impact_slide"."impact"
-
-
-
-```
