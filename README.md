@@ -1,3 +1,11 @@
+# Data Sources:
+
+Clinical Data Mining (CDM) - Datasets generated from abstracting data elements from clinical reports
+IMPACT - MSK IMPACT cohorts
+HoBBit - Pathology slide inventory datasets
+Pathology Data Mining (PDM) - Datasets generated from abstracting data elements from pathology slides
+
+
 # Datasheets for Datasets in Practice
 
 The example datasheet and template provided here were inspired by Timnit Gebru's paper on [Datasheets for Datasets](https://dl.acm.org/doi/10.1145/3458723). The example dataset has been created by CDSI’s Pathology Data Mining (PDM) group to give data consumers an idea of what a datasheet could look like so they can assess its value. 
