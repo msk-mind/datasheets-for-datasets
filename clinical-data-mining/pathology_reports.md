@@ -11,9 +11,10 @@
 
 <b>Summary Statistics:</b>
 
-Total number of rows: 6,295,662 <br/>
-Total number of unique patients: 369,088 <br/>
-Total number of unique slides: 6,192,174 <br/>
+Total number of rows: 199,989 <br/>
+Total number of unique patients: 101,377 <br/>
+Total number of unique IMPACT sample_ids: 199,986 <br/>
+
 
 1. [Description](#description)
 2. [Assumptions](#assumptions)
@@ -23,7 +24,7 @@ Total number of unique slides: 6,192,174 <br/>
 
 ## Description <a name="description"></a>
 
-Contains data elements extracted from the pathology reports. Each row represents an MSK-IMPACT sample.
+Provides source accession number and dates of procedures for a given IMPACT sample extracted from pathology reports.
 
 ## Assumptions <a name="assumptions"></a>
 
@@ -32,29 +33,25 @@ No known assumptions.
 
 ## Vocabulary & Encoding <a name="vocabulary"></a>
 
-See CDSI documentation
+Reference CDSI documentation - [CDM Codebook](https://docs.google.com/spreadsheets/d/1po0GdSwqmmXibz4e-7YvTPUbXpi0WYv3c2ImdHXxyuc/edit#gid=187767892)
 
-- [CDM Codebook](https://docs.google.com/spreadsheets/d/1po0GdSwqmmXibz4e-7YvTPUbXpi0WYv3c2ImdHXxyuc/edit#gid=187767892)
+| **Field name** | **Description** | **Field Type** | **Encoding** |
+|---|---|---|---|
+| `MRN` | Medical Record Number, a unique identifier per patinet  | ID | string |
+| `SAMPLE_ID` | Identifies an IMPACT sample  | ID | string |
+| `SPECIMEN_NUMBER_DMP` | Specimen Number of IMPACT Sample indicated in molecular pathology report (DMP Report)  | ID | string |
+| `SOURCE_ACCESSION_NUMBER_0` | Original pathology report accession number containing specimen used for IMPACT sequencing  | ID | string |
+| `SOURCE_SPEC_NUM_0` | Specimen Number (Part number) in Source Accession Number used for IMPACT sequencing    | ID | string |
+| `SOURCE_ACCESSION_NUMBER_0b` | Original pathology report accession number containing specimen used for IMPACT sequencing   | ID | string |
+| `SOURCE_SPEC_NUM_0b` | Specimen Number (Part number) in Source Accession Number used for IMPACT sequencing | ID | string |
+
 
 
 ## Rules <a name="rules"></a>
 
-#### How many rows are there in total? 
-There are 197,836 rows corresponding to 197,834 samples from 100,486 patients. 
+1. MRNs are not zero padded.
+2. A single MRN can have multiple IMPACT samples associated with it.
+3. Multiple IMPACT samples can be collected from a single procedure.
 
-```
--- Row count
-select count(*)  FROM phi_data_lake."cdm-data".pathology."table_pathology_impact_sample_summary_dop_anno.tsv"
-
--- sample Count
-select count(DISTINCT(SAMPLE_ID))  FROM phi_data_lake."cdm-data".pathology."table_pathology_impact_sample_summary_dop_anno.tsv"
-
--- patient Count
-select count(DISTINCT(MRN))  FROM phi_data_lake."cdm-data".pathology."table_pathology_impact_sample_summary_dop_anno.tsv"
-```
-There are a few caveats:
-
-- Two samples are refer to multiple MRNs. This is a known bug in the data that needs to be resolved before use. This explains the discrepency between the row and sample counts. 
-- This data also contains patients who have received MSK ACCESS and patients partially consented to 12-245. This explains why the sample and patient count is higher than expected. 
 
 
