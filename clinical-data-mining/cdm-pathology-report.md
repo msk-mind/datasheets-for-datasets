@@ -1,7 +1,19 @@
-# CDM Pathology Report Accession Table
+# Pathology Reports 
 
-Late updated 2024-05-20
+<b>Path:</b> `"phi_data_lake"."cdm-data".pathology."table_pathology_impact_sample_summary_dop_anno.tsv"` <br/>
+<b>Table Type:</b> `Live` <br/>
+<b>Late updated:</b> `2024-05-17` <br/>
 
+<b>Lineage:</b> 
+
+`CDM NLP Processes` <br/>
+|_ `"phi_data_lake"."cdm-data".pathology."table_pathology_impact_sample_summary_dop_anno.tsv"` <br/>
+
+<b>Summary Statistics:</b>
+
+Total number of rows: 6,295,662 <br/>
+Total number of unique patients: 369,088 <br/>
+Total number of unique slides: 6,192,174 <br/>
 
 1. [Description](#description)
 2. [Assumptions](#assumptions)
@@ -11,25 +23,7 @@ Late updated 2024-05-20
 
 ## Description <a name="description"></a>
 
-### Motivation
-The purpose of this table is to associate pathology reports and surgeries with MSK-IMPACT samples. 
-
-### How was this data put together? 
-For patients that receive MSK-IMPACT sequencing, we check to see if there is a surgical pathology report reference in the DMP report via regex. If available, then we have
-access to the surgical accession number (`SOURCE_ACCESSION_NUMBER`) and the tissue specimen number (`SOURCE_SPEC_NUM`) associated with each MSK-IMPACT sample. 
-
-### Access
-This data can be accessed here: `phi_data_lake."cdm-data".pathology."table_pathology_impact_sample_summary_dop_anno.tsv"` 
-
-### How should this data be used?
-
-This data should be used to associated pathology reports with MSK-IMPACT samples. 
-
-### How often is this data updated
-This data is updated nightly. 
-
-### What does each row represent 
-Each row represents an MSK-IMPACT sample, and contains the corresponding DMP report accession, the MRN and, if referenced in the DMP report, the surgical pathology report and part number associated with the IMPACT sample. 
+Contains data elements extracted from the pathology reports. Each row represents an MSK-IMPACT sample.
 
 ## Assumptions <a name="assumptions"></a>
 

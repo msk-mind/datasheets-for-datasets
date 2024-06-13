@@ -1,10 +1,22 @@
 
-# HoBBIT 
+# hobbit_casebreakdown
 
-Late updated 2024-05-17
+<b>Path:</b> `"hobbit-poc"."case_breakdown"` <br/>
+<b>Table Type:</b> `Live` <br/>
+<b>Late updated:</b> `2024-05-17` <br/>
 
-Source code: `hobbit-casebreakdown.ipynb`
+<b>Lineage:</b> 
 
+`HoBBit SQL Server` <br/>
+|_ `"hobbit-poc"."case_breakdown"` <br/>
+
+<b>Summary Statistics:</b>
+
+Total number of rows: 6,295,662 <br/>
+Total number of unique patients: 369,088 <br/>
+Total number of unique slides: 6,192,174 <br/>
+
+<b>Source code for figures:</b> `hobbit-casebreakdown.ipynb`
 
 1. [Description](#description)
 2. [Assumptions](#assumptions)
@@ -14,67 +26,34 @@ Source code: `hobbit-casebreakdown.ipynb`
 
 ## Description <a name="description"></a>
 
-### Motivation
-HoBBIT is the institutional database that keeps records of all pathology slides digitized as part of the hospital's clinical workflow. As such, it's the source of the majority of our digital slide data used for research projects. 
+The case_breakdown table, contains information for a slide in each row, indexed by `image_id`, along with the metadata associated with that slide such as a patient ID, (`mrn`), information pertaining to the anatomical site (`part_type`, `part_description`), information about the stain (`stain_name`, `stain_group`), details about the scanner and scanning settings (`scanner_id`, `brand`, `model`, `magnification`) and additional metadata that pertain to the clinical workflow.
 
-### What is HoBBIT?
-
-HoBBIT [(Honest Broker for BioInformatics Technology)](https://academic.oup.com/jamia/article/28/9/1874/6321440) is a database maintained by the
-Department of Pathology containing metadata for all digitized slides processed as part of their clinical workflow [^1]. 
-
-<img src="figures/HoBBIT.png" width=70%/> 
-
-
-
-In so-called "casebreakdown" database, each row represents a slide, indexed by `image_id`, along with the metadata associated with that slide such as a patient ID, (`mrn`), information pertaining to the anatomical site (`part_type`, `part_description`), information about the stain (`stain_name`, `stain_group`), details about the scanner and scanning settings (`scanner_id`, `brand`, `model`, `magnification`) and additional metadata that pertain to the clinical workflow. 
-
-
-The table in Dremio is a live table that is constantly being updated as new slides are scanned. This table may NOT be directly used by researchers because it contains PHI. If you'd like access to the table directly, please contact the PDM engineering team. 
-
-### Access
-The table can be accessed via dremio here: `"hobbit-poc"."case_breakdown"` 
-
-If you do not have permissions on this table, please contact the engineering team. 
-
-### How should this data be used?
-
-The most immediate use of this data is to find pathology slides associated with a set of patients. More specifically, this data has been matched with IMPACT data to associate pathology slides with the closest corresponding IMPACT sample. In generally, researchers may use this table to search for slides of interested or slides that have been scanned while they build their patient cohorts.  
-
-Users interested in working with slide images should contact the engineering team. We highly recommend not using this table directly, but the cleaned version discussed here. 
-
-### How often is this data updated?
-
-This data is updated live, as new slides are digitized and entered into HoBBIT. This data is managed by the Department of Pathology, specifically Luke Geneslaw. 
-
-### How was this data collected?
+##### How was this data collected? 
 
 Tissue that is resected from a patient (identified by `mrn`) during surgery (`specnum_formatted`) is sent to the Dept. of Pathology where it is processed. Tissue may be resected from multiple anatomical sites from a single surgical procedure. Processing involves breaking up the tissue from each anatomical site (`part_type`, `part_description`) into parts (`part_inst`) and blocks (`block_inst `). A part can contain many blocks. Both parts and blocks are given designator labels called part number and block number. Certain blocks of interest are then selected to create slides.
 
 <img src="figures/hobbit_image_id_hierarchy.png" width=70% /> 
 
+##### What are the types of slides that are available? 
 
+HoBBIT also contains data corresponding to H&E and IHC stains. For the most part, IHC stains are less available across cancer types than H&E stains. 
 
-#### What does each row represent?
-Each row represents a single, digitized slide with metadata related to the collection process and the digitization process. The primary key is the `image_id`. 
+<img src="figures/available_stains.png" width=40%/> 
+<img src="figures/available_ihc.png" width=40%/> 
 
+Slides tend to be scanned at either 20x or 40x power depending on the scanner used. Slides scanned at 40x are higher resolution, but also twice the file size (on average .52GB vs 1.15GB). The slide scanning power is largely determined by the scanner model used. There are some slides scanned at other resolutions, but those should be reviewed on a case-by-case basis. 
+
+<img src="figures/magnification.png"  width=50%/> 
 
 ## Assumptions <a name="assumptions"></a>
 
-
-#### Does this database contain all possible slides?
-
-In short, no. There has been an effort in recent years to retrospectively digitize all slides from all available patient surgeries, but there is still some missing-ness.
-
-Furthermore, just because a slide is documented in HoBBIT, does not mean that the slide can be used for research, in rare occurrences (~1%), the slide itself contains PHI and cannot be de-identified for research purposes. 
-
-
-Finally, there are slides scanned strictly for research purposes that are potentially absent from this database, particularly if a novel or new scanner was used in the research workflow. 
-
-
+None.
 
 ## Vocabulary & Encoding <a name="vocabulary"></a>
 
-Each row contains data in 26 columns. Below, we outline the most useful fields. All other fields are used as part of the clinical workflow and are not required for research purposes. These fields are outlined here: 
+Total number of Columns: 26
+
+The columns below are relevant or research purposes.  
 
 | **Field name** | **Description** | **Field Type** | **Encoding** |
 |---|---|---|---|
@@ -94,44 +73,7 @@ Each row contains data in 26 columns. Below, we outline the most useful fields. 
 | `file_size_bytes` | Size of the scanned image in bytes | Continuous Variable | integer |
 
 
-#### Is there any information missing? 
-
-Yes, there are fields with missing data. 
-
-```
-subspecialty          1272200
-priority                   14
-signout_datetime        19319
-part_designator             3
-block_inst             778499
-blkdesig_label         778501
-barcode                     2
-stain_name                290
-stain_group             62006
-magnification               9
-file_size_bytes           191
-
-```
-Most of these fields are used for operations and are not relevant for research, so this level of missing-ness is permissible. 
-
-
-
-#### What kind of slides are available? 
-
-HoBBIT also contains data corresponding to H&E and IHC stains. For the most part, IHC stains are less available across cancer types than H&E stains. 
-
-<img src="figures/available_stains.png" width=40%/> 
-<img src="figures/available_ihc.png" width=40%/> 
-
-
-
-Slides tend to be scanned at either 20x or 40x power depending on the scanner used. Slides scanned at 40x are higher resolution, but also twice the file size (on average .52GB vs 1.15GB). The slide scanning power is largely determined by the scanner model used. There are some slides scanned at other resolutions, but those should be reviewed on a case-by-case basis. 
-
-<img src="figures/magnification.png"  width=50%/> 
-
-
-#### Supplementary fields
-Here we provide a condensed summary of available fields. These are mostly use for hospital operation and not relevant for research. 
+The columns below are relevant to clinical operations and may not be useful for research purposes.  
 
 | **Field name** | **Description** | **Field Type** | **Encoding** |
 |---|---|---|---|
@@ -145,32 +87,24 @@ Here we provide a condensed summary of available fields. These are mostly use fo
 
 # Rules <a name="rules"></a>
 
-#### How many rows are there in total?
-There are  6,295,662 rows, coresponding to data from 369,088 unique patients. There are 6,192,174 unique `image_id`s in total. A subset of the duplicates are entirely duplicated rows. However, in extreme minority of cases, the same `image_id` will have different collection and digitization metadata. These slides need to be removed entirely from the database prior to any use.
- 
-```
--- Row count
-select count(*)  FROM "hobbit-poc"."case_breakdown"
-
--- image_id Count
-select count(DISTINCT(image_id))  FROM "hobbit-poc"."case_breakdown"
+1. Not all slides created at MSK are scanned and represented in this dataset.
+2. Not all slides in this dataseet can be used for research. About 1% of the slides cannot be de-identified and therefore cannot be used for research.
+3. There are slides scanned strictly for research purposes that are potentially absent from this database, particularly if a novel or new scanner was used in the research workflow.
+4. A vast majority of the slides to be used for research purposes are scanned at either 20x or 40x. Some slides may be scanned at 50x or 25x.
+5. On average a 40x scan is 1.15GB  and a 20x scan is around 0.50GB.
+6. The following columns of interest for research contain missing values for some rows.
 
 ```
-
-#### PHI
-Not all of the slides in HoBBIT can be used for research. In practice, roughly 1% of requested slides contain PHI on the slide itself and thus cannot be de-identified for research use. This cannot be determined via HoBBIT, and is only determined during data transfer. 
-
-
-#### Slide Resolution
-A vast majority of the slides to be used for research purposes are scanned at either 20x or 40x. If you find yourself working with a slide scanned at 50x or 25x, then double check to make sure that you're sure about your slide selection. 
-
-
-#### Image Size
-Digitized slides scanned at 40x tend to be twice the size of 20x slides, (on average 1.15GB vs .52GB)
-
+Column Name           # missing values
+part_designator             3
+block_inst             778499
+blkdesig_label         778501
+barcode                     2
+stain_name                290
+stain_group             62006
+magnification               9
+file_size_bytes           191
+```
 
 
-
-
-[^1]: This means that slides specifically requested to be scanned for research purposes may not be in HoBBIT
 
