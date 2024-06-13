@@ -1,4 +1,4 @@
-# IMPACT - MSK IMPACT Table
+# MSK IMPACT Table
 
 <b>Path:</b> `"phi_data_lake"."pdm-data".impact."data_clinical_sample.oncokb.txt"` <br/>
 <b>Table Type:</b> `Live` <br/>
