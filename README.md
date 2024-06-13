@@ -1,7 +1,7 @@
 # Data Sources:
 
 Clinical Data Mining (CDM) - Datasets generated from abstracting data elements from clinical reports <br/>
-IMPACT - MSK IMPACT cohorts <br/>
+IMPACT - MSK IMPACT datasets <br/>
 HoBBit - Pathology slide inventory datasets <br/>
 Pathology Data Mining (PDM) - Datasets generated from abstracting data elements from pathology slides <br/>
 
