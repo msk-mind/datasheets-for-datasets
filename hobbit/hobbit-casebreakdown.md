@@ -62,7 +62,8 @@ The columns below are relevant or research purposes.
 | `part_inst` | Part identifier. Organs are divided into multiple parts to identify locations of specimens in the organ. | ID | integer |
 | `part_type` | The part, or specimen name. Usually formatted as: Anatomical site; Tissue extraction method <br> Example: TRACHEA; RESECTION | Mixed Field | string |
 | `part_description` | Description of the anatomical site from which the part was obtained. | Natural Language Description | string |
-| `block_inst` | Tissues of specific parts can be fixed in one or more paraffin blocks. This ID specifies the block the specimen originates from. | ID | integer |
+| `block_inst` | Tissues of specific parts can be fixed in one or more paraffin blocks. This number specifies which block the specimen originates from. | ID | integer |
+| `blkdesig_label` | This ID also specifies the block the specimen originates from. | ID | string |
 | `barcode` | A unique ID of a glass slide with a prepared tissue specimen.| Mixed Field | string |
 | `stain_group` | Broad category of stain name used to stain the slide (H&E vs IHC)| Categorical Variable | string |
 | `stain_name` | The specific stain used on the slide. This is useful for identifying different IHC stains. | Categorical Variable | string |
