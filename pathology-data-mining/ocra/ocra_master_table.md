@@ -1,4 +1,4 @@
-# Rachel Grisham Cohort
+# OCRA Master Table
 
 <b>Path:</b> `OCRA.<NEED_TO_ADD>` <br/>
 <b>Table Type:</b> `Static, but contains live datasets in lineage` <br/>
