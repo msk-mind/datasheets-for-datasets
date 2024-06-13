@@ -1,4 +1,4 @@
-# Pathology Reports 
+# DDP ID Mapping 
 
 <b>Path:</b> `"phi_data_lake"."cdm-data"."id-mapping"."ddp_id_mapping_pathology.tsv"` <br/>
 <b>Table Type:</b> `Live` <br/>
