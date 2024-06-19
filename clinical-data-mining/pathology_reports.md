@@ -24,7 +24,7 @@ Total number of unique IMPACT sample_ids: 199,986 <br/>
 
 ## Description <a name="description"></a>
 
-Provides source accession number and dates of procedures for a given IMPACT sample extracted from pathology reports.
+NLP parsed data elements from pathology reports. Provides source accession number and dates of procedures for a given IMPACT sample extracted from pathology reports.
 
 ## Assumptions <a name="assumptions"></a>
 
