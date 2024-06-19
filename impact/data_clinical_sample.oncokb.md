@@ -7,7 +7,6 @@
 <b>Lineage:</b> 
 
 [cBioportal - data_clinical_sample.oncokb](https://github.mskcc.org/cdsi/oncokb-annotated-msk-impact/blob/main/data_clinical_sample.oncokb.txt.gz) <br/>
-[cBioportal - msk_solid_heme](https://github.mskcc.org/cdsi/msk-impact/tree/master/msk_solid_heme`) <br/>
 |_ `"phi_data_lake"."pdm-data".impact."data_clinical_sample.oncokb.txt"` <br/>
 
 <b>Summary Statistics:</b>
