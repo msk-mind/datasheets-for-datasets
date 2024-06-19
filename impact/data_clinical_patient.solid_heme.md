@@ -1,4 +1,4 @@
-# MSK IMPACT Table
+# data_clinical_patient.solid_heme
 
 <b>Path:</b> `"phi_data_lake"."pdm-data".impact."data_clinical_patient.solid_heme.txt"` <br/>
 <b>Table Type:</b> `Live` <br/>
