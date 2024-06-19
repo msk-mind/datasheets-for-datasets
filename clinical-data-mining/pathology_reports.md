@@ -11,9 +11,9 @@
 
 <b>Summary Statistics:</b>
 
-Total number of rows: 199,989 <br/>
-Total number of unique patients: 101,377 <br/>
-Total number of unique IMPACT sample_ids: 199,986 <br/>
+Total number of rows: 200,451 <br/>
+Total number of unique patients: 101,605 <br/>
+Total number of unique IMPACT sample_ids: 200,448 <br/>
 
 
 1. [Description](#description)
@@ -37,9 +37,10 @@ Reference CDSI documentation - [CDM Codebook](https://docs.google.com/spreadshee
 
 | **Field name** | **Description** | **Field Type** | **Encoding** |
 |---|---|---|---|
-| `MRN` | Medical Record Number, a unique identifier per patinet  | ID | string |
+| `MRN` | Medical Record Number, which uniquely identifies a patient  | ID | string |
 | `SAMPLE_ID` | Identifies an IMPACT sample  | ID | string |
-| `SPECIMEN_NUMBER_DMP` | Specimen Number of IMPACT Sample indicated in molecular pathology report (DMP Report)  | ID | string |
+| `ACCESSION_NUMBER_DMP` |  Accession number from a DMP report | ID | string |
+| `SPECIMEN_NUMBER_DMP` | Specimen Number of IMPACT Sample indicated in molecular pathology report (DMP report)  | ID | string |
 | `SOURCE_ACCESSION_NUMBER_0` | Original pathology report accession number containing specimen used for IMPACT sequencing  | ID | string |
 | `SOURCE_SPEC_NUM_0` | Specimen Number (Part number) in Source Accession Number used for IMPACT sequencing    | ID | string |
 | `SOURCE_ACCESSION_NUMBER_0b` | Original pathology report accession number containing specimen used for IMPACT sequencing   | ID | string |
@@ -52,6 +53,7 @@ Reference CDSI documentation - [CDM Codebook](https://docs.google.com/spreadshee
 1. MRNs are not zero padded.
 2. A single MRN can have multiple IMPACT samples associated with it.
 3. Multiple IMPACT samples can be collected from a single procedure.
+4. Many samples may have both a regular accession number and a DMP accession number.
 
 
 
