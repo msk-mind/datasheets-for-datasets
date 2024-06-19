@@ -1,7 +1,7 @@
 # OCRA Master Table
 
 <b>Path:</b> `OCRA.<NEED_TO_ADD>` <br/>
-<b>Table Type:</b> `Static, but contains live datasets in lineage` <br/>
+<b>Table Type:</b> `contains live datasets in lineage` <br/>
 <b>Late updated:</b> `2024-05-17` <br/>
 
 <b>Lineage:</b> 
