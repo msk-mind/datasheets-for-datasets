@@ -1,5 +1,7 @@
 # MSK-IMPACT to Pathology Slide Matching Schema
 
+# THIS TABLE NEEDS TO BE REDONE
+
 Late updated 2024-05-16
 
 1. [Description](#description)
