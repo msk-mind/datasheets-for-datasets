@@ -1,20 +1,18 @@
 # MSK IMPACT Table
 
-<b>Path:</b> `"phi_data_lake"."pdm-data".impact."data_clinical_sample.oncokb.txt"` <br/>
+<b>Path:</b> `"phi_data_lake"."pdm-data".impact."data_clinical_patient.solid_heme.txt"` <br/>
 <b>Table Type:</b> `Live` <br/>
 <b>Late updated:</b> `2024-05-17` <br/>
 
 <b>Lineage:</b> 
 
-[cBioportal - data_clinical_sample.oncokb](https://github.mskcc.org/cdsi/oncokb-annotated-msk-impact/blob/main/data_clinical_sample.oncokb.txt.gz) <br/>
-[cBioportal - msk_solid_heme](https://github.mskcc.org/cdsi/msk-impact/tree/master/msk_solid_heme`) <br/>
-|_ `"phi_data_lake"."pdm-data".impact."data_clinical_sample.oncokb.txt"` <br/>
+?? <br/>
+|_ `"phi_data_lake"."pdm-data".impact."data_clinical_patient.solid_heme.txt"` <br/>
 
 <b>Summary Statistics:</b>
 
-Total number of rows: 125,071 <br/>
-Total number of unique patients: 88,072 <br/>
-Total number of unique IMPACT samples: 125,071 <br/>
+Total number of rows: 88,003 <br/>
+Total number of unique patients: 88,003 <br/>
 
 
 1. [Description](#description)
@@ -25,7 +23,7 @@ Total number of unique IMPACT samples: 125,071 <br/>
 
 ## Description <a name="description"></a>
 
-Contains patient level information and sample level information for patients w/ tumors sequenced for MSK IMPACT.
+??
 
 ## Assumptions <a name="assumptions"></a>
 
@@ -35,64 +33,34 @@ None.
 
 | **Field name** | **Description** | **Field Type** | **Encoding** |
 |---|---|---|---|
-| SAMPLE_ID| | | |
 | PATIENT_ID| | | |
-| GLEASON_SAMPLE_LEVEL| | | |
-| PDL1_POSITIVE| | | |
-| MONTH_ADDED| | | |
-| WEEK_ADDED| | | |
-| CANCER_TYPE| | | |
-| SAMPLE_TYPE| | | |
-| SAMPLE_CLASS| | | |
-| METASTATIC_SITE| | | |
-| PRIMARY_SITE| | | |
-| CANCER_TYPE_DETAILED| | | |
-| GENE_PANEL| | | |
-| SO_COMMENTS| | | |
-| SAMPLE_COVERAGE| | | |
-| TUMOR_PURITY| | | |
-| ONCOTREE_CODE| | | |
-| MSI_COMMENT| | | |
-| MSI_SCORE| | | |
-| MSI_TYPE| | | |
-| INSTITUTE| | | |
-| SOMATIC_STATUS| | | |
-| ARCHER| | | |
-| CVR_TMB_COHORT_PERCENTILE| | | |
-| CVR_TMB_SCORE| | | |
-| CVR_TMB_TT_COHORT_PERCENTILE| | | |
-| PATH_SLIDE_EXISTS| | | |
-| MSK_SLIDE_ID| | | |
-| LEVEL_1| | | |
-| LEVEL_2| | | |
-| LEVEL_3A| | | |
-| LEVEL_3B| | | |
-| LEVEL_4| | | |
-| LEVEL_R1| | | |
-| LEVEL_R2| | | |
-| HIGHEST_LEVEL| | | |
-| HIGHEST_SENSITIVE_LEVEL| | | |
-| HIGHEST_RESISTANCE_LEVEL| | | |
-| LEVEL_Dx1| | | |
-| LEVEL_Dx2| | | |
-| LEVEL_Dx3| | | |
-| HIGHEST_DX_LEVEL| | | |
-| LEVEL_Px1| | | |
-| LEVEL_Px2| | | |
-| LEVEL_Px3| | | |
-| HIGHEST_PX_LEVEL| | | |
-| ONCOGENIC_MUTATIONS| | | |
-| #ONCOGENIC_MUTATIONS| | | |
-| RESISTANCE_MUTATIONS| | | |
-| #RESISTANCE_MUTATIONS| | | |
-| #MUTATIONS_WITH_SENSITIVE_THERAPEUTIC_IMPLICATIONS| | | |
-| #MUTATIONS_WITH_RESISTANCE_THERAPEUTIC_IMPLICATIONS| | | |
-| #MUTATIONS_WITH_DIAGNOSTIC_IMPLICATIONS| | | |
-| #MUTATIONS_WITH_PROGNOSTIC_IMPLICATIONS| | | |
-| #MUTATIONS| | | |
+| GENDER| | | |
+| RACE| | | |
+| ETHNICITY| | | |
+| CURRENT_AGE_DEID| | | |
+| STAGE_HIGHEST_RECORDED| | | |
+| NUM_ICDO_DX| | | |
+| ADRENAL_GLANDS| | | |
+| BONE| | | |
+| CNS_BRAIN| | | |
+| INTRA_ABDOMINAL| | | |
+| LIVER| | | |
+| LUNG| | | |
+| LYMPH_NODES| | | |
+| OTHER| | | |
+| PLEURA| | | |
+| REPRODUCTIVE_ORGANS| | | |
+| SMOKING_PREDICTIONS_3_CLASSES| | | |
+| GLEASON_FIRST_REPORTED| | | |
+| GLEASON_HIGHEST_REPORTED| | | |
+| HISTORY_OF_PDL1| | | |
+| PRIOR_MED_TO_MSK| | | |
+| OS_MONTHS| | | |
+| OS_STATUS| | | |
+| OTHER_PATIENT_ID| | | |
+| PARTA_CONSENTED_12_245| | | |
+| PARTC_CONSENTED_12_245| | | |
 
 ## Rules <a name="rules"></a>
 
-1. Each row represents a single MSK-IMPACT sample w/ OncoKB annotated variants and the corresponding patient level clinical data.
-2. This dataset excludes cf-DNA samples from the main IMPACT cohort dataset from cBioportal.
-
+1. Each row represents a single MSK-IMPACT patient.
