@@ -47,8 +47,8 @@ None.
 | PRIMARY_SITE | Location of primary site | string | |
 | CANCER_TYPE_DETAILED | Specific cancer subtype | string | |
 | GENE_PANEL | The IMPACT gene panel that was used | string | IMPACT341, IMPACT410, etc.|
-| SO_COMMENTS | Physician sign-out comments | | |
-| SAMPLE_COVERAGE | | | |
+| SO_COMMENTS | Physician sign-out comments | string | |
+| SAMPLE_COVERAGE | | string | |
 | TUMOR_PURITY | Proportion of cancer cells in tissue sample | string | |
 | ONCOTREE_CODE | The OncoTree cancer-type code | string | |
 | MSI_COMMENT | Microsatellite Instability (MSI) comment | string | |
@@ -57,38 +57,38 @@ None.
 | INSTITUTE | Institute source | string | MSKCC, etc. |
 | SOMATIC_STATUS | Is there a matched somatic sample for comparison? | string | Matched, Unmatched |
 | ARCHER | Was MSK-ARCHER test performed? | string | YES, NO |
-| CVR_TMB_COHORT_PERCENTILE | | | |
-| CVR_TMB_SCORE | | | |
-| CVR_TMB_TT_COHORT_PERCENTILE | | | |
+| CVR_TMB_COHORT_PERCENTILE | Tumor Mutation Burden % across cancer types | string | |
+| CVR_TMB_SCORE | Tumor Mutation Burden score | string | |
+| CVR_TMB_TT_COHORT_PERCENTILE | Tumor Mutation Burden % within cancer type | string | |
 | PATH_SLIDE_EXISTS | Is there a pathology slide ID? | string | YES, NO |
 | MSK_SLIDE_ID | Matching pathology slide ID | string | |
-| LEVEL_1 | | | |
-| LEVEL_2 | | | |
-| LEVEL_3A | | | |
-| LEVEL_3B | | | |
-| LEVEL_4 | | | |
-| LEVEL_R1 | | | |
-| LEVEL_R2 | | | |
-| HIGHEST_LEVEL | | | |
-| HIGHEST_SENSITIVE_LEVEL | | | |
-| HIGHEST_RESISTANCE_LEVEL | | | |
-| LEVEL_Dx1 | | | |
-| LEVEL_Dx2 | | | |
-| LEVEL_Dx3 | | | |
-| HIGHEST_DX_LEVEL | | | |
-| LEVEL_Px1 | | | |
-| LEVEL_Px2 | | | |
-| LEVEL_Px3 | | | |
-| HIGHEST_PX_LEVEL | | | |
-| ONCOGENIC_MUTATIONS | | | |
-| #ONCOGENIC_MUTATIONS | | | |
-| RESISTANCE_MUTATIONS | | | |
-| #RESISTANCE_MUTATIONS | | | |
-| #MUTATIONS_WITH_SENSITIVE_THERAPEUTIC_IMPLICATIONS | | | |
-| #MUTATIONS_WITH_RESISTANCE_THERAPEUTIC_IMPLICATIONS | | | |
-| #MUTATIONS_WITH_DIAGNOSTIC_IMPLICATIONS | | | |
-| #MUTATIONS_WITH_PROGNOSTIC_IMPLICATIONS | | | |
-| #MUTATIONS | | | |
+| LEVEL_1 | | string | |
+| LEVEL_2 | | string | |
+| LEVEL_3A | | string | |
+| LEVEL_3B | | string | |
+| LEVEL_4 | | string | |
+| LEVEL_R1 | | string | |
+| LEVEL_R2 | | string | |
+| HIGHEST_LEVEL | | string | |
+| HIGHEST_SENSITIVE_LEVEL | | string | |
+| HIGHEST_RESISTANCE_LEVEL | | string | |
+| LEVEL_Dx1 | | string | |
+| LEVEL_Dx2 | | string | |
+| LEVEL_Dx3 | | string | |
+| HIGHEST_DX_LEVEL | | string | |
+| LEVEL_Px1 | | string | |
+| LEVEL_Px2 | | string | |
+| LEVEL_Px3 | | string | |
+| HIGHEST_PX_LEVEL | | string | |
+| ONCOGENIC_MUTATIONS | | string | |
+| #ONCOGENIC_MUTATIONS | | string | |
+| RESISTANCE_MUTATIONS | | string | |
+| #RESISTANCE_MUTATIONS | | string | |
+| #MUTATIONS_WITH_SENSITIVE_THERAPEUTIC_IMPLICATIONS | | string | |
+| #MUTATIONS_WITH_RESISTANCE_THERAPEUTIC_IMPLICATIONS | | string | |
+| #MUTATIONS_WITH_DIAGNOSTIC_IMPLICATIONS | | string | |
+| #MUTATIONS_WITH_PROGNOSTIC_IMPLICATIONS | | string | |
+| #MUTATIONS | | string | |
 
 ## Rules <a name="rules"></a>
 
