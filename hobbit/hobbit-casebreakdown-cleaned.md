@@ -12,9 +12,11 @@ HoBBit SQL Server <br/>
 
 <b>Summary Statistics:</b>
 
-Total number of rows: 6,191,382 <br/>
-Total number of unique patients: 369,072 <br/>
-Total number of unique slides: 6,191,382 <br/>
+Total number of rows: 6,235,731 <br/>
+Total number of unique patients: 369,471 <br/>
+Total number of unique slides: 6,235,731 <br/>
+
+Last updated July 1, 2024.  (New slides are typically added weekly.)
 
 1. [Description](#description)
 2. [Assumptions](#assumptions)
