@@ -94,4 +94,5 @@ None.
 
 1. Each row represents a single MSK-IMPACT sample w/ OncoKB annotated variants and the corresponding patient level clinical data.
 2. This dataset excludes cf-DNA samples from the main IMPACT cohort dataset from cBioPortal.
+3. You can't rely on the MSK slide ID, because it's only available for about a quarter of the IMPACT samples in this dataset.
 
