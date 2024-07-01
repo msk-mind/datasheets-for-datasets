@@ -50,10 +50,10 @@ A number of columns were added to make common queries simpler
 | **Field name** | **Description** | **Field Type** | **Encoding** |
 |---|---|---|---|
 | MRN | | string | |
-| ACCESSION_NUMBER | |  | string | |
-| PART_NUMBER | |  | integer  | |
-| BLOCK_NUMBER | |  | integer  | |
-| BLOCK_LABEL | |  | string  | |
+| ACCESSION_NUMBER | |  string | |
+| PART_NUMBER | |  integer  | |
+| BLOCK_NUMBER | | integer  | |
+| BLOCK_LABEL | |  string  | |
 | IS_HNE | Is the stain "H&E (Initial)" or "H&E (Other)" ? | integer | |
 | IS_IHC | Is the stain "IHC"? | integer | |
 | MRN_PATH | medical record number | string | |
