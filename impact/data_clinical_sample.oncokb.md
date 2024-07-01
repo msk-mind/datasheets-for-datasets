@@ -54,14 +54,14 @@ None.
 | MSI_COMMENT | Microsatellite Instability (MSI) comment | string | |
 | MSI_SCORE | Microsatellite Instability (MSI) score | string | |
 | MSI_TYPE | Microsatellite Instability (MSI) type | string | Stable, Instable, or Indeterminate |
-| INSTITUTE | Institute source (.e.g. MSKCC) | string | |
-| SOMATIC_STATUS | Is there a matched somatic sample for comparison? | string | |
-| ARCHER | Was MSK-ARCHER test performed? | string | |
+| INSTITUTE | Institute source | string | MSKCC, etc. |
+| SOMATIC_STATUS | Is there a matched somatic sample for comparison? | string | Matched, Unmatched |
+| ARCHER | Was MSK-ARCHER test performed? | string | YES, NO |
 | CVR_TMB_COHORT_PERCENTILE | | | |
 | CVR_TMB_SCORE | | | |
 | CVR_TMB_TT_COHORT_PERCENTILE | | | |
-| PATH_SLIDE_EXISTS | | | |
-| MSK_SLIDE_ID | | | |
+| PATH_SLIDE_EXISTS | Is there a pathology slide ID? | string | YES, NO |
+| MSK_SLIDE_ID | Matching pathology slide ID | string | |
 | LEVEL_1 | | | |
 | LEVEL_2 | | | |
 | LEVEL_3A | | | |
