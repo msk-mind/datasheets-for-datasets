@@ -40,7 +40,30 @@ None.
 
 ## Vocabulary & Encoding <a name="vocabulary"></a>
 
-See datasheets in the lineage. 
+Most of the columns in the master table are described in datasheets from the lineage. 
+
+A number of columns appeared in multiple base tables - these were re-named to record which
+base table each value was taken from.
+
+A number of columns were added to make common queries simpler
+
+| **Field name** | **Description** | **Field Type** | **Encoding** |
+|---|---|---|---|
+| MRN | | string | |
+| ACCESSION_NUMBER | |  | string | |
+| PART_NUMBER | |  | integer  | |
+| BLOCK_NUMBER | |  | integer  | |
+| BLOCK_LABEL | |  | string  | |
+| IS_HNE | Is the stain "H&E (Initial)" or "H&E (Other)" ? | integer | |
+| IS_IHC | Is the stain "IHC"? | integer | |
+| MRN_PATH | medical record number | string | |
+| SAMPLE_ID_PATH | IMPACT sample ID | string | |
+| SAMPLE_ID_IMPACT  |IMPACT sample id | string | |
+| PATIENT_ID_IMPACT  |De-identified patient ID | string | |
+| MRN_CDM | medical record number | string | |
+| DMP_ID | DMP patient ID ("de-identified patient ID") | string |
+| IS_RG_MYRIAD | Is this row linked to the Rachel Grisham Myriad cohort? | string | |
+| MRN_RG | medical record number | string | |
 
 
 ## Rules <a name="rules"></a>
