@@ -44,8 +44,9 @@ Reference CDSI documentation - [CDM Codebook](https://docs.google.com/spreadshee
 
 ## Rules <a name="rules"></a>
 
-1. MRNs are zero padded.
+1. MRNs must be zero padded to eight digits. (They are compared as strings, not integers.)
 2. A single MRN can have multiple IMPACT samples associated with it.
+3. A given MRN is expected to correspond to a unique DMP_ID, but there are rare exceptions.
 
 
 
