@@ -34,11 +34,11 @@ Any assumptions made about the collection evironment or collection process that 
 
 Vocabulary of the dataset. Clearly an unambiguous field description goes a long way. Equally important are the field type and encoding. The field type helps give a good high level overview of the type of variables contained in the dataset, which can be a very informative view of the dataset. The encoding is very important because often times the data is presented as a CSV where there is no information about whether a field should be considered as an integer or string when it is formatted into a Pandas dataframe for example. Encoding the field into the wrong format can lead to terrible errors like the infamous MRN zero-padding error. 
 
-| **Field name** | **Description** | **Field Type** | **Encoding** |
-|---|---|---|---|
-| field1 | field1 description | ID or Categorical Variable or Continuous Variable or Mixed Field or Natural Language Description | integer or float or string or binary |
-| field2 | field2 description | ID or Categorical Variable or Continuous Variable or Mixed Field or Natural Language Description | integer or float or string or binary |
-| field3 | field3 description | ID or Categorical Variable or Continuous Variable or Mixed Field or Natural Language Description | integer or float or string or binary |
+| **Field name** | **Description** | **Field Type** | **Data Type** | **Field Format** |
+|---|---|---|---|---|
+| field1 | field1 description | ID or Categorical Variable or Continuous Variable or Mixed Field or Natural Language Description | integer or float or string or binary | YYYYMMDD, 0, 1, True, False etc. |
+| field2 | field2 description | ID or Categorical Variable or Continuous Variable or Mixed Field or Natural Language Description | integer or float or string or binary |YYYYMMDD, 0, 1, True, False etc. |
+| field3 | field3 description | ID or Categorical Variable or Continuous Variable or Mixed Field or Natural Language Description | integer or float or string or binary |YYYYMMDD, 0, 1, True, False etc. |
 
 ## Categorical Variables:
 
