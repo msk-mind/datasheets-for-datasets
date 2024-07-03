@@ -1,6 +1,6 @@
 # OCRA Master Table
 
-<b>Path:</b> `OCRA.<NEED_TO_ADD>` <br/>
+<b>Path:</b> `OCRA."OCRA_Master_Table_2024-06-18"` <br/>
 <b>Table Type:</b> `contains live datasets in lineage` <br/>
 <b>Late updated:</b> `2024-05-17` <br/>
 
