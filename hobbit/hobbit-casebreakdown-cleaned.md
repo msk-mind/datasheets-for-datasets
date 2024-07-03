@@ -7,7 +7,7 @@
 <b>Lineage:</b>
 
 HoBBit SQL Server <br/>
-|_ ["hobbit-poc"."case_breakdown"]((hobbit-casebreakdown.md)) <br/>
+|_ ["hobbit-poc"."case_breakdown"](hobbit-casebreakdown.md) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;|_ "hobbit-poc"."case_breakdown_cleaned" <br/>
 
 <b>Summary Statistics:</b>
