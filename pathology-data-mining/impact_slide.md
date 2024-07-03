@@ -13,7 +13,7 @@ Late updated 2024-05-16
 
 ### Motivation
 
-This data provides a way to retrieve pathology slides associated with patients that have had MSK-IMPCAT sequencing.
+This data provides a way to retrieve pathology slides associated with patients that have had MSK-IMPACT sequencing.
 
 This involves bringing together several tables from the Department of Pathology and CDSI data sources. By presenting this data in a single view, we look to improve the consistency in data engineering, cohort selection and project upkeep. 
 
@@ -23,10 +23,9 @@ This involves bringing together several tables from the Department of Pathology 
 For patients that receive MSK-IMPACT sequencing, we check to see if there is a surgical pathology report reference in the DMP report via regex. If available, then we have
 access to the surgical accession number (`SOURCE_ACCESSION_NUMBER`) and the tissue specimen number (`SOURCE_SPEC_NUM`) associated with each MSK-IMPACT sample. 
 
-Using this table, we can then reference [HoBBIT](#HoBBIT), a broker of slide metadata managed by
-the department of pathology, that contains slide metadata associated with all pathology slides digitized as part of the clinical workflow. This data is indexed by a unique
-`image_id` per digitized slide, and also contains the `specnum_formatted` that matches
-the surgical accession number and the `part_inst` which matches the tissue specimen number for each slide. 
+Using this table, we can then reference [HoBBIT](#HoBBIT), a database managed by the department of pathology, that contains slide metadata associated with all 
+pathology slides digitized as part of the clinical workflow. This data is indexed by a unique `image_id` per digitized slide, and also contains the 
+`specnum_formatted` that matches the surgical accession number and the `part_inst` which matches the tissue specimen number (part number) for each slide. 
 
 Merging the MSK-IMPACT table with the surgical and tissue specimen numbers with the HoBBIT
 database then allows us to directly match the slides from the specimen and surgery that are referenced in the DMP report. 
