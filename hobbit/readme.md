@@ -6,4 +6,4 @@ HoBBIT [(Honest Broker for BioInformatics Technology)](https://academic.oup.com/
 
 ## Datasets:
 [hobbit_casebreakdown](hobbit-casebreakdown.md) - scanned pathology slide metadata <br/>
-[hobbit_casebreakdown_cleaned](hobbit-casebreakdown.md)  - curated version of hobbit_casebreakdown dataset
+[hobbit_casebreakdown_cleaned](hobbit-casebreakdown-cleaned.md)  - curated version of hobbit_casebreakdown dataset
