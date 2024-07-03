@@ -15,8 +15,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp; |_ LEFT JOIN t6 ON t5.PATIENT_ID = t6.MRN (as t7) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp; [OCRA."HRD_RG_data"](https://github.com/msk-mind/datasheets-for-datasets/blob/main/pathology-data-mining/ocra/rachel_grisham_cohort.md) (as t8) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |_ FULL JOIN t7 ON t8.MRN = t7.MRN (as t9) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OCRA.archive."wide_shape_features" (as t10) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; |_ FULL JOIN t10 ON t9.image_id = t10.slide_id (as t11) <br/>
+
 
 <b>Summary Statistics:</b>
 
