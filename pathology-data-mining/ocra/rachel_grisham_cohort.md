@@ -32,7 +32,7 @@ None.
 ## Vocabulary & Encoding <a name="vocabulary"></a>
 
 | **Field name** | **Description** | **Field Type** | **Data Type** | **Field Format** |
-|---|---|---|---|
+|---|---|---|---|---|
 | Result | | | string | P, N, I, IT |
 | Result_Binary | | | string | 0, 1 |
 | Date | | | string | MM/DD/YYYY |
