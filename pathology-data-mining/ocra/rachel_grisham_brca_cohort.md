@@ -1,18 +1,18 @@
 # Rachel Grisham Cohort
 
-<b>Path:</b> `OCRA."HRD_RG_data"` <br/>
+<b>Path:</b> `OCRA."HRD_Shah_cohort"` <br/>
 <b>Table Type:</b> `Static` <br/>
-<b>Late updated:</b> `2024-05-17` <br/>
+<b>Last updated:</b> `2024-07-06` <br/>
 
 <b>Lineage:</b> 
 
 Dr. Rachel Grisham <br/>
-|_ `OCRA."HRD_RG_data"` <br/>
+|_ `phi_data_lake.ocra."HRD_Shah_cohort.csv"` <br/>
 
 <b>Summary Statistics:</b>
 
-Total number of rows: 426 <br/>
-Total number of unique patients: 426 <br/>
+Total number of rows: 105 <br/>
+Total number of unique patients: 105 <br/>
 
 
 1. [Description](#description)
