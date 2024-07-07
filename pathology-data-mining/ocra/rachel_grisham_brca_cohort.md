@@ -1,4 +1,4 @@
-# Rachel Grisham Cohort
+# Rachel Grisham BRCA Cohort
 
 <b>Path:</b> `OCRA."HRD_Shah_cohort"` <br/>
 <b>Table Type:</b> `Static` <br/>
