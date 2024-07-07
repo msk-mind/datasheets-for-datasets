@@ -48,23 +48,23 @@ A number of columns were added to make common queries simpler:
 
 | **Field name** | **Description** | **Field Type** | **Encoding** |
 |---|---|---|---|
-| MRN | | string | |
-| ACCESSION_NUMBER | |  string | |
+| MRN | medical record number from Hobbit records | string | |
+| ACCESSION_NUMBER | accession number from Hobbit records |  string | |
 | PART_NUMBER | |  integer  | |
 | BLOCK_NUMBER | | integer  | |
 | BLOCK_LABEL | |  string  | |
 | IS_HNE | Is the stain "H&E (Initial)" or "H&E (Other)" ? | integer | |
 | IS_IHC | Is the stain "IHC"? | integer | |
-| MRN_PATH | medical record number | string | |
-| SAMPLE_ID_PATH | IMPACT sample ID | string | |
-| SAMPLE_ID_IMPACT  |IMPACT sample id | string | |
-| PATIENT_ID_IMPACT  |De-identified patient ID | string | |
-| MRN_CDM | medical record number | string | |
+| MRN_PATH | medical record number from pathology report | string | |
+| SAMPLE_ID_PATH | IMPACT sample ID from pathology report | string | |
+| SAMPLE_ID_IMPACT  |IMPACT sample id from IMPACT report | string | |
+| PATIENT_ID_IMPACT  |De-identified patient ID from IMPACT report | string | |
+| MRN_CDM | medical record number from CDM de-id table | string | |
 | DMP_ID | DMP patient ID ("de-identified patient ID") | string |
 | IS_RG_MYRIAD | Is this row linked to the Rachel Grisham Myriad cohort? | string | |
 | MRN_RG | medical record number from RG_MYRIAD table| string | |
 | IS_RG_BRCA | Is this row linked to the Rachel Grisham BRCA cohort? | string | |
-| MRN_RG_BRCA | medical record number from RB_BRCA table| string | |
+| MRN_RG_BRCA | medical record number from RG_BRCA table| string | |
 
 A number of columns that were unique to the Rachel Grisham BRCA table were also dropped:
 1. The `A`, `Provider`, and `ID/Requisition` columns were dropped because the didn't appear to be medically relevant.
