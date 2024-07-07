@@ -15,12 +15,15 @@
 &nbsp;&nbsp;&nbsp;&nbsp; |_ LEFT JOIN t6 ON t5.PATIENT_ID = t6.MRN (as t7) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp; [OCRA."HRD_RG_data"](https://github.com/msk-mind/datasheets-for-datasets/blob/main/pathology-data-mining/ocra/rachel_grisham_cohort.md) (as t8) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |_ FULL JOIN t7 ON t8.MRN = t7.MRN (as t9) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [OCRA."HRD_Shah_cohort"](https://github.com/msk-mind/datasheets-for-datasets/blob/main/pathology-data-mining/ocra/rachel_grisham_brca_cohort.md) (as t10) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |_ FULL JOIN t10 ON t10.MRN = t9.MRN (as t11) <br/>
 
 
 <b>Summary Statistics:</b>
 
-Total number of rows: <NEED_TO_ADD> <br/>
-Total number of unique patients: <NEED_TO_ADD> <br/>
+Total number of rows: 670,712 <br/>
+Total number of unique patients: 68,684 <br/>
+Total number of IMPACT samples: 89,115 <br/>
 
 
 1. [Description](#description)
@@ -31,7 +34,7 @@ Total number of unique patients: <NEED_TO_ADD> <br/>
 
 ## Description <a name="description"></a>
 
-A master table that brings together pathology, genomics and clinical datasets. 
+A master table that brings together pathology, genomics and clinical datasets.
 
 ## Assumptions <a name="assumptions"></a>
 
