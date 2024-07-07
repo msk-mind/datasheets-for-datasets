@@ -44,7 +44,7 @@ Most of the columns in the master table are described in datasheets from the lin
 A number of columns appeared in multiple base tables - these were re-named to record which
 base table each value was taken from.
 
-A number of columns were added to make common queries simpler
+A number of columns were added to make common queries simpler:
 
 | **Field name** | **Description** | **Field Type** | **Encoding** |
 |---|---|---|---|
@@ -62,8 +62,14 @@ A number of columns were added to make common queries simpler
 | MRN_CDM | medical record number | string | |
 | DMP_ID | DMP patient ID ("de-identified patient ID") | string |
 | IS_RG_MYRIAD | Is this row linked to the Rachel Grisham Myriad cohort? | string | |
-| MRN_RG | medical record number | string | |
+| MRN_RG | medical record number from RG_MYRIAD table| string | |
+| IS_RG_BRCA | Is this row linked to the Rachel Grisham BRCA cohort? | string | |
+| MRN_RG_BRCA | medical record number from RB_BRCA table| string | |
 
+A number of columns that were unique to the Rachel Grisham BRCA table were also dropped:
+1. The `A`, `Provider`, and `ID/Requisition` columns were dropped because the didn't appear to be medically relevant.
+2. The `Name` column was dropped because patient names are PHI and unnecessary for research work.
+3. The `Histology_M1`, `Histology_M2`, and `Hist_Grade` columns were dropped because we didn't also have them for the Myriad cohort.
 
 ## Rules <a name="rules"></a>
 
