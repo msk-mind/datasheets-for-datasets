@@ -59,34 +59,34 @@ The columns below are relevant or research purposes.
 
 | **Field name** | **Description** | **Field Type** | **Encoding** |
 |---|---|---|---|
-| `mrn` | Medical Record Number, a unique identifier per patinet  | ID | string |
+| `mrn` | Medical Record Number, a unique identifier per patient  | ID | string |
 | `specnum_formatted` | Identifies the surgical procedure.  | ID | string |
 | `part_inst` | Part identifier. Organs are divided into multiple parts to identify locations of specimens in the organ. | ID | integer |
-| `part_type` | The part, or specimen name. Usually formatted as: Anatomical site; Tissue extraction method <br> Example: TRACHEA; RESECTION | Mixed Field | string |
-| `part_description` | Description of the anatomical site from which the part was obtained. | Natural Language Description | string |
+| `part_type` | The part, or specimen name. Usually formatted as: Anatomical site; Tissue extraction method <br> Example: TRACHEA; RESECTION | Mixed | string |
+| `part_description` | Description of the anatomical site from which the part was obtained. | Description | string |
 | `block_inst` | Tissues of specific parts can be fixed in one or more paraffin blocks. This number specifies which block the specimen originates from. | ID | integer |
 | `blkdesig_label` | This ID also specifies the block the specimen originates from. | ID | string |
-| `barcode` | A unique ID of a glass slide with a prepared tissue specimen.| Mixed Field | string |
-| `stain_group` | Broad category of stain name used to stain the slide (H&E vs IHC)| Categorical Variable | string |
-| `stain_name` | The specific stain used on the slide. This is useful for identifying different IHC stains. | Categorical Variable | string |
-| `brand` | Manufacturer of the scanner | Categorical Variable | string |
-| `model` | Model of the scanner | Categorical Variable | string |
+| `barcode` | A unique ID of a glass slide with a prepared tissue specimen.| ID | string |
+| `stain_group` | Broad category of stain name used to stain the slide (H&E vs IHC)| Categorical | string |
+| `stain_name` | The specific stain used on the slide. This is useful for identifying different IHC stains. | Categorical | string |
+| `brand` | Manufacturer of the scanner | Categorical | string |
+| `model` | Model of the scanner | Categorical | string |
 | `image_id` | Unique ID for the digitized image | ID (Primary Key) | string |
-| `magnification` | Magnification at which the slide was scanned | Categorical Variable | string 
-| `file_size_bytes` | Size of the scanned image in bytes | Continuous Variable | integer |
+| `magnification` | Magnification at which the slide was scanned | Categorical | string 
+| `file_size_bytes` | Size of the scanned image in bytes | Continuous | integer |
 
 
 The columns below are relevant to clinical operations and may not be useful for research purposes.  
 
 | **Field name** | **Description** | **Field Type** | **Encoding** |
 |---|---|---|---|
-| `specclass_id` | Description is not known. | ID | string |
-| `subspecialty` | Description is not unknown. Related to disease management team from which the (solid or liquid) tissue was sourced.  | Categorical Variable | string |
-| `reduced_priority` | Type of patient visit - a summary list | Categorical Variable | string |
+| `specclass_id` | | ID | string |
+| `subspecialty` | Related to disease management team from which the (solid or liquid) tissue was sourced.  | Categorical | string |
+| `reduced_priority` | Type of patient visit - a summary list | Categorical | string |
 | `datetime_accession` | Date of procedure | Date | date |
-| `signout_datetime` | Description is not known. Related to pathology image sign off | Date | date |
-| `status_id` | Description is not known. | ID | string |
-| `captured_datatime` | Datetime when the image was captured by the scanner | Date | date |
+| `signout_datetime` | Related to pathology image sign off | Date | date |
+| `status_id` | | ID | string |
+| `captured_datatime` | Date and time when the image was captured by the scanner | Date | date |
 
 # Rules <a name="rules"></a>
 
