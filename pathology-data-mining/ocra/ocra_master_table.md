@@ -80,7 +80,7 @@ A number of columns that were unique to the Rachel Grisham BRCA table were also 
 ```
 SELECT count(SAMPLE_ID_IMPACT) as ct, image_id
 FROM OCRA."OCRA_Master_Table_2024-07-05"
-WHERE CANCER_TYPE = 'Breast Cancer' AND image_id IS NOT NULL 
+WHERE image_id IS NOT NULL 
 GROUP BY image_id ORDER BY ct DESC
 ```
 
