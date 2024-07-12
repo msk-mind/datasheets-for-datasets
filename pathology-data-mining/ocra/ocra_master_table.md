@@ -76,7 +76,7 @@ A number of columns that were unique to the Rachel Grisham BRCA table were also 
 
 ## Rules <a name="rules"></a>
 
-1. About 3% if the image_ids that map to IMPACT samples at the part level map to more than one IMPACT sample. In these cases, the most distinguishing data element between the mappings seems to be tumor purity. 
+1. About 3% if the image_ids that map to IMPACT samples at the part level map to more than one IMPACT sample. In these cases, the most distinguishing data element between the mappings seems to be tumor purity. This may be because of the presence of multifocal lesions.
 ```
 SELECT count(SAMPLE_ID_IMPACT) as ct, image_id
 FROM OCRA."OCRA_Master_Table_2024-07-05"
