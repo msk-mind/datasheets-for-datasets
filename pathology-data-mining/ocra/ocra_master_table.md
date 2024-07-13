@@ -51,8 +51,8 @@ A number of columns were added to make common queries simpler:
 
 | **Field name** | **Description** | **Field Type** | **Encoding** |
 |---|---|---|---|
-| MRN | medical record number from Hobbit records | string | |
-| ACCESSION_NUMBER | accession number from Hobbit records |  string | |
+| MRN | medical record number from HoBBIT records | string | |
+| ACCESSION_NUMBER | accession number from HoBBIT records |  string | |
 | PART_NUMBER | |  integer  | |
 | BLOCK_NUMBER | | integer  | |
 | BLOCK_LABEL | |  string  | |
