@@ -77,6 +77,8 @@ A number of columns that were unique to the Rachel Grisham BRCA table were also 
 ## Rules <a name="rules"></a>
 
 1. Slides and IMPACT samples are matched based on the accession number and part number for the tissue used to make those slides and those samples.  This generally works well, but in cases where multiple IMPACT samples are taken from the same part, *each slide from that part will be matched to all of the IMPACT samples taken from the same part.*  This could cause problems if the IMPACT samples represent different lesions in the same part, because you won't know which slide is associated with which lesion.  This could be corrected if we knew the block numbers for the IMPACT samples, but at present we don't.
+
+In case it's helpful, the following query will list slides that are associated with more than one IMPACT sample.
 ```
 SELECT image_id, count(SAMPLE_ID_IMPACT) as samples
 FROM OCRA."OCRA_Master_Table_2024-07-05"
