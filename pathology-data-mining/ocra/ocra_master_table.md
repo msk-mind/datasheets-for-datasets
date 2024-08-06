@@ -50,7 +50,7 @@ base table each value was taken from.
 A number of columns were added to make common queries simpler:
 
 | **Field name** | **Description** | **Field Type** | **Data Type** | **Field Format** |
-|---|---|---|---|
+|---|---|---|---|---|
 | MRN | medical record number from HoBBIT records | ID | string | |
 | ACCESSION_NUMBER | accession number from HoBBIT records |  ID | string | |
 | PART_NUMBER | |  ID | integer  | |
