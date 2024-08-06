@@ -17,7 +17,7 @@
 
 <b>Summary Statistics:</b>
 
-Total number of rows: 572,811 <br/>
+Total number of rows (slides): 572,811 <br/>
 Total number of unique patients: 66,555 <br/>
 Total number of IMPACT samples: 77,155 <br/>
 
@@ -40,7 +40,7 @@ None.
 
 Most of the columns in the master table are described in datasheets from the lineage.
 The columns containing the IMPACT results, in particular, are not described here, but in the
-["data_clinical_sample.oncokb.txt"](https://github.com/msk-mind/datasheets-for-datasets/blob/main/clinical-data-mining/pathology_reports.md) datasheet.
+[data_clinical_sample.oncokb.txt](https://github.com/msk-mind/datasheets-for-datasets/blob/main/clinical-data-mining/pathology_reports.md) datasheet.
 A number of columns were added to make common queries simpler.
 In some cases, a columns that appeared in multiple base tables were renamed to reflect
 which base table they came from.
