@@ -67,7 +67,6 @@ A number of columns were added to make common queries simpler:
 | IS_RG_MYRIAD | Is this row linked to the Rachel Grisham Myriad cohort? | boolean | integer | 0, 1 |
 | MRN_RG | medical record number from RG_MYRIAD table| ID | string | |
 | IS_RG_BRCA | Is this row linked to the Rachel Grisham BRCA cohort? | boolean | intteger | 0, 1 |
-0, 1|
 | MRN_RG_BRCA | medical record number from RG_BRCA table| ID | string | |
 
 A number of columns that were unique to the Rachel Grisham BRCA table were also dropped:
