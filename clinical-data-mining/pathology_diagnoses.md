@@ -1,19 +1,19 @@
-# Pathology Reports 
+# Pathology Diagnosis
 
-<b>Path:</b> `"phi_data_lake"."cdm-data".pathology."table_pathology_impact_sample_summary_dop_anno.tsv"` <br/>
+<b>Path:</b> `"phi_data_lake"."cdm-data".pathology."table_pathology_surgical_samples_parsed_specimen.tsv"` <br/>
 <b>Table Type:</b> `Live` <br/>
-<b>Late updated:</b> `2024-05-17` <br/>
+<b>Late updated:</b> `2024-07-10` <br/>
 
 <b>Lineage:</b> 
 
 `CDM NLP Processes` <br/>
-|_ `"phi_data_lake"."cdm-data".pathology."table_pathology_impact_sample_summary_dop_anno.tsv"` <br/>
+|_ `"phi_data_lake"."cdm-data".pathology."table_pathology_surgical_samples_parsed_specimen.tsv"` <br/>
 
 <b>Summary Statistics:</b>
 
-Total number of rows: 200,451 <br/>
-Total number of unique patients: 101,605 <br/>
-Total number of unique IMPACT sample_ids: 200,448 <br/>
+Total number of rows: 832,946 <br/>
+Total number of accessions: 334,238 <br/>
+Total number of unique parts: 832,946 <br/>
 
 
 1. [Description](#description)
