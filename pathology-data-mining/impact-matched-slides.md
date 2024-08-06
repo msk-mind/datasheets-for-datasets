@@ -1,4 +1,4 @@
-# OCRA Master Table
+# Impact-matched Slides
 
 <b>Path:</b> `"pathology-data-mining"."impact-matched-slides"` <br/>
 <b>Table Type:</b> `contains live datasets in lineage` <br/>
