@@ -57,36 +57,36 @@ Total number of Columns: 26
 
 The columns below are relevant or research purposes.  
 
-| **Field name** | **Description** | **Field Type** | **Encoding** |
-|---|---|---|---|
-| `mrn` | Medical Record Number, a unique identifier per patient  | ID | string |
-| `specnum_formatted` | Identifies the surgical procedure.  | ID | string |
-| `part_inst` | Part identifier. Organs are divided into multiple parts to identify locations of specimens in the organ. | ID | integer |
-| `part_type` | The part, or specimen name. Usually formatted as: Anatomical site; Tissue extraction method <br> Example: TRACHEA; RESECTION | Mixed | string |
-| `part_description` | Description of the anatomical site from which the part was obtained. | Description | string |
-| `block_inst` | Tissues of specific parts can be fixed in one or more paraffin blocks. This number specifies which block the specimen originates from. | ID | integer |
-| `blkdesig_label` | This ID also specifies the block the specimen originates from. | ID | string |
-| `barcode` | A unique ID of a glass slide with a prepared tissue specimen.| ID | string |
-| `stain_group` | Broad category of stain name used to stain the slide (H&E vs IHC)| Categorical | string |
-| `stain_name` | The specific stain used on the slide. This is useful for identifying different IHC stains. | Categorical | string |
-| `brand` | Manufacturer of the scanner | Categorical | string |
-| `model` | Model of the scanner | Categorical | string |
-| `image_id` | Unique ID for the digitized image | ID (Primary Key) | string |
-| `magnification` | Magnification at which the slide was scanned | Categorical | string 
-| `file_size_bytes` | Size of the scanned image in bytes | Continuous | integer |
+| **Field name** | **Description** | **Field Type** | **Data type** | **Format** |
+|---|---|---|---|---|
+| mrn | Medical Record Number, a unique identifier per patient  | ID | string | |
+| specnum_formatted | Identifies the surgical procedure.  | ID | string | |
+| part_inst | Part identifier. Organs are divided into multiple parts to identify locations of specimens in the organ. | ID | integer | |
+| part_type | The part, or specimen name. Usually formatted as: Anatomical site; Tissue extraction method <br> Example: TRACHEA; RESECTION | Mixed | string | |
+| part_description | Description of the anatomical site from which the part was obtained. | Description | string | |
+| block_inst | Tissues of specific parts can be fixed in one or more paraffin blocks. This number specifies which block the specimen originates from. | ID | integer | |
+| blkdesig_label | This ID also specifies the block the specimen originates from. | ID | string | |
+| barcode | A unique ID of a glass slide with a prepared tissue specimen.| ID | string | |
+| stain_group | Broad category of stain name used to stain the slide (H&E vs IHC)| categorical | string | |
+| stain_name | The specific stain used on the slide. This is useful for identifying different IHC stains. | categorical | string | |
+| brand | Manufacturer of the scanner | categorical | string | |
+| model | Model of the scanner | categorical | string | |
+| image_id | Unique ID for the digitized image | ID (Primary Key) | string | |
+| magnification | Magnification at which the slide was scanned | categorical | string  | '20x', '40x', ...|
+| file_size_bytes | Size of the scanned image in bytes | count | integer | |
 
 
 The columns below are relevant to clinical operations and may not be useful for research purposes.  
 
-| **Field name** | **Description** | **Field Type** | **Encoding** |
-|---|---|---|---|
-| `specclass_id` | | ID | string |
-| `subspecialty` | Related to disease management team from which the (solid or liquid) tissue was sourced.  | Categorical | string |
-| `reduced_priority` | Type of patient visit - a summary list | Categorical | string |
-| `datetime_accession` | Date of procedure | Date | date |
-| `signout_datetime` | Related to pathology image sign off | Date | date |
-| `status_id` | | ID | string |
-| `captured_datatime` | Date and time when the image was captured by the scanner | Date | date |
+| **Field name** | **Description** | **Field Type** | **Data type** | **Format** |
+|---|---|---|---|---|
+| specclass_id | | ID | string | |
+| subspecialty | | categorical | string | |
+| reduced_priority | Type of patient visit - a summary list | categorical | string | |
+| datetime_accession | date of procedure | date & time | datetime | |
+| signout_datetime | Related to pathology image sign off | date & time | datetime | |
+| status_id | | ID | string | |
+| captured_datatime | date and time when the image was captured by the scanner | date & time | datetime | |
 
 # Rules <a name="rules"></a>
 
