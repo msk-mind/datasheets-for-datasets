@@ -25,7 +25,7 @@ Last updated July 1, 2024.  (New slides are typically added weekly.)
 
 ## Description <a name="description"></a>
 
-Removes duplicate rows in "hobbit-poc"."case_breakdown". Also removes rows where `image_id` is duplicated but at least one other column has unique vaiues. 
+Removes duplicate rows in "hobbit-poc"."case_breakdown".  Also removes rows where `image_id` is duplicated but at least one other column has unique vaiues. 
 
 ## Assumptions
 
@@ -40,8 +40,8 @@ For example, it is assumed there cannot be a slide with two different stain grou
 
 ## Vocabulary & Encoding <a name="vocabulary"></a>
 
-See base table in lineage. 
+See the datasheet for the parent [hobbit-case-breakdown](hobbit-casebreakdown.md) dataset. 
  
 ## Rules
 
-See base table in lineage. 
+See the datasheet for the parent [hobbit-case-breakdown](hobbit-casebreakdown.md) dataset. 
