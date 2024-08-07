@@ -34,7 +34,7 @@ None.
 
 Abbreviations:
 * TMB - Tumor Mutational Burden
-* MSI - Microstaellite Instability
+* MSI - Microsatellite Instability
 
 | **Field name** | **Description** | **Field Type** | **Data Type** | **Format** |
 |---|---|---|---|---|
