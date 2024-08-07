@@ -47,24 +47,24 @@ which base table they came from.
 
 Key columns include...
 
-| **Field name** | **Description** | **Field Type** | **Encoding** |
-|---|---|---|---|
-| MRN | medical record number from HoBBIT records | string | |
-| ACCESSION_NUMBER | accession number from HoBBIT record |  string | |
-| PART_NUMBER | part number from HoBBIT record |  integer  | |
-| BLOCK_NUMBER | block number from HoBBIT record | integer  | |
-| BLOCK_LABEL | block label from HoBBIT record |  string  | |
-| stain_group | | string | |
-| IS_HNE | Is the stain group  "H&E (Initial)" or "H&E (Other)" ? | integer | |
-| IS_IHC | Is the stain group "IHC"? | integer | |
-| MRN_PATH | medical record number from pathology report | string | |
-| PATH_DX_SPEC_TITLE | brief tissue diagnosis | string | |
-| PATH_DX_SPEC_DESC | detailed tissue diagnosis | string | |
-| image_id | the slide ID for the whole-slide image | string | |
-| magnification | slide magnification (20x, 40x, etc.) | string | |
-| SLIDE_URL | the file:// URL for the downloaded slide | string | |
-| SAMPLE_ID_IMPACT | the IMPACT sample ID associated with the genomics results | string | |
-| SAMPLE_ID_PATH | the IMPACT sample ID associated with the slide | string | |
+| **Field name** | **Description** | **Field Type** | **Data type** | **Format** |
+|---|---|---|---|---|
+| MRN | medical record number from HoBBIT records | ID | string | |
+| ACCESSION_NUMBER | accession number from HoBBIT record | ID  | string | |
+| PART_NUMBER | part number from HoBBIT record | ID  | integer  | |
+| BLOCK_NUMBER | block number from HoBBIT record | ID | integer  | |
+| BLOCK_LABEL | block label from HoBBIT record | ID  | string  | |
+| stain_group | the type of stain used | | string | 'H&E (Initial)', 'IHC', ... |
+| IS_HNE | Is the stain group  "H&E (Initial)" or "H&E (Other)" ? | boolean | integer | 0, 1 |
+| IS_IHC | Is the stain group "IHC"? | boolean | integer | 0, 1 |
+| MRN_PATH | medical record number from pathology report | ID | string | |
+| PATH_DX_SPEC_TITLE | brief tissue diagnosis | description | string | |
+| PATH_DX_SPEC_DESC | detailed tissue diagnosis | description | string | |
+| image_id | slide ID for whole-slide image | ID | string | |
+| magnification | slide magnification | | string | '20x', '40x', ... |
+| SLIDE_URL | the file:// URL for the downloaded slide | URL | string | file://<pathname> |
+| SAMPLE_ID_IMPACT | the IMPACT sample ID associated with the genomics results | ID | string | |
+| SAMPLE_ID_PATH | the IMPACT sample ID associated with the slide | ID | string | |
 
 
 ## Rules <a name="rules"></a>
