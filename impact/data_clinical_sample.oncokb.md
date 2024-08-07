@@ -32,12 +32,16 @@ None.
 
 ## Vocabulary & Encoding <a name="vocabulary"></a>
 
+Abbreviations:
+* TMB - Tumor Mutational Burden
+* MSI - Microstaellite Instability
+
 | **Field name** | **Description** | **Field Type** | **Data Type** | **Format** |
 |---|---|---|---|---|
-| SAMPLE_ID | The IMPACT sample ID | ID | string | |
-| PATIENT_ID | The patient's DMP_ID | ID | string | |
-| GLEASON_SAMPLE_LEVEL | Gleason score reported on sample | | string | '0', '1', ... '9' |
-| PDL1_POSITIVE | Was sample labelled PD-L1 positive? | boolean | string | 'Yes', 'No', or '' |
+| SAMPLE_ID | IMPACT sample ID | ID | string | |
+| PATIENT_ID | Patient DMP_ID | ID | string | |
+| GLEASON_SAMPLE_LEVEL | Gleason score | | string | '0', '1', ... '9' |
+| PDL1_POSITIVE | Sample PD-L1 positive? | boolean | string | 'Yes', 'No', or '' |
 | MONTH_ADDED | Month added to cBioPortal | date | string | YYYY/MM |
 | WEEK_ADDED | Week added to cBioPortal | date | string | YYYY 'Wk.' # |
 | CANCER_TYPE | General cancer type | categorical | string | |
@@ -46,22 +50,22 @@ None.
 | METASTATIC_SITE | Location of metastatic site | categorical | string | |
 | PRIMARY_SITE | Location of primary site | categorical | string | |
 | CANCER_TYPE_DETAILED | Specific cancer subtype | categorical | string | |
-| GENE_PANEL | The IMPACT gene panel that was used | categorical | string | IMPACT341, IMPACT410, etc.|
+| GENE_PANEL | The IMPACT gene panel used | categorical | string | IMPACT341, IMPACT410, etc.|
 | SO_COMMENTS | Physician sign-out comments | | string | |
 | SAMPLE_COVERAGE | | | string | |
-| TUMOR_PURITY | Proportion of cancer cells in tissue sample | | string | |
-| ONCOTREE_CODE | The OncoTree cancer-type code | ID | string | |
-| MSI_COMMENT | Microsatellite Instability (MSI) comment | | string | |
-| MSI_SCORE | Microsatellite Instability (MSI) score | | string | |
-| MSI_TYPE | Microsatellite Instability (MSI) type | categorical | string | Stable, Instable, or Indeterminate |
-| INSTITUTE | Institute source | categorical | string | MSKCC, etc. |
-| SOMATIC_STATUS | Is there a matched somatic sample for comparison? | categorical | string | Matched, Unmatched |
-| ARCHER | Was MSK-ARCHER test performed? | boolean | string | 'YES', 'NO' |
-| CVR_TMB_COHORT_PERCENTILE | Tumor Mutation Burden % across cancer types | | string | |
-| CVR_TMB_SCORE | Tumor Mutation Burden score | | string | |
-| CVR_TMB_TT_COHORT_PERCENTILE | Tumor Mutation Burden % within cancer type | | string | |
-| PATH_SLIDE_EXISTS | Is there a pathology slide ID? | boolean | string | YES, NO |
-| MSK_SLIDE_ID | Matching pathology slide ID | ID | string | |
+| TUMOR_PURITY | Proportion of cancer cells in sample | | string | |
+| ONCOTREE_CODE | OncoTree cancer-type code | ID | string | |
+| MSI_COMMENT | MSI comment | | string | |
+| MSI_SCORE | MSI score | | string | |
+| MSI_TYPE | MSI type | categorical | string | Stable, Instable, or Indeterminate |
+| INSTITUTE | Source institution | categorical | string | MSKCC, etc. |
+| SOMATIC_STATUS | Does matched somatic sample exist? | categorical | string | Matched, Unmatched |
+| ARCHER | MSK-ARCHER performed? | boolean | string | 'YES', 'NO' |
+| CVR_TMB_COHORT_PERCENTILE | TMB % across cancer types | | string | |
+| CVR_TMB_SCORE | TMB score | | string | |
+| CVR_TMB_TT_COHORT_PERCENTILE | TMB % for cancer type | | string | |
+| PATH_SLIDE_EXISTS | | boolean | string | YES, NO |
+| MSK_SLIDE_ID | slide ID | ID | string | |
 | LEVEL_1 | | | string | |
 | LEVEL_2 | | | string | |
 | LEVEL_3A | | | string | |
@@ -80,15 +84,18 @@ None.
 | LEVEL_Px2 | | | string | |
 | LEVEL_Px3 | | | string | |
 | HIGHEST_PX_LEVEL | | | string | |
-| ONCOGENIC_MUTATIONS | | | string | |
-| #ONCOGENIC_MUTATIONS | | count | string | |
-| RESISTANCE_MUTATIONS | | | string | |
-| #RESISTANCE_MUTATIONS | | count | string | |
-| #MUTATIONS_WITH_SENSITIVE_THERAPEUTIC_IMPLICATIONS | | count | string | |
-| #MUTATIONS_WITH_RESISTANCE_THERAPEUTIC_IMPLICATIONS | | count | string | |
-| #MUTATIONS_WITH_DIAGNOSTIC_IMPLICATIONS | | count | string | |
-| #MUTATIONS_WITH_PROGNOSTIC_IMPLICATIONS | | count | string | |
-| #MUTATIONS | | count | string | |
+| ONCOGENIC_MUTATIONS | Oncogenic variants | | string | semi-colon separated list of variants |
+| #ONCOGENIC_MUTATIONS | | count | string | number |
+| RESISTANCE_MUTATIONS | Variants conferring resistance| | string | semi-colon separated list of variants |
+| #RESISTANCE_MUTATIONS | | count | string | number |
+| #MUTATIONS | Total mutations | count | string | number |
+
+Four additional columns provide counts of particular classes of mutations:
+
+* #MUTATIONS_WITH_SENSITIVE_THERAPEUTIC_IMPLICATIONS
+* #MUTATIONS_WITH_RESISTANCE_THERAPEUTIC_IMPLICATIONS
+* #MUTATIONS_WITH_DIAGNOSTIC_IMPLICATIONS
+* #MUTATIONS_WITH_PROGNOSTIC_IMPLICATIONS
 
 ## Rules <a name="rules"></a>
 
