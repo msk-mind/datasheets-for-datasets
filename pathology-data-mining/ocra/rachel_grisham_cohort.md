@@ -44,27 +44,27 @@ None.
 | Prim_Inter | surgery type | categorical | string | '1', '2', ... [Key](https://mskconfluence.mskcc.org/pages/viewpage.action?spaceKey=CDSI&title=OCRA#OCRA-Prim_Inter) |
 | Spec_Source | specimen type | categorical | string | '1', '2', ... [Key](https://mskconfluence.mskcc.org/pages/viewpage.action?spaceKey=CDSI&title=OCRA#OCRA-SpecSource) |
 | Chemo_Naive | has patient received chemo? | boolean | string | 0, 1 |
-| Stage | Cancer stage | | string | 3A1, 4B, etc. |
-| Residual_Disease | | | string | '1', '2', ... [Key](https://mskconfluence.mskcc.org/pages/viewpage.action?spaceKey=CDSI&title=OCRA#OCRA-ResidualDisease) |
-| NA_Cycles | | | string | |
-| Adj_Cycles | | | string | |
-| TUF_Plat_Cycles | | | string | |
-| UF_Chemo_Regm | | | string | |
+| Stage | Cancer stage | categorical | string | 3A1, 4B, etc. |
+| Residual_Disease | | categorical | string | '1', '2', ... [Key](https://mskconfluence.mskcc.org/pages/viewpage.action?spaceKey=CDSI&title=OCRA#OCRA-ResidualDisease) |
+| NA_Cycles | | count | string | |
+| Adj_Cycles | | count | string | |
+| TUF_Plat_Cycles | | count | string | |
+| UF_Chemo_Regm | chemotherapy regimen | categorical | string | [Key](https://mskconfluence.mskcc.org/pages/viewpage.action?spaceKey=CDSI&title=OCRA#OCRA-Chemo_Regm) |
 | Race | | categorical | string | '0', '1', ... [Key](https://mskconfluence.mskcc.org/pages/viewpage.action?spaceKey=CDSI&title=OCRA#OCRA-Race) |
 | First_Treat | | date | string | MM/DD/YYYY |
 | Diag_Date | | date | string | MM/DD/YYYY |
 | Path_Date | | date | string | MM/DD/YYYY |
 | UF_Start_Date | | date | string | MM/DD/YYYY |
 | Last_Plat_Date | | date | string | MM/DD/YYYY |
-| Maint_Regm | | | string | |
-| Maint_Disc_Reason | | | string | |
+| Maint_Regm | Treatment regimen | categorical | string | [Key](https://mskconfluence.mskcc.org/pages/viewpage.action?spaceKey=CDSI&title=OCRA#OCRA-Maint_Regm) |
+| Maint_Disc_Reason | | categorical | string | [Key](https://mskconfluence.mskcc.org/pages/viewpage.action?spaceKey=CDSI&title=OCRA#OCRA-Maint_Disc_Reason) |
 | Bev_Start | | date | string | MM/DD/YYYY |
 | Bev_End | | date | string | MM/DD/YYYY |
-| PARP_Type | | | string | |
+| PARP_Type | PARP inhibitor | categorical | string | [Key](https://mskconfluence.mskcc.org/pages/viewpage.action?spaceKey=CDSI&title=OCRA#OCRA-PARP_Type) |
 | PARP_Start_Date | | date | string | MM/DD/YYYY |
 | PARP_End_Date | | date | string | MM/DD/YYYY |
 | Rad_Progr_Date | | date | string | MM/DD/YYYY |
-| Total_Lines | | | string | |
+| Total_Lines | | count | string | |
 | Date_Death | | date | string | MM/DD/YYYY |
 | Date_Followup | | date | string | MM/DD/YYYY |
 
