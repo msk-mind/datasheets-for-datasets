@@ -45,7 +45,7 @@ which base table they came from.
 
 Key columns in the final table include,
 
-| **Field name** | **Description** | **Field Type** | **Encoding** |
+| **Field name** | **Description** | **Field Type** | **Format** |
 |---|---|---|---|
 | MRN | medical record number from HoBBIT records | string | |
 | ACCESSION_NUMBER | accession number from HoBBIT record |  string | |
