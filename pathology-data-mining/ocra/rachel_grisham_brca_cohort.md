@@ -37,22 +37,22 @@ None.
 |---|---|---|---|---|
 | A | | | string | |
 | Provider | | | string | |
-| ID/Requisition | | | string | |
-| Name | Patient name| | string | |
+| ID/Requisition | | ID | string | |
+| Name | Patient name | | string | |
 | DOB | Date of Birth | date | string | MM/DD/YYYY |
-| MRN | Medical Record Number | | string | |
-| Race | | | string | |
+| MRN | Medical Record Number | ID | string | |
+| Race | | categorical | string | '1', '2', ... |
 | Histology_1 | | | string | |
 | Histology_M1 | | | string | |
 | Histology_M2 | | | string | |
 | Hist_Grade | | | string | |
 | Prim_Inter | | | string | |
 | Spec_Source | | | string | |
-| Chemo_Naive | | | string | 0, 1 |
-| Stage | Cancer stage | | string | 3A1, 4B, etc. |
+| Chemo_Naive | has the patient received chemo? | boolean | string | 0, 1 |
+| Stage | Cancer stage | categorical | string | 3A1, 4B, etc. |
 | Residual_Disease | | | string | |
-| NA_Cycles | | | string | |
-| Adj_Cycles | | | string | |
+| NA_Cycles | | conut | string | |
+| Adj_Cycles | | count | string | |
 | TUF_Plat_Cycles | | | string | |
 | UF_Chemo_Regm | | | string | |
 | Diag_Date | | date | string | MM/DD/YYYY |
@@ -71,11 +71,11 @@ None.
 | Rad_Progr_Date | | date | string | MM/DD/YYYY |
 | Next_Tx_Regimen | | | string | |
 | Next_start_Date | | date | string | |
-| Total_Lines | | | string | |
+| Total_Lines | | count | string | |
 | Date_Death | | date | string | MM/DD/YYYY |
 | Cause_Death | | | string | |
 | Date_Followup | | date | string | MM/DD/YYYY |
-| Comments | | | string | |
+| Comments | | text | string | |
 | UF_Chemo_Regm_Comm | | | string | |
 
 
