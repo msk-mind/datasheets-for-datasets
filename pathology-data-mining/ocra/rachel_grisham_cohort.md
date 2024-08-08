@@ -34,23 +34,23 @@ None.
 
 | **Field name** | **Description** | **Field Type** | **Data Type** | **Field Format** |
 |---|---|---|---|---|
-| Result | | | string | P, N, I, IT |
-| Result_Binary | | | string | 0, 1 |
+| Result | | categorical | string | P, N, I, IT |
+| Result_Binary | | boolean | string | 0, 1 |
 | Date | | date | string | MM/DD/YYYY |
-| MRN | Medical Record Number | | string | |
+| MRN | Medical Record Number | ID | string | |
 | DOB | Date of Birth | date | string | MM/DD/YYYY |
-| GIS | Genomic Instability Score (from Myriad) | | string | 1 - 99 |
-| Histology_1 | | | string | |
-| Prim_Inter | | | string | |
-| Spec_Source | | | string | |
-| Chemo_Naive | | | string | 0, 1 |
+| GIS | Genomic Instability Score (Myriad test) | | string | 1 - 99 |
+| Histology_1 | | categorical | string | '1', '2', ... [Key](https://mskconfluence.mskcc.org/pages/viewpage.action?spaceKey=CDSI&title=OCRA#OCRA-Histology) |
+| Prim_Inter | surgery type | categorical | string | '1', '2', ... [Key](https://mskconfluence.mskcc.org/pages/viewpage.action?spaceKey=CDSI&title=OCRA#OCRA-Prim_Inter) |
+| Spec_Source | specimen type | categorical | string | '1', '2', ... [Key](https://mskconfluence.mskcc.org/pages/viewpage.action?spaceKey=CDSI&title=OCRA#OCRA-SpecSource) |
+| Chemo_Naive | has patient received chemo? | boolean | string | 0, 1 |
 | Stage | Cancer stage | | string | 3A1, 4B, etc. |
-| Residual_Disease | | | string | |
+| Residual_Disease | | | string | '1', '2', ... [Key](https://mskconfluence.mskcc.org/pages/viewpage.action?spaceKey=CDSI&title=OCRA#OCRA-ResidualDisease) |
 | NA_Cycles | | | string | |
 | Adj_Cycles | | | string | |
 | TUF_Plat_Cycles | | | string | |
 | UF_Chemo_Regm | | | string | |
-| Race | | | string | |
+| Race | | categorical | string | '0', '1', ... [Key](https://mskconfluence.mskcc.org/pages/viewpage.action?spaceKey=CDSI&title=OCRA#OCRA-Race) |
 | First_Treat | | date | string | MM/DD/YYYY |
 | Diag_Date | | date | string | MM/DD/YYYY |
 | Path_Date | | date | string | MM/DD/YYYY |
@@ -61,7 +61,7 @@ None.
 | Bev_Start | | date | string | MM/DD/YYYY |
 | Bev_End | | date | string | MM/DD/YYYY |
 | PARP_Type | | | string | |
-| PARP_Start_Date | | | string | MM/DD/YYYY |
+| PARP_Start_Date | | date | string | MM/DD/YYYY |
 | PARP_End_Date | | date | string | MM/DD/YYYY |
 | Rad_Progr_Date | | date | string | MM/DD/YYYY |
 | Total_Lines | | | string | |
