@@ -4,7 +4,7 @@
 <b>Table Type:</b> Live OR Static <br/>
 <b>Date created or last updated:</b> <CREATION_DATE_FOR_STATIC_TABLES> OR <DATE_LAST_UPDATED_FOR_LIVE_TABLES> <br/>
 
-<b>Lineage:</b>
+<b>Lineage: <LINKS_TO_SQL_FILE></b>
 
 <BASE_TABLE> <br/>
 |_ <DERIVED_TABLE> <br/>
