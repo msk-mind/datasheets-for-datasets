@@ -1,6 +1,6 @@
 # Pathology Data Mining
 
-The datasheets in this repo document data used in Pathology Data Mining. The data encompasses the modalities listed in the Datasets section below. [template.md](https://github.com/msk-mind/datasheets-for-datasets/blob/main/template.md) describes the layout and content of each datasheet. It has been designed to give a sense of completeness to the documentation for a datasheet. It may be used for the creation and maintenace of datasheets. 
+The datasheets in this repo document data used in Pathology Data Mining. The data encompasses the modalities listed in the Datasets section below. [template.md](https://github.com/msk-mind/datasheets-for-datasets/blob/main/template.md) describes the layout and content of each datasheet. It has been designed to give a sense of completeness to the documentation for a dataset, for ease of use, and for ease of maintenance. It should be used for the creation and maintenace of datasheets. 
 
 ## Datasets:
 
