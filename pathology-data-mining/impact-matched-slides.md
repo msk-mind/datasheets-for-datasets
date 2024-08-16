@@ -23,7 +23,7 @@ Total number of IMPACT samples: 77,155 <br/>
 
 
 1. [Description](#description)
-2. [Vocabulary and Encoding](#vocabulary)
+2. [Vocabulary](#vocabulary)
 3. [Notes](#notes)
 
 
@@ -32,7 +32,7 @@ Total number of IMPACT samples: 77,155 <br/>
 A table listing all whole-slide-images for which we have matching IMPACT results.  
 
 
-## Vocabulary & Encoding <a name="vocabulary"></a>
+## Vocabulary <a name="vocabulary"></a>
 
 Most of the columns in the master table are described in datasheets from the lineage.
 The columns containing the IMPACT results, in particular, are not described here, but in the
