@@ -23,18 +23,14 @@ Total number of IMPACT samples: 77,155 <br/>
 
 
 1. [Description](#description)
-2. [Assumptions](#assumptions)
-3. [Vocabulary and Encoding](#vocabulary)
-3. [Rules](#rules)
+2. [Vocabulary and Encoding](#vocabulary)
+3. [Notes](#notes)
 
 
 ## Description <a name="description"></a>
 
 A table listing all whole-slide-images for which we have matching IMPACT results.  
 
-## Assumptions <a name="assumptions"></a>
-
-None. 
 
 ## Vocabulary & Encoding <a name="vocabulary"></a>
 
@@ -67,7 +63,7 @@ Key columns include...
 | SAMPLE_ID_PATH | the IMPACT sample ID associated with the slide | ID | string | |
 
 
-## Rules <a name="rules"></a>
+## Notes <a name="notes"></a>
 
 1. Slides and IMPACT samples are matched based on the accession number and part number for the tissue used to make those slides and those samples.  This generally works well, but in cases where multiple IMPACT samples are taken from the same part, *each slide from that part will be matched to all of the IMPACT samples taken from the same part.*  This could cause problems if the IMPACT samples represent different lesions in the same part, because you won't know which slide is associated with which lesion.  This could be corrected if we knew the block numbers for the IMPACT samples, but at present we don't.
 
