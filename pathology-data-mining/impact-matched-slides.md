@@ -2,7 +2,7 @@
 
 <b>Path:</b> `"pathology-data-mining"."impact-matched-slides"` <br/>
 <b>Table Type:</b> `contains live datasets in lineage` <br/>
-<b>Last updated:</b> `2024-08-06` <br/>
+<b>Last updated:</b> `2024-08-26` <br/>
 
 <b>Lineage ([SQL](https://github.com/msk-mind/datasheets-for-datasets/blob/main/pathology-data-mining/sql/impact-matched-slides.sql)): </b> 
 
@@ -76,5 +76,7 @@ GROUP BY image_id
 HAVING samples > 1
 ORDER BY samples DESC
 ```
+
+2. Not all of the slides in HoBBIT can be used for research. In practice, roughly 1% of requested slides contain PHI on the slide itself and thus cannot be de-identified for research use. This cannot be determined via HoBBIT, and is only determined during data transfer.
 
 
