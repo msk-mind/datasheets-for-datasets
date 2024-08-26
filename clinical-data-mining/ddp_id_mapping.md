@@ -7,7 +7,7 @@
 <b>Lineage:</b> 
 
 `CDM NLP Processes` <br/>
-|_ `"phi_data_lake"."cdm-data"."id-mapping"."ddp_id_mapping_pathology.tsv"` <br/>
+|_ ["phi_data_lake"."cdm-data"."id-mapping"."ddp_id_mapping_pathology.tsv"](https://tlvidreamcord1:9047/new_query?context=%22phi_data_lake%22&queryPath=%5B%22phi_data_lake%22%2C%22cdm-data%22%2C%22id-mapping%22%2C%22ddp_id_mapping_pathology.tsv%22%5D) <br/>
 
 <b>Summary Statistics:</b>
 
