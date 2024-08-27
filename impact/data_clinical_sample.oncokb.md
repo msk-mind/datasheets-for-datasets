@@ -1,13 +1,13 @@
 # data_clinical_sample.oncokb
 
-<b>Path:</b> `"phi_data_lake"."pdm-data".impact."data_clinical_sample.oncokb.txt"` <br/>
+<b>Path:</b> ["phi_data_lake"."pdm-data".impact."data_clinical_sample.oncokb.txt"](https://tlvidreamcord1:9047/new_query?context=%22phi_data_lake%22&queryPath=%5B%22phi_data_lake%22%2C%22pdm-data%22%2C%22impact%22%2C%22data_clinical_sample.oncokb.txt%22%5D) <br/>
 <b>Table Type:</b> `Live` <br/>
 <b>Late updated:</b> `2024-05-17` <br/>
 
 <b>Lineage:</b> 
 
 [cBioportal - data_clinical_sample.oncokb](https://github.mskcc.org/cdsi/oncokb-annotated-msk-impact/blob/main/data_clinical_sample.oncokb.txt.gz) <br/>
-|_ `"phi_data_lake"."pdm-data".impact."data_clinical_sample.oncokb.txt"` <br/>
+|_ ["phi_data_lake"."pdm-data".impact."data_clinical_sample.oncokb.txt"](https://tlvidreamcord1:9047/new_query?context=%22phi_data_lake%22&queryPath=%5B%22phi_data_lake%22%2C%22pdm-data%22%2C%22impact%22%2C%22data_clinical_sample.oncokb.txt%22%5D) <br/>
 
 <b>Summary Statistics:</b>
 
@@ -19,7 +19,7 @@ Total number of unique IMPACT samples: 125,071 <br/>
 1. [Description](#description)
 2. [Assumptions](#assumptions)
 3. [Vocabulary and Encoding](#vocabulary)
-3. [Rules](#rules)
+3. [Notes](#notes)
 
 
 ## Description <a name="description"></a>
@@ -97,7 +97,7 @@ Four additional columns provide counts of particular classes of mutations:
 * #MUTATIONS_WITH_DIAGNOSTIC_IMPLICATIONS
 * #MUTATIONS_WITH_PROGNOSTIC_IMPLICATIONS
 
-## Rules <a name="rules"></a>
+## Notes <a name="notes"></a>
 
 1. Each row represents a single MSK-IMPACT sample w/ OncoKB annotated variants and the corresponding patient level clinical data.
 2. This dataset excludes cf-DNA samples from the main IMPACT cohort dataset from cBioPortal.
