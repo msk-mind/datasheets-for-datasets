@@ -16,7 +16,7 @@ Total number of rows: 6,295,662 <br/>
 Total number of unique patients: 369,088 <br/>
 Total number of unique slides: 6,192,174 <br/>
 
-<b>Source code for figures:</b> `hobbit-casebreakdown.ipynb`
+<b>Source code for figures:</b> [hobbit-casebreakdown.ipynb](https://github.com/msk-mind/datasheets-for-datasets/blob/main/hobbit/hobbit-casebreakdown.ipynb)
 
 1. [Description](#description)
 2. [Assumptions](#assumptions)
