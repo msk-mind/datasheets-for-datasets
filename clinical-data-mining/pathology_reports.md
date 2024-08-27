@@ -19,7 +19,7 @@ Total number of unique IMPACT sample_ids: 200,448 <br/>
 1. [Description](#description)
 2. [Assumptions](#assumptions)
 3. [Vocabulary and Encoding](#vocabulary)
-3. [Rules](#rules)
+3. [Notes](#notes)
 
 
 ## Description <a name="description"></a>
@@ -48,7 +48,7 @@ Reference CDSI documentation - [CDM Codebook](https://docs.google.com/spreadshee
 
 
 
-## Rules <a name="rules"></a>
+## Notes <a name="notes"></a>
 
 1. MRNs are not zero padded, so they should not be matched to MRNs in other tables.
 2. A single MRN can have multiple IMPACT samples associated with it.
