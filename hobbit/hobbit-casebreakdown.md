@@ -1,14 +1,14 @@
 
 # hobbit_casebreakdown
 
-<b>Path:</b> `"hobbit-poc"."case_breakdown"` <br/>
+<b>Path:</b> ["hobbit-poc"."case_breakdown"](https://tlvidreamcord1:9047/new_query?context=%22hobbit-poc%22&queryPath=%5B%22hobbit-poc%22%2C%22case_breakdown%22%5D) <br/>
 <b>Table Type:</b> `Live` <br/>
 <b>Late updated:</b> `2024-05-17` <br/>
 
 <b>Lineage:</b> 
 
 `HoBBit SQL Server` <br/>
-|_ `"hobbit-poc"."case_breakdown"` <br/>
+|_ ["hobbit-poc"."case_breakdown"](https://tlvidreamcord1:9047/new_query?context=%22hobbit-poc%22&queryPath=%5B%22hobbit-poc%22%2C%22case_breakdown%22%5D) <br/>
 
 <b>Summary Statistics:</b>
 
