@@ -1,6 +1,6 @@
 # Slides with Diagnosis
 
-<b>Path:</b> `"pathology-data-mining"."slides_with_diagnosis"` <br/>
+<b>Path:</b> ["pathology-data-mining"."slides_with_diagnosis"](https://tlvidreamcord1:9047/new_query?context=%22pathology-data-mining%22&queryPath=%5B%22pathology-data-mining%22%2C%22slides_with_diagnosis%22%5D) <br/>
 <b>Table Type:</b> `contains live datasets in lineage` <br/>
 <b>Last updated:</b> `2024-08-06` <br/>
 
@@ -26,7 +26,7 @@ Total number of downloaded slides: 83,076 <br/>
 1. [Description](#description)
 2. [Assumptions](#assumptions)
 3. [Vocabulary and Encoding](#vocabulary)
-3. [Rules](#rules)
+3. [Notes](#notes)
 
 
 ## Description <a name="description"></a>
@@ -65,7 +65,7 @@ Key columns in the final table include,
 | SLIDE_URL | the file:// URL for the downloaded slide | string | |
 
 
-## Rules <a name="rules"></a>
+## Notes <a name="notes"></a>
 
 1. The SLIDE_URL is NULL if the slide has not been downloaded to a CDSI storage system.
 
