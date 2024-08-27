@@ -1,13 +1,13 @@
 # Rachel Grisham BRCA Cohort
 
-<b>Path:</b> `OCRA."HRD_Shah_cohort"` <br/>
+<b>Path:</b> [OCRA."HRD_Shah_cohort"](https://tlvidreamcord1:9047/new_query?context=%22OCRA%22&queryPath=%5B%22OCRA%22%2C%22HRD_Shah_cohort%22%5D) <br/>
 <b>Table Type:</b> `Static` <br/>
 <b>Last updated:</b> `2024-07-06` <br/>
 
 <b>Lineage:</b> 
 
 Dr. Rachel Grisham <br/>
-|_ `phi_data_lake.ocra."HRD_Shah_cohort.csv"` <br/>
+|_ [phi_data_lake.ocra."HRD_Shah_cohort.csv"](https://tlvidreamcord1:9047/new_query?context=%22phi_data_lake%22&queryPath=%5B%22phi_data_lake%22%2C%22ocra%22%2C%22HRD_Shah_cohort.csv%22%5D) <br/>
 
 <b>Summary Statistics:</b>
 
@@ -18,7 +18,7 @@ Total number of unique patients: 105 <br/>
 1. [Description](#description)
 2. [Assumptions](#assumptions)
 3. [Vocabulary and Encoding](#vocabulary)
-3. [Rules](#rules)
+3. [Notes](#notes)
 
 
 ## Description <a name="description"></a>
@@ -79,7 +79,7 @@ None.
 | UF_Chemo_Regm_Comm | | | string | |
 
 
-## Rules <a name="rules"></a>
+## Notes <a name="notes"></a>
 
 1. PARP treatment wasn't available before 2018
 
