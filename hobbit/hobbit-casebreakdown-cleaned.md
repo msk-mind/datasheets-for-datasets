@@ -1,6 +1,6 @@
 # hobbit_casebreakdown_cleaned
 
-<b>Path:</b> "pathology-data-mining"."impact_slide"."case_breakdown_cleaned" <br/>
+<b>Path:</b> ["pathology-data-mining"."impact_slide"."case_breakdown_cleaned"](https://tlvidreamcord1:9047/new_query?context=%22pathology-data-mining%22&queryPath=%5B%22pathology-data-mining%22%2C%22impact_slide%22%2C%22case_breakdown_cleaned%22%5D) <br/>
 <b>Table Type:</b> Live <br/>
 <b>Late updated:</b> 2024-05-17 <br/>
 
@@ -8,7 +8,7 @@
 
 HoBBit SQL Server <br/>
 |_ ["hobbit-poc"."case_breakdown"](hobbit-casebreakdown.md) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;|_ "hobbit-poc"."case_breakdown_cleaned" <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;|_ ["hobbit-poc"."case_breakdown_cleaned"](https://tlvidreamcord1:9047/new_query?context=%22pathology-data-mining%22&queryPath=%5B%22pathology-data-mining%22%2C%22impact_slide%22%2C%22case_breakdown_cleaned%22%5D) <br/>
 
 <b>Summary Statistics:</b>
 
