@@ -1,6 +1,6 @@
 # OCRA Master Table
 
-<b>Path:</b> `OCRA."OCRA_Master_Table_2024-07-05"` <br/>
+<b>Path:</b> [OCRA."OCRA_Master_Table_2024-07-05"](https://tlvidreamcord1:9047/new_query?context=%22OCRA%22&queryPath=%5B%22OCRA%22%2C%22OCRA_Master_Table_2024-07-05%22%5D) <br/>
 <b>Table Type:</b> `contains live datasets in lineage` <br/>
 <b>Last updated:</b> `2024-07-06` <br/>
 
@@ -29,7 +29,7 @@ Total number of IMPACT samples: 89,115 <br/>
 1. [Description](#description)
 2. [Assumptions](#assumptions)
 3. [Vocabulary and Encoding](#vocabulary)
-3. [Rules](#rules)
+3. [Notes](#notes)
 
 
 ## Description <a name="description"></a>
@@ -74,7 +74,7 @@ A number of columns that were unique to the Rachel Grisham BRCA table were also 
 2. The `Name` column was dropped because patient names are PHI and unnecessary for research work.
 3. The `Histology_M1`, `Histology_M2`, and `Hist_Grade` columns were dropped because we didn't also have them for the Myriad cohort.
 
-## Rules <a name="rules"></a>
+## Notes <a name="notes"></a>
 
 1. Slides and IMPACT samples are matched based on the accession number and part number for the tissue used to make those slides and those samples.  This generally works well, but in cases where multiple IMPACT samples are taken from the same part, *each slide from that part will be matched to all of the IMPACT samples taken from the same part.*  This could cause problems if the IMPACT samples represent different lesions in the same part, because you won't know which slide is associated with which lesion.  This could be corrected if we knew the block numbers for the IMPACT samples, but at present we don't.
 
