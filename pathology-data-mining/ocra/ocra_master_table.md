@@ -4,7 +4,7 @@
 <b>Table Type:</b> `contains live datasets in lineage` <br/>
 <b>Last updated:</b> `2024-07-06` <br/>
 
-<b>Lineage:</b> 
+<b>Lineage: ([SQL](sql/ocra_master_table.sql))</b> 
 
 ["pathology-data-mining".impact_slide.case_breakdown_cleaned](https://github.com/msk-mind/datasheets-for-datasets/blob/main/hobbit/hobbit-casebreakdown-cleaned.md) (as t1) <br/>
 ["phi_data_lake"."cdm-data".pathology."table_pathology_impact_sample_summary_dop_anno.tsv"](https://github.com/msk-mind/datasheets-for-datasets/blob/main/clinical-data-mining/pathology_reports.md) (as t2) <br/>

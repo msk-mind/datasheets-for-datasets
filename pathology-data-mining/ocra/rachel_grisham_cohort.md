@@ -4,10 +4,10 @@
 <b>Table Type:</b> `Static` <br/>
 <b>Late updated:</b> `2024-05-17` <br/>
 
-<b>Lineage:</b> 
+<b>Lineage: ([SQL](sql/rachel_grisham_cohort.sql))</b> 
 
 Dr. Rachel Grisham <br/>
-|_ [OCRA."HRD_RG_data"](https://tlvidreamcord1:9047/new_query?context=%22OCRA%22&queryPath=%5B%22OCRA%22%2C%22HRD_RG_data%22%5D) <br/>
+|_ `OCRA."HRD_RG_data"` <br/>
 
 <b>Summary Statistics:</b>
 
@@ -18,7 +18,7 @@ Total number of unique patients: 426 <br/>
 1. [Description](#description)
 2. [Assumptions](#assumptions)
 3. [Vocabulary and Encoding](#vocabulary)
-3. [Notes](#notes)
+4. [Notes](#notes)
 
 
 ## Description <a name="description"></a>

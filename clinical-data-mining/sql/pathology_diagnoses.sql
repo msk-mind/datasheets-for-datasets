@@ -1,0 +1,1 @@
+SELECT * FROM "table_pathology_surgical_samples_parsed_specimen.tsv"

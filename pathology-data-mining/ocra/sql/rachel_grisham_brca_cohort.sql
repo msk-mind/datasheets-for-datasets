@@ -1,0 +1,1 @@
+SELECT * FROM phi_data_lake.ocra."HRD_Shah_cohort.csv"

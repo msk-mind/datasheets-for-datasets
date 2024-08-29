@@ -3,9 +3,8 @@
 Last updated 2024-07-08
 
 1. [Description](#description)
-2. [Assumptions](#assumptions)
 3. [Vocabulary and Encoding](#vocabulary)
-3. [Rules](#rules)
+3. [Notes](#notes)
 
 ## Description <a name="description"></a>
 
@@ -28,17 +27,10 @@ This dataset is available in Dremio at
 This table is updated manually when new slides are received from the pathology department.
 Currently, that's about once a week.
 
-
-## Assumptions <a name="assumptions"></a>
-
-
 ## Vocabulary & Encoding <a name="vocabulary"></a>
 
 
-## Rules <a name="rules"></a>
-
-
-## Statistics
+## Notes <a name="notes"></a>
 
 There are a total of 469,703 rows, corresponding to data from 65,892 samples from 56,858 patients. In total, there are 461,184 slides. 
 
