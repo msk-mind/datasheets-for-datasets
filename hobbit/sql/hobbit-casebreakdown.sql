@@ -1,0 +1,1 @@
+select cases.* from hobbit_prod.DMSKPWAP.tmp.case_breakdown cases

@@ -4,10 +4,10 @@
 <b>Table Type:</b> `Live` <br/>
 <b>Late updated:</b> `2024-05-17` <br/>
 
-<b>Lineage:</b> 
+<b>Lineage: ([SQL](sql/pathology_reports.sql))</b> 
 
 `CDM NLP Processes` <br/>
-|_ ["phi_data_lake"."cdm-data".pathology."table_pathology_impact_sample_summary_dop_anno.tsv"](https://tlvidreamcord1:9047/new_query?context=%22phi_data_lake%22&queryPath=%5B%22phi_data_lake%22%2C%22cdm-data%22%2C%22pathology%22%2C%22table_pathology_impact_sample_summary_dop_anno.tsv%22%5D) <br/>
+|_ `"phi_data_lake"."cdm-data".pathology."table_pathology_impact_sample_summary_dop_anno.tsv"` <br/>
 
 <b>Summary Statistics:</b>
 
@@ -15,11 +15,10 @@ Total number of rows: 200,451 <br/>
 Total number of unique patients: 101,605 <br/>
 Total number of unique IMPACT sample_ids: 200,448 <br/>
 
-
 1. [Description](#description)
 2. [Assumptions](#assumptions)
-3. [Vocabulary and Encoding](#vocabulary)
-3. [Notes](#notes)
+3. [Vocabulary \& Encoding](#vocabulary--encoding)
+4. [Notes](#notes)
 
 
 ## Description <a name="description"></a>

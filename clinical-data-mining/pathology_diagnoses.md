@@ -4,10 +4,10 @@
 <b>Table Type:</b> `Live` <br/>
 <b>Late updated:</b> `2024-07-10` <br/>
 
-<b>Lineage:</b> 
+<b>Lineage: ([SQL](sql/pathology_diagnoses.sql))</b> 
 
 `CDM NLP Processes` <br/>
-|_ ["phi_data_lake"."cdm-data".pathology."table_pathology_surgical_samples_parsed_specimen.tsv"](https://tlvidreamcord1:9047/new_query?context=%22phi_data_lake%22&queryPath=%5B%22phi_data_lake%22%2C%22cdm-data%22%2C%22pathology%22%2C%22table_pathology_surgical_samples_parsed_specimen.tsv%22%5D) <br/>
+|_ `"phi_data_lake"."cdm-data".pathology."table_pathology_surgical_samples_parsed_specimen.tsv"` <br/>
 
 <b>Summary Statistics:</b>
 
@@ -18,8 +18,8 @@ Total number of unique parts: 832,946 <br/>
 
 1. [Description](#description)
 2. [Assumptions](#assumptions)
-3. [Vocabulary and Encoding](#vocabulary)
-3. [Rules](#rules)
+3. [Vocabulary \& Encoding](#vocabulary--encoding)
+4. [Notes](#notes)
 
 
 ## Description <a name="description"></a>
@@ -48,7 +48,7 @@ Reference CDSI documentation - [CDM Codebook](https://docs.google.com/spreadshee
 
 
 
-## Rules <a name="rules"></a>
+## Notes <a name="notes"></a>
 
 1. MRNs are not zero padded, so they should not be matched to MRNs in other tables.
 2. A single MRN can have multiple IMPACT samples associated with it.

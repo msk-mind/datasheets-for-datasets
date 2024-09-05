@@ -4,11 +4,11 @@
 <b>Table Type:</b> Live <br/>
 <b>Late updated:</b> 2024-05-17 <br/>
 
-<b>Lineage:</b>
+<b>Lineage:([SQL](sql/hobbit-casebreakdown-cleaned.sql))</b>
 
 HoBBit SQL Server <br/>
 |_ ["hobbit-poc"."case_breakdown"](hobbit-casebreakdown.md) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;|_ ["hobbit-poc"."case_breakdown_cleaned"](https://tlvidreamcord1:9047/new_query?context=%22pathology-data-mining%22&queryPath=%5B%22pathology-data-mining%22%2C%22impact_slide%22%2C%22case_breakdown_cleaned%22%5D) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;|_ `"pathology-data-mining"."impact_slide"."case_breakdown_cleaned"` <br/>
 
 <b>Summary Statistics:</b>
 
@@ -18,10 +18,10 @@ Total number of unique slides: 6,235,731 <br/>
 
 Last updated July 1, 2024.  (New slides are typically added weekly.)
 
-1. [Description](#description)
+1. [Description ](#description)
 2. [Assumptions](#assumptions)
-3. [Vocabulary and Encoding](#vocabulary)
-3. [Rules](#rules)
+3. [Vocabulary \& Encoding](#vocabulary--encoding)
+4. [Notes](#notes)
 
 ## Description <a name="description"></a>
 
@@ -42,6 +42,6 @@ For example, it is assumed there cannot be a slide with two different stain grou
 
 See the datasheet for the parent [hobbit-case-breakdown](hobbit-casebreakdown.md) dataset. 
  
-## Rules
+## Notes <a name="notes">
 
 See the datasheet for the parent [hobbit-case-breakdown](hobbit-casebreakdown.md) dataset. 

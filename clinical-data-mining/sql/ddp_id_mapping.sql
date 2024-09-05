@@ -1,0 +1,1 @@
+SELECT * FROM "ddp_id_mapping_pathology.tsv"
