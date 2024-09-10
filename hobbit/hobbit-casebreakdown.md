@@ -21,7 +21,7 @@ Total number of unique slides: 6,192,174 <br/>
 1. [Description](#description)
 2. [Assumptions](#assumptions)
 3. [Vocabulary and Encoding](#vocabulary)
-3. [Rules](#rules)
+3. [Notes](#notes)
 
 
 ## Description <a name="description"></a>
@@ -88,7 +88,7 @@ The columns below are relevant to clinical operations and may not be useful for 
 | status_id | | ID | string | |
 | captured_datatime | date and time when the image was captured by the scanner | date & time | datetime | |
 
-# Rules <a name="rules"></a>
+# Notes <a name="notes"></a>
 
 1. Not all slides created at MSK are scanned and represented in this dataset.
 2. Not all slides in this dataseet can be used for research. About 1% of the slides cannot be de-identified and therefore cannot be used for research.
