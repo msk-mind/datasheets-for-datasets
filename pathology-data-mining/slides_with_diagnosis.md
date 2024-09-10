@@ -68,6 +68,7 @@ Key columns in the final table include,
 ## Notes <a name="notes"></a>
 
 1. The SLIDE_URL is NULL if the slide has not been downloaded to a CDSI storage system.
+2. Rows with duplicate image ids have been filtered out. 
 
 
 
