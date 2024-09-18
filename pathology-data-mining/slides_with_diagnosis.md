@@ -1,5 +1,7 @@
 # Slides with Diagnosis
 
+TODO: demographics needs to be integrated in Drmeio sql 
+
 <b>Path:</b> ["pathology-data-mining"."slides_with_diagnosis"](https://tlvidreamcord1:9047/new_query?context=%22pathology-data-mining%22&queryPath=%5B%22pathology-data-mining%22%2C%22slides_with_diagnosis%22%5D) <br/>
 <b>Table Type:</b> `contains live datasets in lineage` <br/>
 <b>Last updated:</b> `2024-08-06` <br/>
