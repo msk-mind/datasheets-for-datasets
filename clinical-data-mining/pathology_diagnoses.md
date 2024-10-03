@@ -35,10 +35,10 @@ No known assumptions.
 
 | **Field name** | **Description** | **Field Type** | **Encoding** |
 |---|---|---|---|
-| `ACCESSION_NUMBER` |  Accession number from a DMP report | ID | string |
-| `PATH_DX_SPEC_NUM` | Specimen Number of IMPACT Sample indicated in molecular pathology report (DMP report)  | ID | string |
-| `PATH_DX_SPEC_TITLE` | Original pathology report accession number containing specimen used for IMPACT sequencing  | ID | string |
-| `PATH_DX_SPEC_DESC` | Specimen Number (Part number) in Source Accession Number used for IMPACT sequencing    | ID | string |
+| `ACCESSION_NUMBER` |  Accession number | ID | string |
+| `PATH_DX_SPEC_NUM` | Part Number of tissue examined | ID | string |
+| `PATH_DX_SPEC_TITLE` | Brief description of the tissue from which this part was taken | description | string |
+| `PATH_DX_SPEC_DESC` | The pathologists's detailed description of this tissue| description | string |
 
 
 
