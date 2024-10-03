@@ -11,9 +11,9 @@
 
 <b>Summary Statistics:</b>
 
-Total number of rows: 832,946 <br/>
-Total number of accessions: 334,238 <br/>
-Total number of unique parts: 832,946 <br/>
+Total number of rows: 860,086 <br/>
+Total number of accessions: 345,279 <br/>
+Total number of unique parts: 860,086 <br/>
 
 
 1. [Description](#description)
@@ -24,7 +24,7 @@ Total number of unique parts: 832,946 <br/>
 
 ## Description <a name="description"></a>
 
-NLP parsed data elements from pathology reports. Provides source accession number and dates of procedures for a given IMPACT sample extracted from pathology reports.
+NLP parsed data elements from pathology reports. Provides diagnosis notes for each part for each surgical accession.
 
 ## Assumptions <a name="assumptions"></a>
 
@@ -33,27 +33,16 @@ No known assumptions.
 
 ## Vocabulary & Encoding <a name="vocabulary"></a>
 
-Reference CDSI documentation - [CDM Codebook](https://docs.google.com/spreadsheets/d/1po0GdSwqmmXibz4e-7YvTPUbXpi0WYv3c2ImdHXxyuc/edit#gid=187767892)
-
 | **Field name** | **Description** | **Field Type** | **Encoding** |
 |---|---|---|---|
-| `MRN` | Medical Record Number, which uniquely identifies a patient  | ID | string |
-| `SAMPLE_ID` | Identifies an IMPACT sample  | ID | string |
-| `ACCESSION_NUMBER_DMP` |  Accession number from a DMP report | ID | string |
-| `SPECIMEN_NUMBER_DMP` | Specimen Number of IMPACT Sample indicated in molecular pathology report (DMP report)  | ID | string |
-| `SOURCE_ACCESSION_NUMBER_0` | Original pathology report accession number containing specimen used for IMPACT sequencing  | ID | string |
-| `SOURCE_SPEC_NUM_0` | Specimen Number (Part number) in Source Accession Number used for IMPACT sequencing    | ID | string |
-| `SOURCE_ACCESSION_NUMBER_0b` | Original pathology report accession number containing specimen used for IMPACT sequencing   | ID | string |
-| `SOURCE_SPEC_NUM_0b` | Specimen Number (Part number) in Source Accession Number used for IMPACT sequencing | ID | string |
+| `ACCESSION_NUMBER` |  Accession number from a DMP report | ID | string |
+| `PATH_DX_SPEC_NUM` | Specimen Number of IMPACT Sample indicated in molecular pathology report (DMP report)  | ID | string |
+| `PATH_DX_SPEC_TITLE` | Original pathology report accession number containing specimen used for IMPACT sequencing  | ID | string |
+| `PATH_DX_SPEC_DESC` | Specimen Number (Part number) in Source Accession Number used for IMPACT sequencing    | ID | string |
 
 
 
 ## Rules <a name="rules"></a>
-
-1. MRNs are not zero padded, so they should not be matched to MRNs in other tables.
-2. A single MRN can have multiple IMPACT samples associated with it.
-3. Multiple IMPACT samples can be collected from a single procedure.
-4. Many samples may have both a regular accession number and a DMP accession number.
 
 
 
