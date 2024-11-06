@@ -50,7 +50,7 @@ Reference CDSI documentation - [CDM Codebook](https://docs.google.com/spreadshee
 
 ## Notes <a name="notes"></a>
 
-1. MRNs are not zero padded, so they should not be matched to MRNs in other tables.
+1. MRNs are not zero padded, so they should not be matched to MRNs in other tables without applying zero-padding.
 2. A single MRN can have multiple IMPACT samples associated with it.
 3. Multiple IMPACT samples can be collected from a single procedure.
 4. Many samples may have both a regular accession number and a DMP accession number.
