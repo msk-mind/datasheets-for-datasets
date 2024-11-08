@@ -79,4 +79,6 @@ ORDER BY samples DESC
 
 2. Not all of the slides in HoBBIT can be used for research. In practice, roughly 1% of requested slides contain PHI on the slide itself and thus cannot be de-identified for research use. This cannot be determined via HoBBIT, and is only determined during data transfer.
 
+3. The IMPACT samples have been filtered by, SAMPLE_CLASS = 'Tumor' AND GENE_PANEL = ['IMPACT341', 'IMPACT410', 'IMPACT505', 'IMPACT468']
+
 
