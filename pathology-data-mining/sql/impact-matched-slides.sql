@@ -110,7 +110,16 @@ t8 AS (
     "#MUTATIONS_WITH_DIAGNOSTIC_IMPLICATIONS",
     "#MUTATIONS_WITH_PROGNOSTIC_IMPLICATIONS",
     "#MUTATIONS"
-    FROM "phi_data_lake"."pdm-data".impact."data_clinical_sample.oncokb.txt"
+    FROM "phi_data_lake"."pdm-data".impact."data_clinical_sample.oncokb.txt" 
+    WHERE SAMPLE_CLASS = 'Tumor' 
+      AND 
+      (GENE_PANEL = 'IMPACT341' 
+      OR 
+      GENE_PANEL = 'IMPACT410'
+      OR
+      GENE_PANEL = 'IMPACT505'
+      OR
+      GENE_PANEL = 'IMPACT468')
 ),
 t9 AS (
     SELECT *
