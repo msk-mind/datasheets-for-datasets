@@ -9,7 +9,7 @@ TODO: demographics needs to be integrated in Drmeio sql
 <b>Lineage: ([SQL](https://github.com/msk-mind/datasheets-for-datasets/blob/main/pathology-data-mining/sql/slides-with-diagnosis.sql)):</b> 
 
 ["pathology-data-mining".impact_slide.case_breakdown_cleaned](https://github.com/msk-mind/datasheets-for-datasets/blob/main/hobbit/hobbit-casebreakdown-cleaned.md) (as t1) <br/>
-[phi_data_lake."pdm-data"."surgical_specimen_diagnoses.tsv"](https://github.com/msk-mind/datasheets-for-datasets/blob/main/clinical-data-mining/pathology_diagnoses.md) (as t2) <br/>
+[phi_data_lake."pdm-data"."surgical_specimen_diagnoses.tsv"](https://github.com/msk-mind/datasheets-for-datasets/blob/main/pathology-data-mining/pathology_diagnoses.md) (as t2) <br/>
 &nbsp; |_ t1 LEFT JOIN t2 ON t1.ACCESSION_NUMBER = t2.ACCESSION_NUMBER_PATH_DX AND t1.PART_NUMBER = t2.PART_NUMBER_PATH_DX (as t3) <br/>
 &nbsp; &nbsp;&nbsp; &nbsp; ["pathology-data-mining"."master_slide_inventory"."master_slide_inventory"](https://github.com/msk-mind/datasheets-for-datasets/blob/main/pathology-data-mining/master_slide_inventory.md) (as t4) <br/>
 &nbsp; &nbsp;&nbsp; &nbsp; |_ t3 LEFT JOIN t4 ON t3.image_id = t4.IMAGE_ID_INVENTORY (as t5) <br/>
