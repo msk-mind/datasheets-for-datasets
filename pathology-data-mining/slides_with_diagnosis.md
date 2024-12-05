@@ -19,7 +19,7 @@ TODO: demographics needs to be integrated in Drmeio sql
 <b>Summary Statistics:</b>
 
 Total number of rows (slides): 6,335,418 <br/>
-Total number of slides with diagnoses:5,433,946 1,816,553 <br/>
+Total number of slides with diagnoses: 5,433,946 <br/>
 Total number of patients: 369,732 <br/>
 Total number of downloaded slides: 83,076 <br/>
 
