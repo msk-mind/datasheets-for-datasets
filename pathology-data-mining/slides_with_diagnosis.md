@@ -4,23 +4,22 @@ TODO: demographics needs to be integrated in Drmeio sql
 
 <b>Path:</b> ["pathology-data-mining"."slides_with_diagnosis"](https://tlvidreamcord1:9047/new_query?context=%22pathology-data-mining%22&queryPath=%5B%22pathology-data-mining%22%2C%22slides_with_diagnosis%22%5D) <br/>
 <b>Table Type:</b> `contains live datasets in lineage` <br/>
-<b>Last updated:</b> `2024-08-06` <br/>
+<b>Last updated:</b> `2024-12-05` <br/>
 
 <b>Lineage: ([SQL](https://github.com/msk-mind/datasheets-for-datasets/blob/main/pathology-data-mining/sql/slides-with-diagnosis.sql)):</b> 
 
 ["pathology-data-mining".impact_slide.case_breakdown_cleaned](https://github.com/msk-mind/datasheets-for-datasets/blob/main/hobbit/hobbit-casebreakdown-cleaned.md) (as t1) <br/>
-[phi_data_lake."cdm-data".pathology."table_pathology_surgical_samples_parsed_specimen.tsv"](https://github.com/msk-mind/datasheets-for-datasets/blob/main/clinical-data-mining/pathology_diagnoses.md) (as t2) <br/>
+[phi_data_lake."pdm-data"."surgical_specimen_diagnoses.tsv"](https://github.com/msk-mind/datasheets-for-datasets/blob/main/clinical-data-mining/pathology_diagnoses.md) (as t2) <br/>
 &nbsp; |_ t1 LEFT JOIN t2 ON t1.ACCESSION_NUMBER = t2.ACCESSION_NUMBER_PATH_DX AND t1.PART_NUMBER = t2.PART_NUMBER_PATH_DX (as t3) <br/>
-&nbsp; &nbsp; ["cdm-data".demographics."ddp_demographics.tsv"](https://github.com/msk-mind/datasheets-for-datasets/blob/main/clinical-data-mining/demographics.md) (as t4) <br/>
-&nbsp; &nbsp; |_ t3 LEFT JOIN t4 ON t3.MRN = t4.MRN (as t5) <br/>
-&nbsp; &nbsp;&nbsp; &nbsp; ["pathology-data-mining"."master_slide_inventory"."master_slide_inventory"](https://github.com/msk-mind/datasheets-for-datasets/blob/main/pathology-data-mining/master_slide_inventory.md) (as t6) <br/>
-&nbsp; &nbsp;&nbsp; &nbsp; |_ t5 LEFT JOIN t6 ON t5.image_id = t6.IMAGE_ID_INVENTORY (as t7) <br/>
+&nbsp; &nbsp;&nbsp; &nbsp; ["pathology-data-mining"."master_slide_inventory"."master_slide_inventory"](https://github.com/msk-mind/datasheets-for-datasets/blob/main/pathology-data-mining/master_slide_inventory.md) (as t4) <br/>
+&nbsp; &nbsp;&nbsp; &nbsp; |_ t3 LEFT JOIN t4 ON t3.image_id = t4.IMAGE_ID_INVENTORY (as t5) <br/>
+&nbsp; &nbsp;&nbsp; &nbsp; |_ DISTINCT t5.image_id, * (as t6) <br/>
 
 
 <b>Summary Statistics:</b>
 
-Total number of rows (slides): 6,269,634 <br/>
-Total number of slides with diagnoses: 1,816,553 <br/>
+Total number of rows (slides): 6,335,418 <br/>
+Total number of slides with diagnoses:5,433,946 1,816,553 <br/>
 Total number of patients: 369,732 <br/>
 Total number of downloaded slides: 83,076 <br/>
 
