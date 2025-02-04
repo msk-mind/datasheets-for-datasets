@@ -1,13 +1,13 @@
 # data_clinical_sample.oncokb
 
-<b>Path:</b> ["phi_data_lake"."pdm-data".impact."data_clinical_sample.oncokb.txt"](https://tlvidreamcord1:9047/new_query?context=%22phi_data_lake%22&queryPath=%5B%22phi_data_lake%22%2C%22pdm-data%22%2C%22impact%22%2C%22data_clinical_sample.oncokb.txt%22%5D) <br/>
+<b>Path:</b> "cdsi_prod.msk_impact_oncokb_annotated.data_clinical_sample_oncokb_raw" <br/>
 <b>Table Type:</b> `Live` <br/>
 <b>Late updated:</b> `2024-05-17` <br/>
 
 <b>Lineage:</b> 
 
 [cBioportal - data_clinical_sample.oncokb](https://github.mskcc.org/cdsi/oncokb-annotated-msk-impact/blob/main/data_clinical_sample.oncokb.txt.gz) <br/>
-|_ ["phi_data_lake"."pdm-data".impact."data_clinical_sample.oncokb.txt"](https://tlvidreamcord1:9047/new_query?context=%22phi_data_lake%22&queryPath=%5B%22phi_data_lake%22%2C%22pdm-data%22%2C%22impact%22%2C%22data_clinical_sample.oncokb.txt%22%5D) <br/>
+|_ ["cdsi_prod.msk_impact_oncokb_annotated.data_clinical_sample_oncokb_raw"](https://msk-mode-prod.cloud.databricks.com/explore/data/cdsi_prod/msk_impact_oncokb_annotated/data_clinical_sample_oncokb_raw) <br/>
 
 <b>Summary Statistics:</b>
 
@@ -19,7 +19,7 @@ Total number of unique IMPACT samples: 125,071 <br/>
 1. [Description](#description)
 2. [Assumptions](#assumptions)
 3. [Vocabulary and Encoding](#vocabulary)
-3. [Notes](#notes)
+4. [Notes](#notes)
 
 
 ## Description <a name="description"></a>

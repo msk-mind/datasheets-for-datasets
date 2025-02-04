@@ -1,14 +1,14 @@
 
 # hobbit_casebreakdown
 
-<b>Path:</b> ["hobbit-poc"."case_breakdown"](https://tlvidreamcord1:9047/new_query?context=%22hobbit-poc%22&queryPath=%5B%22hobbit-poc%22%2C%22case_breakdown%22%5D) <br/>
+<b>Path:</b> "src_hobbit_prod.dbo.case_breakdown_v" <br/>
 <b>Table Type:</b> `Live` <br/>
 <b>Late updated:</b> `2024-05-17` <br/>
 
 <b>Lineage:</b> 
 
 `HoBBit SQL Server` <br/>
-|_ ["hobbit-poc"."case_breakdown"](https://tlvidreamcord1:9047/new_query?context=%22hobbit-poc%22&queryPath=%5B%22hobbit-poc%22%2C%22case_breakdown%22%5D) <br/>
+|_ ["src_hobbit_prod.dbo.case_breakdown_v"](https://msk-mode-prod.cloud.databricks.com/explore/data/src_hobbit_prod/dbo/case_breakdown_v) <br/>
 
 <b>Summary Statistics:</b>
 
@@ -21,7 +21,7 @@ Total number of unique slides: 6,192,174 <br/>
 1. [Description](#description)
 2. [Assumptions](#assumptions)
 3. [Vocabulary and Encoding](#vocabulary)
-3. [Notes](#notes)
+4. [Notes](#notes)
 
 
 ## Description <a name="description"></a>

@@ -1,17 +1,15 @@
 # Slides with Diagnosis
 
-TODO: demographics needs to be integrated in Drmeio sql 
-
-<b>Path:</b> ["pathology-data-mining"."slides_with_diagnosis"](https://tlvidreamcord1:9047/new_query?context=%22pathology-data-mining%22&queryPath=%5B%22pathology-data-mining%22%2C%22slides_with_diagnosis%22%5D) <br/>
+<b>Path:</b> ["cdsi_prod.pathology_data_mining.slides_with_diagnosis"](https://msk-mode-prod.cloud.databricks.com/explore/data/cdsi_prod/pathology_data_mining/slides_with_diagnosis) <br/>
 <b>Table Type:</b> `contains live datasets in lineage` <br/>
 <b>Last updated:</b> `2024-12-05` <br/>
 
 <b>Lineage: ([SQL](https://github.com/msk-mind/datasheets-for-datasets/blob/main/pathology-data-mining/sql/slides-with-diagnosis.sql)):</b> 
 
-["pathology-data-mining".impact_slide.case_breakdown_cleaned](https://github.com/msk-mind/datasheets-for-datasets/blob/main/hobbit/hobbit-casebreakdown-cleaned.md) (as t1) <br/>
-[phi_data_lake."pdm-data"."surgical_specimen_diagnoses.tsv"](https://github.com/msk-mind/datasheets-for-datasets/blob/main/pathology-data-mining/pathology_diagnoses.md) (as t2) <br/>
+["cdsi_prod.pathology_data_mining.case_breakdown_cleaned"](https://github.com/msk-mind/datasheets-for-datasets/blob/main/hobbit/hobbit-casebreakdown-cleaned.md) (as t1) <br/>
+["cdsi_prod.pathology_data_mining.table_pathology_surgical_samples_parsed_specimen"](https://github.com/msk-mind/datasheets-for-datasets/blob/main/pathology-data-mining/pathology_diagnoses.md) (as t2) <br/>
 &nbsp; |_ t1 LEFT JOIN t2 ON t1.ACCESSION_NUMBER = t2.ACCESSION_NUMBER_PATH_DX AND t1.PART_NUMBER = t2.PART_NUMBER_PATH_DX (as t3) <br/>
-&nbsp; &nbsp;&nbsp; &nbsp; ["pathology-data-mining"."master_slide_inventory"."master_slide_inventory"](https://github.com/msk-mind/datasheets-for-datasets/blob/main/pathology-data-mining/master_slide_inventory.md) (as t4) <br/>
+&nbsp; &nbsp;&nbsp; &nbsp; ["cdsi_prod.pathology_data_mining.master_slide_inventory"](https://github.com/msk-mind/datasheets-for-datasets/blob/main/pathology-data-mining/master_slide_inventory.md) (as t4) <br/>
 &nbsp; &nbsp;&nbsp; &nbsp; |_ t3 LEFT JOIN t4 ON t3.image_id = t4.IMAGE_ID_INVENTORY (as t5) <br/>
 &nbsp; &nbsp;&nbsp; &nbsp; |_ DISTINCT t5.image_id, * (as t6) <br/>
 
@@ -27,7 +25,7 @@ Total number of downloaded slides: 83,076 <br/>
 1. [Description](#description)
 2. [Assumptions](#assumptions)
 3. [Vocabulary and Encoding](#vocabulary)
-3. [Notes](#notes)
+4. [Notes](#notes)
 
 
 ## Description <a name="description"></a>

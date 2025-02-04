@@ -1,13 +1,13 @@
 # Rachel Grisham BRCA Cohort
 
-<b>Path:</b> [OCRA."HRD_Shah_cohort"](https://tlvidreamcord1:9047/new_query?context=%22OCRA%22&queryPath=%5B%22OCRA%22%2C%22HRD_Shah_cohort%22%5D) <br/>
+<b>Path:</b> ["cdsi_prod.pdm_ocra.hrd_shah_cohort"](https://msk-mode-prod.cloud.databricks.com/explore/data/cdsi_prod/pdm_ocra/hrd_shah_cohort) <br/>
 <b>Table Type:</b> `Static` <br/>
 <b>Last updated:</b> `2024-07-06` <br/>
 
 <b>Lineage:</b> 
 
 Dr. Rachel Grisham <br/>
-|_ [phi_data_lake.ocra."HRD_Shah_cohort.csv"](https://tlvidreamcord1:9047/new_query?context=%22phi_data_lake%22&queryPath=%5B%22phi_data_lake%22%2C%22ocra%22%2C%22HRD_Shah_cohort.csv%22%5D) <br/>
+|_ "cdsi_prod.pdm_ocra.hrd_shah_cohort" <br/>
 
 <b>Summary Statistics:</b>
 
@@ -18,7 +18,7 @@ Total number of unique patients: 105 <br/>
 1. [Description](#description)
 2. [Assumptions](#assumptions)
 3. [Vocabulary and Encoding](#vocabulary)
-3. [Notes](#notes)
+4. [Notes](#notes)
 
 
 ## Description <a name="description"></a>

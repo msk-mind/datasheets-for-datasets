@@ -1,14 +1,14 @@
 # hobbit_casebreakdown_cleaned
 
-<b>Path:</b> ["pathology-data-mining"."impact_slide"."case_breakdown_cleaned"](https://tlvidreamcord1:9047/new_query?context=%22pathology-data-mining%22&queryPath=%5B%22pathology-data-mining%22%2C%22impact_slide%22%2C%22case_breakdown_cleaned%22%5D) <br/>
+<b>Path:</b> "cdsi_prod.pathology_data_mining.case_breakdown_cleaned" <br/>
 <b>Table Type:</b> Live <br/>
 <b>Late updated:</b> 2024-05-17 <br/>
 
 <b>Lineage:</b>
 
 HoBBit SQL Server <br/>
-|_ ["hobbit-poc"."case_breakdown"](hobbit-casebreakdown.md) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;|_ ["hobbit-poc"."case_breakdown_cleaned"](https://tlvidreamcord1:9047/new_query?context=%22pathology-data-mining%22&queryPath=%5B%22pathology-data-mining%22%2C%22impact_slide%22%2C%22case_breakdown_cleaned%22%5D) <br/>
+|_ ["src_hobbit_prod.dbo.case_breakdown_v"](hobbit-casebreakdown.md) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;|_ ["cdsi_prod.pathology_data_mining.case_breakdown_cleaned"](https://msk-mode-prod.cloud.databricks.com/explore/data/cdsi_prod/pathology_data_mining/case_breakdown_cleaned) <br/>
 
 <b>Summary Statistics:</b>
 
@@ -21,7 +21,7 @@ Last updated July 1, 2024.  (New slides are typically added weekly.)
 1. [Description](#description)
 2. [Assumptions](#assumptions)
 3. [Vocabulary and Encoding](#vocabulary)
-3. [Rules](#rules)
+4. [Rules](#rules)
 
 ## Description <a name="description"></a>
 
