@@ -1,21 +1,21 @@
 # OCRA Master Table
 
-<b>Path:</b> [OCRA."OCRA_Master_Table_2024-07-05"](https://tlvidreamcord1:9047/new_query?context=%22OCRA%22&queryPath=%5B%22OCRA%22%2C%22OCRA_Master_Table_2024-07-05%22%5D) <br/>
+<b>Path:</b> ["cdsi_prod.pdm_ocra.ocra_master_table"](https://msk-mode-prod.cloud.databricks.com/explore/data/cdsi_prod/pdm_ocra/ocra_master_table) <br/>
 <b>Table Type:</b> `contains live datasets in lineage` <br/>
 <b>Last updated:</b> `2024-07-06` <br/>
 
 <b>Lineage:</b> 
 
-["pathology-data-mining".impact_slide.case_breakdown_cleaned](https://github.com/msk-mind/datasheets-for-datasets/blob/main/hobbit/hobbit-casebreakdown-cleaned.md) (as t1) <br/>
-["phi_data_lake"."cdm-data".pathology."table_pathology_impact_sample_summary_dop_anno.tsv"](https://github.com/msk-mind/datasheets-for-datasets/blob/main/clinical-data-mining/pathology_reports.md) (as t2) <br/>
+["cdsi_prod.pathology_data_mining.case_breakdown_cleaned"](https://github.com/msk-mind/datasheets-for-datasets/blob/main/hobbit/hobbit-casebreakdown-cleaned.md) (as t1) <br/>
+["cdsi_prod.cdm_impact_pipeline_prod.table_pathology_impact_sample_summary_dop_anno"](https://github.com/msk-mind/datasheets-for-datasets/blob/main/clinical-data-mining/pathology_reports.md) (as t2) <br/>
 &nbsp; |_ JOIN t2 ON t1.specnum_formatted = t2.SOURCE_ACCESSION_NUMBER_0 AND t1.part_inst = t2.SOURCE_SPEC_NUM_0 (as t3) <br/>
-&nbsp; ["phi_data_lake"."pdm-data".impact."data_clinical_sample.oncokb.txt"](https://github.com/msk-mind/datasheets-for-datasets/blob/main/impact/data_clinical_sample.oncokb.md) (as t4) <br/>
+&nbsp; ["cdsi_prod.msk_impact_oncokb_annotated.data_clinical_sample_oncokb_raw"](https://github.com/msk-mind/datasheets-for-datasets/blob/main/impact/data_clinical_sample.oncokb.md) (as t4) <br/>
 &nbsp;&nbsp;&nbsp; |_ FULL JOIN t4 ON t3.SAMPLE_ID = t4.SAMPLE_ID (as t5) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp; ["phi_data_lake"."cdm-data"."id-mapping"."ddp_id_mapping_pathology.tsv"](https://github.com/msk-mind/datasheets-for-datasets/blob/main/clinical-data-mining/ddp_id_mapping.md) (as t6) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp; ["cdsi_prod.cdm_impact_pipeline_prod.ddp_id_mapping_pathology"](https://github.com/msk-mind/datasheets-for-datasets/blob/main/clinical-data-mining/ddp_id_mapping.md) (as t6) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp; |_ LEFT JOIN t6 ON t5.PATIENT_ID = t6.MRN (as t7) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp; [OCRA."HRD_RG_data"](https://github.com/msk-mind/datasheets-for-datasets/blob/main/pathology-data-mining/ocra/rachel_grisham_cohort.md) (as t8) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp; ["cdsi_prod.pdm_ocra.hrd_rg_data"](https://github.com/msk-mind/datasheets-for-datasets/blob/main/pathology-data-mining/ocra/rachel_grisham_cohort.md) (as t8) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |_ FULL JOIN t7 ON t8.MRN = t7.MRN (as t9) <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [OCRA."HRD_Shah_cohort"](https://github.com/msk-mind/datasheets-for-datasets/blob/main/pathology-data-mining/ocra/rachel_grisham_brca_cohort.md) (as t10) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ["cdsi_prod.pdm_ocra.hrd_shah_cohort"](https://github.com/msk-mind/datasheets-for-datasets/blob/main/pathology-data-mining/ocra/rachel_grisham_brca_cohort.md) (as t10) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |_ FULL JOIN t10 ON t10.MRN = t9.MRN (as t11) <br/>
 
 
@@ -29,7 +29,7 @@ Total number of IMPACT samples: 89,115 <br/>
 1. [Description](#description)
 2. [Assumptions](#assumptions)
 3. [Vocabulary and Encoding](#vocabulary)
-3. [Notes](#notes)
+4. [Notes](#notes)
 
 
 ## Description <a name="description"></a>
