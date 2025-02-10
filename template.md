@@ -13,7 +13,7 @@
 <b>Summary Statistics:</b>
 
 - counts of key data elements
-- unique id guarantees 
+- unique id guarantees (SELECT <ID>, count(<ID>) as ct FROM <TABLE> GROUP BY <ID> ORDER BY ct DESC -- all counts should be 1)
 - id relationship guarantees (one-one, one-many etc.)
 - categorical values and counts of important columns containing categorical values
 - value ranges of important columns containing continuous values
