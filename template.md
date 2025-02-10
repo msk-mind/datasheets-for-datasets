@@ -15,7 +15,8 @@
 - counts of key data elements
 - unique id guarantees 
 - id relationship guarantees (one-one, one-many etc.)
-- group values and counts of important columns
+- categorical values and counts of important columns containing categorical values
+- value ranges of important columns containing continuous values
 
 
 # Table of contents
