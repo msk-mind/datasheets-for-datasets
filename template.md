@@ -13,8 +13,16 @@
 <b>Summary Statistics:</b>
 
 - counts of key data elements
-- unique id guarantees (SELECT <ID>, count(<ID>) as ct FROM <TABLE> GROUP BY <ID> ORDER BY ct DESC -- all counts should be 1)
+- unique id guarantees
+  ```
+    SELECT <ID>, count(<ID>) as ct FROM <TABLE> GROUP BY <ID> ORDER BY ct DESC -- all counts should be 1
+  ```
 - id relationship guarantees (one-one, one-many etc.)
+   ``` 
+    SELECT uid, count(uid) as ct FROM (
+       SELECT concat(<ID1>, '--', <ID2>) as uid FROM <TABLE>
+   ) GROUP BY uid ORDER BY ct DESC   -- all counts should be 1 if ID1 <--> ID2 have a one-one mapping
+   ```
 - categorical values and counts of important columns containing categorical values
 - value ranges of important columns containing continuous values
 
