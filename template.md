@@ -12,7 +12,10 @@
 
 <b>Summary Statistics:</b>
 
-Shape and size of table, counts of key data elements and other statistics that may be useful for the user. 
+- Shape and size of table, counts of key data elements and other statistics that may be useful for the user.
+- unique id guarantee 
+- id relationship guarantees (one-one, one-many etc.)
+- group counts of important columns
 
 
 # Table of contents
