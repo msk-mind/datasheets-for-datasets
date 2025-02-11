@@ -53,7 +53,8 @@ Reference CDSI documentation - [CDM Codebook](https://docs.google.com/spreadshee
 1. MRNs are not zero padded, so they should not be matched to MRNs in other tables without applying zero-padding.
 2. A single MRN can have multiple IMPACT samples associated with it.
 3. Multiple IMPACT samples can be collected from a single procedure.
-4. Many samples may have both a regular accession number and a DMP accession number.
+4. Many samples may have both a regular accession number and a DMP accession number
+5. SPECIMEN_NUMBER_DMP is tied to ACCESSION_NUMBER_DMP. SOURCE_SPEC_NUM_0 is tied to SOURCE_ACCESSION_NUMBER_0. SOURCE_SPEC_NUM_0b is tied to SOURCE_ACCESSION_NUMBER_0b. The three pairs of columns are not entirely disjoint. There are a few duplicate pairs across these three columns. 
 
 
 
