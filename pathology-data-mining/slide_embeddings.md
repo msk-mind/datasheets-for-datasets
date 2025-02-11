@@ -37,4 +37,5 @@ PyTorch tensors.
 
 ## Notes <a name="notes"></a>
 
-Relative paths are relative to the filesystem roots in the run parameters table.
+1. Relative paths are relative to the filesystem roots in the run parameters table.
+2. Primary location /gpfs/cdsi_ess/foundation/reef
