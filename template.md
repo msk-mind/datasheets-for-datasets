@@ -13,7 +13,7 @@
 <b>Summary Statistics:</b>
 
 - counts of key data elements
-- unique id guarantees
+- unique id guarantee (no duplicates)
   ```
     SELECT <ID>, count(<ID>) as ct FROM <TABLE> GROUP BY <ID> ORDER BY ct DESC -- all counts should be 1
   ```
@@ -21,13 +21,13 @@
    ``` 
     SELECT uid, count(uid) as ct FROM (
        SELECT concat(<ID1>, '--', <ID2>) as uid FROM <TABLE>
-   ) GROUP BY uid ORDER BY ct DESC   -- all counts should be 1 if ID1 <--> ID2 have a one-one mapping
+   ) GROUP BY uid ORDER BY ct DESC   -- if all counts are 1 then ID1 <--> ID2 have a one-one instance level mapping. One of the two ids may be considered redundant
    ```
 
    ```
    SELECT <ID1>, count(<ID2>) as ct FROM <TABLE> GROUP BY <ID1> HAVING ct > 1 ORDER BY ct DESC  -- ID1 has a one-many relationship to ID2 if this sql generates any records
 
-   SELECT <ID1>, count(DISTINCT <ID2>) as ct FROM <TABLE> GROUP BY <ID1> HAVING ct > 1 ORDER BY ct DESC  -- ID1 has is a one-many relationship to many different ID2s if this sql generates any records, else ID1 has a one-many relationship with many of the same ID2s if no records are generated from this sql
+   SELECT <ID1>, count(DISTINCT <ID2>) as ct FROM <TABLE> GROUP BY <ID1> HAVING ct > 1 ORDER BY ct DESC  -- ID1 has is a one-many relationship to many different ID2s (instance level multiplicity) if this sql generates any records, else ID1 has a one-many relationship with many of the same ID2s if no records are generated from this sql
    ```
 - categorical values and counts of important columns containing categorical values
 - value ranges of important columns containing continuous values
