@@ -2,7 +2,7 @@
 
 <b>Path:</b> [`"cdsi_prod.pathology_data_mining.impact_matched_slides"`](https://msk-mode-prod.cloud.databricks.com/explore/data/cdsi_prod/pathology_data_mining/impact_matched_slides) <br/>
 <b>Table Type:</b> `contains live datasets in lineage` <br/>
-<b>Last updated:</b> `2024-08-26` <br/>
+<b>Last updated:</b> `2025-02-12` <br/>
 
 <b>Lineage ([SQL](https://github.com/msk-mind/datasheets-for-datasets/blob/main/pathology-data-mining/sql/impact-matched-slides.sql)): </b> 
 
@@ -17,9 +17,9 @@
 
 <b>Summary Statistics:</b>
 
-Total number of rows (slides): 572,811 <br/>
-Total number of unique patients: 66,555 <br/>
-Total number of IMPACT samples: 77,155 <br/>
+Total number of rows (slides): 686,540 <br/>
+Total number of unique patients: 75,181 <br/>
+Total number of IMPACT samples: 86,887 <br/>
 
 
 1. [Description](#description)
@@ -39,7 +39,7 @@ The columns containing the IMPACT results, in particular, are not described here
 [data_clinical_sample.oncokb.txt](https://github.com/msk-mind/datasheets-for-datasets/blob/main/clinical-data-mining/pathology_reports.md) datasheet.
 A number of columns were added to make common queries simpler.
 In some cases, a columns that appeared in multiple base tables were renamed to reflect
-which base table they came from.
+which base table they came from.  ***We retain these columns to make it easier to debug issues in the final table.***
 
 Key columns include...
 
@@ -70,15 +70,30 @@ Key columns include...
 In case it's helpful, the following query will list slides that are associated with more than one IMPACT sample.
 ```
 SELECT image_id, count(SAMPLE_ID_IMPACT) as samples
-FROM OCRA."OCRA_Master_Table_2024-07-05"
+FROM cdsi_prod.pathology_data_mining.impact_matched_slides 
 WHERE image_id IS NOT NULL 
 GROUP BY image_id
 HAVING samples > 1
 ORDER BY samples DESC
 ```
 
-2. Not all of the slides in HoBBIT can be used for research. In practice, roughly 1% of requested slides contain PHI on the slide itself and thus cannot be de-identified for research use. This cannot be determined via HoBBIT, and is only determined during data transfer.
+2. Matching slides and IMPACT results using the accession and part numbers depends on the accession numbers being correct.  We discovered that some pathology reports contain incorrect references to related accessions, and have even found cases where the same accession number was assigned to two different accessions for different patients!  This can lead to an IMPACT sample ID mapping to more than one MRN, which should never legitimately happen.  Samples that display this should probably be discarded.  To check for this, you can use the following query,
+```
+WITH
+t1 AS (
+  SELECT SAMPLE_ID_IMPACT
+  FROM cdsi_prod.pathology_data_mining.impact_matched_slides 
+  GROUP BY SAMPLE_ID_IMPACT
+  HAVING COUNT(DISTINCT MRN) > 1
+)
+SELECT DISTINCT t1.SAMPLE_ID_IMPACT, ACCESSION_NUMBER, MRN, MRN_CDM, MRN_PATH, image_id
+FROM cdsi_prod.pathology_data_mining.impact_matched_slides t2
+INNER JOIN t1 ON t1.SAMPLE_ID_IMPACT = t2.SAMPLE_ID_IMPACT
+ORDER BY t1.SAMPLE_ID_IMPACT ASC, MRN ASC;
+```
 
-3. The IMPACT samples have been filtered by, SAMPLE_CLASS = 'Tumor' AND GENE_PANEL = ['IMPACT341', 'IMPACT410', 'IMPACT505', 'IMPACT468']
+3. Not all of the slides in HoBBIT can be used for research. In practice, roughly 1% of requested slides contain PHI on the slide itself and thus cannot be de-identified for research use. This cannot be determined via HoBBIT, and is only determined during data transfer.
+
+4. The IMPACT samples have been filtered to include only solid tumors, using SAMPLE_CLASS = 'Tumor' AND GENE_PANEL = ['IMPACT341', 'IMPACT410', 'IMPACT505', 'IMPACT468']
 
 
