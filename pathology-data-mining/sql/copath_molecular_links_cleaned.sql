@@ -2,7 +2,7 @@ WITH
   t1 as 
   ( -- Filter out rows not containing structured data. This is split into two steps. 
     -- First, check to see if there are matches on keywords inside parenthases 
-    -- that indicate precense of a valid accession
+    -- that indicate the presence of a valid accession.
         select 
         specnum_formatted,
         part_type, 
@@ -26,7 +26,7 @@ WITH
         ARRAY_TO_STRING(SUBLIST(_t2a_parsed, 2, 1),',') as parsed from t1 where matched <> '' 
   ),
   t3 as
-  ( -- Union the two previous steps so that all of the specnums that have valid into parsed column
+  ( -- Concatenate the results of the two previous steps so all of the valid accession numbers will be in the 'parsed' column
         select specnum_formatted, part_type, part_description, matched, parsed from t2b
         union all
         select specnum_formatted, part_type, part_description, matched, parsed from t2a
