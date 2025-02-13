@@ -12,25 +12,24 @@
 
 <b>Summary Statistics:</b>
 
-- counts of key data elements
-- unique id guarantee (no duplicates)
+<b>counts of key data elements</b> (group counts in the case of categorical variables and value ranges in the case of continuous variables)
+
+<b>one-one mapping guarantee</b>. To test for this guarantee, it is sufficient to test each id for uniquenes. i.e. there are no duplicates. For example, if ID1<-->ID2 is expected to have a one-one mapping, then all counts should be one for the following two queries. If there are violations to this guarantee, then it should be reported. 
   ```
-    SELECT <ID>, count(<ID>) as ct FROM <TABLE> GROUP BY <ID> ORDER BY ct DESC -- all counts should be 1
+    SELECT <ID1>, count(<ID1>) as ct FROM <TABLE> GROUP BY <ID1> ORDER BY ct DESC -- all counts should be 1
+    SELECT <ID2>, count(<ID2>) as ct FROM <TABLE> GROUP BY <ID2> ORDER BY ct DESC -- all counts should be 1
   ```
-- id relationship guarantees (one-one, one-many of the same ids, one-many of the same or different ids etc.)
-   ``` 
-    SELECT uid, count(uid) as ct FROM (
-       SELECT concat(<ID1>, '--', <ID2>) as uid FROM <TABLE>
-   ) GROUP BY uid ORDER BY ct DESC   -- if all counts are 1 then ID1 <--> ID2 have a one-one instance level mapping. One of the two ids may be considered redundant
-   ```
+<b>many-to-one relationship guarantee</b>. To test for this guarantee, it is sufficient to test the many-many relationship in both directions. For example, if ID1<-->ID2 has a many-many relationship such that many ID1s map to many ID2s, then the following queries should yeild the stated results. If there are violations to this guarantee, then it should be reported. 
 
    ```
-   SELECT <ID1>, count(<ID2>) as ct FROM <TABLE> GROUP BY <ID1> HAVING ct > 1 ORDER BY ct DESC  -- ID1 has a one-many relationship to ID2 if this sql generates any records
+   SELECT <ID1>, count(DISTINCT <ID2>) as ct FROM <TABLE> GROUP BY <ID1> HAVING ct > 1 ORDER BY ct DESC  -- at least one ID1 should match to many distinct ID2s 
 
-   SELECT <ID1>, count(DISTINCT <ID2>) as ct FROM <TABLE> GROUP BY <ID1> HAVING ct > 1 ORDER BY ct DESC  -- ID1 has is a one-many relationship to many different ID2s (instance level multiplicity) if this sql generates any records, else ID1 has a one-many relationship with many of the same ID2s if no records are generated from this sql
+   SELECT <ID2>, count(DISTINCT <ID1>) as ct FROM <TABLE> GROUP BY <ID2> HAVING ct > 1 ORDER BY ct DESC  -- at least one ID2 should match many distinct ID2s
    ```
-- categorical values and counts of important columns containing categorical values
-- value ranges of important columns containing continuous values
+If say ID1 matches to many non-disctinct ID2s, and vice versa with the query below, then the relationship between ID1 and ID2 is not a defining relationship. One or more identifiers or fields may need to be considered in conjuction with ID1 and ID2 for form a 'unique together relationship' that can then be formally defined as a one-many relationship. 
+
+- <b>many-many relationship guarantee</b> <TBD>
+
 
 
 # Table of contents
