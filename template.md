@@ -14,23 +14,6 @@
 
 <b>counts of key data elements</b> (group counts in the case of categorical variables and value ranges in the case of continuous variables)
 
-<b>one-one mapping guarantee</b>. To test for this guarantee, it is sufficient to test each id for uniquenes. i.e. there are no duplicates. For example, if ID1<-->ID2 is expected to have a one-one mapping, then all counts should be one for the following two queries. If there are violations to this guarantee, then it should be reported. 
-  ```
-    SELECT <ID1>, count(<ID1>) as ct FROM <TABLE> GROUP BY <ID1> ORDER BY ct DESC -- all counts should be 1
-    SELECT <ID2>, count(<ID2>) as ct FROM <TABLE> GROUP BY <ID2> ORDER BY ct DESC -- all counts should be 1
-  ```
-<b>many-to-one relationship guarantee</b>. To test for this guarantee, it is sufficient to test the many-many relationship in both directions. For example, if ID1<-->ID2 has a many-many relationship such that many ID1s map to many ID2s, then the following queries should yeild the stated results. If there are violations to this guarantee, then it should be reported. 
-
-   ```
-   SELECT <ID1>, count(DISTINCT <ID2>) as ct FROM <TABLE> GROUP BY <ID1> HAVING ct > 1 ORDER BY ct DESC  -- at least one ID1 should match to many distinct ID2s 
-
-   SELECT <ID2>, count(DISTINCT <ID1>) as ct FROM <TABLE> GROUP BY <ID2> HAVING ct > 1 ORDER BY ct DESC  -- at least one ID2 should match many distinct ID2s
-   ```
-If say ID1 matches to many non-disctinct ID2s, and vice versa with the query below, then the relationship between ID1 and ID2 is not a defining relationship. One or more identifiers or fields may need to be considered in conjuction with ID1 and ID2 for form a 'unique together relationship' that can then be formally defined as a one-many relationship. 
-
-- <b>many-many relationship guarantee</b> <TBD>
-
-
 
 # Table of contents
 1. [Description](#description)
@@ -62,4 +45,22 @@ Equally important are the field types. The field type provides the semantics beh
 Verifiable invariants guarding the consistency of the data (or lack of, if data is noisy). Notes are intended to save the user a significant amount of time in querying and understanding the dataset.  
 
 For example, a mention of a field that contains empty strings or null values may be presented as a rule. Conversely, if a field is guaranteed not to have empty or null values, this may also be presented as a rule if knowledge of this guarantee could be useful to the user of the dataset. 
+
+Examples of consistency checks that one can run in order to generate meaningful notes. 
+
+<b>one-one mapping guarantee</b>. To test for this guarantee, it is sufficient to test each id for uniquenes. i.e. there are no duplicates. For example, if ID1<-->ID2 is expected to have a one-one mapping, then all counts should be one for the following two queries. If there are violations to this guarantee, then it should be reported. 
+  ```
+    SELECT <ID1>, count(<ID1>) as ct FROM <TABLE> GROUP BY <ID1> ORDER BY ct DESC -- all counts should be 1
+    SELECT <ID2>, count(<ID2>) as ct FROM <TABLE> GROUP BY <ID2> ORDER BY ct DESC -- all counts should be 1
+  ```
+<b>many-to-one relationship guarantee</b>. To test for this guarantee, it is sufficient to test the many-many relationship in both directions. For example, if ID1<-->ID2 has a many-many relationship such that many ID1s map to many ID2s, then the following queries should yeild the stated results. If there are violations to this guarantee, then it should be reported. 
+
+   ```
+   SELECT <ID1>, count(DISTINCT <ID2>) as ct FROM <TABLE> GROUP BY <ID1> HAVING ct > 1 ORDER BY ct DESC  -- at least one ID1 should match to many distinct ID2s 
+
+   SELECT <ID2>, count(DISTINCT <ID1>) as ct FROM <TABLE> GROUP BY <ID2> HAVING ct > 1 ORDER BY ct DESC  -- at least one ID2 should match many distinct ID2s
+   ```
+If say ID1 matches to many non-disctinct ID2s, and vice versa with the query below, then the relationship between ID1 and ID2 is not a defining relationship. One or more identifiers or fields may need to be considered in conjuction with ID1 and ID2 for form a 'unique together relationship' that can then be formally defined as a one-many relationship. 
+
+- <b>many-many relationship guarantee</b> <TBD>
 
