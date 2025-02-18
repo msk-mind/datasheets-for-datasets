@@ -51,16 +51,16 @@ For example, take the following `part_description`:
 
 | **Field name** | **Description** | **Field Type** | **Data Type** | **Field Format** |
 |---|---|---|---|---|
-| specnum_formatted | 'M' accession number from DMP or Molecular Number | ID | string | |
+| specnum_formatted | M accession number from DMP or Molecular Number | ID | string | |
 | part_description | free text followed by machine readable form in parenthesis with link to Surgical accession ID, part number and block designator that can be used to link an IMPACT sample to a specific block | string  | string  | |
-| s_number | parsed out internal surgical accession ID  | ID  | integer  | |
-| part_number | parsed out surgical part number | ID  | integer  | |
-| s_blkdesig_label | parsed out block label from surgical accession | ID | string  | |
-| dop | parsed out date of procedure | Date | date | |
-| uss_count | parsed out unstained slide count | integer | integer | |
-| hne_count | parsed out h&E slide count | integer | integer | |
-| has_only_external_s_number | Indicates if a specnum only has an external accession number | Binary  | bool  | |
-| has_external_s_number | Indicates if a specnum has an external accession number | Binary  | bpp;  | |
+| s_number | surgical accession ID  | ID  | integer  | |
+| part_number | surgical part number | ID  | integer  | |
+| s_blkdesig_label | block label from surgical accession | ID | string  | |
+| dop | date of procedure | Date | date | |
+| uss_count | unstained slide count | integer | integer | |
+| hne_count | H&E slide count | integer | integer | |
+| has_only_external_s_number | True, if only an external (non-MSK) accession number is available | Binary  | bool  | |
+| has_external_s_number | True, if there's an external (non-MSK) accession number | Binary  | bpp;  | |
 
 
 
@@ -74,7 +74,7 @@ For example, take the following `part_description`:
 6. Some internal and external accessions are formatted similarly (ie both are M\d+-[a set of digits])
 7. Approximately 38,000 specnums do not have part_descriptions that contain structured data (for example: blood samples, normal samples, cfDNA, Nail, donor samples, )
 
-7. The following columns contain missing values:
+8. The following columns contain missing values:
 ```
 specnum_formatted: 0
 part_description: 1
