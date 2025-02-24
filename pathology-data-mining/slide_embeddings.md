@@ -8,6 +8,12 @@
 
 Total number of rows (slides): 528,891 <br/>
 
+Total number of rows with H-Optimus-0: 528,304 <br/>
+
+Total number of non-IHC rows: 488,011 <br/>
+
+Total number of non-IHC rows with H-Optimus-0: 487,636 <br/>
+
 # Table of contents
 1. [Description](#description)
 2. [Vocabulary](#vocab)
@@ -38,4 +44,5 @@ PyTorch tensors.
 ## Notes <a name="notes"></a>
 
 1. Relative paths are relative to the filesystem roots in the run parameters table.
-2. Primary location /gpfs/cdsi_ess/foundation/reef
+2. Primary location on gpfs: /gpfs/cdsi_ess/foundation/reef
+3. Iris location: /data1/pashaa/cdsi/pdm/reef (CTransPath not available)
