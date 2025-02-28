@@ -1,4 +1,4 @@
-# Rachel Grisham BRCA Cohort
+# HRD Shah Cohort
 
 <b>Path:</b> ["cdsi_prod.pdm_ocra.hrd_shah_cohort"](https://msk-mode-prod.cloud.databricks.com/explore/data/cdsi_prod/pdm_ocra/hrd_shah_cohort) <br/>
 <b>Table Type:</b> `Static` <br/>
