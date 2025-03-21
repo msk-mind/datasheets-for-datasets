@@ -28,6 +28,20 @@ linear model to filter out marker tiles. We use the H-Optimus-0 pretrained
 encoder to create embeddings on the filtered tiles. Embeddings are stored as
 PyTorch tensors.
 
+| **Parameter** | **Value** |
+|---|---|
+| filter model type | ctranspath |
+| filter threshold | 0.75 |
+| filter tiles | false |
+| patch size | 224 |
+| mpp | 0.5 |
+| segment threshold | 15 |
+| median blur ksize | 11 |
+| morphology ex kernel | 2 |
+| tissue area threshold | 1 |
+| hole area threshold | 1 |
+| max num holes | 2 |
+
 
 ### Vocabulary <a name="vocab"></a>
 
