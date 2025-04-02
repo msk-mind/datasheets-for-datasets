@@ -1,6 +1,6 @@
 # Table Name 
 
-<b>Path:</b> `"pathology-data-mining"."copath_molecular_links_clean"` <br/>
+<b>Path:</b> `"pathology-data-mining"."copath_molecular_links_cleaned"` <br/>
 <b>Table Type:</b> Live <br/>
 <b>Last updated:</b> `2025-04-01` <br/>
 
@@ -23,7 +23,7 @@ Total number of rows (m-numbers): 127,433
 
 ## Description <a name="description"></a>
 
-Table containing parsed and cleaned columns from [the source copath molecular links table](https://github.com/msk-mind/datasheets-for-datasets/blob/main/hobbit/copath_molecular_links.md).  
+Table containing parsed and cleaned columns from [the source copath molecular links table](https://github.com/msk-mind/datasheets-for-datasets/blob/main/hobbit/copath_molecular_links.md).
 
 The following columns used to create the output table:
 * `m_specnum_formatted` is the "M-number" for this sample.  It is labeled `m_number` in the cleaned table.
@@ -31,7 +31,7 @@ The following columns used to create the output table:
 * `accession_block_term` is the complete ID for the sequenced tissue block, composed of the S-accession number, part number and (usually) a block-designator label. 
 * `part_description` includes a description of the sequenced tissue, along with the MSK block ID, an outside block ID (if any), the date-of-procedure, and the number of H&E or unstained slides made from this sample.  The output columns derived from the part description are described below.
 
-The structured portion of the `part_description` contains an MSK block ID for the tissue block, based on the S-accession number.  This block id is written to the `block_id` column of the cleaned table.  It must match the `accession_block_term` from the input Copath table.
+The structured portion of the `part_description` contains an MSK block ID for the tissue block, based on the S-accession number.  This block id is written to the `block_id` column of the cleaned table.  It should match the `accession_block_term` from the input Copath table.
 
 The block id is also parsed into the S-accession number, the part number, and the block designator, which are reported in the `s_number`, `part_number`, and `s_blkdesig_label` columns.
 
