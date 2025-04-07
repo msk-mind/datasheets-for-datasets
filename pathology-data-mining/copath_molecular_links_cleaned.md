@@ -60,10 +60,10 @@ For example, take the following `part_description`:
 
 | **Field name** | **Description** | **Field Type** | **Data Type** | **Field Format** |
 |---|---|---|---|---|
-| m_number | M accession number from DMP or Molecular Number | ID | string | |
+| m_number | M accession number from DMP | ID | string | |
 | part_description | the origin and nature of the tissue part | string  | string  | |
 | dop | date of procedure | Date | date | |
-| block_id | full block ID  | ID  | string  | |
+| block_id | full block ID, based on surgical accession and part numbers  | ID  | string  | |
 | s_number | surgical accession ID  | ID  | string  | |
 | part_number | surgical part number | ID  | integer  | |
 | s_blkdesig_label | block label from surgical accession | ID | string  | |
@@ -75,10 +75,12 @@ For example, take the following `part_description`:
 
 ## Notes <a name="notes"></a>
 
-1. Not all `part_description` values contain a DOP, and in some cases there is no `DOP` label despite a date being indicated. These cases are not captured in the `DOP` column
+1. The "full block ID" is formatted here as "<accession> / <part_number> - <block_label>".  There's no canonical formatting for block IDs, and so matching this dataset with others will typically require reformatting one or the other block ID to be consistent.
+2. Not all samples have a block label.  When that's the case, the block id will just be part id, that is, "<accession> / <part_number>".
+3. Not all `part_description` values contain a DOP, and in some cases there is no `DOP` label despite a date being indicated. These cases are not captured in the `DOP` column
 4. Almost all cases that come from external sources also get internal accession numbers. In those cases, both the internal and external accessions are available. In order to flag these cases, use the `has_external_s_number` field.
-5. Some external cases are also not given internal accessions. To flag these cases, use the `only_has_external_s_number`
-6. Some internal and external accessions are formatted similarly (i.e., both are S\d+-[a set of digits])
-7. Approximately 38,000 specnums do not have part_descriptions that contain structured data (for example: blood samples, normal samples, cfDNA, Nail, donor samples, )
+5. It's unusual, but some external samples are not given internal accessions. To find these cases, use the `only_has_external_s_number` column.
+6. Some internal and external accession IDs are formatted similarly (i.e., both are S\d+-[a set of digits])
+7. Approximately 38,000 accessions do not have part_descriptions that contain structured data (for example: blood samples, normal samples, cfDNA, Nail, donor samples, )
 
 
