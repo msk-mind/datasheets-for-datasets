@@ -2,7 +2,7 @@
 
 <b>Path:</b> [`"cdsi_prod.pathology_data_mining.slide_embeddings"`](https://msk-mode-prod.cloud.databricks.com/explore/data/cdsi_prod/pathology_data_mining/slide_embeddings) <br/>
 <b>Table Type:</b> Static <br/>
-<b>Date created or last updated:</b> 2025-02-10 <br/>
+<b>Date created or last updated:</b> 2025-06-02 <br/>
 
 <b>Summary Statistics:</b>
 
@@ -10,9 +10,9 @@ Total number of rows (slides): 569,961 <br/>
 
 Total number of rows with H-Optimus-0: 569,360 <br/>
 
-Total number of non-IHC rows: 488,011 <br/>
+Total number of non-IHC rows: 553,008 <br/>
 
-Total number of non-IHC rows with H-Optimus-0: 487,636 <br/>
+Total number of non-IHC rows with H-Optimus-0: 552,569 <br/>
 
 # Table of contents
 1. [Description](#description)
