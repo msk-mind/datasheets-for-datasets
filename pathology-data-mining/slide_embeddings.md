@@ -6,9 +6,9 @@
 
 <b>Summary Statistics:</b>
 
-Total number of rows (slides): 528,891 <br/>
+Total number of rows (slides): 569,961 <br/>
 
-Total number of rows with H-Optimus-0: 528,304 <br/>
+Total number of rows with H-Optimus-0: 569,360 <br/>
 
 Total number of non-IHC rows: 488,011 <br/>
 
@@ -21,13 +21,13 @@ Total number of non-IHC rows with H-Optimus-0: 487,636 <br/>
 
 ## Description <a name="description"></a>
 
-Slide embeddings created using Mussel. We first segment sides for tissue and
-patch, storing the coordinates in an HDF file. We then create the embeddings
-with the CTransPath pretrained encoder. Using the CTransPath features, we use a
-linear model to filter out marker tiles. We use the H-Optimus-0 pretrained
-encoder to create embeddings on the filtered tiles. Embeddings are stored as
-PyTorch tensors.
+Slide embeddings are created using [Mussel](https://github.com/pathology-data-mining/Mussel). 
+We first segment each slide for tissue and define patches, 
+storing the coordinates in an HDF5 file.  We then create CTransPath embeddings with a pretrained 
+encoder and use those features to filter out marker tiles, with a linear model.  Finally, we use 
+the H-Optimus-0 pretrained encoder to generate embeddings on the filtered tiles.  The embeddings are stored as PyTorch tensors.
 
+The Mussel parameters used to do all this are summarized below.
 | **Parameter** | **Value** |
 |---|---|
 | filter model type | ctranspath |
