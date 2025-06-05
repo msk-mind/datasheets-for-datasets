@@ -1,13 +1,13 @@
 # Pathology Diagnosis (PDM)
 
-<b>Path:</b> `"phi_data_lake"."pdm-data"."surgical_specimen_diagnoses.tsv"` <br/>
+<b>Path:</b> `cdsi_prod.pathology_data_mining.surgical_specimen_diagnoses.tsv` <br/>
 <b>Table Type:</b> `Live` <br/>
-<b>Late updated:</b> `2024-07-10` <br/>
+<b>Last updated:</b> `2025-01-31` <br/>
 
 <b>Lineage:</b> 
 
-`CDM NLP Processes` <br/>
-|_ ["phi_data_lake"."pdm-data"."surgical_specimen_diagnoses.tsv"](https://tlvidreamcord1:9047/new_query?context=%22phi_data_lake%22&queryPath=%5B%22phi_data_lake%22%2C%22pdm-data%22%2C%22surgical_specimen_diagnoses.tsv%22%5D) <br/>
+<br/>
+[cdsi_prod.pathology_data_mining.surgical_specimen_diagnoses](https://msk-mode-prod.cloud.databricks.com/explore/data/cdsi_prod/pathology_data_mining/surgical_specimen_diagnoses)<br/>
 
 <b>Summary Statistics:</b>
 
