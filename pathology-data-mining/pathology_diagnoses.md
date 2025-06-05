@@ -7,7 +7,6 @@
 <b>Lineage:</b> 
 
 <br/>
-[cdsi_prod.pathology_data_mining.surgical_specimen_diagnoses](https://msk-mode-prod.cloud.databricks.com/explore/data/cdsi_prod/pathology_data_mining/surgical_specimen_diagnoses)<br/>
 
 <b>Summary Statistics:</b>
 
