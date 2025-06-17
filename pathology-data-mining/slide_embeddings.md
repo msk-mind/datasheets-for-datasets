@@ -4,7 +4,7 @@
 <b>Table Type:</b> Static <br/>
 <b>Date created or last updated:</b> 2025-06-02 <br/>
 
-<b>Lineage: ([SQL](https://msk-mode-prod.cloud.databricks.com/sql/editor/e5c4288b-5c95-423b-af15-2a4932367b53?o=646852163028571) </b>
+<b>Lineage: ([SQL](https://msk-mode-prod.cloud.databricks.com/sql/editor/e5c4288b-5c95-423b-af15-2a4932367b53?o=646852163028571)) </b>
 "cdsi_prod.pathology_data_mining.slide_embeddings" (as t1) <br/>
 ["cdsi_prod.pathology_data_mining.slides_with_diagnosis"](https://github.com/msk-mind/datasheets-for-datasets/blob/main/pathology-data-mining/slides_with_diagnosis.md) (as t2) <br/>
 &nbsp; |_ t1 LEFT JOIN t2 ON t1.slide_id = t2.image_id WHERE t2.IS_IHC = 0 <br/>
