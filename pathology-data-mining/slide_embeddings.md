@@ -1,18 +1,21 @@
 # Slide Embeddings
 
-<b>Path:</b> [`"cdsi_prod.pathology_data_mining.slide_embeddings"`](https://msk-mode-prod.cloud.databricks.com/explore/data/cdsi_prod/pathology_data_mining/slide_embeddings) <br/>
+<b>Path:</b> [`"cdsi_prod.pathology_data_mining.he_slide_embeddings"`](https://msk-mode-prod.cloud.databricks.com/explore/data/cdsi_prod/pathology_data_mining/he_slide_embeddings) <br/>
 <b>Table Type:</b> Static <br/>
 <b>Date created or last updated:</b> 2025-06-02 <br/>
 
+<b>Lineage: ([SQL](https://msk-mode-prod.cloud.databricks.com/sql/editor/e5c4288b-5c95-423b-af15-2a4932367b53?o=646852163028571) </b>
+"cdsi_prod.pathology_data_mining.slide_embeddings" (as t1) <br/>
+["cdsi_prod.pathology_data_mining.slides_with_diagnosis"](https://github.com/msk-mind/datasheets-for-datasets/blob/main/pathology-data-mining/slides_with_diagnosis.md) (as t2) <br/>
+&nbsp; |_ t1 LEFT JOIN t2 ON t1.slide_id = t2.image_id WHERE t2.IS_IHC = 0 <br/>
+
 <b>Summary Statistics:</b>
 
-Total number of rows (slides): 569,961 <br/>
+Total number of rows (slides): 564,352 <br/>
 
-Total number of rows with H-Optimus-0: 569,360 <br/>
+Total number of rows with H-Optimus-0: 563,816 (missing: 536, 0.1%) <br/>
 
-Total number of non-IHC rows: 553,008 <br/>
-
-Total number of non-IHC rows with H-Optimus-0: 552,569 <br/>
+Total number of rows with CTransPath: 564,351 (missing: 1, <0.1%) <br/>
 
 # Table of contents
 1. [Description](#description)
@@ -24,8 +27,10 @@ Total number of non-IHC rows with H-Optimus-0: 552,569 <br/>
 Slide embeddings are created using [Mussel](https://github.com/pathology-data-mining/Mussel). 
 We first segment each slide for tissue and define patches, 
 storing the coordinates in an HDF5 file.  We then create CTransPath embeddings with a pretrained 
-encoder and use those features to filter out marker tiles, with a linear model.  Finally, we use 
+encoder and use those features to filter out marker tiles with a linear model.  Finally, we use 
 the H-Optimus-0 pretrained encoder to generate embeddings on the filtered tiles.  The embeddings are stored as PyTorch tensors.
+
+slides &rarr; tiles &rarr; prefilter ctranspath features &rarr; filtered tiles &rarr; h-optimus + ctranspath features
 
 The Mussel parameters used to do all this are summarized below.
 | **Parameter** | **Value** |
@@ -49,14 +54,12 @@ The Mussel parameters used to do all this are summarized below.
 |---|---|---|---|---|
 | slide_id | Slide ID | ID | string |  |
 | workflow_id | Workflow ID  | ID  | string | |
-| prefilter_ctranspath_features_tensor_path | CTransPath embedding pytorch tensor path (unfiltered)| ID | string | relative path |
-| tiles_h5_path | Tissue tile coordinates in HDF5 format (unfiltered) | ID | string | relative path |
-| filtered_tiles_h5_path | Tissue tile coordinates in HDF5 format (marker filtered) | ID | string | relative path |
-| ctranspath_features_tensor_path | CTransPath embedding pytorch tensor path (marker filtered)| ID | string | relative path |
-| optimus_features_tensor_path | H-Optimus-0 embedding pytorch tensor path (marker filtered) | ID | string | relative path |
+| prefilter_ctranspath_features_tensor_path | CTransPath embedding pytorch tensor path (unfiltered)| ID | string | full path |
+| tiles_h5_path | Tissue tile coordinates in HDF5 format (unfiltered) | ID | string | full path |
+| filtered_tiles_h5_path | Tissue tile coordinates in HDF5 format (marker filtered) | ID | string | full path |
+| ctranspath_features_tensor_path | CTransPath embedding pytorch tensor path (marker filtered)| ID | string | full path |
+| optimus_features_tensor_path | H-Optimus-0 embedding pytorch tensor path (marker filtered) | ID | string | full path |
 
 ## Notes <a name="notes"></a>
 
-1. Relative paths are relative to the filesystem roots in the run parameters table.
-2. Primary location on gpfs: /gpfs/cdsi_ess/foundation/reef
-3. Iris location: /data1/pashaa/cdsi/pdm/reef (CTransPath not available)
+1. For S3 paths, use http://pmindecs.mskcc.org:9020 endpoint.
