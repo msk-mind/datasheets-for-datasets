@@ -63,3 +63,4 @@ The Mussel parameters used to do all this are summarized below.
 ## Notes <a name="notes"></a>
 
 1. For S3 paths, use http://pmindecs.mskcc.org:9020 endpoint.
+2. Usage examples for [AWS CLI](https://gist.github.com/raylim/2039b01cbb5f6682e1f115106aee65b6), [R](https://gist.github.com/raylim/4cff68d45a83cf6f28508c0a5f7afd33), and [python](https://gist.github.com/raylim/ceb4ea7d8db8ff0c27b8d2322a1f9bd9).
