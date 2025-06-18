@@ -1,4 +1,4 @@
-# Slide Embeddings
+# H&E Slide Embeddings
 
 <b>Path:</b> [`"cdsi_prod.pathology_data_mining.he_slide_embeddings"`](https://msk-mode-prod.cloud.databricks.com/explore/data/cdsi_prod/pathology_data_mining/he_slide_embeddings) <br/>
 <b>Table Type:</b> Static <br/>
