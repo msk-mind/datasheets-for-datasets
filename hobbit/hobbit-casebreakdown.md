@@ -62,7 +62,7 @@ The columns below are relevant or research purposes.
 | **Field name** | **Description** | **Field Type** | **Data type** | **Format** |
 |---|---|---|---|---|
 | mrn | Medical Record Number, a unique identifier per patient  | ID | string | |
-| specnum_formatted | Identifies the surgical procedure.  | ID | string | |
+| specnum_formatted | Identifies the procedure and consequently the type of sample. The prefixes stand for the following H - hemetological sample, C - cytology sample, A - autopsy samply, R - routine autopsy sample, J - molecular outreach sample, F - flow cytometry sample   | ID | string | |
 | part_inst | Part identifier. Organs are divided into multiple parts to identify locations of specimens in the organ. | ID | integer | |
 | part_type | The part, or specimen name. Usually formatted as: Anatomical site; Tissue extraction method <br> Example: TRACHEA; RESECTION | Mixed | string | |
 | part_description | Description of the anatomical site from which the part was obtained. | Description | string | |
