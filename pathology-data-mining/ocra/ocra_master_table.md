@@ -7,7 +7,7 @@
 <b>Lineage:</b> 
 
 ["cdsi_prod.pathology_data_mining.case_breakdown_cleaned"](https://github.com/msk-mind/datasheets-for-datasets/blob/main/hobbit/hobbit-casebreakdown-cleaned.md) (as t1) <br/>
-["cdsi_prod.cdm_impact_pipeline_prod.table_pathology_impact_sample_summary_dop_anno"](https://github.com/msk-mind/datasheets-for-datasets/blob/main/clinical-data-mining/pathology_reports.md) (as t2) <br/>
+["cdsi_prod.cdm_impact_pipeline_prod.table_pathology_impact_sample_summary_dop_anno"](https://github.com/msk-mind/datasheets-for-datasets/blob/main/clinical-data-mining/table_pathology_impact_sample_summary_dop_anno.md) (as t2) <br/>
 &nbsp; |_ JOIN t2 ON t1.specnum_formatted = t2.SOURCE_ACCESSION_NUMBER_0 AND t1.part_inst = t2.SOURCE_SPEC_NUM_0 (as t3) <br/>
 &nbsp; ["cdsi_prod.msk_impact_oncokb_annotated.data_clinical_sample_oncokb_raw"](https://github.com/msk-mind/datasheets-for-datasets/blob/main/impact/data_clinical_sample.oncokb.md) (as t4) <br/>
 &nbsp;&nbsp;&nbsp; |_ FULL JOIN t4 ON t3.SAMPLE_ID = t4.SAMPLE_ID (as t5) <br/>

@@ -7,7 +7,7 @@
 <b>Lineage ([SQL](https://github.com/msk-mind/datasheets-for-datasets/blob/main/pathology-data-mining/sql/impact-matched-slides.sql)): </b> 
 
 ["cdsi_prod.pathology_data_mining.slides_with_diagnosis"](https://github.com/msk-mind/datasheets-for-datasets/blob/main/pathology-data-mining/slides_with_diagnosis.md) (as t5) <br/>
-["cdsi_prod.cdm_impact_pipeline_prod.table_pathology_impact_sample_summary_dop_anno"](https://github.com/msk-mind/datasheets-for-datasets/blob/main/clinical-data-mining/pathology_reports.md) (as t6) <br/>
+["cdsi_prod.cdm_impact_pipeline_prod.table_pathology_impact_sample_summary_dop_anno"](https://github.com/msk-mind/datasheets-for-datasets/blob/main/clinical-data-mining/table_pathology_impact_sample_summary_dop_anno.md) (as t6) <br/>
 &nbsp; |_ t5 INNER JOIN t6 ON t5.ACCESSION_NUMBER = t6.SOURCE_ACCESSION_NUMBER_0 AND t5.PART_NUMBER = t6.SOURCE_SPEC_NUM_0 (as t7) <br/>
 &nbsp; ["cdsi_prod.msk_impact_oncokb_annotated.data_clinical_sample_oncokb_raw"](https://github.com/msk-mind/datasheets-for-datasets/blob/main/impact/data_clinical_sample.oncokb.md) (as t8) <br/>
 &nbsp;&nbsp;&nbsp; |_ t7 INNER JOIN t8 ON t7.SAMPLE_ID_PATH = t8.SAMPLE_ID_IMPACT (as t9) <br/>
@@ -36,7 +36,7 @@ A table listing all whole-slide-images for which we have matching IMPACT results
 
 Most of the columns in the master table are described in datasheets from the lineage.
 The columns containing the IMPACT results, in particular, are not described here, but in the
-[data_clinical_sample.oncokb.txt](https://github.com/msk-mind/datasheets-for-datasets/blob/main/clinical-data-mining/pathology_reports.md) datasheet.
+[data_clinical_sample.oncokb.txt](https://github.com/msk-mind/datasheets-for-datasets/blob/main/clinical-data-mining/table_pathology_impact_sample_summary_dop_anno.md) datasheet.
 A number of columns were added to make common queries simpler.
 In some cases, a columns that appeared in multiple base tables were renamed to reflect
 which base table they came from.  ***We retain these columns to make it easier to debug issues in the final table.***
