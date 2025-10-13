@@ -4,7 +4,7 @@
 <b>Table Type:</b> Part Static (some table in lineagre tree are static and some are live) <br/>
 <b>Date created or last updated:</b> 2025/10/08 <br/>
 
-<b>Lineage: pathology-data-mining/sql/impact_block_matched_slides_clean.sql</b>
+<b>[Lineage](https://github.com/msk-mind/datasheets-for-datasets/blob/main/pathology-data-mining/sql/impact_block_matched_slides_clean.sql#lineage)</b>
 
 <b>Summary Statistics:</b>
 
