@@ -10,7 +10,7 @@
 
 <b>counts of key data elements</b> 
 
-[sql](pathology-data-mining/sql/impact_block_matched_slides_clean.sql#Sql14)
+[sql](pathology-data-mining/sql/impact_block_matched_slides_clean.sql#sql14)
  42,066 distinct patients 
  45,373 distinct S-numbers 
  45,817 distinct M-numbers
