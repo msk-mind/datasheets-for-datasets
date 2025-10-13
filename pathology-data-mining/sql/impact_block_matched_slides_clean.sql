@@ -1,4 +1,4 @@
-##Lineage
+## Lineage
 WITH slide_dx AS (
   SELECT
     *,
@@ -207,7 +207,7 @@ SELECT
 FROM
   t11
 
-##SQL1
+## SQL1
 with t1 as (
   -- group S-numbers by surgical date 
 select specnum_formatted, datetime_accession, count(specnum_formatted, datetime_accession) as ct from cdsi_prod.pathology_data_mining.case_breakdown_cleaned where specnum_formatted LIKE 'S%' group by specnum_formatted, datetime_accession order by ct desc limit 100
@@ -215,63 +215,63 @@ select specnum_formatted, datetime_accession, count(specnum_formatted, datetime_
 -- check to see if there are any S-numbers that belong to more than one surgical date (ct>1). If not S-numbers identify a single surgical event
 select specnum_formatted, count(specnum_formatted) as ct from t1 group by specnum_formatted order by ct desc
 
-##SQL2
+## SQL2
 with t1 as (
   -- group S-numbers by surgical date 
 select specnum_formatted, datetime_accession, count(specnum_formatted, datetime_accession) as ct from cdsi_prod.pathology_data_mining.case_breakdown_cleaned where specnum_formatted LIKE 'S%' group by specnum_formatted, datetime_accession order by ct desc
 )
 select count(distinct specnum_formatted) from t1 
 
-##SQL3
+## SQL3
 select mrn, specnum_formatted, part_inst, part_description, datetime_accession from cdsi_prod.pathology_data_mining.case_breakdown_cleaned where specnum_formatted = 'S15-23298'
 
 
-##SQL4
+## SQL4
 with t1 as (
   -- group M-numbers by surgical date 
 select specnum_formatted, datetime_accession, count(specnum_formatted, datetime_accession) as ct from cdsi_prod.pathology_data_mining.case_breakdown_cleaned where specnum_formatted LIKE 'M%' group by specnum_formatted, datetime_accession order by ct desc
 )
 select count(distinct specnum_formatted) from t1 
 
-##SQL5
+## SQL5
 select * from cdsi_prod.pathology_data_mining.case_breakdown_cleaned where mrn = '35366573' and specnum_formatted LIKE 'S%' 
 
-##SQL6
+## SQL6
 select * from cdsi_prod.pathology_data_mining.table_pathology_impact_sample_summary_dop_anno_clean where ACCESSION_NUMBER_DMP ='M14-14980'
 
-##SQL7
+## SQL7
 select SOURCE_ACCESSION_NUMBER_0, ACCESSION_NUMBER_DMP, count(SOURCE_ACCESSION_NUMBER_0, ACCESSION_NUMBER_DMP) as ct
   from cdsi_prod.pathology_data_mining.table_pathology_impact_sample_summary_dop_anno_clean where SOURCE_ACCESSION_NUMBER_0
  like 'S%' and ACCESSION_NUMBER_DMP like 'M%' group by SOURCE_ACCESSION_NUMBER_0, ACCESSION_NUMBER_DMP order by ct desc
 
-##SQL8
+## SQL8
 select SOURCE_ACCESSION_NUMBER_0, count(ACCESSION_NUMBER_DMP) as ct
   from cdsi_prod.pathology_data_mining.table_pathology_impact_sample_summary_dop_anno_clean where SOURCE_ACCESSION_NUMBER_0
  like 'S%' group by SOURCE_ACCESSION_NUMBER_0 order by ct desc
 
-##SQL9
+## SQL9
 select count(distinct SAMPLE_ID)
   from cdsi_prod.pathology_data_mining.table_pathology_impact_sample_summary_dop_anno_clean where SOURCE_ACCESSION_NUMBER_0 like 'S%' and ACCESSION_NUMBER_DMP like 'M%'
 
-##SQL10
+## SQL10
 select count(distinct SOURCE_ACCESSION_NUMBER_0) from cdsi_prod.pathology_data_mining.table_pathology_impact_sample_summary_dop_anno_clean where SOURCE_ACCESSION_NUMBER_0 like 'S%' and ACCESSION_NUMBER_DMP like 'M%'
 
-##SQL11
+## SQL11
 select count(distinct ACCESSION_NUMBER_DMP) from cdsi_prod.pathology_data_mining.table_pathology_impact_sample_summary_dop_anno_clean where SOURCE_ACCESSION_NUMBER_0 like 'S%' and ACCESSION_NUMBER_DMP like 'M%'
 
-##SQL12
+## SQL12
 select count(distinct m_number) from cdsi_prod.pathology_data_mining.copath_molecular_links_cleaned where s_number like 'S%' and isnotnull(block_id)
 
 
-##SQL13
+## SQL13
 select m_number, count(block_id) as ct from cdsi_prod.pathology_data_mining.copath_molecular_links_cleaned where s_number like 'S%' and isnotnull(block_id) group by m_number order by ct desc
 
-##SQL14
+## SQL14
 select count(distinct MRN) from cdsi_prod.pathology_data_mining.impact_block_matched_slides_clean
 select count(distinct ACCESSION_NUMBER) from cdsi_prod.pathology_data_mining.impact_block_matched_slides_clean
 select count(distinct M_NUMBER_COPATH) from cdsi_prod.pathology_data_mining.impact_block_matched_slides_clean 
 
-##SQL15
+## SQL15
 -- every sample_id comes from a single block
 with t1 as (
   select SAMPLE_ID_IMPACT, count(distinct BLOCK_ID_COPATH) as ct from cdsi_prod.pathology_data_mining.impact_block_matched_slides_clean group by SAMPLE_ID_IMPACT order by ct desc
