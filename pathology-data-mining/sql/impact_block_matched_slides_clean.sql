@@ -1,3 +1,212 @@
+## Lineage
+WITH slide_dx AS (
+  SELECT
+    *,
+    CASE
+      WHEN
+        BLOCK_LABEL IS NOT NULL
+        AND TRIM(BLOCK_LABEL) <> ''
+      THEN
+        ACCESSION_NUMBER || '/' || PART_NUMBER || '-' || BLOCK_LABEL
+      ELSE ACCESSION_NUMBER || '/' || PART_NUMBER
+    END AS BLOCK_ID_HOBBIT
+  FROM
+    cdsi_prod.pathology_data_mining.slides_with_diagnosis
+),
+copath AS (
+  SELECT
+    *
+  FROM
+    cdsi_prod.pathology_data_mining.copath_molecular_links_cleaned
+),
+t5 AS (
+  SELECT
+    slide_dx.*,
+    copath.m_number AS M_NUMBER_COPATH,
+    copath.s_number AS S_NUMBER_COPATH,
+    copath.part_number AS PART_NUMBER_COPATH,
+    copath.block_id AS BLOCK_ID_COPATH
+  FROM
+    slide_dx
+      JOIN copath
+        ON slide_dx.BLOCK_ID_HOBBIT = copath.block_id
+),
+t6 AS (
+  SELECT
+    MRN as MRN_PATH,
+    SAMPLE_ID AS SAMPLE_ID_PATH,
+    SOURCE_ACCESSION_NUMBER_0,
+    CASE
+      WHEN SOURCE_SPEC_NUM_0 IS NOT NULL THEN CAST(SOURCE_SPEC_NUM_0 AS INTEGER)
+      ELSE NULL
+    END AS SOURCE_SPEC_NUM_0,
+    SOURCE_ACCESSION_NUMBER_0b,
+    CASE
+      WHEN SOURCE_SPEC_NUM_0b IS NOT NULL THEN CAST(SOURCE_SPEC_NUM_0b AS INTEGER)
+      ELSE NULL
+    END AS SOURCE_SPEC_NUM_0b,
+    ACCESSION_NUMBER_DMP,
+    CASE
+      WHEN SPECIMEN_NUMBER_DMP IS NOT NULL THEN CAST(SPECIMEN_NUMBER_DMP AS INTEGER)
+      ELSE NULL
+    END AS SPECIMEN_NUMBER_DMP,
+    DATE_SEQUENCING_REPORT,
+    REPORT_CMPT_DATE_SOURCE_0,
+    REPORT_CMPT_DATE_SOURCE_0b,
+    DATE_OF_PROCEDURE_SURGICAL,
+    DATE_OF_PROCEDURE_SURGICAL_EST,
+    DOP_COMPUTE_SOURCE
+  FROM
+    cdsi_prod.pathology_data_mining.table_pathology_impact_sample_summary_dop_anno_clean
+  WHERE
+    SAMPLE_ID not in ('P-0000000-N-VR1', 'P-0032211-T02-IM6')
+),
+t7a as (
+  SELECT
+    *
+  FROM
+    t5
+      INNER JOIN t6
+        ON t5.ACCESSION_NUMBER = t6.SOURCE_ACCESSION_NUMBER_0
+        AND t5.PART_NUMBER = t6.SOURCE_SPEC_NUM_0
+        AND t5.M_NUMBER_COPATH = t6.ACCESSION_NUMBER_DMP
+),
+t7b as (
+  SELECT
+    *
+  FROM
+    t5
+      INNER JOIN t6
+        ON t5.ACCESSION_NUMBER = t6.SOURCE_ACCESSION_NUMBER_0b
+        AND t5.PART_NUMBER = t6.SOURCE_SPEC_NUM_0b
+        AND t5.M_NUMBER_COPATH = t6.ACCESSION_NUMBER_DMP
+),
+t7c as (
+  SELECT
+    *
+  FROM
+    t5
+      INNER JOIN t6
+        ON t5.ACCESSION_NUMBER = t6.ACCESSION_NUMBER_DMP
+        AND t5.PART_NUMBER = t6.SPECIMEN_NUMBER_DMP
+        AND t5.M_NUMBER_COPATH = t6.ACCESSION_NUMBER_DMP
+),
+t7 AS (
+  SELECT
+    *
+  FROM
+    t7a
+  UNION ALL
+  SELECT
+    *
+  FROM
+    t7b
+  UNION ALL
+  SELECT
+    *
+  from
+    t7c
+),
+t8 AS (
+  SELECT
+    SAMPLE_ID AS SAMPLE_ID_IMPACT,
+    PATIENT_ID AS PATIENT_ID_IMPACT,
+    GLEASON_SAMPLE_LEVEL,
+    PDL1_POSITIVE,
+    MONTH_ADDED,
+    WEEK_ADDED,
+    CANCER_TYPE,
+    SAMPLE_TYPE,
+    SAMPLE_CLASS,
+    METASTATIC_SITE,
+    PRIMARY_SITE,
+    CANCER_TYPE_DETAILED,
+    GENE_PANEL,
+    SO_COMMENTS,
+    SAMPLE_COVERAGE,
+    TUMOR_PURITY,
+    ONCOTREE_CODE,
+    MSI_COMMENT,
+    MSI_SCORE,
+    MSI_TYPE,
+    INSTITUTE,
+    SOMATIC_STATUS,
+    ARCHER,
+    CVR_TMB_COHORT_PERCENTILE,
+    CVR_TMB_SCORE,
+    CVR_TMB_TT_COHORT_PERCENTILE,
+    PATH_SLIDE_EXISTS,
+    MSK_SLIDE_ID,
+    LEVEL_1,
+    LEVEL_2,
+    LEVEL_3A,
+    LEVEL_3B,
+    LEVEL_4,
+    LEVEL_R1,
+    LEVEL_R2,
+    HIGHEST_LEVEL,
+    HIGHEST_SENSITIVE_LEVEL,
+    HIGHEST_RESISTANCE_LEVEL,
+    LEVEL_Dx1,
+    LEVEL_Dx2,
+    LEVEL_Dx3,
+    HIGHEST_DX_LEVEL,
+    LEVEL_Px1,
+    LEVEL_Px2,
+    LEVEL_Px3,
+    HIGHEST_PX_LEVEL,
+    ONCOGENIC_MUTATIONS,
+    `#ONCOGENIC_MUTATIONS`,
+    RESISTANCE_MUTATIONS,
+    `#RESISTANCE_MUTATIONS`,
+    `#MUTATIONS_WITH_SENSITIVE_THERAPEUTIC_IMPLICATIONS`,
+    `#MUTATIONS_WITH_RESISTANCE_THERAPEUTIC_IMPLICATIONS`,
+    `#MUTATIONS_WITH_DIAGNOSTIC_IMPLICATIONS`,
+    `#MUTATIONS_WITH_PROGNOSTIC_IMPLICATIONS`,
+    `#MUTATIONS`
+  FROM
+    cdsi_prod.msk_impact_oncokb_annotated.data_clinical_sample_oncokb_raw
+  WHERE
+    SAMPLE_CLASS = 'Tumor'
+    AND (
+      GENE_PANEL = 'IMPACT341'
+      OR GENE_PANEL = 'IMPACT410'
+      OR GENE_PANEL = 'IMPACT505'
+      OR GENE_PANEL = 'IMPACT468'
+    )
+),
+t9 AS (
+  SELECT
+    *
+  FROM
+    t7
+      INNER JOIN t8
+        ON t7.SAMPLE_ID_PATH = t8.SAMPLE_ID_IMPACT
+),
+t10 AS (
+  SELECT
+    MRN AS MRN_CDM,
+    MAX(DMP_ID) AS DMP_ID
+  FROM
+    cdsi_prod.cdm_idbw_impact_pipeline_prod.ddp_id_mapping_pathology
+  GROUP BY
+    MRN_CDM
+  HAVING
+    COUNT(DISTINCT DMP_ID) = 1
+),
+t11 AS (
+  SELECT
+    *
+  FROM
+    t9
+      LEFT JOIN t10
+        ON t9.PATIENT_ID_IMPACT = t10.DMP_ID
+)
+SELECT
+  *
+FROM
+  t11
+
 ## Sql1
 with t1 as (
   -- group S-numbers by surgical date 
