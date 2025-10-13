@@ -4,13 +4,13 @@
 <b>Table Type:</b> Part Static (some table in lineagre tree are static and some are live) <br/>
 <b>Date created or last updated:</b> 2025/10/08 <br/>
 
-<b>[Lineage](https://github.com/msk-mind/datasheets-for-datasets/blob/main/pathology-data-mining/sql/impact_block_matched_slides_clean.sql#lineage)</b>
+<b>[Lineage](https://github.com/msk-mind/datasheets-for-datasets/blob/main/pathology-data-mining/sql/impact_block_matched_slides_clean.md#lineage)</b>
 
 <b>Summary Statistics:</b>
 
 <b>counts of key data elements</b> 
 
-[SQL14](https://github.com/msk-mind/datasheets-for-datasets/blob/main/pathology-data-mining/sql/impact_block_matched_slides_clean.sql#sql14)
+[SQL14](https://github.com/msk-mind/datasheets-for-datasets/blob/main/pathology-data-mining/sql/impact_block_matched_slides_clean.md#sql14)
  42,066 distinct patients 
  45,373 distinct S-numbers 
  45,817 distinct M-numbers
