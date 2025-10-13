@@ -30,7 +30,7 @@ The case_breakdown table, contains information for a slide in each row, indexed 
 
 ##### How was this data collected? 
 
-Tissue that is resected (or biopsied) from a patient (identified by `mrn`) during surgery (`specnum_formatted`) is sent to the Dept. of Pathology where it is processed. Tissue may be resected from multiple anatomical sites from a single surgical procedure. Processing involves breaking up the tissue from each anatomical site (`part_type`, `part_description`) into parts (`part_inst`) and blocks (`block_inst`, `blkdesig_label`). A part can contain many blocks. Both parts and blocks are given designator labels called part number and block number. Certain blocks of interest are then selected to create slides.
+Tissue that is resected (or biopsied) from a patient (identified by `mrn`) during a surgerical event (`specnum_formatted`) is sent to the Dept. of Pathology where it is processed. Tissue may be resected from multiple anatomical sites from a single surgical procedure. Processing involves breaking up the tissue from each anatomical site (`part_type`, `part_description`) into parts (`part_inst`) and blocks (`block_inst`, `blkdesig_label`). A part can contain many blocks. Both parts and blocks are given designator labels called part number and block number. Certain blocks of interest are then selected to create slides.
 
 Tissue from one or more slides is then scraped from regions of interest (ROI) and sent for molecular sequencing. The molecular sequencing process results in a molecular case number (often referred to as an M-number, or accession_number_dmp) and an sample_id, typically from the IMPACT protocol. 
 
