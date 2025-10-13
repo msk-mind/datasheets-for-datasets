@@ -1,4 +1,4 @@
-# Table Name 
+# copath_molecular_links_cleaned
 
 <b>Path:</b> `"pathology-data-mining"."copath_molecular_links_cleaned"` <br/>
 <b>Table Type:</b> Live <br/>
