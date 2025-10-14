@@ -28,18 +28,30 @@ This dataset matches IMPACT samples to H&E images down to a [block](https://gith
 
 ### Vocabulary <a name="vocab"></a>
 
-The vocabulary of a dataset is comprised of its variables, (or field names) the description (or semantics) of 
-these variables, their field type, data type and format. An unambiguous field description
-is very important for consistent interpretation of the field. The description must also include units where applicable. 
-Equally important are the field types. The field type provides the semantics behind the variable. The data type specifies the encoding that should be used for the variable when the dataset is loaded into memory. The encoding is critical because the data may be presented in a file format like CSV, which carries no information about the encoding, forcing data loaders (like Pandas) to guess.  Writing a field in the wrong format can lead to terrible and unexpected errors, like the infamous MRN zero-padding error where the preceeding zeros in an MRN are stripped if the field is encoded as an integer instead of a string. The field format may be used to further describe or elaborate on categorical variables that have a finite set of possible values and semantics behind each value. 
+This dataset has many columns included in it as a consequence of the multiple joins. The columns below are the most important from the perspective of matching image_ids to IMPACT sample_ids at the block level. 
 
 Identify primary key(s). 
 
 | **Field name** | **Description** | **Field Type** | **Data Type** | **Field Format** |
 |---|---|---|---|---|
-| field1 | field1 description | ID *or* Categorical *or* Continuous *or* Mixed *or* Natural Language Description | integer *or* float *or* string *or* binary | YYYYMMDD, 0, 1, True, False etc. (and corresponding description of each value) |
-| field2 | field2 description | ID *or* Categorical *or* Continuous *or* Mixed *or* Natural Language Description | integer *or* float *or* string *or* binary |YYYYMMDD, 0, 1, True, False etc. (and corresponding description of each value) |
-| field3 | field3 description | ID *or* Categorical *or* Continuous *or* Mixed *or* Natural Language Description | integer *or* float *or* string *or* binary |YYYYMMDD, 0, 1, True, False etc. (and corresponding description of each value) |
+| MRN | medical record number from HoBBIT records | ID | string | '\d\d\d\d\d\d\d\d' |
+| DMP_ID | de-identified patient ID | ID | string | 'P-\d\d\d\d\d\d\d' |
+| ACCESSION_NUMBER | accession number from HoBBIT record that identifies a surgical event | ID  | string | 'S-\d\d-(\d)+'|
+| stain_name | Type of stain used and sometimes carries processing info | Categorical / Natural Language Description | string | 'H%E' implies H&E stain, 'RECUT' indicates, a new slide was requested possible for higher tumor content for sequencing, 'SUBMITTED' indicates an outside MSK case that was submitted to MSK |
+| image_id | de-identified slide ID for whole slide image | ID  | string | (\d)+ |
+| PATH_DX_SPEC_TITLE | brief tissue diagnosis | description | natural language description | |
+| PATH_DX_SPEC_DESC | detailed tissue diagnosis | description | natrual language description | |
+| magnification | slide magnification | | string | '20x', '40x', ... |
+| BLOCK_ID_HOBBIT | globally unique block ID | ID | string | concatenates accession-number, part-number and block-label to create a globally unique id - 'S\d\d-(\d)+/[a-zA-Z0-9-]+' |
+| M_NUMBER_COPATH | Molecular case ID that identifies a sequencing case | ID | string | 'M\d\d-(\d)+' |
+| SAMPLE_ID_IMPACT | de-identified IMPACT sample ID | ID | string | 'P-\d\d\d\d\d\d\d-T\d\d-IM\d' |
+| CANCER_TYPE | brief cancer type description | Natural Language Description |  |
+| PRIMARY_SITE | primary site of tumor when available | Natural Language Description |  |
+| CANCER_TYPE_DETAILED | detailed description pf cancer type | Natural Language Description |  |
+| GENE_PANEL | genomic panels included for solid tumor samples only | Categorical | 'IMPACT341','IMPACT410','IMPACT505','IMPACT468' |
+| ONCOGENIC_MUTATIONS | list of oncogenic mutations | Natural Language Description | string | semi-colon separated list of oncogenic mutations |
+
+
 
 ## Notes <a name="notes"></a>
 
@@ -301,4 +313,5 @@ select block_id_copath, m_number, s_number, part_number, s_blkdesig_label from c
    
 7. IM in the sample id stands for impact test - verify that the sample_ids in this dataset align with the assays chosen in the lineage - P-0106020-T01-IM7
 
-8. Filter out any 'bsbsbs' mrns 
+8. Filter out any 'bsbsbs' mrns
+9. Need to include slide_url and add to vocabulary list
