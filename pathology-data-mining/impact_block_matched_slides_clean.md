@@ -8,13 +8,10 @@
 
 <b>Summary Statistics:</b>
 
-<b>counts of key data elements</b> 
-
 [[SQL14]](https://github.com/msk-mind/datasheets-for-datasets/blob/main/pathology-data-mining/sql/impact_block_matched_slides_clean.md#sql14) <br/>
  42,066 distinct patients <br/>
  45,373 distinct S-numbers <br/>
- 45,817 distinct M-numbers <br/>
- [todo: list distinct number of block matches and compare to about 87k sample ids that are part matched with sql]
+ 45,817 distinct M-numbers and IMPACT sample_ids matched (out of 137,790 in IMPACT table) <br/>
 
 
 # Table of contents
