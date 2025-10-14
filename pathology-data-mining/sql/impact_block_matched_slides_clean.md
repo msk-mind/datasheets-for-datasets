@@ -296,7 +296,9 @@ select m_number, count(block_id) as ct from cdsi_prod.pathology_data_mining.copa
 ```sql
 select count(distinct MRN) from cdsi_prod.pathology_data_mining.impact_block_matched_slides_clean
 select count(distinct ACCESSION_NUMBER) from cdsi_prod.pathology_data_mining.impact_block_matched_slides_clean
-select count(distinct M_NUMBER_COPATH) from cdsi_prod.pathology_data_mining.impact_block_matched_slides_clean 
+select count(distinct M_NUMBER_COPATH) from cdsi_prod.pathology_data_mining.impact_block_matched_slides_clean
+select count(distinct SAMPLE_ID_IMPACT) from cdsi_prod.pathology_data_mining.impact_block_matched_slides_clean
+select count(distinct SAMPLE_ID) from cdsi_prod.pathology_data_mining.data_clinical_sample_oncokb
 ```
 
 ## SQL15
