@@ -38,7 +38,7 @@ Abbreviations:
 
 | **Field name** | **Description** | **Field Type** | **Data Type** | **Format** |
 |---|---|---|---|---|
-| SAMPLE_ID | IMPACT sample ID | ID | string | |
+| SAMPLE_ID | IMPACT sample ID | ID | string | P-\d\d\d\d\d\d\d-(T or N)\d\d-{ASSAY}\d\d For {ASSAY}, see assay table below to learn the suffix that is added to the ID|
 | PATIENT_ID | Patient DMP_ID | ID | string | |
 | GLEASON_SAMPLE_LEVEL | Gleason score | | string | '0', '1', ... '9' |
 | PDL1_POSITIVE | Sample PD-L1 positive? | boolean | string | 'Yes', 'No', or '' |
@@ -96,6 +96,32 @@ Four additional columns provide counts of particular classes of mutations:
 * #MUTATIONS_WITH_RESISTANCE_THERAPEUTIC_IMPLICATIONS
 * #MUTATIONS_WITH_DIAGNOSTIC_IMPLICATIONS
 * #MUTATIONS_WITH_PROGNOSTIC_IMPLICATIONS
+
+### Assay suffix in sample_id
+
+| **Field name** | **Description** |
+|---|---|
+| IM7 | 'IMPACT505' |
+| IM6 | 'IMPACT468' |
+| IM5 | 'IMPACT410' |
+| IM3 | 'IMPACT341' |
+| IH3 | 'IMPACT-HEME-400' |
+| IH4 | 'IMPACT-HEME-468' |
+| TS1 | 'RDTS30' |
+| TB5 | 'RDTB49' |
+| TB3 | 'RDTB49' |
+| AS1 | 'ARCHER-SOLID-CV1' |
+| AS2 | 'ARCHER-SOLID-CV2' |
+| AS3 | 'ARCHER-SOLID-CV3' |
+| AS4 | 'ARCHER-SOLID-CV4' |
+| AS5 | 'ARCHER-SOLID-CV5' |
+| AH1 | 'ARCHER-HEME-CV1' |
+| AH2 | 'ARCHER-HEME-CV2' |
+| XS1 | 'ACCESS129' |
+| XS2 | 'ACCESS146' |
+| XH1 | 'ACCESS-HEME-115' |
+| TG1 | 'TARGET51' |
+
 
 ## Notes <a name="notes"></a>
 
