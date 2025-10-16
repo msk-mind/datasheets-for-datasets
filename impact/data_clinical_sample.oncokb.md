@@ -38,7 +38,7 @@ Abbreviations:
 
 | **Field name** | **Description** | **Field Type** | **Data Type** | **Format** |
 |---|---|---|---|---|
-| SAMPLE_ID | IMPACT sample ID | ID | string | P-\d\d\d\d\d\d\d-(T or N)\d\d-{ASSAY}\d\d For {ASSAY}, see assay table below to learn the suffix that is added to the ID|
+| SAMPLE_ID | IMPACT sample ID | ID | string | P-\d\d\d\d\d\d\d-(T or N)\d\d-{ASSAY}\d\d. (T or N) implies either Tumor or Normal sample. For {ASSAY}, see assay table below to learn the suffix that is added to the ID. |
 | PATIENT_ID | Patient DMP_ID | ID | string | |
 | GLEASON_SAMPLE_LEVEL | Gleason score | | string | '0', '1', ... '9' |
 | PDL1_POSITIVE | Sample PD-L1 positive? | boolean | string | 'Yes', 'No', or '' |
