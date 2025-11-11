@@ -1,6 +1,6 @@
-# Impact-matched Slides
+# Impact-surgery-matched-Slides
 
-<b>Path:</b> [`"cdsi_prod.pathology_data_mining.impact_matched_slides"`](https://msk-mode-prod.cloud.databricks.com/explore/data/cdsi_prod/pathology_data_mining/impact_matched_slides) <br/>
+<b>Path:</b> [`"cdsi_prod.pathology_data_mining.impact_surgery_matched_slides"`](https://msk-mode-prod.cloud.databricks.com/explore/data/cdsi_prod/pathology_data_mining/impact_surgery_matched_slides) <br/>
 <b>Table Type:</b> `contains live datasets in lineage` <br/>
 <b>Last updated:</b> `2025-11-11` <br/>
 
@@ -22,7 +22,7 @@ Total number of IMPACT samples: 82,389 <br/>
 
 ## Description <a name="description"></a>
 
-This table represents all IMPACT patients and samples for which we have whole slide images matched at the surgery level (NOTE: not matched at part of block level). This table was built using multiple tables starting from the Hobbit table as base. The [Hobbit table]() includes all patients for whom de-identified slides exist. The [surgical_specimen_diagnoses table]() was added to the Hobbit table to include detailed information about the patient's diagnosis relative to the time at which tissue was accessioned from a surgery event. The [pathology reports table]() from the CDM team was added to include the mapping between IMPACT sample_id and accession. This mapping is required to integrate the whole slide image information from Hobbit with the genomic sample information from IMPACT. These two additions form an extended version of the Hobbit table. 
+This table represents all IMPACT patients and samples for which we have whole slide images matched at the surgery level (NOTE: not matched at part of block level). This table was built using multiple tables starting from the Hobbit table as base. The [Hobbit table](https://github.com/msk-mind/datasheets-for-datasets/blob/main/hobbit/hobbit-casebreakdown-cleaned.md) includes all patients for whom de-identified slides exist. The [surgical_specimen_diagnoses table](https://github.com/msk-mind/datasheets-for-datasets/blob/main/clinical-data-mining/pathology_diagnoses.md) was added to the Hobbit table to include detailed information about the patient's diagnosis relative to the time at which tissue was accessioned from a surgery event. The [pathology reports table](https://github.com/msk-mind/datasheets-for-datasets/blob/main/clinical-data-mining/pathology_reports.md) from the CDM team was added to include the mapping between IMPACT sample_id and accession. This mapping is required to integrate the whole slide image information from Hobbit with the genomic sample information from IMPACT. These two additions form an extended version of the Hobbit table. 
 
 Next, the intersection between the extended Hobbit table and select gene panels for solid tumors (see NOTES below) from the IMPACT table (cdsi_public.msk_impact.data_clinical_sample) was made to generate the final table that integrates genomic sample information with whole slide image information at the surgery level.   
 
