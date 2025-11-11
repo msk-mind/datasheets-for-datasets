@@ -83,7 +83,7 @@ cvr_tmb_tt_cohort_percentile |  |  |  |  |
 
 1. Whole slide images and IMPACT samples are matched using the accession number for the tissue that was used to make the slides and samples. The accession number uniquely defines a surgery event and is considered PHI.   
 
-2. The IMPACT samples have been filtered to include only solid tumors, using SAMPLE_CLASS = 'Tumor' AND GENE_PANEL = ['IMPACT341', 'IMPACT410', 'IMPACT505', 'IMPACT468']
+2. The IMPACT samples have been filtered to include only solid tumors, using SAMPLE_CLASS = 'Tumor' (100,505 patients) AND GENE_PANEL = ['IMPACT341', 'IMPACT410', 'IMPACT505', 'IMPACT468'] (83,580 patients)
 
 3. <b>Data attrition:</b> We start with 502,266 patients from the Hobbit table for whome we have ananymized slides, and 104,440 patients in the IMPACT table. The integrating Pathology Reports table from the CDM team helps to bring these two tables together and it has 110,636 patients. Of these 110,636 patients, 83,084 patients are found to intersect with the patients in the Hobbit table. The IMPACT table after filtering for solid tumor assays, contains 83,568 patients, down from 104,440 patients. The intersection of the 83,084 patients from the Hobbit table that overlaps with the Pathology Reports table, and the 83,568 patients with solid tumor samples in the IMPACT table finally yields <b>76,604 IMPACT patients</b> that have at least one matching slide out of 104,440 IMPACT patients.
 
