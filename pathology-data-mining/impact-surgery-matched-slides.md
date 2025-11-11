@@ -99,6 +99,7 @@ cvr_tmb_tt_cohort_percentile |  |  |  |  |
     `#MUTATIONS_WITH_DIAGNOSTIC_IMPLICATIONS`,
     `#MUTATIONS_WITH_PROGNOSTIC_IMPLICATIONS` 
 
+6. Slides may be H&E (count = 673,569) or IHC (COUNT = 120,600) as determined by the fields IS_HNE and IS_IHC. There are another 182,271 slides that are marked as neither H&E or IHC. These are slides that have been submitted from external sources outside of MSK and typically have 'SLIDES SUBMITTED' as the `stain_name` designation. The actual stain type may be derived computationally however. 
 
 
 
