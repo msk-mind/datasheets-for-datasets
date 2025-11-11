@@ -10,10 +10,10 @@
 
 <b>Summary Statistics:</b>
 
-Total number of rows (slides): 571,191 <br/>
 Total number of unique patients: 71,607 <br/>
 Total number of IMPACT samples: 82,389 <br/>
 Total number of whole slide images: 976,440 <br/>
+Total number of whole slide images in PDM inventory: 571,191 <br/>
 
 
 1. [Description](#description)
