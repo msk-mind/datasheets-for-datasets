@@ -12,8 +12,8 @@
 
 Total number of unique patients: 71,607 <br/>
 Total number of IMPACT samples: 82,389 <br/>
-Total number of whole slide images: 976,440 <br/>
-Total number of whole slide images in PDM inventory: 571,191 <br/>
+Total number of whole slide images (H&E and IHC - see Notes section): 976,440 <br/>
+Total number of whole slide images in PDM inventory (H&E and IHC - see Notes section): 571,191 <br/>
 
 
 1. [Description](#description)
@@ -25,7 +25,7 @@ Total number of whole slide images in PDM inventory: 571,191 <br/>
 
 This table represents all IMPACT patients and samples for which we have whole slide images matched at the surgery level (NOTE: not matched at part of block level). This table was built using multiple tables starting from the Hobbit table as base. The [Hobbit table](https://github.com/msk-mind/datasheets-for-datasets/blob/main/hobbit/hobbit-casebreakdown-cleaned.md) includes all patients for whom de-identified slides exist. The [surgical_specimen_diagnoses table](https://github.com/msk-mind/datasheets-for-datasets/blob/main/clinical-data-mining/pathology_diagnoses.md) was added to the Hobbit table to include detailed information about the patient's diagnosis relative to the time at which tissue was accessioned from a surgery event. The [pathology reports table](https://github.com/msk-mind/datasheets-for-datasets/blob/main/clinical-data-mining/pathology_reports.md) from the CDM team was added to include the mapping between IMPACT sample_id and accession. This mapping is required to integrate the whole slide image information from Hobbit with the genomic sample information from IMPACT. These two additions form an extended version of the Hobbit table. 
 
-Next, the intersection between the extended Hobbit table and select gene panels for solid tumors (see NOTES below) from the IMPACT table (cdsi_public.msk_impact.data_clinical_sample) was made to generate the final table that integrates genomic sample information with whole slide image information at the surgery level. See attrition information in NOTES section below.   
+Next, the intersection between the extended Hobbit table and select gene panels for solid tumors (see Notes section below) from the IMPACT table (cdsi_public.msk_impact.data_clinical_sample) was made to generate the final table that integrates genomic sample information with whole slide image information at the surgery level. See attrition information in Notes section below.   
 
 
 ## Vocabulary <a name="vocabulary"></a>
