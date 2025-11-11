@@ -89,6 +89,16 @@ cvr_tmb_tt_cohort_percentile |  |  |  |  |
 
 4. Not all of the slides in HoBBIT can be used for research. In practice, roughly 1% of requested slides contain PHI on the slide itself and thus cannot be de-identified for research use. This cannot be determined via HoBBIT, and is only determined during data transfer.
 
+5. This table is missing some mutation data that needs to be brought in from another IMPACT table. For example, 
+    `ONCOGENIC_MUTATIONS,`
+    `#ONCOGENIC_MUTATIONS`,
+    `RESISTANCE_MUTATIONS`,
+    `#RESISTANCE_MUTATIONS`,
+    `#MUTATIONS_WITH_SENSITIVE_THERAPEUTIC_IMPLICATIONS`,
+    `#MUTATIONS_WITH_RESISTANCE_THERAPEUTIC_IMPLICATIONS`,
+    `#MUTATIONS_WITH_DIAGNOSTIC_IMPLICATIONS`,
+    `#MUTATIONS_WITH_PROGNOSTIC_IMPLICATIONS` 
+
 
 
 
