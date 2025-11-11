@@ -87,22 +87,7 @@ cvr_tmb_tt_cohort_percentile |  |  |  |  |
 
 3. Data attrition: We start with patients = 502,266 patients from the Hobbit table and 104,440 patients in the IMPACT table. The integrating pathology reports table from CDM team that helps to bring these two tables together has 110,636 patients. Of these 110,636 patients, 83,084 patients are found to intersect with the patients in the Hobbit table. The IMPACT table after filtering for solid tumor assays, contains 83,568 patients, down from 104,440 patients. The intersection of the 83,084 patients from the Hobbit table that overlaps with the pathology reports table and the 83,568 patients with solid tumor samples in the IMPACT table finally yields 76,604 patients that have at least one matching slide.
 
-4. Matching slides and IMPACT results using the accession and part numbers depends on the accession numbers being correct.  We discovered that some pathology reports contain incorrect references to related accessions, and have even found cases where the same accession number was assigned to two different accessions for different patients!  This can lead to an IMPACT sample ID mapping to more than one MRN, which should never legitimately happen.  Samples that display this should probably be discarded.  To check for this, you can use the following query,
-```
-WITH
-t1 AS (
-  SELECT SAMPLE_ID_IMPACT
-  FROM cdsi_prod.pathology_data_mining.impact_matched_slides 
-  GROUP BY SAMPLE_ID_IMPACT
-  HAVING COUNT(DISTINCT MRN) > 1
-)
-SELECT DISTINCT t1.SAMPLE_ID_IMPACT, ACCESSION_NUMBER, MRN, MRN_CDM, MRN_PATH, image_id
-FROM cdsi_prod.pathology_data_mining.impact_matched_slides t2
-INNER JOIN t1 ON t1.SAMPLE_ID_IMPACT = t2.SAMPLE_ID_IMPACT
-ORDER BY t1.SAMPLE_ID_IMPACT ASC, MRN ASC;
-```
-
-5. Not all of the slides in HoBBIT can be used for research. In practice, roughly 1% of requested slides contain PHI on the slide itself and thus cannot be de-identified for research use. This cannot be determined via HoBBIT, and is only determined during data transfer.
+4. Not all of the slides in HoBBIT can be used for research. In practice, roughly 1% of requested slides contain PHI on the slide itself and thus cannot be de-identified for research use. This cannot be determined via HoBBIT, and is only determined during data transfer.
 
 
 
