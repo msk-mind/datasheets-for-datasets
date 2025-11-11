@@ -256,4 +256,4 @@ t13 AS ( -- patients = 76,604
 SELECT
   *
 FROM
-  t13  WHERE image_id = image_id_inventory
+  t13  
