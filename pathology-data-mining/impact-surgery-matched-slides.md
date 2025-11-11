@@ -25,7 +25,7 @@ Total number of whole slide images in PDM inventory: 571,191 <br/>
 
 This table represents all IMPACT patients and samples for which we have whole slide images matched at the surgery level (NOTE: not matched at part of block level). This table was built using multiple tables starting from the Hobbit table as base. The [Hobbit table](https://github.com/msk-mind/datasheets-for-datasets/blob/main/hobbit/hobbit-casebreakdown-cleaned.md) includes all patients for whom de-identified slides exist. The [surgical_specimen_diagnoses table](https://github.com/msk-mind/datasheets-for-datasets/blob/main/clinical-data-mining/pathology_diagnoses.md) was added to the Hobbit table to include detailed information about the patient's diagnosis relative to the time at which tissue was accessioned from a surgery event. The [pathology reports table](https://github.com/msk-mind/datasheets-for-datasets/blob/main/clinical-data-mining/pathology_reports.md) from the CDM team was added to include the mapping between IMPACT sample_id and accession. This mapping is required to integrate the whole slide image information from Hobbit with the genomic sample information from IMPACT. These two additions form an extended version of the Hobbit table. 
 
-Next, the intersection between the extended Hobbit table and select gene panels for solid tumors (see NOTES below) from the IMPACT table (cdsi_public.msk_impact.data_clinical_sample) was made to generate the final table that integrates genomic sample information with whole slide image information at the surgery level.   
+Next, the intersection between the extended Hobbit table and select gene panels for solid tumors (see NOTES below) from the IMPACT table (cdsi_public.msk_impact.data_clinical_sample) was made to generate the final table that integrates genomic sample information with whole slide image information at the surgery level. See attrition information in NOTES section below.   
 
 
 ## Vocabulary <a name="vocabulary"></a>
@@ -81,11 +81,11 @@ cvr_tmb_tt_cohort_percentile |  |  |  |  |
 
 ## Notes <a name="notes"></a>
 
-1. Slides and IMPACT samples are matched based on the accession number for the tissue used to make those slides and those samples.  
+1. Whole slide images and IMPACT samples are matched using the accession number for the tissue that was used to make the slides and samples. The accession number uniquely defines a surgery event and is considered PHI.   
 
 2. The IMPACT samples have been filtered to include only solid tumors, using SAMPLE_CLASS = 'Tumor' AND GENE_PANEL = ['IMPACT341', 'IMPACT410', 'IMPACT505', 'IMPACT468']
 
-3. Data attrition: We start with patients = 502,266 patients from the Hobbit table and 104,440 patients in the IMPACT table. The integrating pathology reports table from CDM team that helps to bring these two tables together has 110,636 patients. Of these 110,636 patients, 83,084 patients are found to intersect with the patients in the Hobbit table. The IMPACT table after filtering for solid tumor assays, contains 83,568 patients, down from 104,440 patients. The intersection of the 83,084 patients from the Hobbit table that overlaps with the pathology reports table and the 83,568 patients with solid tumor samples in the IMPACT table finally yields 76,604 patients that have at least one matching slide.
+3. <b>Data attrition:</b> We start with 502,266 patients from the Hobbit table for whome we have ananymized slides, and 104,440 patients in the IMPACT table. The integrating Pathology Reports table from the CDM team helps to bring these two tables together and it has 110,636 patients. Of these 110,636 patients, 83,084 patients are found to intersect with the patients in the Hobbit table. The IMPACT table after filtering for solid tumor assays, contains 83,568 patients, down from 104,440 patients. The intersection of the 83,084 patients from the Hobbit table that overlaps with the Pathology Reports table, and the 83,568 patients with solid tumor samples in the IMPACT table finally yields <b>76,604 IMPACT patients</b> that have at least one matching slide out of 104,440 IMPACT patients.
 
 4. Not all of the slides in HoBBIT can be used for research. In practice, roughly 1% of requested slides contain PHI on the slide itself and thus cannot be de-identified for research use. This cannot be determined via HoBBIT, and is only determined during data transfer.
 
