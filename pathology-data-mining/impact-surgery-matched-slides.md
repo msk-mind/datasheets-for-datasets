@@ -38,10 +38,10 @@ Key columns include...
 |---|---|---|---|---|
 patient_id_impact | anonymized medical record number from MPath | ID | string | |
 sample_id_impact | the IMPACT sample ID associated with the genomics results | ID | string | |
-accession_number | accession number from HoBBIT record | ID  | string | |
-date_of_procedure_surgical | Date of surgical procedure | Date  | Datetime | |
-datetime_accession | date of tissue accession | Date  | Datetime | |
-date_sequencing_report | Date of sequencing report generation | Date  | Datetime | |
+accession_number | accession number from HoBBIT record. <b>This data element is considered PHI</b> | ID  | string | |
+date_of_procedure_surgical | Date of surgical procedure <b>This data element is considered PHI</b> | Date  | Datetime | |
+datetime_accession | anonymized date of tissue accession <b>This data element is considered PHI</b> | Date  | Datetime | |
+date_sequencing_report | Date of sequencing report generation <b>This data element is considered PHI</b> | Date  | Datetime | |
 is_hne | 1 if H&E, else 0 | categorical  | string | |
 is_ihc | 1 if IHC, else 0 | categorgical  | string | |
 stain_name | Type of stain used and sometimes carries processing info | Categorical / Natural Language Description  | string | 'H%E' implies H&E stain, 'RECUT' indicates, a new slide was requested possible for higher tumor content for sequencing, 'SUBMITTED' indicates an outside MSK case that was submitted to MSK |
