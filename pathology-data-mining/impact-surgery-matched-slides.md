@@ -1,4 +1,4 @@
-# Impact-surgery-matched-Slides
+# Impact-surgery-matched-Slides (temp sheet)
 
 <b>Path:</b> [`"cdsi_prod.pathology_data_mining.impact_surgery_matched_slides"`](https://msk-mode-prod.cloud.databricks.com/explore/data/cdsi_prod/pathology_data_mining/impact_surgery_matched_slides) <br/>
 <b>Table Type:</b> `contains live datasets in lineage` <br/>
@@ -10,7 +10,7 @@
 
 <b>Summary Statistics:</b>
 
-Total number of unique patients: 71,607 <br/>
+Total number of unique patients: 76,604 <br/>
 Total number of IMPACT samples: 82,389 <br/>
 Total number of whole slide images (H&E and IHC - see Notes section): 976,440 <br/>
 Total number of whole slide images in PDM inventory (H&E and IHC - see Notes section): 571,191 <br/>
@@ -85,11 +85,23 @@ cvr_tmb_tt_cohort_percentile |  |  |  |  |
 
 2. The IMPACT samples have been filtered to include only solid tumors, using SAMPLE_CLASS = 'Tumor' (100,505 patients) AND GENE_PANEL = ['IMPACT341', 'IMPACT410', 'IMPACT505', 'IMPACT468'] (83,580 patients)
 
-3. <b>Data attrition:</b> We start with 502,266 patients from the Hobbit table for whome we have ananymized slides, and 104,440 patients in the IMPACT table. The integrating Pathology Reports table from the CDM team helps to bring these two tables together and it has 110,636 patients. Of these 110,636 patients, 83,084 patients are found to intersect with the patients in the Hobbit table. The IMPACT table after filtering for solid tumor assays, contains 83,568 patients, down from 104,440 patients. The intersection of the 83,084 patients from the Hobbit table that overlaps with the Pathology Reports table, and the 83,568 patients with solid tumor samples in the IMPACT table finally yields <b>76,604 IMPACT patients</b> that have at least one matching slide out of 104,440 IMPACT patients.
+3. <b>Data attrition:</b>
+We start with 502,266 patients from the Hobbit table for whome we have ananymized slides, and 104,440 patients in the IMPACT table. The integrating Pathology Reports table from the CDM team helps to bring these two tables together and it has 110,636 patients. Of these 110,636 patients, 83,084 patients are found to intersect with the patients in the Hobbit table. The IMPACT table after filtering for solid tumor assays, contains 83,568 patients, down from 104,440 patients. The intersection of the 83,084 patients from the Hobbit table that overlaps with the Pathology Reports table, and the 83,568 patients with solid tumor samples in the IMPACT table finally yields <b>76,604 IMPACT patients</b> that have at least one matching slide out of 104,440 IMPACT patients.
 
-4. Not all of the slides in HoBBIT can be used for research. In practice, roughly 1% of requested slides contain PHI on the slide itself and thus cannot be de-identified for research use. This cannot be determined via HoBBIT, and is only determined during data transfer.
+```
+Hobbit table #patients = 502,266 
+IMPACT table #patients = 104,440
+Pathology reports #patients = 110,636
 
-5. This table is missing some mutation data that needs to be brought in from another IMPACT table. For example, 
+Hobbit table + pathology reports #patients = 83,084 
+IMPACT table solid tumor assays #patients = 83,568
+
+Hobbit table + pathology reports + IMPACT table solid tumor assays #patients = 76,604
+```
+
+7. Not all of the slides in HoBBIT can be used for research. In practice, roughly 1% of requested slides contain PHI on the slide itself and thus cannot be de-identified for research use. This cannot be determined via HoBBIT, and is only determined during data transfer.
+
+8. This table is missing some mutation data that needs to be brought in from another IMPACT table. For example, 
     `ONCOGENIC_MUTATIONS,`
     `#ONCOGENIC_MUTATIONS`,
     `RESISTANCE_MUTATIONS`,
@@ -99,7 +111,9 @@ cvr_tmb_tt_cohort_percentile |  |  |  |  |
     `#MUTATIONS_WITH_DIAGNOSTIC_IMPLICATIONS`,
     `#MUTATIONS_WITH_PROGNOSTIC_IMPLICATIONS` 
 
-6. Slides may be H&E (count = 673,569) or IHC (COUNT = 120,600) as determined by the fields IS_HNE and IS_IHC. There are another 182,271 slides that are marked as neither H&E or IHC. These are slides that have been submitted from external sources outside of MSK and typically have 'SLIDES SUBMITTED' as the `stain_name` designation. The actual stain type may be derived computationally however. 
+9. Slides may be H&E (count = 673,569) or IHC (COUNT = 120,600) as determined by the fields IS_HNE and IS_IHC. There are another 182,271 slides that are marked as neither H&E or IHC. These are slides that have been submitted from external sources outside of MSK and typically have 'SLIDES SUBMITTED' as the `stain_name` designation. The actual stain type may be derived computationally however.
+
+10. Whole slide images may be created from tissue that is extracted from multiple sites in the body during surgery. But the IMPACT sample(s) may belong to one or a small subset of these sites. It is important to match the sample to the site and not just to surgery event to ensure the sample(s) is(/are) coming fomr the same site of origin. It turns out that this matching does not cause much attrition for matching images to IMPACT samples. The unique patient count with site/part matching is 76,458
 
 
 
