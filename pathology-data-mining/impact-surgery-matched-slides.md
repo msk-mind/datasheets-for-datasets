@@ -113,7 +113,7 @@ Hobbit table + pathology reports + IMPACT table solid tumor assays #patients = 7
 
 9. Slides may be H&E (count = 673,569) or IHC (COUNT = 120,600) as determined by the fields IS_HNE and IS_IHC. There are another 182,271 slides that are marked as neither H&E or IHC. These are slides that have been submitted from external sources outside of MSK and typically have 'SLIDES SUBMITTED' as the `stain_name` designation. The actual stain type may be derived computationally however.
 
-10. Whole slide images may be created from tissue that is extracted from multiple sites in the body during surgery. But the IMPACT sample(s) may belong to one or a small subset of these sites. It is important to match the sample to the site and not just to surgery event to ensure the sample(s) is(/are) coming fomr the same site of origin. It turns out that this matching does not cause much attrition for matching images to IMPACT samples. The unique patient count with site/part matching is 76,458
+10. Whole slide images may be created from tissue that is extracted from multiple sites in the body during surgery. But the IMPACT sample(s) may belong to one or a small subset of these sites. It is important to match the sample and the image to the site and not just to surgery event to ensure the sample(s) and images are coming from the same site of origin. It turns out that this matching does not cause much patient count attrition for matching images to IMPACT samples. The unique patient count with site/part matching is 76,458. But image count drops to 697,498 from 976,440.
 
 
 
