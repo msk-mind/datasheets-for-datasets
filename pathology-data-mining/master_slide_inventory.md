@@ -1,3 +1,6 @@
+
+**NOTE: This datasheet/dataset is deprecated please use `slide_inventory.md`**
+
 # Master Slide Inventory
 
 Last updated 2024-07-08
