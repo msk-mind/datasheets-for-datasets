@@ -37,7 +37,7 @@ The Mussel parameters used to do all this are summarized below.
 |---|---|
 | filter model type | ctranspath |
 | filter threshold | 0.75 |
-| filter tiles | false |
+| filter tiles | true |
 | patch size | 224 |
 | mpp | 0.5 |
 | segment threshold | 15 |
