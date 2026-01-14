@@ -89,3 +89,4 @@ Primary key: `image_id`
 
 - This table is updated regularly as new slides are added to storage systems
 - `last_modified` dates reflect when files were written or updated, not when slides were originally scanned
+- TODO: make a list of type of slide buckets we have, like reef-slides etc. and describe the motivation for each
