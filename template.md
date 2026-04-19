@@ -50,7 +50,7 @@ For example, a mention of a field that contains empty strings or null values may
 
 Examples of consistency checks that one can run in order to generate meaningful notes. 
 
-<b>Primary key constraint</b>. Primary key constraint for either a single column, or a group of columns taken together. 
+<b>Primary key constraint guarantee</b>. Primary key constraint for either a single column, or a group of columns taken together. 
 
 <b>one-one mapping guarantee</b>. To test for this guarantee, it is sufficient to test each id for uniquenes. i.e. there are no duplicates. For example, if ID1<-->ID2 is expected to have a one-one mapping, then all counts should be one for the following two queries. If there are violations to this guarantee, then it should be reported. 
   ```
