@@ -2,9 +2,9 @@
 
 <b>Path:</b> cdsi_eng_phi.pdm_base_tables_dev.case_breakdown_cleaned_v2 <br/>
 <b>Table Type:</b> Live  <br/>
-<b>Date created or last updated:</b> 04/22/0226 OR <DATE_LAST_UPDATED_FOR_LIVE_TABLES> <br/>
+<b>Date created or last updated:</b> 04/22/0226  <br/>
 
-<b>Lineage (See in databricks): </b>
+<b>Lineage: See table overview and lineage in Databricks->Catalog section, Overview tab for SQL definition of the table, and lineage tab for lineage.</b>
 
 
 <b>Summary Statistics:</b>

@@ -9,12 +9,10 @@
 <b>Summary Statistics:</b>
 
 Total rows: 176,114<br/>
-sample_ids: 40,696
-block_ids: 40,674
-image_ids: 175,970
-block_id, m_accession_number, sample_id, image_id: 176,112
-
-
+sample_ids: 40,696<br/>
+block_ids: 40,674<br/>
+image_ids: 175,970<br/>
+block_id, m_accession_number, sample_id, image_id: 176,112<br/>
 
 
 # Table of contents

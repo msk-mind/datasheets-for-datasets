@@ -4,7 +4,7 @@
 <b>Table Type:</b> Live <br/>
 <b>Date created or last updated:</b> 04/22/0226 <br/>
 
-<b>Lineage (See in databricks): </b>
+<b>Lineage: See table overview and lineage in Databricks->Catalog section, Overview tab for SQL definition of the table, and lineage tab for lineage.</b>
 
 <b>Summary Statistics:</b>
 

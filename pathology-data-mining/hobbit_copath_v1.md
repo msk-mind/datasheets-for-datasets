@@ -11,7 +11,7 @@
 
 Total rows: 329,234 <br/>
 accession_number, m_accession_number pairs: 67,989 <br/>
-block_ids: 62,518
+block_ids: 62,518<br/>
 block_id, m_accession_number, image_id: 329,230 <br/>
 
 

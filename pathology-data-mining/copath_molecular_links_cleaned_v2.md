@@ -10,9 +10,9 @@
 
 Total rows: 127,283 <br/>
 Total accession_number, m_accession_number pairs: 117,239 <br/>
-rows with has_external_s_number = false: 86,276
-rows with has_external_s_number = true: 40,989
-rows with has_external_s_number = false and non-null block_ids: 75,463 (87% of MSK cases have block_id)
+rows with has_external_s_number = false: 86,276<br/>
+rows with has_external_s_number = true: 40,989<br/>
+rows with has_external_s_number = false and non-null block_ids: 75,463 (87% of MSK cases have block_id)<br/>
 Total block_ids: 69,477 <br/>
 
 
