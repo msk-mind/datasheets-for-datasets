@@ -1,6 +1,6 @@
 # Table Name 
 
-<b>Path:</b> <DREMIO_PATH_TO_TABLE> <br/>
+<b>Path:</b> <PATH_TO_TABLE_IN_DATABRICKS> <br/>
 <b>Table Type:</b> Live OR Static <br/>
 <b>Date created or last updated:</b> <CREATION_DATE_FOR_STATIC_TABLES> OR <DATE_LAST_UPDATED_FOR_LIVE_TABLES> <br/>
 
