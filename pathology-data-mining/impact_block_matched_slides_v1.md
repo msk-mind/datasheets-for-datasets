@@ -4,7 +4,7 @@
 <b>Table Type:</b> Live <br/>
 <b>Date created or last updated:</b> 04/22/0226 <br/>
 
-<b>Lineage (See in databricks): </b>
+<b>Lineage: See table overview and lineage in Databricks->Catalog section, Overview tab for SQL definition of the table, and lineage tab for lineage.</b>
 
 <b>Summary Statistics:</b>
 
@@ -24,7 +24,7 @@ block_id, m_accession_number, sample_id, image_id: 176,112
 
 ## Description <a name="description"></a>
 
-Matches slides (H&E and IHC) to IMPACT samples at the block level. 
+(H&E and IHC) Slides matched to IMPACT samples at the block level. 
 
 ### Vocabulary <a name="vocab"></a> 
 
@@ -33,6 +33,8 @@ Primary key: (block_id, m_accession_number, sample_id, image_id)
 ## Notes <a name="notes"></a>
 
 The table generally contains H&E and IHC images but it is hard to tell which stain was used for all images because the 'stain_group' column does not clearly specify the stain for all image_ids. 
+
+While about 87% of MSK records (has_external_s_number = false) in the copath table have block_ids, the block_id coverage for IMPACT is rather low, at about 50% of sample_ids have block_ids if IMPACT had 80,000 samples in the summer of 2024. <b>The reason for this is inclear. </b>
 
 <b>Assertions:<b/><br/>
 

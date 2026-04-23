@@ -4,7 +4,7 @@
 <b>Table Type:</b> Live <br/>
 <b>Date created or last updated:</b> 04/22/2026 <br/>
 
-<b>Lineage (See in databricks): </b>
+<b>Lineage: See table overview and lineage in Databricks->Catalog section, Overview tab for SQL definition of the table, and lineage tab for lineage.</b>
 
 
 <b>Summary Statistics:</b>
@@ -22,7 +22,18 @@ block_id, m_accession_number, image_id: 329,230 <br/>
 
 ## Description <a name="description"></a>
 
-This table joins the Hobbit casebreakdown table with the Copath table in order to map S-accessions (surgical) to M-accessions (molecular) and to also increase the number of valid block_ids. The block_id count is increased by taking the union of valid block_ids from both tables. 
+This table joins the Hobbit casebreakdown table with the Copath table in order to include the map from S-accessions (surgical) to M-accessions (molecular) in the case_breakdown table. This join was also done to possibly increase the number of valid block_ids in the casebreakdown table. 
+
+The approach taken (See SQL definition on Databricks) to increase the overall block_id count was to 
+
+1. first separate out casebreakdown records that have block_ids from those that don't have block_ids. <br/><br/>
+
+The records that don't have block_ids in casebreakdown table, were then joined with the records in the copath table in two separate ways. <br/><br/>
+
+2. By (S and M) accession number in casebreakdown to (S and M) accession number in copath. <br/>
+3. By (M) accession number in casebreakdown to M accession number in copath. <br/><br/>
+
+The union of these three sets of records is then taken to maximize block_id coverage in the casebreakdown table. It can be seen from commenting out the first and third unions that the block_ids obtained from the copath table largely overlap with the block_ids already present in the case_breakdown table. Therefore, little is gained from the join operation. 
 
 ### Vocabulary <a name="vocab"></a>
 
