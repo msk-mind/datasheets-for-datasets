@@ -1,5 +1,5 @@
 import { joinSession } from "@github/copilot-sdk/extension";
-import { readFileSync, readdirSync, statSync } from "node:fs";
+import { readFileSync, readdirSync, statSync, existsSync } from "node:fs";
 import { homedir } from "node:os";
 import { join, dirname, relative } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -21,10 +21,14 @@ const DEFAULT_WAREHOUSE_ID = "0b49b7d78734ad5c"; // CDSI Warehouse
 const DEFAULT_CATALOG = "cdsi_eng_phi";
 const DEFAULT_SCHEMA = "pdm_base_tables";
 
-// Repo root is two levels up from .github/extensions/databricks/
-const REPO_ROOT = join(dirname(fileURLToPath(import.meta.url)), "../../..");
+// Repo root: env var override > relative path from extension location (repo-scoped) > hardcoded fallback
+const _extDir = dirname(fileURLToPath(import.meta.url));
+const _relRoot = join(_extDir, "../../..");
+const REPO_ROOT = process.env.DATASHEETS_REPO
+    || (existsSync(join(_relRoot, ".github")) ? _relRoot : "/gpfs/mskmind_ess/limr/repos/datasheets-for-datasets");
 // Local checkout of the pipelines repo (SQL source of truth)
-const PIPELINES_REPO = "/gpfs/cdsi_ess/home/limr/ess/repos/pdm_databricks_pipelines";
+const PIPELINES_REPO = process.env.PDM_PIPELINES_REPO
+    || "/gpfs/cdsi_ess/home/limr/ess/repos/pdm_databricks_pipelines";
 
 // ---------------------------------------------------------------------------
 // Datasheet index — built once at startup from the repo's markdown files
