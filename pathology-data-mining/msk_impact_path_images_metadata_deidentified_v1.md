@@ -1,4 +1,4 @@
-# Table Name 
+# msk_impact_path_images_metadata_deidentified_v1
 
 <b>Path:</b> cdsi_eng_phi.pdm_base_tables_dev.impact_block_matched_slides_v1 <br/>
 <b>Table Type:</b> Live <br/>
@@ -20,7 +20,7 @@ image_ids: 3,116,164
 
 ## Description <a name="description"></a>
 
-All (H&E and IHC) Slides for IMPACT patients across all timepoints with only deidentified ids and deidentified dates. 
+All (H&E and IHC) Slides for IMPACT patients across all patient timepoints with only deidentified ids and deidentified dates. 
 
 ### Vocabulary <a name="vocab"></a> 
 
