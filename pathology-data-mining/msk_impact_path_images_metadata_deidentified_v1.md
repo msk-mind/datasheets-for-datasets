@@ -1,6 +1,6 @@
 # msk_impact_path_images_metadata_deidentified_v1
 
-<b>Path:</b> 
+<b>Path:</b> <br/>
 cdsi_eng_phi.pdm_base_tables_dev.impact_block_matched_slides_v1 <br/>
 |_ cdsi_res_deid.pdm_base_tables.msk_impact_path_images_metadata_deidentified_v1 <br/>
 <b>Table Type:</b> Live <br/>
