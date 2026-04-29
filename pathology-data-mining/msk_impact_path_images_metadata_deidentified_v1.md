@@ -30,5 +30,5 @@ Primary key: img_hid
 
 ## Notes <a name="notes"></a>
 
-The table may be used to showcase all images associated with an IMPACT patients one a timeline. 
+The table may be used to showcase all images associated with an IMPACT patient on a timeline. 
 
