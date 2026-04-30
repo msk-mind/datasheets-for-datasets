@@ -2,7 +2,7 @@
 
 <b>Path:</b> cdsi_eng_phi.pdm_base_tables_dev.copath_molecular_links_cleaned_v2 <br/>
 <b>Table Type:</b> Static <br/>
-<b>Date created or last updated:</b> 04/22/0226 <br/>
+<b>Date created or last updated:</b> 04/22/2026 (updated: 4/29/2026) <br/>
 
 <b>Lineage: See table overview and lineage in Databricks->Catalog section, Overview tab for SQL definition of the table, and lineage tab for lineage.</b>
 
@@ -37,6 +37,20 @@ Primary key: block_id
 
 ## Notes <a name="notes"></a>
 
+1. Coverage of records belonging to just S-accessions:
+
+  105,459 total rows with S-accessions \
+   69,368 non null block ids (largely msk cases except 41) \
+      335 null block ids (msk cases) \
+   35,714 null block ids (external cases) 
+
+  This implies that almost all MSK cases have block ids, while external cases don't. 
+
+2. When comparing overlap with IMPACT taking src_idbdw_prod.dv.pathology_dmp_results_xml as a reference table,
+
+  81,252 of 127,171 (~64%) m-accesions overlap with IMPACT. This implies that not all copath M-accessions belong to the IMPACT cohort. 
+
 <b>Assertions:</b> <br/>
 
 1. All block ids are fully formed or null. i.e. they contain S-number/part_number-block_label.
+
