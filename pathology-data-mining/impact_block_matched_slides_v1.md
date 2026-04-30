@@ -32,7 +32,7 @@ Primary key: (block_id, m_accession_number, sample_id, image_id)
 
 The table generally contains H&E and IHC images but it is hard to tell which stain was used for all images because the 'stain_group' column does not clearly specify the stain for all image_ids. 
 
-While over 99% of MSK records (has_external_s_number = false) with S-accessions in the copath table have block_ids (see [copath_molecular_links_cleaned_v2](copath_molecular_links_cleaned_v2.md) ), the block_id coverage for IMPACT is rather low, at about 50% of sample_ids have block_ids if IMPACT had 80,000 samples in the summer of 2024. <b>The reason for this is partly because only 64% copath m-accession records (see [copath_molecular_links_cleaned_v2](copath_molecular_links_cleaned_v2.md) ) overlap with the IMPACT cohort. There is some other attrition that still needs to be accounted for. </b>
+While over 99% of MSK records (has_external_s_number = false) with S-accessions in the copath table have block_ids (see [copath_molecular_links_cleaned_v2](copath_molecular_links_cleaned_v2.md) ), the block_id coverage for IMPACT is rather low, at about 50% of sample_ids have block_ids if IMPACT had 80,000 samples in the summer of 2024. <b>The reason for this is partly because only 66% copath M-accession records that map to S-accessions (see [copath_molecular_links_cleaned_v2](copath_molecular_links_cleaned_v2.md) ) overlap with the IMPACT cohort. There is some other attrition that still needs to be accounted for. </b>
 
 <b>Assertions:<b/><br/>
 
