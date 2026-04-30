@@ -48,7 +48,8 @@ Primary key: block_id
 
 2. When comparing overlap with IMPACT taking src_idbdw_prod.dv.pathology_dmp_results_xml as a reference table,
 
-  81,252 of 127,171 (~64%) m-accesions overlap with IMPACT. This implies that not all copath M-accessions belong to the IMPACT cohort. 
+  69,432 of 105,360 (~66%) M-accesions that map to S-accessions overlap with IMPACT. This implies that not all copath M-accessions belong to the IMPACT cohort. 
+
 
 <b>Assertions:</b> <br/>
 
