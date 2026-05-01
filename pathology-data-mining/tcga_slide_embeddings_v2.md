@@ -106,8 +106,8 @@ Embeddings are stored in [WebDataset](https://github.com/webdataset/webdataset) 
 | file_size | File size of the SVS file in bytes | Continuous | integer | bytes |
 | model | Feature extraction model | Categorical | string | `hoptimus1` (patch encoder), `titan_slide` (slide-level encoder) |
 | status | Feature extraction status | Categorical | string | `done` = embeddings available in WDS; `pending` = not yet extracted |
-| pt_path | S3 path to the WDS tar shard containing this slide's embeddings | ID | string | S3 URI, e.g. `s3://reef-tcga-v2-0/wds/hoptimus1/TCGA-BRCA/000001.tar` |
-| h5_path | S3 path to the WDS tar shard containing this slide's patch coordinates | ID | string | Same shard as pt_path for WDS-stored slides |
+| wds_path | S3 path to the WDS tar shard containing this slide's embeddings | ID | string | S3 URI, e.g. `s3://reef-tcga-v2-0/wds/hoptimus1/TCGA-BRCA/000001.tar` |
+| wds_index_path | S3 path to the model-level WDS index JSON (`slide_id → shard_file` mapping) | ID | string | S3 URI, e.g. `s3://reef-tcga-v2-0/wds/hoptimus1/wds_index.json` |
 | last_updated | Timestamp when this row was last updated | Continuous | string | ISO 8601, e.g. `2026-05-01T18:36:00` |
 | md5sum | MD5 checksum of the SVS file | ID | string | hex string |
 | updated_datetime | GDC last-modified datetime for this file | Continuous | string | ISO 8601 |
@@ -138,7 +138,9 @@ Embeddings are stored in [WebDataset](https://github.com/webdataset/webdataset) 
 
 1. **Primary key** is (`file_id`, `model`). Each slide appears once per model (currently `hoptimus1` and `titan_slide`), so every `file_id` has exactly 2 rows.
 
-2. **`pt_path` / `h5_path` are WDS shard paths, not per-slide file paths.** Multiple slides are packed into a single `.tar` shard. To read a specific slide's tensor, use the WDS API or the `wds_manifest.csv` in the dispatcher output directory to identify which shard contains which slide.
+2. **`wds_path` is a WDS shard path, not a per-slide file path.** Multiple slides are packed into a single `.tar` shard. To read a specific slide's tensor, use the WDS API with the `slide_id` as the sample key (files inside the shard are named `{slide_id}.features.npy` and `{slide_id}.coords.npy`), or use `wds_index_path` to download the full index for batch lookups.
+
+3. **`wds_index_path`** points to `wds_index.json` on S3 — a JSON file mapping every `slide_id` to its shard file for that model. Load it once to efficiently locate any slide without scanning shards.
 
 3. **S3 endpoint:** use `http://pmindecs.mskcc.org:9020` for on-premises S3 access. See usage examples for [AWS CLI](https://gist.github.com/raylim/2039b01cbb5f6682e1f115106aee65b6), [python](https://gist.github.com/raylim/ceb4ea7d8db8ff0c27b8d2322a1f9bd9).
 
