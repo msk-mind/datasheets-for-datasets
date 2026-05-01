@@ -109,6 +109,7 @@ Embeddings are stored in [WebDataset](https://github.com/webdataset/webdataset) 
 | model | Feature extraction model | Categorical | string | `hoptimus1` — patch-level embeddings from [H-Optimus-1](https://huggingface.co/bioptimus/H-optimus-1); `titan_slide` — slide-level embedding from [TITAN](https://github.com/mahmoodlab/TITAN) |
 | status | Feature extraction status | Categorical | string | `done` (23,640) = embeddings in WDS; `failed` (43) = permanently excluded; `pending` (13) = not yet extracted |
 | failure_reason | Human-readable reason for failure; blank when `status ≠ failed` | Categorical | string | `Empty SVS file (~480 KB) - known corrupt GDC file, produces 0 tissue tiles on tessellation` (23 titan_slide rows); `Failed after max retries` (20 rows across both models) |
+| native_mpp | Scanner resolution in µm per pixel, read from the SVS TIFF header (Aperio `MPP` tag or `XResolution`); same value applies across both models for a given slide | Continuous | float | 0.25 (9,851 slides = 83.4%), 0.50 (1,065 = 9.0%), 0.23 (748 = 6.3%), 0.49 (52), 0.19 (16), 0.16 (8), 0.46–0.47 (8), 0.11–0.12 (3); null for 99 slides whose SVS header lacks MPP metadata |
 | wds_path | S3 path to the WDS tar shard containing this slide's embeddings | ID | string | S3 URI, e.g. `s3://reef-tcga-v2-0/wds/hoptimus1/TCGA-BRCA/000001.tar`; blank when `status ≠ done` |
 | wds_index_path | S3 path to the model-level WDS index JSON (`slide_id → shard_file` mapping) | ID | string | e.g. `s3://reef-tcga-v2-0/wds/hoptimus1/wds_index.json`; blank when `status ≠ done` |
 | last_updated | Timestamp when this row was last written by the dispatcher | Continuous | string | ISO 8601, e.g. `2026-05-01T18:36:00` |
@@ -150,6 +151,8 @@ Embeddings are stored in [WebDataset](https://github.com/webdataset/webdataset) 
 5. **Only diagnostic slides are included** (`slide_type` starts with `DX`). Tissue section (TS), blood/bone marrow (BS), and other slide types from the GDC inventory are excluded.
 
 6. **`titan_slide` embeddings** are slide-level aggregations produced by the [TITAN](https://github.com/mahmoodlab/TITAN) encoder, which takes the set of hoptimus1 patch embeddings as input. A slide must have hoptimus1 embeddings before titan_slide can be computed.
+
+7. **`native_mpp` was recovered retroactively** from SVS TIFF headers (Aperio `ImageDescription` tag) via two HTTP range requests per file — no full SVS download required. For slides already on ECS S3, headers were read directly; for the 408 slides not yet on ECS S3, headers were fetched from GDC. The 99 null values are slides whose SVS TIFF header contains neither an Aperio MPP tag nor a usable `XResolution`/`ResolutionUnit` pair. Note that **`native_mpp` does not distinguish real 0.50 µm/px scans from the Mussel default fallback (0.5)** — if a scanner's resolution metadata was absent or unreadable at tessellation time, Mussel used 0.5 as the fallback value. For the 99 null slides, the tessellation used the 0.5 default.
 
 7. **Known failures — 33 slides permanently excluded (`status = 'failed'`):**
 
