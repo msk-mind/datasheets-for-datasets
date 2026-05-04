@@ -2,7 +2,7 @@
 
 <b>Path:</b> [`cdsi_prod.pathology_data_mining.tcga_slide_embeddings_v2`](https://msk-mode-prod.cloud.databricks.com/explore/data/cdsi_prod/pathology_data_mining/tcga_slide_embeddings_v2) <br/>
 <b>Table Type:</b> Live <br/>
-<b>Date created or last updated:</b> 2026-05-01 <br/>
+<b>Date created or last updated:</b> 2026-05-04 <br/>
 
 <b>Lineage:</b>
 
@@ -21,9 +21,9 @@ TCGA projects: **32** <br/>
 | Model | Done | Failed | Pending |
 |---|---|---|---|
 | hoptimus1 | 11,838 | 10 | 0 |
-| titan_slide | 11,802 | 33 | 13 |
+| titan_slide | 11,802 | 46 | 0 |
 
-**33 slides permanently excluded** (0.28% of 11,848 DX slides) — see [Notes](#notes) for details.
+**46 slides permanently excluded** (0.39% of 11,848 DX slides) — see [Notes](#notes) for details.
 
 <details>
 <summary>Slides per project (hoptimus1 done)</summary>
@@ -107,8 +107,8 @@ Embeddings are stored in [WebDataset](https://github.com/webdataset/webdataset) 
 | slide_type | GDC slide portion type | Categorical | string | `DX1` (9,774 = 82.6%), `DX2` (884 = 7.5%), `DX3` (425), `DX4` (298), `DX5` (225), `DX6`–`DX17` (<80 each) |
 | file_size | SVS file size in bytes; range 0–5.12 GB, mean 1.11 GB | Continuous | integer | bytes |
 | model | Feature extraction model | Categorical | string | `hoptimus1` — patch-level embeddings from [H-Optimus-1](https://huggingface.co/bioptimus/H-optimus-1); `titan_slide` — slide-level embedding from [TITAN](https://github.com/mahmoodlab/TITAN) |
-| status | Feature extraction status | Categorical | string | `done` (23,640) = embeddings in WDS; `failed` (43) = permanently excluded; `pending` (13) = not yet extracted |
-| failure_reason | Human-readable reason for failure; blank when `status ≠ failed` | Categorical | string | `Empty SVS file (~480 KB) - known corrupt GDC file, produces 0 tissue tiles on tessellation` (23 titan_slide rows); `Failed after max retries` (20 rows across both models) |
+| status | Feature extraction status | Categorical | string | `done` (23,640) = embeddings in WDS; `failed` (56) = permanently excluded; `pending` (0) = not yet extracted |
+| failure_reason | Human-readable reason for failure; blank when `status ≠ failed` | Categorical | string | `Empty SVS file (~480 KB) - known corrupt GDC file, produces 0 tissue tiles on tessellation` (23 titan_slide rows); `Failed after max retries` (20 rows across both models); `zero-output: ... produced 0 patches in 4 attempts` (13 titan_slide rows) |
 | native_mpp | Scanner resolution in µm per pixel, read from the SVS TIFF header (Aperio `MPP` tag or `XResolution`); same value applies across both models for a given slide | Continuous | float | 0.25 (9,851 slides = 83.4%), 0.50 (1,065 = 9.0%), 0.23 (748 = 6.3%), 0.49 (52), 0.19 (16), 0.16 (8), 0.46–0.47 (8), 0.11–0.12 (3); null for 99 slides whose SVS header lacks MPP metadata |
 | wds_path | S3 path to the WDS tar shard containing this slide's embeddings | ID | string | S3 URI, e.g. `s3://reef-tcga-v2-0/wds/hoptimus1/TCGA-BRCA/000001.tar`; blank when `status ≠ done` |
 | wds_index_path | S3 path to the model-level WDS index JSON (`slide_id → shard_file` mapping) | ID | string | e.g. `s3://reef-tcga-v2-0/wds/hoptimus1/wds_index.json`; blank when `status ≠ done` |
@@ -154,7 +154,7 @@ Embeddings are stored in [WebDataset](https://github.com/webdataset/webdataset) 
 
 7. **`native_mpp` was recovered retroactively** from SVS TIFF headers (Aperio `ImageDescription` tag) via two HTTP range requests per file — no full SVS download required. For slides already on ECS S3, headers were read directly; for the 408 slides not yet on ECS S3, headers were fetched from GDC. The 99 null values are slides whose SVS TIFF header contains neither an Aperio MPP tag nor a usable `XResolution`/`ResolutionUnit` pair. Note that **`native_mpp` does not distinguish real 0.50 µm/px scans from the Mussel default fallback (0.5)** — if a scanner's resolution metadata was absent or unreadable at tessellation time, Mussel used 0.5 as the fallback value. For the 99 null slides, the tessellation used the 0.5 default.
 
-7. **Known failures — 33 slides permanently excluded (`status = 'failed'`):**
+7. **Known failures — 46 slides permanently excluded (`status = 'failed'`):**
 
    **Group A — 23 TCGA-STAD slides (TCGA-BR-\* barcodes): `titan_slide` only (hoptimus1 succeeded)**
    These slides are stored as ~480 KB SVS files on GDC — far smaller than a real gastric WSI (typically 100 MB–3 GB). When tessellated, they produce zero tissue tiles. hoptimus1 patch extraction technically completes (producing an empty or minimal feature set), but the TITAN slide encoder cannot aggregate zero patches and produces no output. All 23 carry the failure reason: *"Empty SVS file (~480 KB) — known corrupt GDC file, produces 0 tissue tiles on tessellation"*. These files exist on GDC but are likely blank/thumbnail-only SVS artifacts from the TCGA-Brazil gastric cohort.
@@ -176,7 +176,25 @@ Embeddings are stored in [WebDataset](https://github.com/webdataset/webdataset) 
 
    These slides failed the maximum number of dispatcher retries (10×) across both models. The 4 large KIRP slides (1.6–3.7 GB) are likely GPU out-of-memory errors; the remaining 6 are undetermined and may reflect corrupted SVS files or transient infrastructure failures.
 
-   **13 slides remain `pending`** (all `titan_slide`, hoptimus1 done): these are still being actively retried by the dispatcher.
+   **Group C — 13 slides across 9 projects: `titan_slide` only (hoptimus1 succeeded)**
+
+   | slide_id | project | file_size | failure pattern |
+   |---|---|---|---|
+   | TCGA-05-4425-01Z-00-DX1 | TCGA-LUAD | 6 MB | likely non-tissue overview image |
+   | TCGA-CG-5725-01Z-00-DX1 | TCGA-STAD | 6 MB | likely non-tissue overview image |
+   | TCGA-DQ-5630-01Z-00-DX1 | TCGA-HNSC | 10 MB | 0 tissue patches |
+   | TCGA-HT-7873-01Z-00-DX2 | TCGA-LGG | 30 MB | 0 tissue patches |
+   | TCGA-06-1802-01Z-00-DX1 | TCGA-GBM | 48 MB | 0 tissue patches |
+   | TCGA-PN-A8MA-01A-01-DX1 | TCGA-CESC | 84 MB | 0 tissue patches |
+   | TCGA-FF-8062-01Z-00-DX1 | TCGA-DLBC | 108 MB | task error (exit 1, ignored) then 0 patches |
+   | TCGA-HT-7884-01Z-00-DX1 | TCGA-LGG | 118 MB | 0 tissue patches |
+   | TCGA-19-0963-01Z-00-DX1 | TCGA-GBM | 158 MB | 0 tissue patches |
+   | TCGA-TM-A7CF-01Z-00-DX1 | TCGA-LGG | 256 MB | 0 tissue patches |
+   | TCGA-K7-A5RF-01Z-00-DX1 | TCGA-LIHC | 276 MB | 0 tissue patches |
+   | TCGA-R5-A7ZR-01Z-00-DX1 | TCGA-STAD | 440 MB | 0 tissue patches |
+   | TCGA-3H-AB3X-01Z-00-DX1 | TCGA-MESO | 711 MB | 0 tissue patches |
+
+   hoptimus1 patch embeddings were successfully extracted for all 13 slides and are present in WDS. However, the `TESSELLATE_FEATURIZE_BATCH` step consistently produced zero output when run with the TITAN/conch1_5 model stack, across 4 independent dispatch attempts. The two 6 MB files are almost certainly non-tissue overview images masquerading as DX slides. The remaining 11 likely have tissue presentations (e.g. very sparse cellularity, unusual staining, or scan artifacts) that produce zero valid patches under the `tcga` segmentation configuration at 0.5 µm/px.
 
 8. **`ajcc_pathologic_stage` and `tumor_grade` are frequently blank** (40% and 63% missing respectively). Brain tumors (GBM, LGG), sarcomas, and several other disease types do not use AJCC staging or WHO grading in GDC annotations.
 
