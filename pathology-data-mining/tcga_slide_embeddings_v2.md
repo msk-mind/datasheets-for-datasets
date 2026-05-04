@@ -2,7 +2,7 @@
 
 <b>Path:</b> [`cdsi_prod.pathology_data_mining.tcga_slide_embeddings_v2`](https://msk-mode-prod.cloud.databricks.com/explore/data/cdsi_prod/pathology_data_mining/tcga_slide_embeddings_v2) <br/>
 <b>Table Type:</b> Live <br/>
-<b>Date created or last updated:</b> 2026-05-04 <br/>
+<b>Date created or last updated:</b> 2026-05-05 <br/>
 
 <b>Lineage:</b>
 
@@ -18,12 +18,14 @@ Unique DX slides: **11,848** <br/>
 Unique patients (case_submitter_id): **9,743** <br/>
 TCGA projects: **32** <br/>
 
-| Model | Done | Failed | Pending |
+| Model | Done | Failed | Pending (re-dispatching) |
 |---|---|---|---|
-| hoptimus1 | 11,838 | 10 | 0 |
-| titan_slide | 11,802 | 46 | 0 |
+| hoptimus1 | 11,388 | 10 | 415 |
+| titan_slide | 11,388 | 46 | 415 |
 
 **46 slides permanently excluded** (0.39% of 11,848 DX slides) — see [Notes](#notes) for details.
+
+**415 slides re-queued** — these slides were previously extracted but their WDS shards were written to an incorrect S3 path (`wds/{model}/{model}/{project}/` instead of `wds/{model}/{project}/`) due to an old misconfiguration of `wds_dest` in the dispatcher. They are not accessible via `wds_index.json` and are being re-extracted. See [Notes](#notes) for details.
 
 <details>
 <summary>Slides per project (hoptimus1 done)</summary>
@@ -107,7 +109,7 @@ Embeddings are stored in [WebDataset](https://github.com/webdataset/webdataset) 
 | slide_type | GDC slide portion type | Categorical | string | `DX1` (9,774 = 82.6%), `DX2` (884 = 7.5%), `DX3` (425), `DX4` (298), `DX5` (225), `DX6`–`DX17` (<80 each) |
 | file_size | SVS file size in bytes; range 0–5.12 GB, mean 1.11 GB | Continuous | integer | bytes |
 | model | Feature extraction model | Categorical | string | `hoptimus1` — patch-level embeddings from [H-Optimus-1](https://huggingface.co/bioptimus/H-optimus-1); `titan_slide` — slide-level embedding from [TITAN](https://github.com/mahmoodlab/TITAN) |
-| status | Feature extraction status | Categorical | string | `done` (23,640) = embeddings in WDS; `failed` (56) = permanently excluded; `pending` (0) = not yet extracted |
+| status | Feature extraction status | Categorical | string | `done` (22,776) = embeddings in WDS; `failed` (56) = permanently excluded; `pending` (830) = being re-extracted (see Note 11) |
 | failure_reason | Human-readable reason for failure; blank when `status ≠ failed` | Categorical | string | `Empty SVS file (~480 KB) - known corrupt GDC file, produces 0 tissue tiles on tessellation` (23 titan_slide rows); `Failed after max retries` (20 rows across both models); `zero-output: ... produced 0 patches in 4 attempts` (13 titan_slide rows) |
 | native_mpp | Scanner resolution in µm per pixel, read from the SVS TIFF header (Aperio `MPP` tag or `XResolution`); same value applies across both models for a given slide | Continuous | float | 0.25 (9,851 slides = 83.4%), 0.50 (1,065 = 9.0%), 0.23 (748 = 6.3%), 0.49 (52), 0.19 (16), 0.16 (8), 0.46–0.47 (8), 0.11–0.12 (3); null for 99 slides whose SVS header lacks MPP metadata |
 | wds_path | S3 path to the WDS tar shard containing this slide's embeddings | ID | string | S3 URI, e.g. `s3://reef-tcga-v2-0/wds/hoptimus1/TCGA-BRCA/000001.tar`; blank when `status ≠ done` |
@@ -201,3 +203,5 @@ Embeddings are stored in [WebDataset](https://github.com/webdataset/webdataset) 
 9. **`percent_tumor_cells`, `percent_stromal_cells`, `percent_necrosis`, `percent_normal_cells` are 100% missing.** GDC does not populate these pathologist-estimated fields for the vast majority of TCGA cases. These columns are retained to match the GDC schema but should not be used.
 
 10. **Clinical metadata** (columns from `primary_site` onward) is sourced from the GDC API at the time of inventory download and reflects GDC annotations at that date. Fields may contain `not reported`, `Unknown`, or be blank where GDC has no value.
+
+11. **415 slides temporarily inaccessible (re-dispatching):** An earlier version of the dispatcher config set `wds_dest` to `s3://reef-tcga-v2-0/wds/hoptimus1` (with the model name included). The `_ShardWriter` in `append_wds.py` then appended the model name a second time when constructing shard paths, resulting in objects uploaded to `wds/{model}/{model}/{project}/` instead of `wds/{model}/{project}/`. When the config was corrected, the `wds_index.json` was rebuilt without those 415 slides, making them inaccessible. The 415 slides have been reset to `pending` and will be re-extracted at correct paths. The orphan shards at double-model paths remain in S3 but are not indexed; they will be cleaned up once re-extraction completes. Projects affected (top 5): TCGA-TGCT (263 slides, TCGA-2G barcodes), TCGA-THYM (38 slides, TCGA-XE barcodes), TCGA-PCPG (23 slides, TCGA-YU barcodes), TCGA-DLBC (12 slides, TCGA-UW barcodes), TCGA-MESO (8 slides, TCGA-ZM barcodes).
