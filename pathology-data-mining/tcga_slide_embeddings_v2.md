@@ -70,7 +70,8 @@ TCGA projects: **32** <br/>
 # Table of contents
 1. [Description](#description)
 2. [Vocabulary](#vocab)
-3. [Notes](#notes)
+3. [Downloading TCGA Slides](#downloading)
+4. [Notes](#notes)
 
 ## Description <a name="description"></a>
 
@@ -141,7 +142,103 @@ Embeddings are stored in [WebDataset](https://github.com/webdataset/webdataset) 
 | first_seen_date | Date this file first appeared in the GDC inventory (used by the dispatcher to detect new slides) | Continuous | string | ISO 8601 date, e.g. `2016-05-01` |
 | removed_date | Date this file was removed from the GDC active inventory, if applicable | Continuous | string | ISO 8601 date; blank for all currently active files |
 
-## Notes <a name="notes"></a>
+## Downloading TCGA Slides <a name="downloading"></a>
+
+TCGA slides are publicly accessible from the [GDC Data Portal](https://portal.gdc.cancer.gov/) without authentication. The recommended download tool is [gdc-client](https://gdc.cancer.gov/access-data/gdc-data-transfer-tool), which supports multi-connection parallel downloads and resumable transfers.
+
+### Install gdc-client
+
+```bash
+# Via conda (recommended)
+conda install -c bioconda gdc-client
+
+# Or download the pre-built binary from GDC:
+# https://gdc.cancer.gov/access-data/gdc-data-transfer-tool
+```
+
+### Download a single slide by file UUID
+
+Each row in `tcga_slide_embeddings_v2` has a `file_id` (GDC file UUID) and `file_name`. Use these to download the corresponding SVS directly:
+
+```bash
+# Downloads to ./<file_id>/<file_name>.svs
+gdc-client download --no-related-files -n 8 <file_id>
+
+# Example
+gdc-client download --no-related-files -n 8 0006ae80-5774-4199-bbd0-3c120ed547e6
+```
+
+`-n 8` opens 8 parallel connections per file — safe to increase for large slides on fast networks.
+
+### Download multiple slides from a manifest
+
+Build a GDC manifest from file UUIDs (one per line) and submit it in one call:
+
+```bash
+# Create a manifest file from the table
+# (GDC manifest format: id<TAB>filename<TAB>md5<TAB>size<TAB>state)
+python - <<'EOF'
+import databricks.connect as db
+df = spark.sql("""
+    SELECT file_id, file_name, md5sum, file_size
+    FROM cdsi_prod.pathology_data_mining.tcga_slide_embeddings_v2
+    WHERE model = 'hoptimus1' AND status = 'done'
+    LIMIT 100
+""")
+df.selectExpr(
+    "file_id as id",
+    "file_name as filename",
+    "md5sum as md5",
+    "CAST(file_size AS STRING) as size",
+    "'validated' as state"
+).toPandas().to_csv("gdc_manifest.txt", sep="\t", index=False)
+EOF
+
+gdc-client download --no-related-files -n 8 -m gdc_manifest.txt -d ./tcga-slides/
+```
+
+Alternatively, build a manifest interactively at [portal.gdc.cancer.gov](https://portal.gdc.cancer.gov/) by filtering cases/files and clicking **Download Manifest**.
+
+### Download via mussel-nf pipeline (automatic)
+
+The `mussel-nf` pipeline integrates GDC downloads directly. When a slide is not found on local disk or S3, it is automatically downloaded by the `DOWNLOAD_SLIDE` Nextflow process before feature extraction.
+
+**Configure in `nextflow.config` or a params YAML:**
+
+```groovy
+params {
+    download {
+        local_dir       = "/path/to/tcga-slides"   // root cache dir
+        gdc_client_bin  = "gdc-client"             // path to binary if not on PATH
+        gdc_token_file  = ""                       // leave empty for public TCGA data
+        n_connections   = 8                        // parallel connections per download
+        max_concurrent  = 16                       // max simultaneous DOWNLOAD_SLIDE tasks
+    }
+}
+```
+
+Slides are cached under `local_dir/<file_id>/<file_name>` and re-used across pipeline runs (`storeDir` semantics — a slide is never re-downloaded if the file already exists at that path).
+
+**Pass `needs_download = true` in the samples CSV** to route a slide through `DOWNLOAD_SLIDE`:
+
+```csv
+slide_id,slide_path,file_id,file_name,needs_download
+TCGA-BR-A44T-01Z-00-DX1,TCGA-BR-A44T-01Z-00-DX1.svs,<uuid>,TCGA-BR-A44T-01Z-00-DX1.<uuid>.svs,true
+```
+
+The `tcga_prepare_samples.py` script in `scripts/tcga/` generates this CSV automatically, resolving each slide's path (local → S3 → needs_download) and writing both a samples CSV and a sidecar `.meta.csv`.
+
+### Token (controlled-access data)
+
+All TCGA open-access data (including slides) does **not** require a token. If you are downloading controlled-access data from other GDC programs (e.g. TARGET), obtain a token from [portal.gdc.cancer.gov/auth](https://portal.gdc.cancer.gov/auth) and pass it via:
+
+```bash
+gdc-client download -t /path/to/gdc-user-token.txt --no-related-files <file_id>
+```
+
+Or set `params.download.gdc_token_file` in `nextflow.config`.
+
+
 
 1. **Primary key** is (`file_id`, `model`). Each slide appears once per model (currently `hoptimus1` and `titan_slide`), so every `file_id` has exactly 2 rows.
 
