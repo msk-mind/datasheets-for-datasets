@@ -2,7 +2,7 @@
 
 <b>Path:</b> [`cdsi_prod.pathology_data_mining.tcga_slide_embeddings_v2`](https://msk-mode-prod.cloud.databricks.com/explore/data/cdsi_prod/pathology_data_mining/tcga_slide_embeddings_v2) <br/>
 <b>Table Type:</b> Live <br/>
-<b>Date created or last updated:</b> 2026-05-05 <br/>
+<b>Date created or last updated:</b> 2026-05-08 <br/>
 
 <b>Lineage:</b>
 
@@ -13,15 +13,15 @@
 
 <b>Summary Statistics:</b>
 
-Total rows (one per slide × model): **23,696** <br/>
+Total rows (one per slide × model): **23,660** <br/>
 Unique DX slides: **11,848** <br/>
 Unique patients (case_submitter_id): **9,743** <br/>
 TCGA projects: **32** <br/>
 
 | Model | Done | Failed | Pending (re-dispatching) |
 |---|---|---|---|
-| hoptimus1 | 11,388 | 10 | 415 |
-| titan_slide | 11,388 | 46 | 415 |
+| hoptimus1 | 11,802 | 10 | 0 |
+| titan_slide | 11,802 | 46 | 0 |
 
 **46 slides permanently excluded** (0.39% of 11,848 DX slides) — see [Notes](#notes) for details.
 
@@ -110,7 +110,7 @@ Embeddings are stored in [WebDataset](https://github.com/webdataset/webdataset) 
 | slide_type | GDC slide portion type | Categorical | string | `DX1` (9,774 = 82.6%), `DX2` (884 = 7.5%), `DX3` (425), `DX4` (298), `DX5` (225), `DX6`–`DX17` (<80 each) |
 | file_size | SVS file size in bytes; range 0–5.12 GB, mean 1.11 GB | Continuous | integer | bytes |
 | model | Feature extraction model | Categorical | string | `hoptimus1` — patch-level embeddings from [H-Optimus-1](https://huggingface.co/bioptimus/H-optimus-1); `titan_slide` — slide-level embedding from [TITAN](https://github.com/mahmoodlab/TITAN) |
-| status | Feature extraction status | Categorical | string | `done` (22,770) = embeddings in WDS; `failed` (92) = permanently excluded; `pending`/`dispatched` (836) = being re-extracted (see Note 11) |
+| status | Feature extraction status | Categorical | string | `done` (23,604) = embeddings in WDS; `failed` (92) = permanently excluded |
 | failure_reason | Human-readable reason for failure; blank when `status ≠ failed` | Categorical | string | `Empty SVS file (~480 KB) - known corrupt GDC file, produces 0 tissue tiles on tessellation` (23 titan_slide rows); `Failed after max retries` (20 rows across both models); `zero-output: ... produced 0 patches in 4 attempts` (13 titan_slide rows) |
 | native_mpp | Scanner resolution in µm per pixel, read from the SVS TIFF header (Aperio `MPP` tag or `XResolution`); same value applies across both models for a given slide | Continuous | float | 0.25 (9,851 slides = 83.4%), 0.50 (1,065 = 9.0%), 0.23 (748 = 6.3%), 0.49 (52), 0.19 (16), 0.16 (8), 0.46–0.47 (8), 0.11–0.12 (3); null for 99 slides whose SVS header lacks MPP metadata |
 | mpp_is_fallback | `true` when Mussel used the 0.5 µm/px default because the SVS header had no readable MPP tag; `false` when `native_mpp` was used; null when MPP provenance is unknown | Categorical | boolean | `false` for ~99% of slides; `true` for slides with null/unreadable headers |
@@ -302,4 +302,5 @@ Or set `params.download.gdc_token_file` in `nextflow.config`.
 
 10. **Clinical metadata** (columns from `primary_site` onward) is sourced from the GDC API at the time of inventory download and reflects GDC annotations at that date. Fields may contain `not reported`, `Unknown`, or be blank where GDC has no value.
 
-11. **418 slides temporarily inaccessible (re-dispatching):** An earlier version of the dispatcher config set `wds_dest` to `s3://reef-tcga-v2-0/wds/hoptimus1` (with the model name included). The `_ShardWriter` in `append_wds.py` then appended the model name a second time when constructing shard paths, resulting in objects uploaded to `wds/{model}/{model}/{project}/` instead of `wds/{model}/{project}/`. When the config was corrected, the `wds_index.json` was rebuilt without those slides, making them inaccessible. All 418 affected slides (415 reset to `dispatched`, 3 to `pending`) are being re-extracted at the correct paths. The 39 orphan objects at double-model paths have been deleted from S3. Projects affected (top 5): TCGA-TGCT (263 slides), TCGA-THYM (38 slides), TCGA-PCPG (23 slides), TCGA-DLBC (12 slides), TCGA-MESO (8 slides).
+11. **418 slides re-extracted due to wrong S3 path (resolved 2026-05-08):** An earlier version of the dispatcher config set `wds_dest` to `s3://reef-tcga-v2-0/wds/hoptimus1` (with the model name included). The `_ShardWriter` in `append_wds.py` then appended the model name a second time when constructing shard paths, resulting in objects uploaded to `wds/{model}/{model}/{project}/` instead of `wds/{model}/{project}/`. When the config was corrected, the `wds_index.json` was rebuilt without those slides. All 418 affected slides were re-extracted and are now `done`. The 39 orphan objects at double-model paths were deleted from S3. Projects affected (top 5): TCGA-TGCT (263 slides), TCGA-THYM (38 slides), TCGA-PCPG (23 slides), TCGA-DLBC (12 slides), TCGA-MESO (8 slides).
+
