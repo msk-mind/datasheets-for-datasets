@@ -22,7 +22,7 @@ image_ids: 3,116,164
 
 ## Description <a name="description"></a>
 
-All (H&E and IHC) Slides for IMPACT patients across all patient timepoints with only deidentified ids and deidentified dates. 
+All slides for IMPACT patients across all patient timepoints with only deidentified ids and deidentified dates. 
 
 ### Vocabulary <a name="vocab"></a> 
 
