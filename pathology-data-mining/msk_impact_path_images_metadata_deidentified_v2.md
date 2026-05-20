@@ -33,9 +33,9 @@ Primary key: img_hid
 
 2. This data is obtained from systems that support clinical operations, and that are fine tuned for clinical operations, and not research. Therefore the dataset may contain some noise. 
 
-3. The bulk of the data contains H&E and IHC images with solid tissue. There is likely a small percentage of ICC images with free flowing cells from cytopathology and hematopathology. For example, when the stain name contains "FROZEN" it generally indicates that the slide was prepared while the surgery was in progress to look for remaining margins of the tumor. These slides may or may not be solid tissue. Further curation will be required to identify a cleaner set of H&E and IHC slides. This is also a good example of how the data stems from fine tuned clinical workflows and is not designed for research.
+3. The bulk of the data contains H&E and IHC images with solid tissue stemming from surgeries (biopsy and resection) and molecular work. There is likely a small percentage of ICC images with free flowing cells from cytopathology and hematopathology. For example, when the stain name contains "FROZEN" it generally indicates that the slide was prepared while the surgery was in progress to look for remaining margins of the tumor. These slides may or may not be solid tissue. Further curation will be required to identify a cleaner set of H&E and IHC slides. This is also a good example of how the data stems from fine tuned clinical workflows and is not designed for research.
 
-4. Some hematopathology slides that may be considered as IHC (bone marrow core) for example may also be exluded in this dataset. 
+4. Some hematopathology slides that may be considered as IHC (bone marrow core biopsy for example) for example may also be exluded in this dataset. 
 
 
 
