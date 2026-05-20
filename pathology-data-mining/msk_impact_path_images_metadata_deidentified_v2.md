@@ -1,4 +1,4 @@
-# msk_impact_path_images_metadata_deidentified_v1
+# msk_impact_path_images_metadata_deidentified_v2
 
 <b>Path:</b> <br/>
 cdsi_eng_phi.pdm_base_tables_dev.impact_block_matched_slides_v2 <br/>
