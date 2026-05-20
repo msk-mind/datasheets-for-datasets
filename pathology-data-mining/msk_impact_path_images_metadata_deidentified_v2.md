@@ -8,7 +8,7 @@ cdsi_eng_phi.pdm_base_tables_dev.impact_block_matched_slides_v2 <br/>
 
 <b>Lineage: See table overview and lineage in Databricks->Catalog section, Overview tab for SQL definition of the table, and lineage tab for lineage.</b>
 
-<b>Summary Statistics:</b>
+<b>Summary Statistics:</b> <br/>
 Total rows: 2,548,422<br/>
 total patients: 100,093<br/>
 image_ids: 2,548,422
