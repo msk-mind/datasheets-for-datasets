@@ -26,6 +26,8 @@ Total number of unique slides: 6,192,174 <br/>
 
 ## Description <a name="description"></a>
 
+The case breakdown table contains all clinical slides for which clinical metadata was available (sometimes due to operational issues or otherwise, complete data associated with an image is not available). 
+
 The case_breakdown table, contains information for a slide in each row, indexed by `image_id`, along with the metadata associated with that slide such as a patient ID, (`mrn`), information pertaining to the anatomical site (`part_type`, `part_description`), information about the stain (`stain_name`, `stain_group`), details about the scanner and scanning settings (`scanner_id`, `brand`, `model`, `magnification`) and additional metadata that pertain to the clinical workflow.
 
 ##### How was this data collected? 
