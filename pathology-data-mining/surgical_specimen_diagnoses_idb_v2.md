@@ -5,7 +5,7 @@
 <b>Date created:</b> 2026-05-22 <br/>
 <b>Last updated:</b> 2026-06-17 <br/>
 
-<b>Lineage:</b> Parsed from `src_idbdw_prod.dv.pathology_report_v` (IDB canonical surgical pathology source). Script: `/Workspace/Users/limr@mskcc.org/parse_all_msk_surgical.py` (Databricks). Four parser correctness fixes applied (range-notation headers, colon-delimiter headers, single-specimen fallback, whitespace/encoding edge cases). DMP linkage via `cdsi_eng_phi.cdm_eng_pathology_report_segmentation.table_pathology_impact_sample_summary_dop_anno_epic_idb_combined`.
+<b>Lineage:</b> Parsed from `src_idbdw_prod.dv.pathology_report_v` (IDB canonical surgical pathology source). Original script: `/Workspace/Users/limr@mskcc.org/parse_all_msk_surgical.py` (Databricks workspace). Active maintained pipeline scripts: [`pdm_databricks_pipelines` `feat/surgical-specimen-parser` / `pathology_data_mining/surgical_specimen_parser/`](https://github.com/pathology-data-mining/pdm_databricks_pipelines/tree/feat/surgical-specimen-parser/pathology_data_mining/surgical_specimen_parser). Four parser correctness fixes applied (range-notation headers, colon-delimiter headers, single-specimen fallback, whitespace/encoding edge cases). DMP linkage via `cdsi_eng_phi.cdm_eng_pathology_report_segmentation.table_pathology_impact_sample_summary_dop_anno_epic_idb_combined`.
 
 See also: [Completeness Assessment](https://mskconfluence.mskcc.org/spaces/CDSI/pages/241638443) | [Parser Correctness](https://mskconfluence.mskcc.org/spaces/CDSI/pages/241638446) | [Project Plan](https://mskconfluence.mskcc.org/spaces/CDSI/pages/241637348)
 
