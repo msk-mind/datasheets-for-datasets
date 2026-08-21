@@ -25,7 +25,7 @@ Total block_ids: 69,477 <br/>
 
 The primary purpose of this table is to obtain the S-accession to M-accession mapping. This mapping is not available in the Hobbit casebreakdown table. The table also contains part number and block label information which is useful for constructing the block_id. 
 
-This table is a snapshot from Copath obtained in the Summer of 2024. It needs to be replaced with a live table in MODE that maps S-accessions to M-accesions. 
+This table is a snapshot from Copath obtained in the Summer of 2024. It was built by the Hobbit team and it needs to be replaced with a live table in MODE that maps S-accessions to M-accesions. For Copath era cases, there was not a clean way to associate an IMPACT study to a surgical block. This issue was partially addressed by including the surgical accession and block as part of the molecular accession part description. From this data, the Hobbit team were able to create a view mapping molecular cases to surgical cases, and the associated surgical block.
 
 This version 2 of the table has improved curation compared to the first version of the table named copath_molecular_linked_cleaned in the same schema. 
 
