@@ -34,7 +34,7 @@
 
 This dataset reports some basic demographic data for the IMPACT patients in the mosaic study.
 
-Patients are categorized into five races, and an "other" category.  If the race is not known, that's's recorded explicitly.
+Patients are categorized into five races, and an "other" category.  If the race is not known, that's recorded explicitly.
 
 The ethnicity reported here is basically just Hispanic vs non-Hispanic.
 
@@ -53,7 +53,7 @@ The SAMPLE_ID is the primary key, here.
 | ETHNICITY | Hispanic ethnicity | categorical | string | (2) |
 | CURRENT_AGE_DEID | the patient's age | number | string |  |
 
-(1) The RACE is recorded as one of White", "Asian-Far East/Indian Subcont", "Black or African American", "American Indian or Alaska Native", "Native Hawaiian or Other Pacific Islander", "Unknown", or "Other".
+(1) The RACE is recorded as one of "White", "Asian-Far East/Indian Subcont", "Black or African American", "American Indian or Alaska Native", "Native Hawaiian or Other Pacific Islander", "Unknown", or "Other".
 
 (2) The Ethnicity is recorded as one of "Non-Spanish; Non-Hispanic", "Spanish NOS; Hispanic NOS, Latino NOS", "Unknown", or "Other".
 
@@ -76,7 +76,7 @@ The SAMPLE_ID is the primary key, here.
     ORDER BY patients DESC
 
 
-## Breakdown by Ethnicity
+#### Breakdown by Ethnicity
 
     SELECT
       ETHNICITY,
