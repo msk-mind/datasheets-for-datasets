@@ -10,8 +10,8 @@
 
 <b>Summary Statistics:</b>
 
-<b>v1</b> — Total rows: 10,925 | Unique image_ids: 10,925 <br/>
-<b>v2</b> — Total rows: 23,601 | Unique image_ids: 11,802 <br/>
+<b>v1</b>: Total rows: 10,925 | Unique image_ids: 10,925 <br/>
+<b>v2</b>: Total rows: 23,601 | Unique image_ids: 11,802 <br/>
 
 
 # Table of contents
@@ -30,7 +30,7 @@ The slides themselves are inventoried in [tcga_slide_inventory_v1](tcga_slide_in
 
 ### Vocabulary <a name="vocab"></a>
 
-Primary key: `image_id` for v1 and (`image_id`, `model`) for v2 — both verified unique across every row.
+Primary key: `image_id`
 
 <b>v1: `tcga_reef_v1_embeddings_inventory_v1`</b>
 
@@ -62,7 +62,7 @@ Primary key: `image_id` for v1 and (`image_id`, `model`) for v2 — both verifie
 
 2. <b>Multi-model fan-out in v2.</b> Each slide is embedded by up to two models, so v2's 23,601 rows cover 11,802 distinct slides. Filter on `model` when counting slides. hoptimus1 covers all 11,802; titan_slide covers 11,799.
 
-3. <b>v1 covers fewer slides than v2.</b> 10,925 slides in v1 against 11,802 in v2 — v2 extended coverage rather than replacing it in place.
+3. <b>v1 covers fewer slides than v2.</b> 10,925 slides in v1 against 11,802 in v2. v2 extended coverage rather than replacing it in place.
 
 4. <b>v2 storage.</b> WDS shards live under `s3://reef-tcga-v2-0/wds/{model}/`; the sample key within each shard is the `image_id`.
 

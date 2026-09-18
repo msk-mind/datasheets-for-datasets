@@ -23,7 +23,7 @@ An inventory of TCGA whole-slide image (WSI) files, including their storage loca
 
 ### Vocabulary <a name="vocab"></a>
 
-Primary key: `image_id` — verified unique across all 11,741 rows (one row per slide, no fan-out).
+Primary key: `image_id`
 
 | **Field name** | **Description** | **Field Type** | **Data Type** | **Field Format** |
 |---|---|---|---|---|
@@ -34,7 +34,7 @@ Primary key: `image_id` — verified unique across all 11,741 rows (one row per 
 
 ## Notes <a name="notes"></a>
 
-1. <b>Not IMPACT-scoped.</b> Unlike the MSK product tables, the TCGA inventory has no IMPACT identifiers; TCGA slides exist outside the MSK-IMPACT cohort, so the whole table is kept and the Part A consent restriction does not apply. There is consequently no multi-sample fan-out — row count equals slide count.
+1. <b>Not IMPACT-scoped.</b> Unlike the MSK product tables, the TCGA inventory has no IMPACT identifiers; TCGA slides exist outside the MSK-IMPACT cohort, so the whole table is kept and the Part A consent restriction does not apply. There is consequently no multi-sample fan-out, so row count equals slide count.
 
 2. <b>TCGA scope.</b> Only slides under `s3://pathology/TCGA/` are included.
 

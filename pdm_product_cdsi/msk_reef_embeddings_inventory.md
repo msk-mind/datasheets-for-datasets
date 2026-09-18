@@ -10,8 +10,8 @@
 
 <b>Summary Statistics:</b>
 
-<b>v1</b> — Total rows: 512,747 | Unique image_ids: 504,120 | PATIENT_ID_IMPACT: 71,412 | SAMPLE_ID_IMPACT: 82,078 <br/>
-<b>v2</b> — Total rows: 1,629,873 | Unique image_ids: 535,083 | PATIENT_ID_IMPACT: 70,009 | SAMPLE_ID_IMPACT: 80,631 <br/>
+<b>v1</b>: Total rows: 512,747 | Unique image_ids: 504,120 | PATIENT_ID_IMPACT: 71,412 | SAMPLE_ID_IMPACT: 82,078 <br/>
+<b>v2</b>: Total rows: 1,629,873 | Unique image_ids: 535,083 | PATIENT_ID_IMPACT: 70,009 | SAMPLE_ID_IMPACT: 80,631 <br/>
 
 
 # Table of contents
@@ -30,13 +30,13 @@ Both are IMPACT-scoped: only slides matching an MSK-IMPACT sample are retained, 
 
 ### Vocabulary <a name="vocab"></a>
 
-Primary key: (`image_id`, `SAMPLE_ID_IMPACT`) for v1 and (`image_id`, `model`, `SAMPLE_ID_IMPACT`) for v2 — both verified unique across every row. `image_id` **alone is not a key in either table** (see note 1).
+Primary key: `image_id`
 
 <b>v1: `msk_reef_v1_embeddings_inventory_v1`</b>
 
 | **Field name** | **Description** | **Field Type** | **Data Type** | **Field Format** |
 |---|---|---|---|---|
-| image_id | Slide ID for the whole-slide image | ID | integer | *int here, string in the slide tables — see note 4* |
+| image_id | Slide ID for the whole-slide image | ID | integer | *int here, string in the slide tables; see note 4* |
 | PATIENT_ID_IMPACT | IMPACT DMP patient identifier | ID | string | `P-XXXXXXX` |
 | SAMPLE_ID_IMPACT | IMPACT DMP sample identifier | ID | string | `P-XXXXXXX-TNN-IMn` |
 | prefilter_ctranspath_features_tensor_path | CTransPath embedding tensor path (unfiltered) | ID | string | `s3://reef-v1-0/...` |
@@ -50,7 +50,7 @@ Primary key: (`image_id`, `SAMPLE_ID_IMPACT`) for v1 and (`image_id`, `model`, `
 
 | **Field name** | **Description** | **Field Type** | **Data Type** | **Field Format** |
 |---|---|---|---|---|
-| image_id | Slide ID for the whole-slide image | ID | integer | *int here, string in the slide tables — see note 4* |
+| image_id | Slide ID for the whole-slide image | ID | integer | *int here, string in the slide tables; see note 4* |
 | PATIENT_ID_IMPACT | IMPACT DMP patient identifier | ID | string | `P-XXXXXXX` |
 | SAMPLE_ID_IMPACT | IMPACT DMP sample identifier | ID | string | `P-XXXXXXX-TNN-IMn` |
 | model | Feature-extraction model | Categorical | string | 'hoptimus1', 'optimus', 'titan_slide' |
@@ -62,9 +62,9 @@ Primary key: (`image_id`, `SAMPLE_ID_IMPACT`) for v1 and (`image_id`, `model`, `
 
 ## Notes <a name="notes"></a>
 
-1. <b>`image_id` is not the primary key.</b> Two separate fan-outs apply:
+1. <b>Two separate fan-outs apply.</b>
    - <b>Multi-sample</b> (both versions): a slide matching multiple IMPACT samples appears once per `SAMPLE_ID_IMPACT`.
-   - <b>Multi-model</b> (v2 only): each slide is embedded by up to three models, so v2's 1,629,873 rows cover only 535,083 distinct slides — roughly 3x. Always filter on `model` when counting slides:
+   - <b>Multi-model</b> (v2 only): each slide is embedded by up to three models, so v2's 1,629,873 rows cover only 535,083 distinct slides, roughly 3x. Always filter on `model` when counting slides:
    ```sql
    SELECT count(DISTINCT image_id)
    FROM cdsi_res_deid.pdm_product_cdsi.msk_reef_v2_embeddings_inventory_v1
@@ -73,7 +73,7 @@ Primary key: (`image_id`, `SAMPLE_ID_IMPACT`) for v1 and (`image_id`, `model`, `
 
 2. <b>Model coverage is near-complete but not identical.</b> hoptimus1 covers 535,053 slides, optimus 534,915, and titan_slide 531,205; expect a few thousand slides to be missing from any single model.
 
-3. <b>v1 and v2 cover different slide sets.</b> v1 has 504,120 slides, v2 has 535,083, and neither is a superset of the other by construction — check membership rather than assuming v2 supersedes v1.
+3. <b>v1 and v2 cover different slide sets.</b> v1 has 504,120 slides, v2 has 535,083, and neither is a superset of the other by construction. Check membership rather than assuming v2 supersedes v1.
 
 4. <b>`image_id` type mismatch.</b> It is an `int` in both embedding inventories but a `varchar(100)`/`string` in [msk_slide_inventory_v1](msk_slide_inventory_v1.md), [slides_with_diagnosis_v1](slides_with_diagnosis_v1.md), and [impact_matched_slides_v1](impact_matched_slides_v1.md). Cast explicitly when joining, and note that an integer encoding cannot preserve any leading zeros.
 
@@ -81,4 +81,4 @@ Primary key: (`image_id`, `SAMPLE_ID_IMPACT`) for v1 and (`image_id`, `model`, `
 
 6. <b>v2 storage.</b> WDS shards live under `s3://reef-v2-0/`; the sample key within each shard is the `image_id`.
 
-7. <b>`native_mpp` is always real in v2.</b> `mpp_is_fallback` is `true` on 0 rows, so every MSK slide had a readable MPP tag — unlike the TCGA inventory (see [tcga_reef_embeddings_inventory](tcga_reef_embeddings_inventory.md)).
+7. <b>`native_mpp` is always real in v2.</b> `mpp_is_fallback` is `true` on 0 rows, so every MSK slide had a readable MPP tag, unlike the TCGA inventory (see [tcga_reef_embeddings_inventory](tcga_reef_embeddings_inventory.md)).

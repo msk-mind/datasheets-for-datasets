@@ -27,7 +27,7 @@ This is the widest of the MSK slide tables (683,953 slides across 75,490 patient
 
 ### Vocabulary <a name="vocab"></a>
 
-Primary key: none declared. The natural key is (`image_id`, `SAMPLE_ID_IMPACT`), which is unique on all but 260 of the 696,758 rows.
+Primary key: `image_id`
 
 The first three columns are the IMPACT identifiers, followed by the slide, part, stain, and diagnosis columns (31 columns total).
 
@@ -65,7 +65,7 @@ The first three columns are the IMPACT identifiers, followed by the slide, part,
 
 ## Notes <a name="notes"></a>
 
-1. <b>Multi-sample fan-out — `image_id` is not unique.</b> A slide that matches multiple IMPACT samples appears on multiple rows (one per `SAMPLE_ID_IMPACT`): 696,758 rows cover 683,953 distinct `image_id`s. Each `image_id` still corresponds to a single physical slide; repeated values come only from this fan-out.
+1. <b>Multi-sample fan-out.</b> A slide that matches multiple IMPACT samples appears on multiple rows (one per `SAMPLE_ID_IMPACT`): 696,758 rows cover 683,953 distinct `image_id`s. Each `image_id` still corresponds to a single physical slide; repeated values come only from this fan-out.
 
 2. <b>Duplicate (`image_id`, `SAMPLE_ID_IMPACT`) pairs.</b> 696,758 rows collapse to 696,498 distinct pairs, so 260 rows repeat a pair that is already present. De-duplicate before counting slides or samples.
 

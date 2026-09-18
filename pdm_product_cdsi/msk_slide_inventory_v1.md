@@ -27,7 +27,7 @@ Use this table to resolve an `image_id` to an S3 object; the slide-level metadat
 
 ### Vocabulary <a name="vocab"></a>
 
-Primary key: (`image_id`, `SAMPLE_ID_IMPACT`) — verified unique across all 652,495 rows.
+Primary key: `image_id`
 
 | **Field name** | **Description** | **Field Type** | **Data Type** | **Field Format** |
 |---|---|---|---|---|
@@ -42,16 +42,10 @@ Primary key: (`image_id`, `SAMPLE_ID_IMPACT`) — verified unique across all 652
 
 1. <b>Multi-sample fan-out.</b> A slide that matches multiple IMPACT samples appears on multiple rows (one per `SAMPLE_ID_IMPACT`): 652,495 rows over 640,689 distinct `image_id`s. Counting rows overcounts slides by about 1.8%.
 
-2. <b>(`image_id`, `SAMPLE_ID_IMPACT`) is a true key here.</b> Unlike [impact_matched_slides_v1](impact_matched_slides_v1.md) and [slides_with_diagnosis_v1](slides_with_diagnosis_v1.md), this table carries no duplicate pairs:
-   ```sql
-   SELECT image_id, SAMPLE_ID_IMPACT, count(*) AS ct
-   FROM cdsi_res_deid.pdm_product_cdsi.msk_slide_inventory_v1
-   GROUP BY image_id, SAMPLE_ID_IMPACT
-   HAVING ct > 1   -- returns no rows
-   ```
+2. <b>No repeated (`image_id`, `SAMPLE_ID_IMPACT`) pairs.</b> Unlike [impact_matched_slides_v1](impact_matched_slides_v1.md) and [slides_with_diagnosis_v1](slides_with_diagnosis_v1.md), each slide/sample pair appears exactly once.
 
 3. <b>MSK scope.</b> Only slides under `s3://mskmind-bkt/reef-slides/` are included (the MSK REEF slide bucket).
 
 4. <b>`size` is always positive.</b> Zero or null `size` would indicate an incomplete upload or a metadata-collection error; there are currently 0 such rows.
 
-5. <b>Fewer slides than the metadata tables.</b> 640,689 slides are on storage against 683,953 in [slides_with_diagnosis_v1](slides_with_diagnosis_v1.md) — a slide can be catalogued in HoBBIT without having been transferred to the REEF bucket.
+5. <b>Fewer slides than the metadata tables.</b> 640,689 slides are on storage against 683,953 in [slides_with_diagnosis_v1](slides_with_diagnosis_v1.md). A slide can be catalogued in HoBBIT without having been transferred to the REEF bucket.

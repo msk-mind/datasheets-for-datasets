@@ -27,7 +27,7 @@ Slides and IMPACT samples are matched at the **part** level using the accession 
 
 ### Vocabulary <a name="vocab"></a>
 
-Primary key: none declared. The natural key is (`image_id`, `SAMPLE_ID_IMPACT`); see note 1 for the fan-out and note 2 for the duplicate rows that keep it from being a strict key.
+Primary key: `image_id`
 
 The first three columns are the IMPACT identifiers, followed by slide, part, and diagnosis columns. Key columns include:
 
@@ -59,7 +59,7 @@ The first three columns are the IMPACT identifiers, followed by slide, part, and
 
 ## Notes <a name="notes"></a>
 
-1. <b>Multi-sample fan-out — `image_id` is not unique.</b> Slides and IMPACT samples are matched by accession number and part number. In cases where multiple IMPACT samples are taken from the same part, *each slide from that part is matched to all of the IMPACT samples taken from that part*, so a single `image_id` can appear on multiple rows (one per `SAMPLE_ID_IMPACT`): 657,598 rows cover only 645,067 distinct `image_id`s. `image_id` <--> `SAMPLE_ID_IMPACT` is therefore a many-many relationship, not a one-one mapping. Slides associated with more than one IMPACT sample can be listed with:
+1. <b>Multi-sample fan-out.</b> Slides and IMPACT samples are matched by accession number and part number. In cases where multiple IMPACT samples are taken from the same part, *each slide from that part is matched to all of the IMPACT samples taken from that part*, so a single `image_id` can appear on multiple rows (one per `SAMPLE_ID_IMPACT`): 657,598 rows cover only 645,067 distinct `image_id`s. `image_id` <--> `SAMPLE_ID_IMPACT` is therefore a many-many relationship, not a one-one mapping. Slides associated with more than one IMPACT sample can be listed with:
 ```sql
 SELECT image_id, count(SAMPLE_ID_IMPACT) AS samples
 FROM cdsi_res_deid.pdm_product_cdsi.impact_matched_slides_v1

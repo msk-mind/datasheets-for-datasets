@@ -28,7 +28,7 @@ The narrower scope is visible in the counts: 38,983 IMPACT samples here versus 8
 
 ### Vocabulary <a name="vocab"></a>
 
-Primary key: none declared. The natural key is (`image_id`, `SAMPLE_ID_IMPACT`), which is unique on all but 6 of the 168,853 rows.
+Primary key: `image_id`
 
 The first three columns are the IMPACT identifiers. `PATIENT_ID_IMPACT` and `SAMPLE_ID_IMPACT` are the IMPACT DMP patient/sample identifiers (the same concept as the identically named columns in the other product tables). Key columns include:
 
@@ -66,8 +66,8 @@ The first three columns are the IMPACT identifiers. `PATIENT_ID_IMPACT` and `SAM
 
 2. <b>Block-level matching.</b> Contains slides for **solid tumors only**, obtained from S-accessions (surgery) that subsequently had M-accessions (molecular) generated for IMPACT sequencing. i.e. no 'C' cytology, 'H' heme etc. accessions included.
 
-3. <b>Stain ambiguity.</b> The table generally contains H&E and IHC images, but the `stain_group` column does not clearly specify the stain for every `image_id` — 5,080 rows are NULL and a further ~5,900 fall into `Other`/`SS`/`Frozen`/`Surgical Submitted`.
+3. <b>Stain ambiguity.</b> The table generally contains H&E and IHC images, but the `stain_group` column does not clearly specify the stain for every `image_id`: 5,080 rows are NULL and a further ~5,900 fall into `Other`/`SS`/`Frozen`/`Surgical Submitted`.
 
-4. <b>Block coverage is partial.</b> Block ID coverage for the IMPACT cohort is incomplete — this table reaches 38,983 IMPACT samples against 81,707 in the part-level [impact_matched_slides_v1](impact_matched_slides_v1.md), i.e. roughly 48%. This is partly because only ~66% of copath M-accession records that map to S-accessions overlap with the IMPACT cohort. There is some other attrition that still needs to be accounted for.
+4. <b>Block coverage is partial.</b> Block ID coverage for the IMPACT cohort is incomplete. This table reaches 38,983 IMPACT samples against 81,707 in the part-level [impact_matched_slides_v1](impact_matched_slides_v1.md), i.e. roughly 48%. This is partly because only ~66% of copath M-accession records that map to S-accessions overlap with the IMPACT cohort. There is some other attrition that still needs to be accounted for.
 
 5. <b>Assay measurements are stored as strings.</b> `CYCLE_THRESHOLD`, `DNA_CONCENTRATION`, `PLASMA_USED_VOLUME`, and `DNA_ELUTION_BUFFER_VOLUME` are numeric quantities typed as `string` in the table and must be cast before use.

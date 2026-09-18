@@ -6,7 +6,7 @@ Unless noted otherwise, MSK tables are **IMPACT-scoped**: they are restricted to
 
 > **Note:** These tables are staged in `cdsi_res_deid.pdm_product_cdsi` pending publication to the `product_cdsi` catalog, which as of 2026-09-18 holds only the cBioPortal schemas (`msk_impact`, `msk_archer`, `tempo`, `gene_panels`). A `pdm_product_cdsi_dev` schema holds the development copies. Counts in these datasheets were taken on 2026-09-18.
 
-> **Note:** `image_id` is **not** a primary key on the MSK tables. Every IMPACT-scoped table repeats a slide once per matching `SAMPLE_ID_IMPACT`, and the v2 embedding inventories repeat it again per `model`. See each datasheet's Notes section for the verified key.
+> **Note:** Every IMPACT-scoped table repeats a slide once per matching `SAMPLE_ID_IMPACT`, and the v2 embedding inventories repeat it again per `model`, so row counts exceed slide counts. See each datasheet's Notes section.
 
 ## How was this data collected?
 
