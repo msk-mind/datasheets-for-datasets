@@ -12,6 +12,7 @@ Total rows: 657,598 <br/>
 Unique image_ids (slides): 645,067 <br/>
 Unique PATIENT_ID_IMPACT: 70,352 <br/>
 Unique SAMPLE_ID_IMPACT: 81,707 <br/>
+Latest datetime_accession: 2024-12-11
 Total columns: 37 <br/>
 
 # Table of contents
