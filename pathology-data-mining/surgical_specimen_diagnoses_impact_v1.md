@@ -1,0 +1,113 @@
+# Surgical Specimen Diagnoses, IMPACT (v1)
+
+<b>Paths:</b>
+
+| Tier | Table | Access |
+|---|---|---|
+| Engineering PHI | `cdsi_eng_phi.pdm_base_tables.surgical_specimen_diagnoses_impact_v1` | Engineers only |
+| Research PHI | `cdsi_res_phi.pdm_base_tables.surgical_specimen_diagnoses_impact_v1` | Researchers on IRB, cohort building |
+| Research de-identified | `cdsi_res_deid.pdm_base_tables.surgical_specimen_diagnoses_impact_v1` | Researchers on IRB |
+| Product | `cdsi_res_deid.pdm_product_cdsi.surgical_specimen_diagnoses_impact_v1` | Part A consented patients only |
+
+<b>Table Type:</b> `Static` (frozen snapshot; see Lineage) <br/>
+<b>Version:</b> `v1` <br/>
+<b>Date created:</b> `2026-09-28` <br/>
+<b>Data product owner:</b> Pathology Data Mining (PDM) team, CDSI <br/>
+
+<b>Lineage</b> ([pdm_catalogs SQL](https://github.com/pathology-data-mining/pdm_databricks_pipelines/tree/main/pathology_data_mining/pdm_catalogs)):
+
+`cdsi_eng_phi.cdm_eng_pathology_report_segmentation.surgical_specimen_diagnoses_impact` (legacy CDM table, Delta version 242) <br/>
+|_ `cdsi_eng_phi.pdm_base_tables.surgical_specimen_diagnoses_impact` (legacy_impact_bridge copy, run `manual-20260924-prod`) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;|_ `cdsi_eng_phi.pdm_base_tables.legacy_impact_identity_review` (MRN to DMP patient ID resolution) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;|_ `cdsi_eng_phi.pdm_base_tables.surgical_specimen_diagnoses_impact_v1` <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|_ `cdsi_res_phi.pdm_base_tables.surgical_specimen_diagnoses_impact_v1` <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|_ `cdsi_res_deid.pdm_base_tables.surgical_specimen_diagnoses_impact_v1` <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|_ `cdsi_res_deid.pdm_product_cdsi.surgical_specimen_diagnoses_impact_v1` <br/>
+
+<b>Summary Statistics</b> (computed 2026-09-28 on the dev build of the same 990,806-row source; recompute after the prod refresh):
+
+| Measure | Rows |
+|---|---:|
+| Source rows (eng_phi, res_phi) | 990,806 |
+| Releasable rows | 986,160 |
+| Distinct res_deid rows (identical duplicates collapsed) | 986,013 (118,225 patients) |
+| Product rows (Part A consented at refresh) | 769,362 (91,368 patients) |
+| Withheld: diagnosis text could not be edited safely | 4,056 |
+| &nbsp;&nbsp;bare 8+ digit number / abbreviated address / signature marker / dotted date after a date word (rows can have several) | 2,570 / 1,343 / 165 / 11 |
+| Withheld: identity not resolved (ambiguous MRN, conflicting patient ID, non-identical duplicate) | 590 |
+| Rows with at least one placeholder substitution in text | 313,032 |
+
+
+# Table of contents
+1. [Description](#description)
+2. [Vocabulary](#vocab)
+3. [Notes](#notes)
+
+## Description <a name="description"></a>
+
+Diagnosis title and description for each part of each surgical pathology accession for IMPACT
+patients, from the legacy CDM NLP parse (IDB and Epic sources). v1 is a frozen snapshot: the
+source was copied once, pinned to Delta version 242, and is not refreshed. The canonical parser
+(`surgical_specimen_parser`) will replace it in a later version.
+
+The tiers follow the CDSI [cBioPortal Data Ingestion - Design](https://mskconfluence.mskcc.org/spaces/CDSI/pages/273580547)
+governance rules. eng_phi holds everything, including the MRN to DMP patient ID mapping. res_phi
+holds MRN, dates, and raw text but no DMP IDs, for cohort building. res_deid holds DMP patient IDs
+and scrubbed text but no MRN or dates, for analysis. The product table is the res_deid table
+restricted to Part A consented patients.
+
+### Vocabulary <a name="vocab"></a>
+
+Primary key: (`ACCESSION_NUMBER`, `PATH_DX_SPEC_NUM`, `SOURCE`).
+
+| **Field name** | **Description** | **Field Type** | **Data Type** | **Field Format** | **Tiers** |
+|---|---|---|---|---|---|
+| `ACCESSION_NUMBER` | Surgical pathology accession | ID | string | e.g. `S19-12345` | all |
+| `PATH_DX_SPEC_NUM` | Specimen part number within the accession | ID | integer | 1, 2, ... | all |
+| `SOURCE` | Report source | Categorical | string | `IDB`, `EPIC` | all |
+| `PRPT_REPORT_TYPE` | Pathology report type | Categorical | string | as in source | all |
+| `PATH_DX_SPEC_TITLE` | Part title (tissue and procedure) | Natural Language Description | string | raw in eng_phi/res_phi; scrubbed in res_deid/product | all |
+| `PATH_DX_SPEC_DESC` | Diagnosis for the part | Natural Language Description | string | raw in eng_phi/res_phi; scrubbed in res_deid/product | all |
+| `MRN` | Medical record number | ID | string | 8 digits, zero padded | eng_phi, res_phi |
+| `PROCEDURE_DATE` | Procedure date | Continuous | date | YYYY-MM-DD | eng_phi, res_phi |
+| `REPORT_DATE` | Report date | Continuous | date | YYYY-MM-DD | eng_phi, res_phi |
+| `DMP_PATIENT_ID` | IMPACT patient ID resolved from MRN | ID | string | `P-0000000` | eng_phi, res_deid, product |
+| `DEID_TITLE`, `DEID_DESC` | Scrubbed title and description | Natural Language Description | string | see Notes | eng_phi |
+| `DEID_WITHHOLD_REASONS` | Why the row is withheld from res_deid | Categorical | string | comma separated; empty when releasable | eng_phi |
+| `RELEASABLE` | Row is published to res_deid | Categorical | boolean | true/false | eng_phi |
+| `REVIEW_STATUS` | Identity and consent review outcome | Categorical | string | see Notes | eng_phi |
+
+## Notes <a name="notes"></a>
+
+- **Clinician names are not masked in v1.** Diagnosis text in every tier can contain pathologist,
+  surgeon, or consultant names.
+- **Known linkage.** `ACCESSION_NUMBER` is in both res_phi (with MRN) and res_deid (with
+  `DMP_PATIENT_ID`), so a user with access to both tiers can join MRN to DMP patient ID. This was
+  accepted for v1.
+- **Placeholders in res_deid and product text.** Identifiers are replaced, not deleted:
+  `[DATE]`, `[ACCESSION]` (accession and outside case numbers), `[PHONE]`, `[EMAIL]`, `[ADDRESS]`
+  (spelled-out street suffixes), and `[MRN]` (the patient's own MRN, with or without zero
+  padding). `[DATE]` covers `m/d/yy(yy)`, `m-d-yy(yy)`, `m.d.yyyy`, `yyyy-m-d`, `yyyy/m/d`,
+  `m/yyyy`, and month names or abbreviations with a day and/or year (`Jan 5, 2019`, `5 Jan 19`,
+  `Sept. 2019`, `May 2019`), including forms split across line breaks. A year on its own is kept.
+  Dotted two-digit-year forms (`3.15.19`) are not replaced because they are usually section or
+  measurement numbers; a row is withheld when one follows a date word such as `collected on`.
+- **Withheld rows.** A row is not released when its scrubbed text still contains a signature
+  marker (`SIGNED BY`, `PATHOLOGIST:`), an address with an abbreviated suffix (`DR`, `ST`, `CT`,
+  ...), a bare run of 8 or more digits (possible MRN or compact date), a dotted two-digit-year date
+  after a date word, or any residual identifier pattern. These rows remain in eng_phi and res_phi.
+- **Identity.** `DMP_PATIENT_ID` comes from the unique MRN to DMP patient mapping in
+  `t03_id_mapping_pathology_sample_xml_parsed`. Ambiguous or conflicting mappings and non-identical
+  duplicate diagnosis keys are not released. `DMP_SAMPLE_ID` is not published because it is empty
+  in the v1 source.
+- **Consent.** res_deid base tables include patients without Part A consent; the product table
+  keeps only `PARTA_CONSENTED_12_245 = 'YES'` in `product_cdsi.msk_impact.data_clinical_patient`.
+- **Guarantees checked on every refresh** (the job fails otherwise): one eng_phi row per source row;
+  every row has a current identity review; the primary key is unique among released rows; released
+  patient IDs match `^P-[0-9]{7}$`; the row's own MRN never appears in released text; res_phi has
+  no DMP ID columns; res_deid and product have no MRN or date columns; every product row has Part A
+  consent.
+
+### Changelog
+
+- `v1` (2026-09-28): first research-tier release from the frozen legacy snapshot.
