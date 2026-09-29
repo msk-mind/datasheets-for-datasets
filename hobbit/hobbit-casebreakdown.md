@@ -26,11 +26,15 @@ Total number of unique slides: 6,192,174 <br/>
 
 ## Description <a name="description"></a>
 
+The case breakdown table contains all clinical slides for which clinical metadata was available (sometimes due to operational issues or otherwise, complete data associated with an image is not available). It also does not contain any research slide images (i.e. anything that's not associated with an accession, such as pathology core slides).
+
 The case_breakdown table, contains information for a slide in each row, indexed by `image_id`, along with the metadata associated with that slide such as a patient ID, (`mrn`), information pertaining to the anatomical site (`part_type`, `part_description`), information about the stain (`stain_name`, `stain_group`), details about the scanner and scanning settings (`scanner_id`, `brand`, `model`, `magnification`) and additional metadata that pertain to the clinical workflow.
 
 ##### How was this data collected? 
 
-Tissue that is resected from a patient (identified by `mrn`) during surgery (`specnum_formatted`) is sent to the Dept. of Pathology where it is processed. Tissue may be resected from multiple anatomical sites from a single surgical procedure. Processing involves breaking up the tissue from each anatomical site (`part_type`, `part_description`) into parts (`part_inst`) and blocks (`block_inst`, `blkdesig_label`). A part can contain many blocks. Both parts and blocks are given designator labels called part number and block number. Certain blocks of interest are then selected to create slides.
+Tissue that is resected (or biopsied) from a patient (identified by `mrn`) during a surgerical event (`specnum_formatted`) is sent to the Dept. of Pathology where it is processed. Tissue may be resected from multiple anatomical sites from a single surgical procedure. Processing involves breaking up the tissue from each anatomical site (often represented as `part_type`, `part_description`) into parts (often represented as `part_inst`) and blocks (often representated as `block_inst`, `blkdesig_label`, `block_label`). A part can contain many blocks. Both parts and blocks are given designator labels called part number and block number. Certain blocks of interest are then selected to create slides.
+
+Tissue from one or more slides is then scraped from regions of interest (ROI) and sent for molecular sequencing. The molecular sequencing process results in a molecular case number (often referred to as an M-number, or accession_number_dmp) and an sample_id, typically from the IMPACT protocol. 
 
 The figure below illustrates the identifier hierarchy and also provides commonly used names/aliases for each of the identifiers.
 
@@ -60,7 +64,7 @@ The columns below are relevant or research purposes.
 | **Field name** | **Description** | **Field Type** | **Data type** | **Format** |
 |---|---|---|---|---|
 | mrn | Medical Record Number, a unique identifier per patient  | ID | string | |
-| specnum_formatted | Identifies the surgical procedure.  | ID | string | |
+| specnum_formatted | Identifies the procedure and consequently the type of sample. The prefixes stand for the following H - hemetological sample, C - cytology sample, A - autopsy samply, R - routine autopsy sample, J - molecular outreach sample, F - flow cytometry sample   | ID | string | |
 | part_inst | Part identifier. Organs are divided into multiple parts to identify locations of specimens in the organ. | ID | integer | |
 | part_type | The part, or specimen name. Usually formatted as: Anatomical site; Tissue extraction method <br> Example: TRACHEA; RESECTION | Mixed | string | |
 | part_description | Description of the anatomical site from which the part was obtained. | Description | string | |

@@ -96,4 +96,13 @@ ORDER BY t1.SAMPLE_ID_IMPACT ASC, MRN ASC;
 
 4. The IMPACT samples have been filtered to include only solid tumors, using SAMPLE_CLASS = 'Tumor' AND GENE_PANEL = ['IMPACT341', 'IMPACT410', 'IMPACT505', 'IMPACT468']
 
+## Todos <a name="todos"></a>
+
+1. Either reference impact_matched_slides_clean here or renamed the table in databricks and remove the old one
+2. The SQL here needs to be updated to look exactly like the SQL in the Databricks "Overview" tab so we can diff the two easily
+3. Of 685,662 rows, 683,197 are unique. i.e. about 0.3% of the rows (1212 rows) are redundantly duplicated. Given the small size of these duplications, a possible explanation for this is that these are manual data entry errors where perhaps an image_id or sample_id was recorded twice. This needs to be further investigated and either we mention it in the Notes section or we clean these rows out. 
+4. There are cases where a slide is used to generate many IMPACT samples (image_id='5544040' for example). This makes the otherwise assumed one-one relationship between slides and samples into a one-many relationship. There are 11,464 such cases. An explanation for this needs to be sought from the pathology dept and then documented in the Notes section.
+5. A sample_id can exist in more than one row. There are 78,317 such rows. One explanation for this is because a sample can be derived from more than one slide (sample_id='“P-0059788-T02-IM7' for example). There may be other explanations for this as well which may need to be sought from the pathology dept. and then documended in the Notes section.
+
+
 

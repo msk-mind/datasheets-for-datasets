@@ -1,3 +1,6 @@
+
+**NOTE: This datasheet/dataset is deprecated please use `slide_inventory.md`**
+
 # Master Slide Inventory
 
 Last updated 2024-07-08
@@ -54,6 +57,8 @@ select count(DISTINCT(PATIENT_ID))  FROM "pathology-data-mining"."impact_slide".
 
 -- slide Count
 select count(DISTINCT(IMAGE_ID))  FROM "pathology-data-mining"."impact_slide"."impact_slide"
+
+TODO: List #images outside impact and in impact. 
 
 
 ```

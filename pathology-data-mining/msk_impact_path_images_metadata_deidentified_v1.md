@@ -1,0 +1,34 @@
+# msk_impact_path_images_metadata_deidentified_v1
+
+<b>Path:</b> <br/>
+cdsi_eng_phi.pdm_base_tables_dev.impact_block_matched_slides_v1 <br/>
+|_ cdsi_res_deid.pdm_base_tables.msk_impact_path_images_metadata_deidentified_v1 <br/>
+<b>Table Type:</b> Live <br/>
+<b>Date created or last updated:</b> 04/23/0226 <br/>
+
+<b>Lineage: See table overview and lineage in Databricks->Catalog section, Overview tab for SQL definition of the table, and lineage tab for lineage.</b>
+
+<b>Summary Statistics:</b>
+
+Total rows: 3,116,164<br/>
+total patients: 106,362<br/>
+image_ids: 3,116,164
+
+
+# Table of contents
+1. [Description](#description)
+2. [Vocabulary](#vocab)
+3. [Notes](#notes)
+
+## Description <a name="description"></a>
+
+All slides for IMPACT patients across all patient timepoints with only deidentified ids and deidentified dates. 
+
+### Vocabulary <a name="vocab"></a> 
+
+Primary key: img_hid
+
+## Notes <a name="notes"></a>
+
+The table may be used to showcase all images associated with an IMPACT patient on a timeline. 
+

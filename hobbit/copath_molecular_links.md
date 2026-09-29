@@ -39,12 +39,52 @@ Things will change after EPIC is rolled out. With EPIC things like specimen sour
 
 | **Field name** | **Description** | **Field Type** | **Data type** | **Format** |
 |---|---|---|---|---|
-| m_specnum_formatted | 'M' accession number from DMP | ID | string | |
-| part_description | description of tissue and its origins | description  | string | |
-| s_part_inst | part id from surgical accession | ID  | integer  | |
-| s_blkdesig_label | block label from surgical accession | ID | string  | |
-| outside_number | non-MSK accession number | ID  | string  | |
-| accession_block_term | full block identifier | ID | string | |
+| specnum_formatted | 'M' accession number from DMP or Molecular Number | ID | string | |
+| specclass_id |  | string  | Categorical | [DMPN, DM, MPATH]|
+| part_inst | part id from surgical accession | ID  | integer  | |
+| part_type | tissue type | string | categorical  | See below |
+| part_description | free text followed by machine readable form in parenthesis with link to Surgical accession ID, part number and block designator that can be used to link an IMPACT sample to a specific block | ID  | string  | |
+
+|** part_type **|
+| Cord Blood Donor |
+| DM NK CELL |
+| DM SUBMITTED SLIDES-NORMAL |
+| BLOOD |
+| BUCCAL CELL SCRAPE |
+| DM DNA |
+| FNA SMEAR |
+| DM RNA |
+| Fresh Tissue |
+| Nail clipping |
+| SALIVA |
+| Sorted Cells |
+| BIOP |
+| Blood (Paxgene) |
+| Cell Lysate |
+| DM PERIPHERAL BLOOD STEM (HPC-A) |
+| CEREBROSPINAL FLUID |
+| DM Pleural Fluid |
+| "Lymph nodes, regional resection." |
+| cell pellet (SUP) |
+| BONE MARROW - DM |
+| Bone Marrow (Paxgene) |
+| DM SUBMITTED SLIDES |
+| Donor Blood |
+| FROZEN TISSUE |
+| Flow Cytometry |
+| SMEAR |
+| cfDNA |
+| BUCCAL SWABS |
+| Cytology Specimen |
+| DM DONOR NK CELL |
+| DM DONOR PERIPHERAL BLOOD STEM (HPC-A) |
+| DM PARAFFIN CURLS |
+| DM SUBMITTED SLIDES-TUMOR |
+| Donor Bone Marrow |
+| Extracted Lysate |
+| PARAFFIN BLOCK |
+| T-CELLS |
+
 
 
 ## Notes <a name="notes"></a>

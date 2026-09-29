@@ -1,14 +1,10 @@
 # Table Name 
 
-<b>Path:</b> <DREMIO_PATH_TO_TABLE> <br/>
+<b>Path:</b> <PATH_TO_TABLE_IN_DATABRICKS> <br/>
 <b>Table Type:</b> Live OR Static <br/>
 <b>Date created or last updated:</b> <CREATION_DATE_FOR_STATIC_TABLES> OR <DATE_LAST_UPDATED_FOR_LIVE_TABLES> <br/>
 
-<b>Lineage (<LINK_TO_SQL_FILE>): </b>
-
-<BASE_TABLE> <br/>
-|_ <DERIVED_TABLE> <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;|_ <DERIVED_TABLE> etc. <br/>
+<b>Lineage: See table overview and lineage in Databricks->Catalog section, Overview tab for SQL definition of the table, and lineage tab for lineage.</b>
 
 <b>Summary Statistics:</b>
 
@@ -49,6 +45,8 @@ Verifiable invariants guarding the consistency of the data (or lack of, if data 
 For example, a mention of a field that contains empty strings or null values may be presented as a rule. Conversely, if a field is guaranteed not to have empty or null values, this may also be presented as a rule if knowledge of this guarantee could be useful to the user of the dataset. 
 
 Examples of consistency checks that one can run in order to generate meaningful notes. 
+
+<b>Primary key constraint guarantee</b>. Primary key constraint for either a single column, or a group of columns taken together. 
 
 <b>one-one mapping guarantee</b>. To test for this guarantee, it is sufficient to test each id for uniquenes. i.e. there are no duplicates. For example, if ID1<-->ID2 is expected to have a one-one mapping, then all counts should be one for the following two queries. If there are violations to this guarantee, then it should be reported. 
   ```
