@@ -46,6 +46,8 @@ Slides tend to be scanned at either 20x or 40x power depending on the scanner us
 
 ### Diagnoses
 [slides_with_diagnosis_v1](slides_with_diagnosis_v1.md) - IMPACT-matched slides with parsed pathology diagnoses. <br/>
+[surgical_specimen_diagnoses_impact_v1](../pathology-data-mining/surgical_specimen_diagnoses_impact_v1.md) - diagnosis per surgical specimen part for Part A consented IMPACT patients, keyed by `DMP_PATIENT_ID`, with identifiers in the text replaced by placeholders. It is not slide-based. <br/>
+[surgical_specimen_diagnoses_sample_links_v1](../pathology-data-mining/surgical_specimen_diagnoses_impact_v1.md#links) - links surgical specimen parts to molecular (M) accessions and IMPACT samples. <br/>
 
 ### Slide inventories
 [msk_slide_inventory_v1](msk_slide_inventory_v1.md) - storage inventory of IMPACT-matched MSK slides. <br/>
