@@ -58,8 +58,8 @@ source was copied once, pinned to Delta version 242, and is not refreshed. The c
 
 The tiers follow the CDSI [cBioPortal Data Ingestion - Design](https://mskconfluence.mskcc.org/spaces/CDSI/pages/273580547)
 governance rules. eng_phi holds everything, including the MRN to DMP patient ID mapping. res_phi
-holds MRN, dates, and raw text but no DMP IDs, for cohort building. res_deid holds DMP patient IDs
-and scrubbed text but no MRN or dates, for analysis. The product table is the res_deid table
+holds MRN, dates, and raw text but no DMP IDs, for cohort building. res_deid holds DMP patient IDs,
+scrubbed text, and the report date but no MRN or procedure date, for analysis. The product table is the res_deid table
 restricted to Part A consented patients.
 
 ### Vocabulary <a name="vocab"></a>
@@ -76,7 +76,7 @@ Primary key: (`ACCESSION_NUMBER`, `PATH_DX_SPEC_NUM`, `SOURCE`).
 | `PATH_DX_SPEC_DESC` | Diagnosis for the part | Natural Language Description | string | raw in eng_phi/res_phi; scrubbed in res_deid/product | all |
 | `MRN` | Medical record number | ID | string | 8 digits, zero padded | eng_phi, res_phi |
 | `PROCEDURE_DATE` | Procedure date | Continuous | date | YYYY-MM-DD | eng_phi, res_phi |
-| `REPORT_DATE` | Report date | Continuous | date | YYYY-MM-DD | eng_phi, res_phi |
+| `REPORT_DATE` | Report date | Continuous | date | YYYY-MM-DD | eng_phi, res_phi, res_deid (v1 exception) |
 | `DMP_PATIENT_ID` | IMPACT patient ID resolved from MRN | ID | string | `P-0000000` | eng_phi, res_deid, product |
 | `DEID_TITLE`, `DEID_DESC` | Scrubbed title and description | Natural Language Description | string | see Notes | eng_phi |
 | `DEID_WITHHOLD_REASONS` | Why the row is withheld from res_deid | Categorical | string | comma separated; empty when releasable | eng_phi |
@@ -85,6 +85,10 @@ Primary key: (`ACCESSION_NUMBER`, `PATH_DX_SPEC_NUM`, `SOURCE`).
 
 ## Notes <a name="notes"></a>
 
+- **v1 exception: exact report date in res_deid.** `REPORT_DATE` is published in
+  `cdsi_res_deid.pdm_base_tables` next to `DMP_PATIENT_ID`. An exact date is outside HIPAA Safe
+  Harbor de-identification; this was accepted for v1. It is not in the product table, and
+  `PROCEDURE_DATE` is not in any de-identified table.
 - **Clinician names are not masked in v1.** Diagnosis text in every tier can contain pathologist,
   surgeon, or consultant names.
 - **Known linkage.** `ACCESSION_NUMBER` is in both res_phi (with MRN) and res_deid (with
@@ -146,3 +150,4 @@ Notes:
 
 - `v1` (2026-09-28): first research-tier release from the frozen legacy snapshot.
 - `v1` (2026-09-29): added `surgical_specimen_diagnoses_sample_links_v1` (surgical part to M accession and IMPACT sample).
+- `v1` (2026-09-29): added `REPORT_DATE` to the res_deid diagnoses table (exception; not in product).
