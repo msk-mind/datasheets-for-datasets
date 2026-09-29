@@ -27,18 +27,20 @@ Each tier also has `surgical_specimen_diagnoses_sample_links_v1`, linking surgic
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|_ `cdsi_res_deid.pdm_base_tables.surgical_specimen_diagnoses_impact_v1` <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|_ `cdsi_res_deid.pdm_product_cdsi.surgical_specimen_diagnoses_impact_v1` <br/>
 
-<b>Summary Statistics</b> (computed 2026-09-28 on the dev build of the same 990,806-row source; recompute after the prod refresh):
+<b>Summary Statistics</b> (prod, computed 2026-09-29 after the first refresh):
 
 | Measure | Rows |
 |---|---:|
 | Source rows (eng_phi, res_phi) | 990,806 |
 | Releasable rows | 986,160 |
 | Distinct res_deid rows (identical duplicates collapsed) | 986,013 (118,225 patients) |
-| Product rows (Part A consented at refresh) | 769,362 (91,368 patients) |
+| Product rows (Part A consented at refresh) | 769,390 (91,373 patients) |
 | Withheld: diagnosis text could not be edited safely | 4,056 |
 | &nbsp;&nbsp;bare 8+ digit number / abbreviated address / signature marker / dotted date after a date word (rows can have several) | 2,570 / 1,343 / 165 / 11 |
 | Withheld: identity not resolved (ambiguous MRN, conflicting patient ID, non-identical duplicate) | 590 |
 | Rows with at least one placeholder substitution in text | 313,032 |
+| Sample links: eng_phi / res_phi / res_deid / product | 116,179 / 116,173 / 95,826 / 88,107 |
+| res_deid surgical parts with a sample link | 85,025 |
 
 
 # Table of contents
