@@ -9,6 +9,9 @@
 | Research de-identified | `cdsi_res_deid.pdm_base_tables.surgical_specimen_diagnoses_impact_v1` | Researchers on IRB |
 | Product | `cdsi_res_deid.pdm_product_cdsi.surgical_specimen_diagnoses_impact_v1` | Part A consented patients only |
 
+Each tier also has `surgical_specimen_diagnoses_sample_links_v1`, linking surgical parts to molecular
+(M) accessions and IMPACT samples (see [Sample links](#links)).
+
 <b>Table Type:</b> `Static` (frozen snapshot; see Lineage) <br/>
 <b>Version:</b> `v1` <br/>
 <b>Date created:</b> `2026-09-28` <br/>
@@ -42,6 +45,7 @@
 1. [Description](#description)
 2. [Vocabulary](#vocab)
 3. [Notes](#notes)
+4. [Sample links](#links)
 
 ## Description <a name="description"></a>
 
@@ -108,6 +112,35 @@ Primary key: (`ACCESSION_NUMBER`, `PATH_DX_SPEC_NUM`, `SOURCE`).
   no DMP ID columns; res_deid and product have no MRN or date columns; every product row has Part A
   consent.
 
+## Sample links <a name="links"></a>
+
+`surgical_specimen_diagnoses_sample_links_v1` holds one row per distinct surgical accession/part to
+molecular accession/part to IMPACT sample relationship, from
+`table_pathology_impact_sample_summary_dop_anno_epic_idb_combined` (both DOP source columns).
+The DMP patient comes from `t03_id_mapping_pathology_sample_xml_parsed`, joined on the sample ID.
+Join to the diagnoses on (`ACCESSION_NUMBER`, `PATH_DX_SPEC_NUM`); diagnosis rows are not multiplied.
+
+| **Field name** | **Description** | **Field Type** | **Data Type** | **Tiers** |
+|---|---|---|---|---|
+| `ACCESSION_NUMBER`, `PATH_DX_SPEC_NUM` | Surgical accession and part (join key to the diagnoses) | ID | string, integer (string in res_phi) | all |
+| `MOLECULAR_ACCESSION_NUMBER` | Molecular (M) accession of the sequenced sample | ID | string | all |
+| `MOLECULAR_SPECIMEN_NUMBER` | Part number within the M accession | ID | string | all |
+| `DMP_PATIENT_ID` | IMPACT patient ID | ID | string | eng_phi, res_deid, product |
+| `DMP_SAMPLE_ID` | IMPACT sample ID, `P-#######-T##-XX#` | ID | string | eng_phi, res_deid, product |
+| `LINK_STATUS` | `RESOLVED` (one sample), `MULTIPLE_SAMPLES` (part sequenced more than once), `MISSING_SAMPLE_ID`, `NON_NUMERIC_PART`, `CONFLICTING_MRNS`, `CONFLICTING_DMP_PATIENTS` | Categorical | string | all |
+
+Notes:
+- res_phi keeps every link with its status but no DMP IDs or MRN, so it cannot map MRN to DMP ID
+  on its own. The accession linkage caveat above applies here too.
+- res_deid and product keep only `RESOLVED` and `MULTIPLE_SAMPLES` links to an M accession whose
+  surgical part is a released diagnosis row for the same DMP patient, so every link joins a
+  diagnosis row. Conflicting identities, non-numeric parts, and links to unreleased diagnoses are
+  excluded.
+- Checked on every refresh: sample IDs are well formed and belong to their patient; a `RESOLVED`
+  part has exactly one link; every released link joins a released diagnosis for the same patient;
+  column sets match the tier rules.
+
 ### Changelog
 
 - `v1` (2026-09-28): first research-tier release from the frozen legacy snapshot.
+- `v1` (2026-09-29): added `surgical_specimen_diagnoses_sample_links_v1` (surgical part to M accession and IMPACT sample).
