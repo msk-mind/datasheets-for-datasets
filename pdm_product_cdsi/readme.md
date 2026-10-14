@@ -34,6 +34,8 @@ Slides tend to be scanned at either 20x or 40x power depending on the scanner us
 | msk_reef_v1_embeddings_inventory_v1 | 512,747 | 504,120 | 71,412 | 82,078 |
 | msk_reef_v2_embeddings_inventory_v1 | 1,629,873 | 535,083 | 70,009 | 80,631 |
 | impact_block_matched_slides_v1 | 168,853 | 168,712 | 35,254 | 38,983 |
+| impact_part_matched_slides_v2 | 788,429 | 773,702 | 76,334 | 89,252 |
+| impact_block_matched_slides_v2 | 282,900 | 282,347 | 65,555 | 76,153 |
 | tcga_slide_inventory_v1 | 11,741 | 11,741 | n/a | n/a |
 | tcga_reef_v1_embeddings_inventory_v1 | 10,925 | 10,925 | n/a | n/a |
 | tcga_reef_v2_embeddings_inventory_v1 | 23,601 | 11,802 | n/a | n/a |
@@ -43,6 +45,8 @@ Slides tend to be scanned at either 20x or 40x power depending on the scanner us
 ### Matched slides
 [impact_matched_slides_v1](impact_matched_slides_v1.md) - slides matched to IMPACT samples at the **part** level, with IMPACT genomic annotations. <br/>
 [impact_block_matched_slides_v1](impact_block_matched_slides_v1.md) - slides matched to IMPACT samples at the finer **block** level. <br/>
+[impact_part_matched_slides_v2](impact_part_matched_slides_v2.md) - slides matched to IMPACT samples at the **part** level for pre- and post-Epic data, with a `match_type` for block precision. <br/>
+[impact_block_matched_slides_v2](impact_block_matched_slides_v2.md) - slides matched to IMPACT samples at the **block** level for pre- and post-Epic data (exact and inferred). <br/>
 
 ### Diagnoses
 [slides_with_diagnosis_v1](slides_with_diagnosis_v1.md) - IMPACT-matched slides with parsed pathology diagnoses. <br/>
