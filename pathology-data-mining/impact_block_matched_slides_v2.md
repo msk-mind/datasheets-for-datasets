@@ -2,33 +2,33 @@
 
 <b>Path:</b> [`cdsi_eng_phi.pdm_base_tables.impact_block_matched_slides_v2`](https://msk-mode-prod.cloud.databricks.com/explore/data/cdsi_eng_phi/pdm_base_tables/impact_block_matched_slides_v2) <br/>
 <b>Research copies:</b> `cdsi_res_phi.pdm_base_tables.impact_block_matched_slides_v2` (identical), `cdsi_res_deid.pdm_base_tables.impact_block_matched_slides_v2` (de-identified) <br/>
-<b>Table Type:</b> Live (materialized view, refreshed daily by `pdm_catalogs_job` / `pdm_catalogs_res_job`) <br/>
+<b>Table Type:</b> Live (materialized view, refreshed daily by `pdm_catalogs_job` / `pdm_catalogs_res_job`; gated by `validate_impact_matched_slides_v2`) <br/>
 <b>Date created or last updated:</b> 2026-10-14 <br/>
 
 <b>Lineage: See table overview and lineage in Databricks->Catalog section, Overview tab for SQL definition of the table, and lineage tab for lineage.</b> Filtered from [impact_part_matched_slides_v2](impact_part_matched_slides_v2.md). Source SQL: [`pdm_catalogs/src/cdsi_eng_phi/impact_block_matched_slides_v2.sql`](https://github.com/pathology-data-mining/pdm_databricks_pipelines/blob/main/pathology_data_mining/pdm_catalogs/src/cdsi_eng_phi/impact_block_matched_slides_v2.sql)
 
-<b>Summary Statistics</b> (2026-10-14):
+<b>Summary Statistics</b> (dev build of pdm_databricks_pipelines #49–#51, 2026-10-14; refresh after the prod deploy):
 
-Total rows: 303,641 <br/>
-Unique image_ids (slides): 303,057 <br/>
-IMPACT patients: 70,224 (76.6% of the 91,639 IMPACT341/410/468/505 patients in `pathology_dmp_genomics`) <br/>
-IMPACT samples: 81,425 <br/>
-Distinct block_ids: 81,338 <br/>
+Total rows: 385,472 <br/>
+Unique image_ids (slides): 384,827 <br/>
+IMPACT patients: 86,488 (94.4% of the 91,639 IMPACT341/410/468/505 patients in `pathology_dmp_genomics`) <br/>
+IMPACT samples: 100,718 <br/>
+Distinct block_ids: 82,857 (79,346 rows have none: M-accession slides without a block label) <br/>
 
 | match_type | Rows | Slides | Samples | Patients |
 |---|---|---|---|---|
-| block | 271,966 | 271,506 | 66,824 | 57,720 |
-| inferred_single_block | 31,675 | 31,571 | 14,601 | 14,283 |
+| block | 353,127 | 352,664 | 98,629 | 84,876 |
+| inferred_single_block | 32,345 | 32,216 | 14,868 | 14,531 |
 
 | is_outside_material | Rows | Patients |
 |---|---|---|
-| false | 246,276 | 54,242 |
-| true | 57,365 | 18,056 |
+| false | 327,885 | 81,263 |
+| true | 57,587 | 18,214 |
 
 | label_era | Rows |
 |---|---|
-| copath | 221,818 |
-| epic | 81,823 |
+| copath | 304,337 |
+| epic | 81,135 |
 
 
 # Table of contents
@@ -38,34 +38,36 @@ Distinct block_ids: 81,338 <br/>
 
 ## Description <a name="description"></a>
 
-Whole-slide images matched to MSK-IMPACT samples at the **block level**, for pre-Epic (CoPath) and post-Epic data. It supersedes [impact_block_matched_slides_v1](impact_block_matched_slides_v1.md): 70,224 patients here versus 37,099 in v1.
+Whole-slide images matched to MSK-IMPACT samples at the **block level**, for pre-Epic (CoPath) and post-Epic data. It supersedes [impact_block_matched_slides_v1](impact_block_matched_slides_v1.md): 86,488 patients here versus 37,099 in v1.
 
 It contains the rows of [impact_part_matched_slides_v2](impact_part_matched_slides_v2.md) where `match_type` is `block` or `inferred_single_block`.
-* `block`: the HOBBIT block id (`accession/part-block_label`) equals a block id parsed from the DMP `part_description`. CoPath block labels (e.g. `3GI`) and Epic block labels (e.g. `A`) both match.
-* `inferred_single_block`: the DMP text names only the part, and HOBBIT has exactly one distinct block label for that part. The block is inferred because unscanned blocks may exist. 98% of these rows are outside material.
+* `block`: one of two cases.
+  * The HOBBIT block id (`accession/part-block_label`) equals a linked block id, from the DMP `part_description` or the CoPath molecular links. CoPath block labels (e.g. `3GI`) and Epic block labels (e.g. `A`) both match.
+  * The slide is filed under the sample's own M accession (`link_sources = ['m_accession']`): a DMP recut of the sequenced material.
+* `inferred_single_block`: the links name only the part, and HOBBIT has exactly one distinct block label for that part. The block is inferred because unscanned blocks may exist. 96% of these rows are outside material.
 
-For exact matches on MSK-cut tissue only, filter `match_type = 'block' AND NOT is_outside_material` (54,007 patients).
+For exact matches on MSK-cut tissue only, filter `match_type = 'block' AND NOT is_outside_material` (81,206 patients).
 
 ### Vocabulary <a name="vocab"></a>
 
 Primary key: (`sample_id`, `image_id`)
 
-Same columns as [impact_part_matched_slides_v2](impact_part_matched_slides_v2.md#vocab), except `is_block_match` and `dmp_block_ids` are dropped. `match_type` takes only the values `block` and `inferred_single_block`, and `block_id` is never NULL.
+Same columns as [impact_part_matched_slides_v2](impact_part_matched_slides_v2.md#vocab), except `is_block_match` and `dmp_block_ids` are dropped. `match_type` takes only the values `block` and `inferred_single_block`.
 
 ## Notes <a name="notes"></a>
 
-1. <b>Primary key holds; block_id is always populated.</b>
+1. <b>Primary key holds, and the table equals the block-level part rows.</b> Both are enforced by `validate_impact_matched_slides_v2`.
    ```sql
-   SELECT count(*) - count(DISTINCT sample_id, image_id), sum(CASE WHEN block_id IS NULL THEN 1 ELSE 0 END)
-   FROM cdsi_eng_phi.pdm_base_tables.impact_block_matched_slides_v2  -- 0, 0
+   SELECT count(*) - count(DISTINCT sample_id, image_id) FROM cdsi_eng_phi.pdm_base_tables.impact_block_matched_slides_v2  -- 0
    ```
 
-2. <b>Mild multi-sample fan-out.</b> 303,641 rows over 303,057 slides. A block sequenced for more than one IMPACT sample repeats its slides once per sample.
+2. <b>block_id can be NULL.</b> The 79,346 such rows are M-accession slides, which HOBBIT files without a block label. Use `image_id` or `link_sources` rather than `block_id` to identify them.
 
-3. <b>Why samples are not block-matched.</b> These samples still appear at part level:
-   * the DMP gives only the part and HOBBIT has several blocks (12,003 samples);
-   * the named block was never scanned (1,476);
-   * Epic-style references on CoPath-era cases (544);
-   * slides with no HOBBIT block label, almost all outside submitted slides.
+3. <b>Mild multi-sample fan-out.</b> 385,472 rows over 384,827 slides.
 
-4. <b>De-identified copy.</b> `cdsi_res_deid` drops the same PHI columns as the part table. Product copy: [pdm_product_cdsi/impact_block_matched_slides_v2](../pdm_product_cdsi/impact_block_matched_slides_v2.md).
+4. <b>Why samples are not block-matched.</b> These samples still appear at part level:
+   * all of the sample's slides lack a block label (2,742 samples, mostly outside submitted slides);
+   * the named block was never scanned (739);
+   * several blocks exist and none is named (216).
+
+5. <b>De-identified copy.</b> `cdsi_res_deid` drops the same PHI columns as the part table. Product copy: [pdm_product_cdsi/impact_block_matched_slides_v2](../pdm_product_cdsi/impact_block_matched_slides_v2.md).
