@@ -2,14 +2,14 @@
 
 <b>Path:</b> [`cdsi_eng_phi.pdm_base_tables.impact_dmp_specimen_links_v1`](https://msk-mode-prod.cloud.databricks.com/explore/data/cdsi_eng_phi/pdm_base_tables/impact_dmp_specimen_links_v1) <br/>
 <b>Table Type:</b> Live (materialized view, refreshed daily by `pdm_catalogs_job`) <br/>
-<b>Date created or last updated:</b> 2026-10-14 <br/>
+<b>Date created or last updated:</b> 2026-10-15 <br/>
 
 <b>Lineage: See table overview and lineage in Databricks->Catalog section, Overview tab for SQL definition of the table, and lineage tab for lineage.</b> Source SQL: [`pdm_catalogs/src/cdsi_eng_phi/impact_dmp_specimen_links_v1.sql`](https://github.com/pathology-data-mining/pdm_databricks_pipelines/blob/main/pathology_data_mining/pdm_catalogs/src/cdsi_eng_phi/impact_dmp_specimen_links_v1.sql)
 
 <b>Summary Statistics</b> (prod, 2026-10-15):
 
 Total rows: 384,789 <br/>
-IMPACT patients: 91,639 (every IMPACT341/410/468/505 patient in `pathology_dmp_genomics`) <br/>
+IMPACT patients: 91,639 (every IMPACT341/410/468/505 patient in `pathology_dmp_genomics`); IMPACT-HEME adds 21,394 patients / 44,244 samples from pdm_databricks_pipelines#59 (dev, 2026-10-15) <br/>
 IMPACT samples: 108,631 <br/>
 Rows with an outside accession: 32,242 <br/>
 
@@ -26,6 +26,9 @@ Rows with an outside accession: 32,242 <br/>
 | IMPACT410 | 10,016 | 9,509 |
 | IMPACT468 | 36,783 | 32,993 |
 | IMPACT505 | 59,011 | 50,377 |
+| IMPACT-HEME-400 (#59, dev) | 9,092 | 5,106 |
+| IMPACT-HEME-468 (#59, dev) | 22,323 | 10,876 |
+| IMPACT-HEME-HS (#59, dev) | 12,829 | 8,469 |
 
 
 # Table of contents
@@ -37,7 +40,7 @@ Rows with an outside accession: 32,242 <br/>
 
 Links each MSK-IMPACT sample to the MSK specimens (S/C/H accession, part, and block when known) and to the M (molecular) accession its DNA came from. It is the sample side of the image → sample mapping used by [impact_part_matched_slides_v2](impact_part_matched_slides_v2.md) and [impact_block_matched_slides_v2](impact_block_matched_slides_v2.md). The M accession (`m_accession_number`) is the PHI form of the sample identifier.
 
-Scope: every sample on the IMPACT341, IMPACT410, IMPACT468 and IMPACT505 panels in `product_clinical_analytics.laboratory_pathology.pathology_dmp_genomics`.
+Scope: every sample on the IMPACT341, IMPACT410, IMPACT468 and IMPACT505 solid-tumor panels and the IMPACT-HEME-400, IMPACT-HEME-468 and IMPACT-HEME-HS panels in `product_clinical_analytics.laboratory_pathology.pathology_dmp_genomics`. The IMPACT-HEME panels were added in pdm_databricks_pipelines#59: many IMPACT-HEME samples are tissue (lymph node, skin, soft tissue, bone), although most are blood or marrow and have no surgical specimen.
 
 Links come from four sources (`link_source`):
 
@@ -68,7 +71,7 @@ Unique key: (`sample_id`, `link_source`, `msk_token`, `accession_number`, `part_
 | sample_id | IMPACT DMP sample identifier | ID | string | `P-XXXXXXX-TNN-IMn` |
 | m_accession_number | Molecular (M) accession of the sample | ID (PHI) | string | `MYY-NNNNN` |
 | mrn | Patient MRN, zero-padded to 8 digits | ID (PHI) | string | 8 digits |
-| gene_panel | IMPACT gene panel | Categorical | string | IMPACT341, IMPACT410, IMPACT468, IMPACT505 |
+| gene_panel | IMPACT gene panel | Categorical | string | IMPACT341, IMPACT410, IMPACT468, IMPACT505, IMPACT-HEME-400, IMPACT-HEME-468, IMPACT-HEME-HS |
 | part_description | Raw DMP part description | Natural Language Description (PHI) | string | |
 | link_source | Where the link came from | Categorical | string | `dmp_part_description`, `dop_anno`, `copath_molecular_links`, `m_accession` |
 | msk_token | One `MSK:` reference from part_description, upper-cased; NULL for other sources | Natural Language Description (PHI) | string | |

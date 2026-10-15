@@ -12,6 +12,7 @@ Total rows: 361,103 <br/>
 Unique slide_keys (slides): 360,491 <br/>
 Unique PATIENT_ID_IMPACT: 80,535 <br/>
 Unique SAMPLE_ID_IMPACT: 94,072 <br/>
+IMPACT-HEME panels are included from pdm_databricks_pipelines#59 (not yet in the figures above) <br/>
 
 | match_type | Rows | Patients | Samples |
 |---|---|---|---|

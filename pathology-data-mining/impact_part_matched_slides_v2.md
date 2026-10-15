@@ -12,6 +12,7 @@
 Total rows: 928,499 (v1 `impact_matched_slides_v1` ∪ `impact_block_matched_slides_v1`: ~710k sample–slide pairs) <br/>
 Unique image_ids (slides): 911,189 <br/>
 IMPACT patients: 89,382 (97.5% of the 91,639 IMPACT341/410/468/505 patients in `pathology_dmp_genomics`) <br/>
+IMPACT-HEME (from pdm_databricks_pipelines#59, dev 2026-10-15): +5,439 patients, 6,248 samples, 106,420 slides (25% of 21,394 IMPACT-HEME patients; most IMPACT-HEME samples are blood or marrow, and 89% of tissue samples match) <br/>
 IMPACT samples: 104,472 <br/>
 Rows without a HOBBIT block label (`block_id` NULL): 165,039 <br/>
 
@@ -68,7 +69,7 @@ Stain decision (`stain_label`, from [slide_stain_resolved_v1](slide_stain_resolv
 
 ## Description <a name="description"></a>
 
-Whole-slide images (HOBBIT `image_id`) matched to MSK-IMPACT samples at the **part (specimen) level**, covering both pre-Epic (CoPath) and post-Epic data. It supersedes the part-level [impact-matched-slides](impact-matched-slides.md) (`impact_matched_slides_v1`) and keeps every v1 match except deliberate exclusions (note 3).
+Whole-slide images (HOBBIT `image_id`) matched to MSK-IMPACT samples at the **part (specimen) level**, covering both pre-Epic (CoPath) and post-Epic data. It supersedes the part-level [impact-matched-slides](impact-matched-slides.md) (`impact_matched_slides_v1`) and keeps every v1 match except deliberate exclusions (note 3). Samples on the IMPACT-HEME panels are included from pdm_databricks_pipelines#59; filter `gene_panel` for solid-tumor panels only.
 
 A slide matches a sample in either of two ways, provided the DMP and HOBBIT MRNs agree:
 * the slide's HOBBIT specimen (`accession/part`) equals a specimen linked to the sample by any `link_source` in [impact_dmp_specimen_links_v1](impact_dmp_specimen_links_v1.md);
@@ -91,7 +92,7 @@ Primary key: (`sample_id`, `image_id`)
 | sample_id | IMPACT DMP sample identifier | ID | string | `P-XXXXXXX-TNN-IMn` |
 | m_accession_number | Molecular (M) accession | ID (PHI) | string | |
 | mrn | Patient MRN | ID (PHI) | string | 8 digits, zero-padded |
-| gene_panel | IMPACT gene panel | Categorical | string | IMPACT341, IMPACT410, IMPACT468, IMPACT505 |
+| gene_panel | IMPACT gene panel | Categorical | string | IMPACT341, IMPACT410, IMPACT468, IMPACT505, IMPACT-HEME-400, IMPACT-HEME-468, IMPACT-HEME-HS |
 | specimen_id | Matched HOBBIT specimen, accession unpadded | ID (PHI) | string | `accession/part` |
 | block_id | HOBBIT block of the slide; NULL when the slide has no block label | ID (PHI) | string | `accession/part-block_label` |
 | is_block_match | `match_type = 'block'` | Categorical | boolean | true/false |
@@ -146,7 +147,7 @@ Primary key: (`sample_id`, `image_id`)
 2. <b>Mild multi-sample fan-out.</b> A slide repeats once per matching sample. 896,914 slides map to 1 sample, 12,012 to 2, 1,777 to 3 and 486 to 4–7.
 
 3. <b>Parity with v1 is enforced.</b> `validate_impact_matched_slides_v2` fails `pdm_catalogs_job`, and blocks the research refresh, if more than 100 v1 (sample, slide) pairs are missing without an exclusion reason. The allowed exclusions are:
-   * the sample is not on IMPACT341/410/468/505 in `pathology_dmp_genomics` (mostly IMPACT-HEME);
+   * the sample is not on an IMPACT solid or IMPACT-HEME panel in `pathology_dmp_genomics` (e.g. ACCESS; before #59 this also excluded IMPACT-HEME);
    * the slide is not in `case_breakdown_cleaned_v2` or has no part;
    * the HOBBIT MRN differs from the DMP MRN;
    * the slide is filed under another sample's M accession (e.g. extracted lysate);

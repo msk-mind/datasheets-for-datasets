@@ -12,6 +12,7 @@ Total rows: 870,653 <br/>
 Unique slide_keys (slides): 855,597 <br/>
 Unique PATIENT_ID_IMPACT: 83,033 <br/>
 Unique SAMPLE_ID_IMPACT: 97,343 <br/>
+IMPACT-HEME (from pdm_databricks_pipelines#59, dev 2026-10-15): +4,577 patients, 5,354 samples, 88,521 slides <br/>
 
 | match_type | Rows | Patients | Samples |
 |---|---|---|---|
@@ -52,7 +53,7 @@ Unique SAMPLE_ID_IMPACT: 97,343 <br/>
 
 Whole-slide images (H&E and IHC) matched to MSK-IMPACT samples **at the part (specimen) level**, for both pre-Epic (CoPath) and post-Epic data. This dataset is IMPACT-scoped, de-identified, and limited to patients with Part A research consent. It supersedes [impact_matched_slides_v1](impact_matched_slides_v1.md).
 
-Every row carries a `match_type` that says how precisely the slide's block is known. Slides filed under the sample's own molecular (M) accession, which are DMP recuts of the sequenced material, count as `block`. For block-level matches only, use [impact_block_matched_slides_v2](impact_block_matched_slides_v2.md). Clinical annotations are not included; join `product_cdsi.msk_impact.data_clinical_sample` on `SAMPLE_ID_IMPACT`.
+Every row carries a `match_type` that says how precisely the slide's block is known. Slides filed under the sample's own molecular (M) accession, which are DMP recuts of the sequenced material, count as `block`. For block-level matches only, use [impact_block_matched_slides_v2](impact_block_matched_slides_v2.md). Samples on the IMPACT-HEME panels are included (pdm_databricks_pipelines#59); filter `gene_panel` for solid-tumor panels only. Clinical annotations are not included; join `product_cdsi.msk_impact.data_clinical_sample` on `SAMPLE_ID_IMPACT`.
 
 ### Vocabulary <a name="vocab"></a>
 
@@ -63,7 +64,7 @@ Primary key: (`SAMPLE_ID_IMPACT`, `slide_key`)
 | slide_key | De-identified slide ID; the same `slide_key` as the WSI viewer and cBioPortal | ID | string | 32 hex chars |
 | PATIENT_ID_IMPACT | IMPACT DMP patient identifier | ID | string | `P-XXXXXXX` |
 | SAMPLE_ID_IMPACT | IMPACT DMP sample identifier | ID | string | `P-XXXXXXX-TNN-IMn` |
-| gene_panel | IMPACT gene panel | Categorical | string | IMPACT341, IMPACT410, IMPACT468, IMPACT505 |
+| gene_panel | IMPACT gene panel | Categorical | string | IMPACT341, IMPACT410, IMPACT468, IMPACT505, IMPACT-HEME-400, IMPACT-HEME-468, IMPACT-HEME-HS |
 | is_block_match | `match_type = 'block'` | Categorical | boolean | true/false |
 | match_type | Precision of the match | Categorical | string | `block`: exact block, or slide filed under the sample's M accession; `inferred_single_block`: only the part is known and it has one scanned block; `part`: specimen only |
 | link_sources | How the sample was linked to the slide's specimen | Categorical | array&lt;string&gt; | `dmp_part_description`, `dop_anno`, `copath_molecular_links`, `m_accession` |

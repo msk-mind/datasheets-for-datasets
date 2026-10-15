@@ -12,6 +12,7 @@
 Total rows: 386,383 <br/>
 Unique image_ids (slides): 385,738 <br/>
 IMPACT patients: 86,537 (94.4% of the 91,639 IMPACT341/410/468/505 patients in `pathology_dmp_genomics`) <br/>
+IMPACT-HEME (from pdm_databricks_pipelines#59, dev 2026-10-15): +5,175 patients, 59,739 slides <br/>
 IMPACT samples: 100,781 <br/>
 Distinct block_ids: 82,912 (79,182 rows have none: M-accession slides without a block label) <br/>
 
