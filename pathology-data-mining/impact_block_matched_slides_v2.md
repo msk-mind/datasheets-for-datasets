@@ -3,7 +3,7 @@
 <b>Path:</b> [`cdsi_eng_phi.pdm_base_tables.impact_block_matched_slides_v2`](https://msk-mode-prod.cloud.databricks.com/explore/data/cdsi_eng_phi/pdm_base_tables/impact_block_matched_slides_v2) <br/>
 <b>Research copies:</b> `cdsi_res_phi.pdm_base_tables.impact_block_matched_slides_v2` (without diagnosis text), `cdsi_res_deid.pdm_base_tables.impact_block_matched_slides_v2` (de-identified) <br/>
 <b>Table Type:</b> Live (materialized view, refreshed daily by `pdm_catalogs_job` / `pdm_catalogs_res_job`; gated by `validate_impact_matched_slides_v2`) <br/>
-<b>Date created or last updated:</b> 2026-10-14 <br/>
+<b>Date created or last updated:</b> 2026-10-15 <br/>
 
 <b>Lineage: See table overview and lineage in Databricks->Catalog section, Overview tab for SQL definition of the table, and lineage tab for lineage.</b> Filtered from [impact_part_matched_slides_v2](impact_part_matched_slides_v2.md). Source SQL: [`pdm_catalogs/src/cdsi_eng_phi/impact_block_matched_slides_v2.sql`](https://github.com/pathology-data-mining/pdm_databricks_pipelines/blob/main/pathology_data_mining/pdm_catalogs/src/cdsi_eng_phi/impact_block_matched_slides_v2.sql)
 
@@ -59,7 +59,7 @@ For exact matches on MSK-cut tissue only, filter `match_type = 'block' AND NOT i
 
 Primary key: (`sample_id`, `image_id`)
 
-Same columns as [impact_part_matched_slides_v2](impact_part_matched_slides_v2.md#vocab), except `is_block_match` and `dmp_block_ids` are dropped. `match_type` takes only the values `block` and `inferred_single_block`.
+Same columns as [impact_part_matched_slides_v2](impact_part_matched_slides_v2.md#vocab), except `is_block_match`, `dmp_block_ids` and `dmp_accession_block_keys` are dropped. `match_type` takes only the values `block` and `inferred_single_block`.
 
 ## Notes <a name="notes"></a>
 
@@ -77,4 +77,4 @@ Same columns as [impact_part_matched_slides_v2](impact_part_matched_slides_v2.md
    * the named block was never scanned (728);
    * several blocks exist and none is named (222).
 
-5. <b>De-identified copy.</b> `cdsi_res_deid` drops the same PHI columns as the part table. Product copy: [pdm_product_cdsi/impact_block_matched_slides_v2](../pdm_product_cdsi/impact_block_matched_slides_v2.md).
+5. <b>De-identified copy.</b> `cdsi_res_deid` drops the same PHI columns as the part table, including `image_id`; use `slide_key` and the accession keys. Product copy: [pdm_product_cdsi/impact_block_matched_slides_v2](../pdm_product_cdsi/impact_block_matched_slides_v2.md).
