@@ -2,16 +2,17 @@
 
 <b>Path:</b> [`cdsi_res_deid.pdm_product_cdsi.impact_block_matched_slides_v2`](https://msk-mode-prod.cloud.databricks.com/explore/data/cdsi_res_deid/pdm_product_cdsi/impact_block_matched_slides_v2) <br/>
 <b>Table Type:</b> Live (materialized view, refreshed daily by `pdm_product_cdsi_job`) <br/>
-<b>Date created or last updated:</b> 2026-10-14 <br/>
+<b>Date created or last updated:</b> 2026-10-15 <br/>
 
 <b>Lineage: See table overview and lineage in Databricks->Catalog section, Overview tab for SQL definition of the table, and lineage tab for lineage.</b> Built from `cdsi_res_deid.pdm_base_tables.impact_block_matched_slides_v2` (see [pathology-data-mining/impact_block_matched_slides_v2](../pathology-data-mining/impact_block_matched_slides_v2.md)).
 
 <b>Summary Statistics</b> (prod, 2026-10-15):
 
 Total rows: 361,103 <br/>
-Unique image_ids (slides): 360,491 <br/>
+Unique slide_keys (slides): 360,491 <br/>
 Unique PATIENT_ID_IMPACT: 80,535 <br/>
 Unique SAMPLE_ID_IMPACT: 94,072 <br/>
+IMPACT-HEME (from pdm_databricks_pipelines#59, prod 2026-10-15): +4,368 patients, 5,068 samples, 50,112 slides <br/>
 
 | match_type | Rows | Patients | Samples |
 |---|---|---|---|
@@ -41,15 +42,15 @@ For exact matches on MSK-cut tissue only, filter `match_type = 'block' AND NOT i
 
 ### Vocabulary <a name="vocab"></a>
 
-Primary key: (`SAMPLE_ID_IMPACT`, `image_id`)
+Primary key: (`SAMPLE_ID_IMPACT`, `slide_key`)
 
-Same columns as [impact_part_matched_slides_v2](impact_part_matched_slides_v2.md#vocab), including `link_sources`, `stain_label`, `stain_classification_source`, `IS_HNE` and `IS_IHC`, but without `is_block_match`. `match_type` takes only the values `block` and `inferred_single_block`.
+Same columns as [impact_part_matched_slides_v2](impact_part_matched_slides_v2.md#vocab), including `slide_key`, the accession keys, `link_sources`, `stain_label`, `stain_classification_source`, `IS_HNE` and `IS_IHC`, but without `is_block_match` and `dmp_accession_block_keys`. `match_type` takes only the values `block` and `inferred_single_block`.
 
 ## Notes <a name="notes"></a>
 
 1. <b>Primary key holds.</b>
    ```sql
-   SELECT count(*) - count(DISTINCT SAMPLE_ID_IMPACT, image_id) FROM cdsi_res_deid.pdm_product_cdsi.impact_block_matched_slides_v2  -- 0
+   SELECT count(*) - count(DISTINCT SAMPLE_ID_IMPACT, slide_key) FROM cdsi_res_deid.pdm_product_cdsi.impact_block_matched_slides_v2  -- 0
    ```
 
 2. <b>Multi-sample fan-out is mild.</b> 361,103 rows over 360,491 slides.

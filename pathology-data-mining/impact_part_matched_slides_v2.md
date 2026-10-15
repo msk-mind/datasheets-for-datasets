@@ -3,7 +3,7 @@
 <b>Path:</b> [`cdsi_eng_phi.pdm_base_tables.impact_part_matched_slides_v2`](https://msk-mode-prod.cloud.databricks.com/explore/data/cdsi_eng_phi/pdm_base_tables/impact_part_matched_slides_v2) <br/>
 <b>Research copies:</b> `cdsi_res_phi.pdm_base_tables.impact_part_matched_slides_v2` (without diagnosis text), `cdsi_res_deid.pdm_base_tables.impact_part_matched_slides_v2` (de-identified, see note 9) <br/>
 <b>Table Type:</b> Live (materialized view, refreshed daily by `pdm_catalogs_job` / `pdm_catalogs_res_job`; gated by `validate_impact_matched_slides_v2`) <br/>
-<b>Date created or last updated:</b> 2026-10-14 <br/>
+<b>Date created or last updated:</b> 2026-10-15 <br/>
 
 <b>Lineage: See table overview and lineage in Databricks->Catalog section, Overview tab for SQL definition of the table, and lineage tab for lineage.</b> Built from [impact_dmp_specimen_links_v1](impact_dmp_specimen_links_v1.md) and [case_breakdown_cleaned_v2](case_breakdown_cleaned_v2.md). Source SQL: [`pdm_catalogs/src/cdsi_eng_phi/impact_part_matched_slides_v2.sql`](https://github.com/pathology-data-mining/pdm_databricks_pipelines/blob/main/pathology_data_mining/pdm_catalogs/src/cdsi_eng_phi/impact_part_matched_slides_v2.sql)
 
@@ -12,6 +12,7 @@
 Total rows: 928,499 (v1 `impact_matched_slides_v1` ∪ `impact_block_matched_slides_v1`: ~710k sample–slide pairs) <br/>
 Unique image_ids (slides): 911,189 <br/>
 IMPACT patients: 89,382 (97.5% of the 91,639 IMPACT341/410/468/505 patients in `pathology_dmp_genomics`) <br/>
+IMPACT-HEME (from pdm_databricks_pipelines#59, prod 2026-10-15): +5,440 patients, 6,249 samples, 106,619 slides (25% of 21,394 IMPACT-HEME patients; most IMPACT-HEME samples are blood or marrow, and 89% of tissue samples match) <br/>
 IMPACT samples: 104,472 <br/>
 Rows without a HOBBIT block label (`block_id` NULL): 165,039 <br/>
 
@@ -68,7 +69,7 @@ Stain decision (`stain_label`, from [slide_stain_resolved_v1](slide_stain_resolv
 
 ## Description <a name="description"></a>
 
-Whole-slide images (HOBBIT `image_id`) matched to MSK-IMPACT samples at the **part (specimen) level**, covering both pre-Epic (CoPath) and post-Epic data. It supersedes the part-level [impact-matched-slides](impact-matched-slides.md) (`impact_matched_slides_v1`) and keeps every v1 match except deliberate exclusions (note 3).
+Whole-slide images (HOBBIT `image_id`) matched to MSK-IMPACT samples at the **part (specimen) level**, covering both pre-Epic (CoPath) and post-Epic data. It supersedes the part-level [impact-matched-slides](impact-matched-slides.md) (`impact_matched_slides_v1`) and keeps every v1 match except deliberate exclusions (note 3). Samples on the IMPACT-HEME panels are included from pdm_databricks_pipelines#59; filter `gene_panel` for solid-tumor panels only.
 
 A slide matches a sample in either of two ways, provided the DMP and HOBBIT MRNs agree:
 * the slide's HOBBIT specimen (`accession/part`) equals a specimen linked to the sample by any `link_source` in [impact_dmp_specimen_links_v1](impact_dmp_specimen_links_v1.md);
@@ -91,7 +92,7 @@ Primary key: (`sample_id`, `image_id`)
 | sample_id | IMPACT DMP sample identifier | ID | string | `P-XXXXXXX-TNN-IMn` |
 | m_accession_number | Molecular (M) accession | ID (PHI) | string | |
 | mrn | Patient MRN | ID (PHI) | string | 8 digits, zero-padded |
-| gene_panel | IMPACT gene panel | Categorical | string | IMPACT341, IMPACT410, IMPACT468, IMPACT505 |
+| gene_panel | IMPACT gene panel | Categorical | string | IMPACT341, IMPACT410, IMPACT468, IMPACT505, IMPACT-HEME-400, IMPACT-HEME-468, IMPACT-HEME-HS |
 | specimen_id | Matched HOBBIT specimen, accession unpadded | ID (PHI) | string | `accession/part` |
 | block_id | HOBBIT block of the slide; NULL when the slide has no block label | ID (PHI) | string | `accession/part-block_label` |
 | is_block_match | `match_type = 'block'` | Categorical | boolean | true/false |
@@ -99,7 +100,13 @@ Primary key: (`sample_id`, `image_id`)
 | link_sources | Link sources that connect the sample to this specimen | Categorical | array&lt;string&gt; | values of `impact_dmp_specimen_links_v1.link_source`; `['m_accession']` for M-accession slides |
 | dmp_block_ids | All linked block ids for this sample and specimen | ID (PHI) | array&lt;string&gt; | empty when only the part is linked |
 | outside_accession_numbers | Outside accessions named in the DMP text | ID (PHI) | array&lt;string&gt; | |
+| accession_key | De-identified HOBBIT accession (note 11) | ID | string | 32 hex chars |
+| accession_specimen_key | De-identified `specimen_id` | ID | string | `accession_key/part` |
+| accession_block_key | De-identified `block_id`; NULL when `block_id` is NULL | ID | string | `accession_key/part-label` |
+| dmp_accession_block_keys | `dmp_block_ids` in the same form | ID | array&lt;string&gt; | |
+| outside_accession_keys | De-identified `outside_accession_numbers`, scoped to the patient | ID | array&lt;string&gt; | 32 hex chars |
 | image_id | HOBBIT slide identifier | ID | string | |
+| slide_key | De-identified slide identifier, identical to the WSI pipeline and cBioPortal `slide_key` (note 11) | ID | string | 32 hex chars |
 | img_hid | HOBBIT image hash identifier | ID (PHI) | string | |
 | barcode | Slide barcode; contains the accession | ID (PHI) | string | |
 | accession_number | HOBBIT accession as recorded (Epic accessions zero-padded) | ID (PHI) | string | |
@@ -140,7 +147,7 @@ Primary key: (`sample_id`, `image_id`)
 2. <b>Mild multi-sample fan-out.</b> A slide repeats once per matching sample. 896,914 slides map to 1 sample, 12,012 to 2, 1,777 to 3 and 486 to 4–7.
 
 3. <b>Parity with v1 is enforced.</b> `validate_impact_matched_slides_v2` fails `pdm_catalogs_job`, and blocks the research refresh, if more than 100 v1 (sample, slide) pairs are missing without an exclusion reason. The allowed exclusions are:
-   * the sample is not on IMPACT341/410/468/505 in `pathology_dmp_genomics` (mostly IMPACT-HEME);
+   * the sample is not on an IMPACT solid or IMPACT-HEME panel in `pathology_dmp_genomics` (e.g. ACCESS; before #59 this also excluded IMPACT-HEME);
    * the slide is not in `case_breakdown_cleaned_v2` or has no part;
    * the HOBBIT MRN differs from the DMP MRN;
    * the slide is filed under another sample's M accession (e.g. extracted lysate);
@@ -167,7 +174,7 @@ Primary key: (`sample_id`, `image_id`)
 
 9. <b>Research copies.</b>
    * `cdsi_res_phi`: drops `PATH_DX_SPEC_TITLE` / `PATH_DX_SPEC_DESC` (no diagnosis text next to DMP IDs in res_phi); otherwise identical.
-   * `cdsi_res_deid`: drops mrn, m_accession_number, accession_number, specimen_id, block_id, dmp_block_ids, outside_accession_numbers, block_label, img_hid, barcode, part_description, PATH_DX_SPEC_TITLE, PATH_DX_SPEC_DESC, all dates and timestamps. `sample_id` / `patient_id` + `image_id` are the identifiers; `link_sources`, `stain_label`, `stain_classification_source`, `IS_HNE`, `IS_IHC` are kept.
+   * `cdsi_res_deid`: drops image_id, mrn, m_accession_number, accession_number, specimen_id, block_id, dmp_block_ids, outside_accession_numbers, block_label, img_hid, barcode, part_description, PATH_DX_SPEC_TITLE, PATH_DX_SPEC_DESC, all dates and timestamps. The identifiers are `sample_id` / `patient_id`, `slide_key` and the accession keys (note 11). `validate_impact_matched_slides_v2_res` fails the research job, and blocks the product job, unless the column list is exactly the expected one.
    * Product copy: [pdm_product_cdsi/impact_part_matched_slides_v2](../pdm_product_cdsi/impact_part_matched_slides_v2.md).
 
 10. <b>Unmatched target samples.</b> 4,159 of the 108,631 target samples are unmatched:
@@ -175,3 +182,11 @@ Primary key: (`sample_id`, `image_id`)
     * 1,856 have a linked specimen with no slides for the patient in HOBBIT;
     * 67 have only an outside accession;
     * 52 are other.
+
+11. <b>De-identified keys.</b> Each key is `SUBSTR(SHA2(salt || input, 256), 1, 32)`, salted with the WSI `slide_key` salt (`secret('pdm-wsi', 'slide_key_salt')`). Keys are stable from day to day while the salt is unchanged.
+    * `slide_key` = hash of `':' || image_id`. It is byte-identical to the WSI pipeline and cBioPortal `slide_key`, so it joins to them directly. It is the only slide identifier in `cdsi_res_deid` and the product tier.
+    * `accession_key` = hash of `':accession:' ||` the normalized HOBBIT accession (Epic zero padding removed). Specimen and block keys are built on it, so they nest: `accession_key` → `accession_key/part` → `accession_key/part-label`. A block label that is not a plain label (for example one that embeds an outside accession) is replaced by `h` + a salted hash scoped to the accession.
+    * `outside_accession_keys` hash `':outside:' || patient_id || ':' ||` a canonical form of the outside accession. They are scoped to the patient because outside accession numbers are only unique within the issuing institution, which is not recorded.
+    * These are not the WSI pipeline's `specimen_key` / `block_key`, which are derived from `slide_key`.
+    * `validate_impact_matched_slides_v2` checks that the keys are well formed and one to one with the raw ids. It also checks that each exact block match's `accession_block_key` is among its `dmp_accession_block_keys`, and that `slide_key` equals the WSI value on every shared slide, with at least 50% of slides compared.
+
