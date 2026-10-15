@@ -6,9 +6,9 @@
 
 <b>Lineage: See table overview and lineage in Databricks->Catalog section, Overview tab for SQL definition of the table, and lineage tab for lineage.</b> Source SQL: [`pdm_catalogs/src/cdsi_eng_phi/impact_dmp_specimen_links_v1.sql`](https://github.com/pathology-data-mining/pdm_databricks_pipelines/blob/main/pathology_data_mining/pdm_catalogs/src/cdsi_eng_phi/impact_dmp_specimen_links_v1.sql)
 
-<b>Summary Statistics</b> (dev build of pdm_databricks_pipelines #49–#51, 2026-10-14; refresh after the prod deploy):
+<b>Summary Statistics</b> (prod, 2026-10-15):
 
-Total rows: 384,793 <br/>
+Total rows: 384,789 <br/>
 IMPACT patients: 91,639 (every IMPACT341/410/468/505 patient in `pathology_dmp_genomics`) <br/>
 IMPACT samples: 108,631 <br/>
 Rows with an outside accession: 32,242 <br/>
@@ -16,9 +16,9 @@ Rows with an outside accession: 32,242 <br/>
 | link_source | Rows | Samples | Specimens | Blocks |
 |---|---|---|---|---|
 | dmp_part_description | 103,706 | 103,703 | 102,422 | 72,794 |
-| dop_anno | 105,228 | 104,680 | 88,925 | 0 |
-| copath_molecular_links | 67,228 | 67,198 | 66,762 | 42,381 |
-| m_accession | 108,631 | 108,631 | 0 | 0 |
+| dop_anno | 105,226 | 104,679 | 88,924 | 0 |
+| copath_molecular_links | 67,226 | 67,196 | 66,760 | 42,379 |
+| m_accession | 108,631 | 108,631 | 108,526 | 0 |
 
 | gene_panel | Samples | Patients |
 |---|---|---|
@@ -44,9 +44,9 @@ Links come from four sources (`link_source`):
 | link_source | Source | Gives |
 |---|---|---|
 | `dmp_part_description` | `MSK:` references parsed from the DMP `part_description` | accession, part, block when written |
-| `dop_anno` | `SOURCE_ACCESSION_NUMBER_0/0b` + `SOURCE_SPEC_NUM_0/0b` in the DMP DOP annotation tables (`cdsi_prod…table_pathology_impact_sample_summary_dop_anno` and the Epic/IDB combined table) | S/C/H accession and part |
-| `copath_molecular_links` | `copath_molecular_links_cleaned_v2` (M accession → S/C/H accession) | accession, part, block (CoPath era) |
-| `m_accession` | the sample's own M accession | slides filed under the M accession in HOBBIT; no part or block |
+| `dop_anno` | `SOURCE_ACCESSION_NUMBER_0/0b` + `SOURCE_SPEC_NUM_0/0b` in the DMP DOP annotation tables (`cdsi_prod…table_pathology_impact_sample_summary_dop_anno` and the Epic/IDB combined table), excluding v1's blocklisted samples `P-0000000-N-VR1` and `P-0032211-T02-IM6` | S/C/H accession and part |
+| `copath_molecular_links` | `copath_molecular_links_cleaned_v2` (M accession → S/C/H accession), excluding parts described as normal tissue | accession, part, block (CoPath era) |
+| `m_accession` | the sample's own M accession, with the sequenced part (`SPECIMEN_NUMBER_DMP`) when the DOP annotation records it | slides filed under the M accession in HOBBIT; no block |
 
 The last three are the sources the v1 match tables used. Including them means v2 keeps v1's matches.
 
@@ -74,7 +74,7 @@ Unique key: (`sample_id`, `link_source`, `msk_token`, `accession_number`, `part_
 | msk_token | One `MSK:` reference from part_description, upper-cased; NULL for other sources | Natural Language Description (PHI) | string | |
 | accession_number | Linked accession, zero padding of the case number removed (Epic `S25-012345` → `S25-12345`); the M accession for `m_accession` rows | ID (PHI) | string | |
 | msk_token_format | Format of the MSK reference; NULL for other sources or when the part cannot be parsed | Categorical | string | `copath`, `epic`, NULL |
-| part_number | Part number; NULL for `m_accession` rows | ID | string | digits |
+| part_number | Part number; for `m_accession` rows the sequenced part when recorded, else NULL | ID | string | digits |
 | block_label | Block label, upper-cased, whitespace removed; NULL when only the part is known | ID | string | CoPath e.g. `3GI`, `1CB-F`; Epic e.g. `A` |
 | outside_tokens | `Outside:` references from part_description (dates excluded); empty for other sources | Natural Language Description (PHI) | array&lt;string&gt; | |
 | outside_accession_numbers | Outside accession part of each outside token | ID (PHI) | array&lt;string&gt; | |

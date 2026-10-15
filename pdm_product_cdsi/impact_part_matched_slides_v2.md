@@ -6,34 +6,41 @@
 
 <b>Lineage: See table overview and lineage in Databricks->Catalog section, Overview tab for SQL definition of the table, and lineage tab for lineage.</b> Built from `cdsi_res_deid.pdm_base_tables.impact_part_matched_slides_v2` (see [pathology-data-mining/impact_part_matched_slides_v2](../pathology-data-mining/impact_part_matched_slides_v2.md)).
 
-<b>Summary Statistics</b> (dev build of pdm_databricks_pipelines #49–#51, 2026-10-14; refresh after the prod deploy):
+<b>Summary Statistics</b> (prod, 2026-10-15):
 
-Total rows: 869,150 <br/>
-Unique image_ids (slides): 854,106 <br/>
-Unique PATIENT_ID_IMPACT: 82,996 <br/>
-Unique SAMPLE_ID_IMPACT: 97,292 <br/>
+Total rows: 870,653 <br/>
+Unique image_ids (slides): 855,597 <br/>
+Unique PATIENT_ID_IMPACT: 83,033 <br/>
+Unique SAMPLE_ID_IMPACT: 97,343 <br/>
 
 | match_type | Rows | Patients | Samples |
 |---|---|---|---|
-| block | 330,512 | 79,127 | 92,219 |
-| inferred_single_block | 29,776 | 13,501 | 13,815 |
-| part | 508,862 | 56,862 | 63,336 |
+| block | 331,322 | 79,164 | 92,268 |
+| inferred_single_block | 29,781 | 13,500 | 13,814 |
+| part | 509,550 | 56,909 | 63,393 |
 
 | is_outside_material | Rows | Patients |
 |---|---|---|
-| false | 724,754 | 76,339 |
-| true | 144,396 | 27,544 |
+| false | 725,892 | 76,348 |
+| true | 144,761 | 27,565 |
+
+| stain_label | Rows |
+|---|---|
+| he | 635,144 |
+| ihc | 177,875 |
+| unknown | 34,818 |
+| other | 22,816 |
 
 | stain_group | Rows |
 |---|---|
 | H&E (Initial) | 332,468 |
-| H&E (Other) | 143,127 |
-| IHC | 143,070 |
-| (blank) | 141,935 |
+| IHC | 143,687 |
+| H&E (Other) | 143,094 |
+| (blank) | 142,860 |
 | Surgical Submitted | 82,262 |
-| Other | 16,749 |
-| Frozen | 5,972 |
-| SS | 3,567 |
+| Other | 16,735 |
+| Frozen | 5,975 |
+| SS | 3,572 |
 
 
 # Table of contents
@@ -69,8 +76,10 @@ Primary key: (`SAMPLE_ID_IMPACT`, `image_id`)
 | stain_number | Stain instance | ID | string | |
 | stain_name | Stain name | Categorical | string | |
 | stain_group | Type of stain | Categorical | string | see summary |
-| IS_HNE | stain_group is H&E (Initial or Other) | Categorical | int | 1/0 |
-| IS_IHC | stain_group is IHC | Categorical | int | 1/0 |
+| stain_label | Per-slide stain decision: HOBBIT metadata, approved H-Optimus image classifications and manual review (same decision as the WSI viewer) | Categorical | string | `he`, `ihc`, `other`, `unknown` |
+| stain_classification_source | What decided `stain_label` | Categorical | string | `metadata`, `image_model`, `image_model_fallback`, `metadata_fallback`, `he` / `ihc` (manual review) |
+| IS_HNE | `stain_label = 'he'` | Categorical | int | 1/0 |
+| IS_IHC | `stain_label = 'ihc'` | Categorical | int | 1/0 |
 | scanner_id / brand / model | Scanner | Categorical | string | |
 | magnification | Scan magnification | Categorical | string | `20x`, `40x`, … |
 | file_size_bytes | Slide file size | Continuous | long | bytes |
@@ -82,12 +91,12 @@ Primary key: (`SAMPLE_ID_IMPACT`, `image_id`)
    SELECT count(*) - count(DISTINCT SAMPLE_ID_IMPACT, image_id) FROM cdsi_res_deid.pdm_product_cdsi.impact_part_matched_slides_v2  -- 0
    ```
 
-2. <b>Multi-sample fan-out.</b> A slide that matches several IMPACT samples appears once per `SAMPLE_ID_IMPACT`: 869,150 rows over 854,106 slides.
+2. <b>Multi-sample fan-out.</b> A slide that matches several IMPACT samples appears once per `SAMPLE_ID_IMPACT`: 870,653 rows over 855,597 slides.
 
-3. <b>Part A consent only.</b> 82,996 patients here versus 89,339 in the unrestricted `cdsi_res_deid.pdm_base_tables` copy.
+3. <b>Part A consent only.</b> 83,033 patients here versus 89,382 in the unrestricted `cdsi_res_deid.pdm_base_tables` copy.
 
 4. <b>No accessions or dates.</b> Accession numbers, MRN, barcode, image hash, free-text part description and all timestamps are removed. `block_label_deid` is NULL for labels that embed outside accessions.
 
 5. <b>Outside material.</b> Slides with no block label are almost all outside submitted slides (`is_outside_material = true`, `match_type = 'part'`), which never had an MSK block.
 
-6. <b>Stain ambiguity.</b> `stain_group` is blank for 141,935 rows. Use `stain_name` for those.
+6. <b>Use `stain_label` for stain.</b> `stain_group` is blank for 142,860 rows and vague ("Surgical Submitted", "Other") for ~99k more. `stain_label` resolves most of these with the approved image classifier; 34,818 rows remain `unknown`.

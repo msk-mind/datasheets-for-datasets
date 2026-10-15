@@ -34,8 +34,8 @@ Slides tend to be scanned at either 20x or 40x power depending on the scanner us
 | msk_reef_v1_embeddings_inventory_v1 | 512,747 | 504,120 | 71,412 | 82,078 |
 | msk_reef_v2_embeddings_inventory_v1 | 1,629,873 | 535,083 | 70,009 | 80,631 |
 | impact_block_matched_slides_v1 | 168,853 | 168,712 | 35,254 | 38,983 |
-| impact_part_matched_slides_v2 | 869,150 | 854,106 | 82,996 | 97,292 |
-| impact_block_matched_slides_v2 | 360,288 | 359,676 | 80,493 | 94,016 |
+| impact_part_matched_slides_v2 | 870,653 | 855,597 | 83,033 | 97,343 |
+| impact_block_matched_slides_v2 | 361,103 | 360,491 | 80,535 | 94,072 |
 | tcga_slide_inventory_v1 | 11,741 | 11,741 | n/a | n/a |
 | tcga_reef_v1_embeddings_inventory_v1 | 10,925 | 10,925 | n/a | n/a |
 | tcga_reef_v2_embeddings_inventory_v1 | 23,601 | 11,802 | n/a | n/a |
