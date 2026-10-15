@@ -12,7 +12,7 @@
 Total rows: 928,499 (v1 `impact_matched_slides_v1` ∪ `impact_block_matched_slides_v1`: ~710k sample–slide pairs) <br/>
 Unique image_ids (slides): 911,189 <br/>
 IMPACT patients: 89,382 (97.5% of the 91,639 IMPACT341/410/468/505 patients in `pathology_dmp_genomics`) <br/>
-IMPACT-HEME (from pdm_databricks_pipelines#59, dev 2026-10-15): +5,439 patients, 6,248 samples, 106,420 slides (25% of 21,394 IMPACT-HEME patients; most IMPACT-HEME samples are blood or marrow, and 89% of tissue samples match) <br/>
+IMPACT-HEME (from pdm_databricks_pipelines#59, prod 2026-10-15): +5,440 patients, 6,249 samples, 106,619 slides (25% of 21,394 IMPACT-HEME patients; most IMPACT-HEME samples are blood or marrow, and 89% of tissue samples match) <br/>
 IMPACT samples: 104,472 <br/>
 Rows without a HOBBIT block label (`block_id` NULL): 165,039 <br/>
 

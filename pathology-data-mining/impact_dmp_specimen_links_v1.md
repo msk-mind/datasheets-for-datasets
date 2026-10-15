@@ -9,7 +9,7 @@
 <b>Summary Statistics</b> (prod, 2026-10-15):
 
 Total rows: 384,789 <br/>
-IMPACT patients: 91,639 (every IMPACT341/410/468/505 patient in `pathology_dmp_genomics`); IMPACT-HEME adds 21,394 patients / 44,244 samples from pdm_databricks_pipelines#59 (dev, 2026-10-15) <br/>
+IMPACT patients: 91,639 (every IMPACT341/410/468/505 patient in `pathology_dmp_genomics`); IMPACT-HEME adds 21,394 patients / 44,244 samples from pdm_databricks_pipelines#59 <br/>
 IMPACT samples: 108,631 <br/>
 Rows with an outside accession: 32,242 <br/>
 
@@ -26,9 +26,9 @@ Rows with an outside accession: 32,242 <br/>
 | IMPACT410 | 10,016 | 9,509 |
 | IMPACT468 | 36,783 | 32,993 |
 | IMPACT505 | 59,011 | 50,377 |
-| IMPACT-HEME-400 (#59, dev) | 9,092 | 5,106 |
-| IMPACT-HEME-468 (#59, dev) | 22,323 | 10,876 |
-| IMPACT-HEME-HS (#59, dev) | 12,829 | 8,469 |
+| IMPACT-HEME-400 | 9,092 | 5,106 |
+| IMPACT-HEME-468 | 22,323 | 10,876 |
+| IMPACT-HEME-HS | 12,829 | 8,469 |
 
 
 # Table of contents
