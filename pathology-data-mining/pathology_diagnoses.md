@@ -23,6 +23,9 @@ Total number of unique parts: 4,372,130 <br/>
 
 ## Description <a name="description"></a>
 
+> The IMPACT research-tier release of these diagnoses is documented in
+> [surgical_specimen_diagnoses_impact_v1](surgical_specimen_diagnoses_impact_v1.md).
+
 This table provides the diagnosis notes for each part of each surgical accession, parsed from the pathology report for that accession.  This table differs from the corresponding CDM table in that it covers surgical pathology reports from all patients, while the [CDM table](https://github.com/msk-mind/datasheets-for-datasets/blob/main/clinical-data-mining/pathology_diagnoses.md) only covers patients who've had IMPACT sequencing.
 
 The CDM code was adapted somewhat for this.  The code used to create the PDM table is in the `pathdx` module of the [pathology_data_mining/pathology_reports](https://github.com/pathology-data-mining/pathology_reports) repo.
