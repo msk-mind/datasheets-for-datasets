@@ -66,7 +66,7 @@ The columns below are relevant or research purposes.
 | mrn | Medical Record Number, a unique identifier per patient  | ID | string | |
 | specnum_formatted | Identifies the procedure and consequently the type of sample. The prefixes stand for the following H - hemetological sample, C - cytology sample, A - autopsy samply, R - routine autopsy sample, J - molecular outreach sample, F - flow cytometry sample   | ID | string | |
 | part_inst | Part identifier. Organs are divided into multiple parts to identify locations of specimens in the organ. | ID | integer | |
-| part_type | The part, or specimen name. Usually formatted as: Anatomical site; Tissue extraction method <br> Example: TRACHEA; RESECTION | Mixed | string | |
+| part_type | The part, or specimen name. Usually formatted as: Anatomical site; Tissue extraction method <br> Example: TRACHEA; RESECTION. Some times the part type will have an "SSL" in it. This means that the slides came from an external institution (i.e. a patient was transferred into MSK care or getting a second opinion of a diagnosis). When it's not SSL it's in-house material i.e the patient had a surgical procedure at MSK | Mixed | string | |
 | part_description | Description of the anatomical site from which the part was obtained. | Description | string | |
 | block_inst | Tissues of specific parts can be fixed in one or more paraffin blocks. This number specifies which block the specimen originates from. | ID | integer | |
 | blkdesig_label | This ID also specifies the block the specimen originates from. | ID | string | |
