@@ -1,43 +1,29 @@
 # impact_block_matched_slides_v2
 
 <b>Path:</b> [`cdsi_eng_phi.pdm_base_tables.impact_block_matched_slides_v2`](https://msk-mode-prod.cloud.databricks.com/explore/data/cdsi_eng_phi/pdm_base_tables/impact_block_matched_slides_v2) <br/>
-<b>Research copies:</b> `cdsi_res_phi.pdm_base_tables.impact_block_matched_slides_v2` (without diagnosis text), `cdsi_res_deid.pdm_base_tables.impact_block_matched_slides_v2` (de-identified) <br/>
+<b>Research copies:</b> `cdsi_res_phi.pdm_base_tables.impact_block_matched_slides_v2` (PHI ids, no de-identified ids), `cdsi_res_deid.pdm_base_tables.impact_block_matched_slides_v2` (de-identified ids only) <br/>
 <b>Table Type:</b> Live (materialized view, refreshed daily by `pdm_catalogs_job` / `pdm_catalogs_res_job`; gated by `validate_impact_matched_slides_v2`) <br/>
-<b>Date created or last updated:</b> 2026-10-15 <br/>
+<b>Date created or last updated:</b> 2026-11-16 <br/>
 
 <b>Lineage: See table overview and lineage in Databricks->Catalog section, Overview tab for SQL definition of the table, and lineage tab for lineage.</b> Filtered from [impact_part_matched_slides_v2](impact_part_matched_slides_v2.md). Source SQL: [`pdm_catalogs/src/cdsi_eng_phi/impact_block_matched_slides_v2.sql`](https://github.com/pathology-data-mining/pdm_databricks_pipelines/blob/main/pathology_data_mining/pdm_catalogs/src/cdsi_eng_phi/impact_block_matched_slides_v2.sql)
 
-<b>Summary Statistics</b> (prod, 2026-10-15):
+<b>Summary Statistics</b> (prod, 2026-11-16):
 
-Total rows: 386,383 <br/>
-Unique image_ids (slides): 385,738 <br/>
-IMPACT patients: 86,537 (94.4% of the 91,639 IMPACT341/410/468/505 patients in `pathology_dmp_genomics`) <br/>
-IMPACT-HEME (from pdm_databricks_pipelines#59, prod 2026-10-15): +5,179 patients, 59,844 slides <br/>
-IMPACT samples: 100,781 <br/>
-Distinct block_ids: 82,912 (79,182 rows have none: M-accession slides without a block label) <br/>
+Total rows: 452,665 <br/>
+Unique image_ids (slides): 451,554 <br/>
+IMPACT patients / samples: 92,257 / 107,573 <br/>
+Solid panels: 87,197 patients (94.5% of the 92,305 IMPACT341/410/468/505 patients in `pathology_dmp_genomics`), 390,632 slides <br/>
+IMPACT-HEME (from pdm_databricks_pipelines#59): 5,251 patients, 61,002 slides <br/>
 
 | match_type | Rows | Slides | Samples | Patients |
 |---|---|---|---|---|
-| block | 354,033 | 353,570 | 98,685 | 84,920 |
-| inferred_single_block | 32,350 | 32,221 | 14,867 | 14,530 |
+| block | 410,263 | 409,429 | 105,067 | 90,296 |
+| inferred_single_block | 42,402 | 42,183 | 16,157 | 15,774 |
 
-| is_outside_material | Rows | Patients |
+| match_type | Outside material: rows (patients) | MSK material: rows (patients) |
 |---|---|---|
-| false | 328,522 | 81,279 |
-| true | 57,861 | 18,244 |
-
-| label_era | Rows |
-|---|---|
-| copath | 304,122 |
-| epic | 82,261 |
-
-| stain_label | Rows |
-|---|---|
-| he | 250,258 |
-| ihc | 102,951 |
-| unknown | 19,829 |
-| other | 13,345 |
-
+| block | 33,321 (4,665) | 376,942 (86,084) |
+| inferred_single_block | 40,992 (15,403) | 1,410 (381) |
 
 # Table of contents
 1. [Description](#description)
@@ -46,7 +32,7 @@ Distinct block_ids: 82,912 (79,182 rows have none: M-accession slides without a 
 
 ## Description <a name="description"></a>
 
-Whole-slide images matched to MSK-IMPACT samples at the **block level**, for pre-Epic (CoPath) and post-Epic data. It supersedes [impact_block_matched_slides_v1](impact_block_matched_slides_v1.md): 86,537 patients here versus 37,099 in v1.
+Whole-slide images matched to MSK-IMPACT samples at the **block level**, for pre-Epic (CoPath) and post-Epic data. It supersedes [impact_block_matched_slides_v1](impact_block_matched_slides_v1.md): 92,257 patients here versus 37,099 in v1.
 
 It contains the rows of [impact_part_matched_slides_v2](impact_part_matched_slides_v2.md) where `match_type` is `block` or `inferred_single_block`.
 * `block`: one of two cases.
@@ -54,13 +40,13 @@ It contains the rows of [impact_part_matched_slides_v2](impact_part_matched_slid
   * The slide is filed under the sample's own M accession (`link_sources = ['m_accession']`): a DMP recut of the sequenced material.
 * `inferred_single_block`: the links name only the part, and HOBBIT has exactly one distinct block label for that part. The block is inferred because unscanned blocks may exist. 96% of these rows are outside material.
 
-For exact matches on MSK-cut tissue only, filter `match_type = 'block' AND NOT is_outside_material` (81,222 patients).
+For exact matches on MSK-cut tissue only, filter `match_type = 'block' AND NOT is_outside_material` (86,084 patients; 81,706 on the solid panels).
 
 ### Vocabulary <a name="vocab"></a>
 
 Primary key: (`sample_id`, `image_id`)
 
-Same columns as [impact_part_matched_slides_v2](impact_part_matched_slides_v2.md#vocab), except `is_block_match`, `dmp_block_ids` and `dmp_accession_block_keys` are dropped. `match_type` takes only the values `block` and `inferred_single_block`.
+Same columns as [impact_part_matched_slides_v2](impact_part_matched_slides_v2.md#vocab), except `is_block_match` and `dmp_block_ids` are dropped. `match_type` takes only the values `block` and `inferred_single_block`.
 
 ## Notes <a name="notes"></a>
 
@@ -69,13 +55,13 @@ Same columns as [impact_part_matched_slides_v2](impact_part_matched_slides_v2.md
    SELECT count(*) - count(DISTINCT sample_id, image_id) FROM cdsi_eng_phi.pdm_base_tables.impact_block_matched_slides_v2  -- 0
    ```
 
-2. <b>block_id can be NULL.</b> The 79,182 such rows are M-accession slides, which HOBBIT files without a block label. Use `image_id` or `link_sources` rather than `block_id` to identify them.
+2. <b>block_id can be NULL.</b> Such rows are M-accession slides (79,182 on 2026-10-15, solid panels), which HOBBIT files without a block label. Use `image_id` or `link_sources` rather than `block_id` to identify them.
 
-3. <b>Mild multi-sample fan-out.</b> 386,383 rows over 385,738 slides.
+3. <b>Mild multi-sample fan-out.</b> 452,665 rows over 451,554 slides.
 
-4. <b>Why samples are not block-matched.</b> These samples still appear at part level:
+4. <b>Why samples are not block-matched</b> (2026-10-15, solid panels). These samples still appear at part level:
    * all of the sample's slides lack a block label (2,741 samples, mostly outside submitted slides);
    * the named block was never scanned (728);
    * several blocks exist and none is named (222).
 
-5. <b>De-identified copy.</b> `cdsi_res_deid` drops the same PHI columns as the part table, including `image_id`; use `slide_key` and the accession keys. Product copy: [pdm_product_cdsi/impact_block_matched_slides_v2](../pdm_product_cdsi/impact_block_matched_slides_v2.md).
+5. <b>De-identified copy.</b> `cdsi_res_deid` drops the same PHI columns as the part table, including `image_id`; slides, accessions and blocks are identified by `image_deid`, `s_accession_deid` and `block_deid` (note 11 of the part table). Product copy: [pdm_product_cdsi/impact_block_matched_slides_v2](../pdm_product_cdsi/impact_block_matched_slides_v2.md).
