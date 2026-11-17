@@ -50,7 +50,7 @@ Derivation (see the SQL definition in Databricks):
 3. Join to [`slide_inventory`](../pathology-data-mining/slide_inventory.md) (`cdsi_eng_phi.pdm_base_tables.slide_inventory`) on `image_id` to attach `path` and `size`.
 4. De-duplicate per (`sample_id`, `image_id`). If a slide has multiple storage locations, keep the one under `s3://mskmind-bkt/reef-slides/`, otherwise the alphabetically first `path`.
 
-This table lives in `cdsi_eng_phi`, not a de-identified catalog. It carries DMP identifiers and is PHI; access requires the appropriate approvals. The table is not restricted by Part A consent in its own SQL (the cohort is hard-coded); confirm consent status for the cohort before sharing data externally.
+This table lives in `cdsi_eng_phi`, not a de-identified catalog. The table is not restricted by Part A consent in its own SQL (the cohort is hard-coded); confirm consent status for the cohort before sharing data externally.
 
 Expected use: resolve the cohort's H&E slides to S3 objects for transfer or processing.
 
