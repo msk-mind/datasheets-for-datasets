@@ -13,8 +13,7 @@ Unique image_ids (slides): 341 <br/>
 Unique patient_id: 20 <br/>
 Unique sample_id: 45 <br/>
 Unique (image_id, sample_id) pairs: 341 <br/>
-Total size on storage: 349,200,181,385 bytes (~349 GB) <br/>
-Slide `size` (bytes): min 11,333,671; mean ~1,024,047,453; max 2,816,767,096 <br/>
+Total size on storage: ~349 GB <br/>
 
 Breakdown by `cancer`:
 
