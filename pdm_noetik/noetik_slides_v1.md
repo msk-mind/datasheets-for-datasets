@@ -41,7 +41,20 @@ Total size on storage: 174.2 TB<br/>
 |  1  | 12868 |  26899 | 
 |  2  | 31528 | 128165 | 
 |  3  |  2542 |  13279 | 
-|  4+ |  3540 |  24796 | 
+|  4+ |  4156 |  31657 | 
+
+
+#### Tumor Purity
+
+ | percentage_range | row_count | 
+ | --- | --- | 
+ | 30-40% | 46754 | 
+ | 40-50% | 36213 | 
+ | 50-60% | 30575 | 
+ | 60-70% | 34005 | 
+ | 70-80% | 27362 | 
+ | 80-90% | 19831 | 
+ | 90-100% | 5260 | 
 
 
 #### Magnification
@@ -67,6 +80,8 @@ In the end 612 of the 652 Oncotree codes represented in our local slide reposito
 
 All slides listed here are in our local object store, so no additional slide requests need to be made to the Pathology department.
 
+All patients in this cohort accepted Part A for the 12-245 IRB, so all have `YES` for `PARTA_CONSENTED_12_245` 
+
 
 ### Vocabulary <a name="vocab"></a>
 
@@ -75,8 +90,8 @@ Primary key: (`image_id`).
 | **Field name** | **Description** | **Field Type** | **Data Type** | **Field Format** |
 |---|---|---|---|---|
 | patient_id                  | Patient DMP ID                             | ID          | string    | `P-XXXXXXX` |
-| PARTA_CONSENTED_12_245      | Did patient consent to IRB 12-245 part A?  | Boolean     | string    |  '0' or '1' |
-| accession_count_per_patient | Nunmber of accessions                      | Count       | int       |             |
+| PARTA_CONSENTED_12_245      | Did patient consent to IRB 12-245 part A?  | Boolean     | string    |  'YES'      |
+| accession_count_per_patient | Number of accessions                       | Count       | int       |             |
 | accession_number            | Accession number                           | ID          | string    |             |
 | datetime_accession          | Date of accession                          | Date        | timestamp | YYYY-MM-DD  |
 | image_id                    | Image ID                                   | ID          | string    |             |
@@ -90,9 +105,11 @@ Primary key: (`image_id`).
 | block_id                    | Full ID of tissue block for slide          | ID          | string    |             |
 | stain_name                  | Name of slide stain                        | categorical | string    |             |
 | scanner_id                  | ID for WSI scanner                         | ID          | string    |             |
+| brand                       | brand of WSI scanner                       | categorical | string    | 'aperio'    |
+| model                       | model of WSI scanner                       | categorical | string    | 'AT2', 'GT450', or 'CS2' |
 | magnification               | Magnification of image                     | categorical | string    | '40x', '20x', or 'NA' |
 | path                        | S3 pathname for local WSI file             | pathname    | string    | The S3:// pathname for a local copy of this WSI |
-| size                        | SIze (bytes) of image file                 | file size   | int       | The image size in bytes |
+| size                        | Size (bytes) of image file                 | file size   | int       | The image size in bytes |
 
 
 ## Notes <a name="notes"></a>
@@ -102,13 +119,11 @@ Primary key: (`image_id`).
 2. <b>Accession date</b> The accession date is the date that the tissue was received by the pathology department.  (For M-accessions, it's the date the tissue was received for
    sequencing.)  The date that a diagnosis is given will typically be a few days after this.
 
-3. <b>One storage path per slide, all in the REEF bucket.</b> All 200,000 slides are stored in `s3://mskmind-bkt/reef-slides/`, and all are `.svs` files.
-      
-4. <b>Scanner info</b>We have the scanner ID for each slide in this table.  We'll get the microns-per-pixel numbers for each of these from the pathology department.
+3. Tumor purity is just the percentage of the slide that is considered to be part of the tumor.  A purity >60% is considered high, and purity below 30% is considered low.
 
-5. <b>MPP</b> The slide metadata in the svs file should contain native mpp.  Where it is missing, an approximation can be taken relative to objective power.
-MPP translates as follows - if a camera is 10 micrometer pixels and the image is taken at 40x magnification, the mpp is 10/40 = 0.25 mpp
-Again, we expect to get definitive confirmation of the MPP for each slide from the pathology department before this dataset goes to Noetik,
+4. <b>One storage path per slide, all in the REEF bucket.</b> All 200,000 slides are stored in `s3://mskmind-bkt/reef-slides/`, and all are `.svs` files.
+      
+5. <b>Scanner info</b>We have the scanner ID, brand, and model for each slide in this table.  We'll use these to get the microns-per-pixel for each slide from the pathology department.
 
 6. <b>accession_number and sample_id to patient_id are both many-to-one.</b> The queries below both return 0 rows.
 
@@ -117,4 +132,4 @@ Again, we expect to get definitive confirmation of the MPP for each slide from t
    SELECT sample_id, count(DISTINCT patient_id) AS ct FROM cdsi_eng_phi.pdm_noetik.noetik_slides_v1 GROUP BY sample_id HAVING ct > 1
    ```
 
-7. <b>Slide file sizes vary widely.</b> From ~11 MB to ~2.3 MB per slide, with a mean around 0.9 GB. 
+7. <b>Slide file sizes vary widely.</b> From ~11 GB to ~2.3 MB per slide, with a mean around 0.9 GB. 
