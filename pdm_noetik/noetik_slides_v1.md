@@ -89,27 +89,27 @@ Primary key: (`image_id`).
 
 | **Field name** | **Description** | **Field Type** | **Data Type** | **Field Format** |
 |---|---|---|---|---|
-| patient_id                  | Patient DMP ID                             | ID          | string    | `P-XXXXXXX` |
-| PARTA_CONSENTED_12_245      | Did patient consent to IRB 12-245 part A?  | Boolean     | string    |  'YES'      |
-| accession_count_per_patient | Number of accessions                       | Count       | int       |             |
-| accession_number            | Accession number                           | ID          | string    |             |
-| datetime_accession          | Date of accession                          | Date        | timestamp | YYYY-MM-DD  |
-| image_id                    | Image ID                                   | ID          | string    |             |
-| sample_id                   | IMPACT sample ID                           | ID          | string    | `P-XXXXXXX-{T,N}NN-IMn` |
-| sample_type                 | Tissue type (primary, met, normal, etc.)   | categorical | string    |
-| primary_site                | Organ for primary tumor                    | categorical | string    |             |
-| metastatic_site             | Organ for metastatic tumor                 | categorical | string    |             |
-| tumor_purity                | Percentage of tissue that is tumor         | percentage  | string    |             |
-| oncotree_code               | A 4-letter code identifying cancer type    | categorical | string    |             |
-| part_number                 | ID number for tissue part for slide        | ID          | string    |             |
-| block_id                    | Full ID of tissue block for slide          | ID          | string    |             |
-| stain_name                  | Name of slide stain                        | categorical | string    |             |
-| scanner_id                  | ID for WSI scanner                         | ID          | string    |             |
-| brand                       | brand of WSI scanner                       | categorical | string    | 'aperio'    |
-| model                       | model of WSI scanner                       | categorical | string    | 'AT2', 'GT450', or 'CS2' |
-| magnification               | Magnification of image                     | categorical | string    | '40x', '20x', or 'NA' |
-| path                        | S3 pathname for local WSI file             | pathname    | string    | The S3:// pathname for a local copy of this WSI |
-| size                        | Size (bytes) of image file                 | file size   | int       | The image size in bytes |
+| patient_id                  | Patient DMP ID                              | ID          | string    | `P-XXXXXXX` |
+| PARTA_CONSENTED_12_245      | Did patient consent to IRB 12-245 part A?   | Boolean     | string    |  'YES'      |
+| accession_count_per_patient | Number of accessions                        | Count       | int       |             |
+| accession_number            | Accession number (tissue extraction event)  | ID          | string    |             |
+| datetime_accession          | Date of accession (tissue extraction event) | Date        | timestamp | YYYY-MM-DD  |
+| image_id                    | Image ID                                    | ID          | string    |             |
+| sample_id                   | IMPACT sample ID                            | ID          | string    | `P-XXXXXXX-{T,N}NN-IMn` |
+| sample_type                 | Tissue type (primary, met, normal, etc.)    | categorical | string    |
+| primary_site                | Organ for primary tumor                     | categorical | string    |             |
+| metastatic_site             | Organ for metastatic tumor                  | categorical | string    |             |
+| tumor_purity                | Percentage of tissue that is tumor          | percentage  | string    |             |
+| oncotree_code               | A 4-letter code identifying cancer type     | categorical | string    |             |
+| part_number                 | ID number for tissue part for slide         | ID          | string    |             |
+| block_id                    | Full ID of tissue block for slide           | ID          | string    |             |
+| stain_name                  | Name of slide stain                         | categorical | string    |             |
+| scanner_id                  | ID for WSI scanner                          | ID          | string    |             |
+| brand                       | brand of WSI scanner                        | categorical | string    | 'aperio'    |
+| model                       | model of WSI scanner                        | categorical | string    | 'AT2', 'GT450', or 'CS2' |
+| magnification               | Magnification of image                      | categorical | string    | '40x', '20x', or 'NA' |
+| path                        | S3 pathname for local WSI file              | pathname    | string    | The S3:// pathname for a local copy of this WSI |
+| size                        | Size (bytes) of image file                  | file size   | int       | The image size in bytes |
 
 
 ## Notes <a name="notes"></a>
