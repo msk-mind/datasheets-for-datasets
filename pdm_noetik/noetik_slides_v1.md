@@ -46,7 +46,7 @@ Total size on storage: 174.2 TB<br/>
 
 #### Tumor Purity
 
- | percentage_range | row_count | 
+ | percentage_range | slides | 
  | --- | --- | 
  | 30-40% | 46754 | 
  | 40-50% | 36213 | 
@@ -114,16 +114,16 @@ Primary key: (`image_id`).
 
 ## Notes <a name="notes"></a>
 
-1. <b>Stain uncertainty</b> Some IHC slides could have leaked into this dataset because the stain labels we have are occasionally wrong.
+1. <b>Stain uncertainty</b>  Some IHC slides could have leaked into this dataset because the stain labels we have are occasionally wrong.
 
-2. <b>Accession date</b> The accession date is the date that the tissue was received by the pathology department.  (For M-accessions, it's the date the tissue was received for
+2. <b>Accession date</b>  The accession date is the date that the tissue was received by the pathology department.  (For M-accessions, it's the date the tissue was received for
    sequencing.)  The date that a diagnosis is given will typically be a few days after this.
 
 3. Tumor purity is just the percentage of the slide that is considered to be part of the tumor.  A purity >60% is considered high, and purity below 30% is considered low.
 
 4. <b>One storage path per slide, all in the REEF bucket.</b> All 200,000 slides are stored in `s3://mskmind-bkt/reef-slides/`, and all are `.svs` files.
       
-5. <b>Scanner info</b>We have the scanner ID, brand, and model for each slide in this table.  We'll use these to get the microns-per-pixel for each slide from the pathology department.
+5. <b>Scanner info</b>  We have the scanner ID, brand, and model for each slide in this table.  We'll use these to get the microns-per-pixel for each slide from the pathology department.
 
 6. <b>accession_number and sample_id to patient_id are both many-to-one.</b> The queries below both return 0 rows.
 
