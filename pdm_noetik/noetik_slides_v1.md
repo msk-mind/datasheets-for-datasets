@@ -82,6 +82,24 @@ All slides listed here are in our local object store, so no additional slide req
 
 All patients in this cohort accepted Part A for the 12-245 IRB, so all have `YES` for `PARTA_CONSENTED_12_245` 
 
+Derivation (see the SQL definition in Databricks):
+ 1. Sources
+   - cdsi_res_deid.pdm_product_cdsi.msk_slide_inventory_v1 supplies the slide inventory (local slides).
+   - product_cdsi.msk_impact.data_clinical_sample supplies the IMPACT fields.
+   - product_cdsi.msk_impact.data_clinical_patient supplies patient consent. It is filtered to PARTA_CONSENTED_12_245 = 'YES'.
+   - cdsi_eng_phi.pdm_base_tables.case_breakdown_cleaned_v2 (from HoBBIT) supplies accession, block, stain and scanner details.
+ 2. Slide filters
+   - The slide inventory is inner-joined to the clinical_sample table on sample_id and to the consent table on patient_id.
+   - The case breakdown is inner-joined on image_id. It is limited to accessions starting with S or M, and IHC slides are excluded.
+   - block_id is built as "accession / partnumber - blocklabel".
+ 3. Patients with more than one accession (group A)
+   - For each accession, the images are sorted by tumor_purity descending, with nulls last and image_id as the tie-break.
+   - The top 4 are kept, then anything with tumor_purity < 30 or an unparseable value is dropped.
+ 4. Patients with one accession (group B)
+   - The top 3 images are kept, with the same purity filter.
+   - The result is ordered by datetime_accession, with the most recent accessions first.
+ 5. Combine
+   - The group A is unioned with group B, but only the first 200,000 slides are kept. (So, all of group A is kept, but only as much of group B as it takes to get 200,000 slides total.)
 
 ### Vocabulary <a name="vocab"></a>
 
