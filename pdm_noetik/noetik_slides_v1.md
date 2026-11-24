@@ -68,6 +68,7 @@ Total size on storage: 174.2 TB<br/>
 
 # Table of contents
 1. [Description](#description)
+1. [Derivation](#derivation)
 2. [Vocabulary](#vocab)
 3. [Notes](#notes)
 
@@ -82,7 +83,9 @@ All slides listed here are in our local object store, so no additional slide req
 
 All patients in this cohort accepted Part A for the 12-245 IRB, so all have `YES` for `PARTA_CONSENTED_12_245` 
 
-Derivation (see the SQL definition in Databricks):
+## Derivation  <a name="derivation"></a>
+This is a broad description of the query used to build this table.  See the SQL definition in Databricks for the actual query.
+
  1. Sources
    - cdsi_res_deid.pdm_product_cdsi.msk_slide_inventory_v1 supplies the slide inventory (local slides).
    - product_cdsi.msk_impact.data_clinical_sample supplies the IMPACT fields.
@@ -99,7 +102,7 @@ Derivation (see the SQL definition in Databricks):
    - The top 3 images are kept, with the same purity filter.
    - The result is ordered by datetime_accession, with the most recent accessions first.
  5. Combine
-   - The group A is unioned with group B, but only the first 200,000 slides are kept. (So, all of group A is kept, but only as much of group B as it takes to get 200,000 slides total.)
+   - Group A is unioned with group B, but only the first 200,000 slides are kept. (So, all of group A is kept, but only as much of group B as it takes to get 200,000 slides total.)
 
 ### Vocabulary <a name="vocab"></a>
 
